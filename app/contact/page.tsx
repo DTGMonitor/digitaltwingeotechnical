@@ -1,0 +1,12 @@
+import { ArrowUpRight, Building2, Mail, MapPin } from "lucide-react";
+import { PageHero, Reveal, SectionLabel } from "@/components/ui";
+
+const contactPoints=[
+ ["Connect","intelligence@dtg.global","DTG Intelligence Centre",Mail],
+ ["Office","Brisbane, Queensland, Australia","DTG Headquarters",Building2],
+ ["Operations","Yogyakarta, Indonesia","DTG Remote Monitoring Centre",MapPin],
+];
+
+export default function Contact(){return <main><PageHero kicker="Contact / Briefing" index="04" title="Start with the signal." body="Talk to DTG about your monitoring landscape, operational challenges and digital twin readiness."/><section className="border-b hairline py-16 md:py-20"><div className="shell"><SectionLabel>Contact DTG</SectionLabel><div className="grid gap-px bg-[#0E3A4514] md:grid-cols-3">{contactPoints.map(([label,value,description,Icon],i)=><Reveal className="bg-[#081319] p-6 md:p-7" delay={i*.06} key={label as string}><Icon size={17} className="text-[#5F8796]"/><p className="eyebrow mt-10">{label as string}</p><h2 className="mt-4 text-xl leading-7 tracking-[-.035em] text-[#D5E0E4]">{value as string}</h2><p className="body-copy mt-3">{description as string}</p></Reveal>)}</div></div></section><section className="shell py-20 md:py-28"><div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr]"><div><SectionLabel>Initiate a briefing</SectionLabel><p className="subhead max-w-md">Share your monitoring landscape, operational priorities and geotechnical intelligence requirements.</p></div><Reveal><form className="glass grid gap-6 p-6 md:p-9"><Field label="Name" placeholder="Your name"/><Field label="Organisation" placeholder="Organisation"/><Field label="Email" placeholder="name@organisation.com"/><label><span className="eyebrow">Briefing context</span><textarea rows={4} placeholder="Tell us about your operational landscape." className="mt-3 w-full border-b hairline bg-transparent py-3 text-sm text-white outline-none placeholder:text-[#60706d]"/></label><button className="button mt-3 w-fit">Initiate conversation <ArrowUpRight size={14}/></button></form></Reveal></div></section></main>}
+
+function Field({label,placeholder}:{label:string,placeholder:string}){return <label><span className="eyebrow">{label}</span><input placeholder={placeholder} className="mt-3 w-full border-b hairline bg-transparent py-3 text-sm text-white outline-none placeholder:text-[#60706d]"/></label>}
