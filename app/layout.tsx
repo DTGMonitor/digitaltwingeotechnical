@@ -3,8 +3,8 @@ import "./globals.css";
 import { Footer, Header } from "@/components/site";
 
 export const metadata: Metadata = {
-  title: "DTG | Geotechnical Intelligence",
-  description: "Geotechnical foresight, driven by intelligence.",
+  title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
+  description: "Independent geotechnical monitoring, analytics, governance and decision support.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
