@@ -168,7 +168,11 @@ export default function Home() {
           <h2 className="story-headline fade-up mt-8 max-w-5xl">Trusted in live monitoring conditions.</h2>
           <div className="proof-board mt-14">
             {proof.map(([value, label, count, suffix]) => (
-              <Link href="/capabilities/monitoring-governance" className="proof-metric fade-up" key={label}>
+              <Link
+                href="/capabilities/monitoring-governance"
+                className={`proof-metric fade-up${/[a-zA-Z]/.test(value) ? " proof-metric--text" : ""}`}
+                key={label}
+              >
                 <strong data-count={count} data-suffix={suffix}>
                   {value}
                 </strong>
