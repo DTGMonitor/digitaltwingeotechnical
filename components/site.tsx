@@ -54,7 +54,7 @@ const menus = [
       tone: "focus",
     },
     items: [
-      ["Operationalising Monitoring", "DTG Focus™ connects data, workflows and engineering judgement into a single operational framework.", "/dtg-focus"],
+      ["Operationalising Monitoring", "Connects data, workflows and engineering judgement into a single operational framework.", "/dtg-focus"],
       ["Integrate", "Connect monitoring technologies into one operational context.", "/dtg-focus/multi-sensor-integration"],
       ["Correlate", "Identify relationships across sensors, locations and datasets.", "/dtg-focus"],
       ["Analyse", "Transform monitoring data into actionable engineering insight.", "/dtg-focus/data-governance"],
