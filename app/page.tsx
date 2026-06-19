@@ -255,63 +255,11 @@ export default function Home() {
 }
 
 function FocusOperationalView() {
-  const sources = ["Radar", "InSAR", "GNSS", "Prisms", "LiDAR", "Seismic", "VWPs", "Operational"];
-  const workflows = ["Validate", "Correlate", "Govern", "Escalate"];
+  const dtgFocusOverviewPath = "/images/dtg-focus.png"
 
   return (
     <div className="focus-operational-view fade-up" aria-label="DTG Focus™ turns fragmented monitoring systems into one operational view">
-      <svg className="focus-operational-lines" viewBox="0 0 920 520" fill="none" aria-hidden="true">
-        <defs>
-          <marker id="focusArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-            <path d="M1 1L7 4L1 7" fill="none" stroke="#8EC8F2" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" />
-          </marker>
-          <marker id="focusGoldArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
-            <path d="M1 1L8 4.5L1 8" fill="none" stroke="#D6A73A" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" />
-          </marker>
-        </defs>
-        {[92, 140, 188, 236, 284, 332, 380, 428].map((y, index) => (
-          <path
-            key={y}
-            className="focus-input-path"
-            style={{ animationDelay: `${index * 0.18}s` }}
-            d={`M168 ${y} C 260 ${y}, 310 ${260 + (y - 260) * 0.24}, 390 260`}
-            markerEnd="url(#focusArrow)"
-          />
-        ))}
-        <path className="focus-output-path" d="M566 260 C 638 260, 678 260, 754 260" markerEnd="url(#focusGoldArrow)" />
-      </svg>
-
-      <div className="focus-sources" aria-label="Monitoring technologies">
-        <span className="focus-column-label">Fragmented inputs</span>
-        <div className="focus-source-grid">
-          {sources.map((source, index) => (
-            <span key={source} style={{ ["--focus-delay" as string]: `${index * 0.16}s` }}>
-              {source}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="focus-environment">
-        <div className="focus-environment-inner">
-          <small><DTGFocusMark /></small>
-          <strong>Single operational view</strong>
-          <div className="focus-environment-flow">
-            {workflows.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="focus-outcome">
-        <span className="focus-column-label">Decision-ready output</span>
-        <div className="focus-outcome-card">
-          <small>Operational output</small>
-          <strong>Focused Actionable Insight</strong>
-          <p>Clearer review, governance, escalation and action.</p>
-        </div>
-      </div>
+      <Image src={dtgFocusOverviewPath} width={1916} height={955} alt="DTG Focus software overview" className="focus-operational-image"/>
     </div>
   );
 }
