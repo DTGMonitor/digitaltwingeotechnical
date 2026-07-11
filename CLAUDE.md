@@ -217,7 +217,9 @@ aesthetics, decorative data particles. Canonical diagram spine:
 
 Before and after any visual change:
 
-1. `npm run build` and `npm run lint` must pass.
+1. `npm run build` and `npm run lint` must pass. **Never run `npm run build` while `npm run dev`
+   is live — stop the dev server first;** a concurrent dev server corrupts `.next` (mismatched
+   CSS hashes → pages serve unstyled).
 2. Visually verify the affected **live** routes at mobile (~390px) and desktop (~1440px).
 3. Check contrast on any new light-on-dark or dark-on-light combination.
 4. Commit per phase with a clear message; keep the baseline commit

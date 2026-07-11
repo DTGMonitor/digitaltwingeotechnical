@@ -1,0 +1,19 @@
+// DTG shared section archetype kit (Phase A scaffold — masterbook / VISUAL-ARCHITECTURE-PLAN §7, §12).
+// Surface-aware, token-driven, data-prop building blocks. Not yet adopted by pages;
+// pages migrate onto these incrementally in later phases (do not rebuild pages in Phase A).
+export { Surface } from "./Surface";
+export type { SurfaceProps, SurfaceVariant } from "./Surface";
+export { SectionHero } from "./SectionHero";
+export type { SectionHeroProps, SectionHeroVariant } from "./SectionHero";
+export { StatementBand } from "./StatementBand";
+export type { StatementBandProps } from "./StatementBand";
+export { EditorialSplit } from "./EditorialSplit";
+export type { EditorialSplitProps } from "./EditorialSplit";
+export { ValueGrid } from "./ValueGrid";
+export type { ValueGridProps, ValueGridItem } from "./ValueGrid";
+export { MetricsBand } from "./MetricsBand";
+export type { MetricsBandProps, Metric } from "./MetricsBand";
+export { ProcessSteps } from "./ProcessSteps";
+export type { ProcessStepsProps, ProcessStep } from "./ProcessSteps";
+export { FocusModule } from "./FocusModule";
+export type { FocusModuleProps } from "./FocusModule";
