@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { renderTrademarkText } from "@/components/brand";
+import { InternalHero } from "@/components/internal-hero";
 
 export type DetailPageContent = {
   eyebrow: string;
@@ -11,24 +12,54 @@ export type DetailPageContent = {
 };
 
 export const detailPages: Record<string, DetailPageContent> = {
+  "about/purpose-principles": {
+    eyebrow: "About",
+    title: "Purpose & Principles",
+    intro: "DTG exists to help organisations turn complex monitoring information into informed, defensible decisions.",
+    points: [
+      "Many operations are dealing with too much data, too many alarms and too many disconnected systems.",
+      "DTG works between monitoring data and operational decisions, bringing independent review and engineering judgement to the workflow.",
+      "The core principles are simple: integrate monitoring information, govern workflows and support defensible decisions.",
+    ],
+  },
+  "about/vendor-independence": {
+    eyebrow: "About",
+    title: "Vendor Independence",
+    intro: "DTG is independent of monitoring vendors, software vendors and equipment manufacturers.",
+    points: [
+      "Independence allows DTG to evaluate monitoring information objectively across technologies, systems and software ecosystems.",
+      "The role is not to sell equipment or defend a platform. The role is to help clients understand what the information means.",
+      "Vendor-independent review supports technology-agnostic thinking, clearer assurance and more defensible decisions.",
+    ],
+  },
+  "about/our-approach": {
+    eyebrow: "About",
+    title: "Our Approach",
+    intro: "DTG brings monitoring information together through engineering review, governance and decision support.",
+    points: [
+      "Integrate: bring radar, GNSS, prisms, InSAR, LiDAR, SLAM LiDAR, VWP, seismic and operational records into context.",
+      "Govern: support traceability, accountability, audit trails, decision records and review discipline.",
+      "Decide: help organisations move from fragmented information to informed, defensible operational response.",
+    ],
+  },
+  "about/technical-assurance": {
+    eyebrow: "About",
+    title: "Technical Assurance",
+    intro: "DTG applies review discipline, traceability, accountability and quality assurance to support defensible outcomes.",
+    points: [
+      "Monitoring governance is the discipline of knowing what changed, who reviewed it, what decision was made and why.",
+      "DTG supports clear workflows, audit trails, decision records, change management and version control across monitoring review.",
+      "Technical assurance strengthens confidence in the interpretation, escalation pathway and operational response.",
+    ],
+  },
   "about/why-dtg-exists": {
     eyebrow: "About",
     title: "Why DTG Exists",
-    intro: "DTG was created to bridge the gap between powerful monitoring technologies and confident operational decisions.",
+    intro: "DTG was created to help mining organisations integrate monitoring data, govern workflows and make defensible decisions.",
     points: [
-      "Monitoring systems are generating more alarms, more signals and more vendor-specific workflows.",
-      "DTG helps clients create clearer situational awareness from fragmented monitoring environments.",
-      "The company is independent, technology agnostic and focused on decision support.",
-    ],
-  },
-  "about/who-we-are": {
-    eyebrow: "About",
-    title: "Who We Are",
-    intro: "DTG is an independent geotechnical monitoring insight company that helps organisations transform monitoring data into informed decisions.",
-    points: [
-      "Independent across sensors, radar brands and software ecosystems.",
-      "Built around geotechnical monitoring, engineering review and operational visibility.",
-      "Focused on actionable insight, governance and decision support.",
+      "Many operations are dealing with too much data, too many alarms and too many disconnected systems.",
+      "DTG helps clients turn fragmented information into governed monitoring workflows.",
+      "DTG is independent of monitoring vendors, software vendors and equipment manufacturers.",
     ],
   },
   "about/our-journey": {
@@ -37,18 +68,18 @@ export const detailPages: Record<string, DetailPageContent> = {
     intro: "DTG builds on a decade of remote geotechnical monitoring evolution and senior mining leadership.",
     points: [
       "Remote monitoring foundations developed through GroundProbe GSS experience from 2015 to 2024.",
-      "Expanded into a technology-agnostic, multi-sensor monitoring insight model.",
+      "Expanded into a technology-agnostic model for integrating multi-sensor monitoring context.",
       "DTG Focus™ represents the future workflow direction of the company.",
     ],
   },
   "about/leadership": {
     eyebrow: "About",
     title: "Leadership",
-    intro: "Peter Saunders and Mark Burdett connect remote monitoring expertise with mining leadership and operational governance.",
+    intro: "Peter Saunders and Mark Burdett connect remote monitoring expertise with mining leadership, economic and structural geology, geotechnical studies and operational governance.",
     points: [
       "Peter Saunders, Founder / Director: remote monitoring pioneer and former GroundProbe GSS leader.",
-      "Mark Burdett, Founder / Director: mining leadership across geology, civil engineering, consulting and governance.",
-      "Together, DTG leadership connects monitoring insight with real operational understanding.",
+      "Mark Burdett, Founder / Director: economic and structural geology, geotechnical studies, operational consulting and mining leadership.",
+      "Together, DTG leadership connects monitoring data, governance workflows and real operational decision-making.",
     ],
   },
   "about/vision-future": {
@@ -57,17 +88,17 @@ export const detailPages: Record<string, DetailPageContent> = {
     intro: "DTG is working toward focused actionable insight for the next generation of geotechnical risk management.",
     points: [
       "Integrated monitoring data across sensors, vendors and operating environments.",
-      "Future workflows that support validation, governance, escalation and action.",
+      "Future workflows that support validation, audit trails, traceability, escalation and defensible action.",
       "Engineering expertise enhanced by AI-assisted analytics, with engineers remaining central to decision-making.",
     ],
   },
   "capabilities/monitoring-intelligence": {
     eyebrow: "Services",
-    title: "Monitoring Insight",
-    intro: "Remote monitoring, movement review and engineering interpretation for complex geotechnical environments.",
+    title: "Monitoring Integration",
+    intro: "Remote monitoring, movement review and multi-sensor integration for complex geotechnical environments.",
     points: [
-      "Monitor, interpret and act methodology.",
-      "Radar, prism, InSAR and movement review.",
+      "Integrate, Govern, Decide methodology.",
+      "Radar, prism, InSAR, GNSS, LiDAR, SLAM LiDAR and movement review.",
       "Long-term trend analysis and post-blast reporting.",
       "Failure and alarm back-analysis with engineering context.",
     ],
@@ -75,12 +106,12 @@ export const detailPages: Record<string, DetailPageContent> = {
   "capabilities/monitoring-governance": {
     eyebrow: "Services",
     title: "Monitoring Governance",
-    intro: "Alarm optimisation, TARP support and escalation workflows that improve confidence in monitoring response.",
+    intro: "Alarm optimisation, TARP support and escalation workflows that create transparency, traceability and accountability.",
     points: [
-      "Detect, review, escalate and act workflows.",
+      "Integrate, Govern, Decide workflows.",
       "TARP development and monitoring SOP support.",
       "Alarm quality review and nuisance alarm reduction.",
-      "Response workflow review for safety-critical events.",
+      "Audit trails, decision records, change management and version control for safety-critical events.",
     ],
   },
   "capabilities/technology-advisory": {
@@ -91,7 +122,7 @@ export const detailPages: Record<string, DetailPageContent> = {
       "Independent radar and sensor suitability advice.",
       "Technology selection across radar, InSAR, GNSS, prisms and LiDAR.",
       "Deployment support and monitoring strategy.",
-      "Vendor-agnostic review across equipment and software ecosystems.",
+      "Independent of monitoring vendors, software vendors and equipment manufacturers.",
     ],
   },
   "capabilities/data-intelligence": {
@@ -102,7 +133,7 @@ export const detailPages: Record<string, DetailPageContent> = {
       "Noisy monitoring signal improvement.",
       "Radar and prism trend validation.",
       "Data quality checks and automated reporting support.",
-      "Integration, cleanse, validate, analyse, govern and act workflows.",
+      "Integrate, cleanse, validate, govern and decide workflows.",
     ],
   },
   "capabilities/training-capability-development": {
@@ -118,17 +149,17 @@ export const detailPages: Record<string, DetailPageContent> = {
   "dtg-focus": {
     eyebrow: "DTG Focus™",
     title: "What is DTG Focus™?",
-    intro: "DTG Focus™ is not a dashboard. It is an enterprise-grade geotechnical monitoring framework for data integration, governance, analytics and decision support.",
+    intro: "DTG Focus™ integrates monitoring data, engineering workflows, governance and intelligent analytics into a single decision-support platform.",
     points: [
       "One platform, multiple technologies and a single operational view.",
-      "Integrate, visualise, analyse, govern and act.",
-      "Engineering expertise enhanced by AI-assisted analytics.",
+      "Integrate monitoring technologies, Govern workflows and Decide with defensible records.",
+      "Supports audit trails, decision records, change management and version control across monitoring workflows.",
     ],
   },
   "dtg-focus/multi-sensor-integration": {
     eyebrow: "DTG Focus™",
     title: "Multi-Sensor Integration",
-    intro: "Connect radar, InSAR, prisms, GNSS, LiDAR, seismic, VWPs and operational context.",
+    intro: "Connect radar, InSAR, prisms, GNSS, surface LiDAR, SLAM LiDAR, seismic, VWPs and operational context.",
     points: [
       "Multiple monitoring streams in one operating environment.",
       "Sensor input and correlation workflow.",
@@ -148,10 +179,11 @@ export const detailPages: Record<string, DetailPageContent> = {
   "dtg-focus/data-governance": {
     eyebrow: "DTG Focus™",
     title: "Data Governance",
-    intro: "Quality checks, validation pathways and monitoring governance inside a future operating framework.",
+    intro: "Quality checks, validation pathways and monitoring governance inside a future decision-support platform.",
     points: [
       "Support for monitoring data quality and validation workflows.",
-      "Governance pathways for alarms, TARPs and escalation review.",
+      "Governance pathways for alarms, TARPs, audit trails and escalation review.",
+      "Decision records, change management and version control across monitoring workflows.",
       "Designed for vendor-agnostic monitoring environments.",
     ],
   },
@@ -161,8 +193,8 @@ export const detailPages: Record<string, DetailPageContent> = {
     intro: "Workflow support for TARPs, escalation, review and clearer operational decision-making.",
     points: [
       "TARP support and escalation workflow alignment.",
-      "Operational visibility across radar, GNSS, prisms, LiDAR, InSAR, seismic and environmental data.",
-      "Focused actionable insight for engineers and operational decision-makers.",
+      "Operational visibility across radar, GNSS, prisms, LiDAR, SLAM LiDAR, InSAR, seismic and environmental data.",
+      "Informed, defensible decisions for engineers and operational decision-makers.",
     ],
   },
   "dtg-focus/automated-reporting": {
@@ -208,10 +240,10 @@ export const detailPages: Record<string, DetailPageContent> = {
   "operations/underground-operations": {
     eyebrow: "Applications",
     title: "Underground Mining",
-    intro: "Underground convergence monitoring, deformation tracking, SLAM analysis and review support.",
+    intro: "Underground convergence monitoring, deformation tracking, SLAM LiDAR analysis and review support.",
     points: [
       "Convergence monitoring and deformation tracking.",
-      "SLAM analysis support.",
+      "SLAM LiDAR analysis support.",
       "Operational review for underground mine environments.",
     ],
   },
@@ -277,16 +309,41 @@ export const detailPages: Record<string, DetailPageContent> = {
   },
 };
 
+function getDetailBreadcrumb(page: DetailPageContent) {
+  if (page.eyebrow.includes("DTG Focus")) {
+    return [{ label: "Home", href: "/" }, { label: "DTG Focus", href: "/dtg-focus" }, { label: page.title }];
+  }
+
+  if (page.eyebrow === "About") {
+    return [{ label: "Home", href: "/" }, { label: "About Us", href: "/about" }, { label: page.title }];
+  }
+
+  if (page.eyebrow === "Services" || page.eyebrow === "Services Evidence") {
+    return [{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: page.title }];
+  }
+
+  if (page.eyebrow === "Applications") {
+    return [{ label: "Home", href: "/" }, { label: "Applications", href: "/applications" }, { label: page.title }];
+  }
+
+  return [{ label: "Home", href: "/" }, { label: page.title }];
+}
+
 export function DetailPage({ page }: { page: DetailPageContent }) {
+  const titleId = `${page.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}-title`;
+
   return (
     <main className="story-page">
-      <section className="detail-hero">
-        <div className="story-shell">
-          <p className="story-eyebrow">{renderTrademarkText(page.eyebrow)}</p>
-          <h1>{renderTrademarkText(page.title)}</h1>
-          <p>{renderTrademarkText(page.intro)}</p>
-        </div>
-      </section>
+      <InternalHero
+        breadcrumbItems={getDetailBreadcrumb(page).map((item) => ({
+          ...item,
+          label: renderTrademarkText(item.label),
+        }))}
+        title={renderTrademarkText(page.title)}
+        subtitle={renderTrademarkText(page.intro)}
+        titleId={titleId}
+        variant={page.eyebrow.includes("DTG Focus") ? "focus" : "default"}
+      />
       <section className="detail-body">
         <div className="story-shell detail-grid">
           <div>
@@ -304,7 +361,7 @@ export function DetailPage({ page }: { page: DetailPageContent }) {
         <div className="story-shell">
           <h2>Start a monitoring conversation.</h2>
           <Link href="/contact" className="story-button">
-            Initiate Briefing <ArrowUpRight size={15} />
+            CONTACT <ArrowUpRight size={15} />
           </Link>
         </div>
       </section>

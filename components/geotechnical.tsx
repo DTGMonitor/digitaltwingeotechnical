@@ -1,15 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
-import { Activity, BellRing, CloudSun, Database, Radio, Satellite, ShieldCheck, Waves } from "lucide-react";
+import { Activity, BellRing, Database, Radio, Satellite, ShieldCheck, Waves } from "lucide-react";
 import { DTGFocusMark } from "@/components/brand";
 
-const sources=[["Radar",Radio],["GNSS",Activity],["Prisms",Database],["LiDAR",Waves],["InSAR",Satellite],["Seismic",Activity],["Environmental",CloudSun],["Operational data",Database]];
+const sources=[["Radar",Radio],["GNSS",Activity],["Prisms",Database],["LiDAR",Waves],["SLAM LiDAR",Waves],["InSAR",Satellite],["Seismic",Activity],["Operational data",Database]];
 
 export function Workflow(){
  const steps=[
-  ["01","MONITOR","Radar / InSAR / GNSS / Prisms / LiDAR","Reliable data from radar, InSAR, GNSS, prisms, LiDAR and other monitoring systems.",Radio],
-  ["02","INTERPRET","Engineering review / multi-sensor correlation","Engineering review, trend assessment and contextual understanding.",Activity],
-  ["03","ACT","Reporting / TARP / escalation","Reporting, TARP support, escalation workflows and informed operational decisions.",ShieldCheck],
+  ["01","INTEGRATE","Radar / InSAR / GNSS / Prisms / LiDAR / SLAM LiDAR","Reliable data from radar, InSAR, GNSS, prisms, surface LiDAR, SLAM LiDAR and other monitoring systems.",Radio],
+  ["02","GOVERN","Audit trails / traceability / decision records","Transparent workflows, review discipline, change management and version control.",Activity],
+  ["03","DECIDE","Reporting / TARP / escalation","Reporting, TARP support, escalation workflows and informed, defensible decisions.",ShieldCheck],
  ];
  return <div className="relative overflow-hidden border hairline bg-[#071114]/80 px-6 py-8 md:px-10 md:py-12">
   <TerrainLines/>
@@ -37,7 +37,7 @@ export function MonitoringCentreVisual(){
  return <div className="relative min-h-[360px] overflow-hidden border hairline bg-[#0E1823] p-6">
   <TerrainLines/>
   <div className="absolute inset-x-6 top-6 flex justify-between"><p className="eyebrow">Remote monitoring workflow</p><span className="font-mono text-[9px] tracking-[.15em] text-[#D79A2B]">ENGINEERING REVIEW</span></div>
-  <div className="absolute inset-x-6 bottom-6 grid gap-3 sm:grid-cols-3">{[["Observe","Radar + multi-sensor"],["Interpret","Movement analysis"],["Escalate","TARP support"]].map(([title,sub],i)=><div className="border hairline bg-[#08111Acc] p-4" key={title}><span className="font-mono text-[10px] text-[#9CB6C2]">0{i+1}</span><p className="mt-5 text-xl tracking-[-.04em]">{title}</p><p className="mt-2 text-[10px] uppercase tracking-[.14em] text-[#9CB6C2]">{sub}</p></div>)}</div>
+  <div className="absolute inset-x-6 bottom-6 grid gap-3 sm:grid-cols-3">{[["Integrate","Radar + multi-sensor"],["Govern","Traceable review"],["Decide","TARP support"]].map(([title,sub],i)=><div className="border hairline bg-[#08111Acc] p-4" key={title}><span className="font-mono text-[10px] text-[#9CB6C2]">0{i+1}</span><p className="mt-5 text-xl tracking-[-.04em]">{title}</p><p className="mt-2 text-[10px] uppercase tracking-[.14em] text-[#9CB6C2]">{sub}</p></div>)}</div>
   <div className="hero-node absolute left-[31%] top-[39%] h-3 w-3 rounded-full border border-[#9CB6C2] bg-[#9CB6C266]"/>
   <div className="hero-node absolute left-[57%] top-[28%] h-2.5 w-2.5 rounded-full bg-[#D79A2B]" style={{animationDelay:"1.2s"}}/>
   <div className="hero-vector absolute left-[34%] top-[42%] h-px w-28 rotate-[-14deg] bg-[#9CB6C2aa]"/>
@@ -52,9 +52,9 @@ export function FocusVision(){
   <div className="mt-8 grid gap-5 xl:grid-cols-[1fr_auto_1.12fr_auto_.78fr] xl:items-center">
    <div><p className="mb-4 text-[10px] uppercase tracking-[.18em] text-[#8EC8F2]">Monitoring inputs</p><div className="grid grid-cols-2 gap-px bg-[#2F80C966]">{sources.map(([label,Icon])=><div className="flex items-center gap-2 bg-[#071114dd] p-4 text-[10px] uppercase tracking-[.14em] text-[#F3F5F4]" key={label as string}><Icon size={14} className="text-[#3A8DDE]"/>{label as string}</div>)}</div></div>
    <FlowArrow/>
-   <div className="relative border border-[#2F80C9] bg-[#073F4Acc] p-7 text-center"><div className="absolute inset-3 border border-[#3A8DDE33]"/><Database size={19} className="mx-auto text-[#3A8DDE]"/><p className="eyebrow mt-6 text-[#8EC8F2]">Single operational view</p><h3 className="mt-3 text-4xl tracking-[-.08em]"><DTGFocusMark /></h3><p className="mt-4 text-[10px] uppercase leading-5 tracking-[.15em] text-[#F3F5F4]">Data integration<br/>Governance<br/>Escalation pathways</p></div>
+   <div className="relative border border-[#2F80C9] bg-[#073F4Acc] p-7 text-center"><div className="absolute inset-3 border border-[#3A8DDE33]"/><Database size={19} className="mx-auto text-[#3A8DDE]"/><p className="eyebrow mt-6 text-[#8EC8F2]">Single decision-support platform</p><h3 className="mt-3 text-4xl tracking-[-.08em]"><DTGFocusMark /></h3><p className="mt-4 text-[10px] uppercase leading-5 tracking-[.15em] text-[#F3F5F4]">Integrate<br/>Govern<br/>Decide</p></div>
    <FlowArrow/>
-   <div className="grid gap-px bg-[#2F80C966]"><div className="bg-[#071114dd] p-5"><Activity size={16} className="text-[#3A8DDE]"/><p className="mt-5 text-2xl tracking-[-.06em]">Focused Actionable Insight</p><p className="body-copy mt-3">Correlation, trends and review.</p></div><div className="bg-[#071114dd] p-5"><ShieldCheck size={16} className="text-[#D79A2B]"/><p className="mt-5 text-2xl tracking-[-.06em]">Operational Decisions</p><p className="body-copy mt-3">TARP and escalation support.</p></div></div>
+   <div className="grid gap-px bg-[#2F80C966]"><div className="bg-[#071114dd] p-5"><Activity size={16} className="text-[#3A8DDE]"/><p className="mt-5 text-2xl tracking-[-.06em]">Governed Workflows</p><p className="body-copy mt-3">Audit trails, traceability and decision records.</p></div><div className="bg-[#071114dd] p-5"><ShieldCheck size={16} className="text-[#D79A2B]"/><p className="mt-5 text-2xl tracking-[-.06em]">Defensible Decisions</p><p className="body-copy mt-3">TARP discipline and operational response.</p></div></div>
   </div></div>
  </div>
 }
@@ -62,16 +62,14 @@ export function FocusVision(){
 export function FocusPillars(){
  const pillars=[
   ["INTEGRATE","Bring monitoring technologies together."],
-  ["VISUALISE","Create a unified operational view."],
-  ["ANALYSE","Identify trends, relationships and emerging risks."],
-  ["GOVERN","Support TARPs, workflows and escalation procedures."],
-  ["ACT","Deliver focused actionable insight."],
+  ["GOVERN","Ensure transparency, traceability and accountability."],
+  ["DECIDE","Support informed, defensible decisions."],
  ];
- return <div className="grid gap-px bg-[#2F80C94d] md:grid-cols-5">{pillars.map(([title,body],i)=><motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*.05}} className="bg-[#071927] p-5" key={title}><span className={`font-mono text-[10px] ${title==="ACT"?"text-[#D79A2B]":"text-[#8EC8F2]"}`}>0{i+1}</span><h3 className={`mt-8 text-xl tracking-[-.045em] ${title==="ACT"?"text-[#D79A2B]":"text-[#F3F5F4]"}`}>{title}</h3><p className="body-copy mt-3">{body}</p></motion.div>)}</div>
+ return <div className="grid gap-px bg-[#2F80C94d] md:grid-cols-3">{pillars.map(([title,body],i)=><motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*.05}} className="bg-[#071927] p-5" key={title}><span className={`font-mono text-[10px] ${title==="DECIDE"?"text-[#D79A2B]":"text-[#8EC8F2]"}`}>0{i+1}</span><h3 className={`mt-8 text-xl tracking-[-.045em] ${title==="DECIDE"?"text-[#D79A2B]":"text-[#F3F5F4]"}`}>{title}</h3><p className="body-copy mt-3">{body}</p></motion.div>)}</div>
 }
 
 export function IntegrationVisual(){
- const inputs=["Radar","GNSS","Prisms","LiDAR","InSAR","Seismic","Environmental","Operational"];
+ const inputs=["Radar","GNSS","Prisms","LiDAR","SLAM LiDAR","InSAR","Seismic","Operational"];
  return <div className="relative min-h-[520px] overflow-hidden border hairline bg-[#071114] p-6 md:p-8">
   <TerrainLines/>
   <div className="relative flex items-center justify-between"><p className="eyebrow">Sensor streams / operational workflow</p><span className="font-mono text-[9px] uppercase tracking-[.16em] text-[#D79A2B]">Technology agnostic</span></div>
@@ -81,8 +79,8 @@ export function IntegrationVisual(){
     <div className="absolute left-[-60px] top-1/2 hidden h-px w-[120px] bg-[#9CB6C255] lg:block"><motion.span className="absolute -top-1 h-2 w-2 rounded-full bg-[#D79A2B]" animate={{x:["0px","118px"]}} transition={{duration:3.5,repeat:Infinity,ease:"linear"}}/></div>
     <CrosshairIcon/>
     <p className="eyebrow">Single operational view</p>
-    <h3 className="mt-10 text-5xl tracking-[-.08em]">Correlate.<br/>Review.<br/><span className="text-[#D79A2B]">Act.</span></h3>
-    <p className="body-copy mt-6 max-w-sm">Multiple technologies converging into one workflow for engineering review, escalation and decision support.</p>
+    <h3 className="mt-10 text-5xl tracking-[-.08em]">Integrate.<br/>Govern.<br/><span className="text-[#D79A2B]">Decide.</span></h3>
+    <p className="body-copy mt-6 max-w-sm">Multiple technologies converging into one workflow for traceable review, escalation and defensible decisions.</p>
    </div>
   </div>
  </div>

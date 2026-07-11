@@ -14,13 +14,13 @@ export function ContactForm(){
   function handleSubmit(event:React.FormEvent<HTMLFormElement>){
     event.preventDefault();
     // Native `required` validation has passed by the time we reach here.
-    const subject=`Monitoring briefing — ${organisation}`;
+    const subject=`Monitoring briefing - ${organisation}`;
     const body=[
       `Name: ${name}`,
       `Organisation: ${organisation}`,
       `Email: ${email}`,
       "",
-      "Briefing context:",
+      "Briefing context / Message:",
       context,
     ].join("\n");
     window.location.href=`mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -30,8 +30,8 @@ export function ContactForm(){
     <Field label="Name" placeholder="Your name" value={name} onChange={setName}/>
     <Field label="Organisation" placeholder="Organisation" value={organisation} onChange={setOrganisation}/>
     <Field label="Email" type="email" placeholder="name@organisation.com" value={email} onChange={setEmail}/>
-    <label><span className="eyebrow">Briefing context</span><textarea rows={4} required value={context} onChange={(e)=>setContext(e.target.value)} placeholder="Tell us about your operational landscape." className="mt-3 w-full border-b hairline bg-transparent py-3 text-sm text-white outline-none placeholder:text-[#9CB6C2]"/></label>
-    <button type="submit" className="button mt-3 w-fit">Initiate conversation <ArrowUpRight size={14}/></button>
+    <label><span className="eyebrow">Briefing context / Message</span><textarea rows={4} required value={context} onChange={(e)=>setContext(e.target.value)} placeholder="Tell us about your operational landscape." className="mt-3 w-full border-b hairline bg-transparent py-3 text-sm text-white outline-none placeholder:text-[#9CB6C2]"/></label>
+    <button type="submit" className="button mt-3 w-fit">CONTACT DTG <ArrowUpRight size={14}/></button>
   </form>;
 }
 

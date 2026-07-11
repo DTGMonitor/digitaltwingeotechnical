@@ -18,6 +18,7 @@ build/
 
 # Local preview artifacts
 previews/
+work/
 .preview-server.*.log
 
 # OS and editor files

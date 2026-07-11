@@ -2,91 +2,205 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import {
+  Activity,
+  ArrowUp,
+  ArrowUpRight,
+  Building2,
+  ChevronDown,
+  Database,
+  Layers3,
+  type LucideIcon,
+  Menu,
+  Mountain,
+  Network,
+  RadioTower,
+  ShieldCheck,
+  Target,
+  UserRound,
+  X,
+} from "lucide-react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { renderTrademarkText } from "@/components/brand";
+import { SiteFooter } from "@/components/SiteFooter";
+
+type MegaMenuItem = [string, string, string, LucideIcon];
+type MobileNavItem = [string, string];
+type MobileNavSection = {
+  label: string;
+  href: string;
+  items?: MobileNavItem[];
+};
+type MegaMenu = {
+  label: string;
+  eyebrow: string;
+  title: string;
+  statement: string;
+  ctaLabel: string;
+  ctaHref: string;
+  pointer: string;
+  items: MegaMenuItem[];
+};
 
 const menus = [
   {
     label: "About",
-    title: "About DTG",
-    statement: "Independent monitoring intelligence, governance and engineering review for trusted operational outcomes.",
-    visual: {
-      src: "/images/dtg-command-centre.png",
-      label: "About",
-      caption: "Independent insight for safer operational decisions.",
-      tone: "about",
-    },
+    eyebrow: "ABOUT DTG",
+    title: "Independent monitoring support.",
+    statement:
+      "Learn how DTG supports monitoring review, technical assurance, vendor-independent advice and decision-ready outcomes.",
+    ctaLabel: "EXPLORE ABOUT DTG",
+    ctaHref: "/about",
+    pointer: "25%",
     items: [
-      ["Who We Are", "Independent monitoring intelligence and decision support.", "/about/who-we-are"],
-      ["Leadership", "Technical leadership across mining and geoscience.", "/about/leadership"],
-      ["Monitoring Governance", "Independent review, assurance and operational confidence.", "/capabilities/monitoring-governance"],
-      ["Technical Philosophy", "Technology-agnostic. Outcomes-driven. Evidence-based.", "/capabilities/technology-advisory"],
-      ["Vision & Future", "Advancing monitoring intelligence for complex operations.", "/about/vision-future"],
+      ["Purpose & Principles", "Why DTG exists and how we work.", "/about/purpose-principles", Target],
+      ["Vendor Independence", "Objective review across technologies and systems.", "/about/vendor-independence", ShieldCheck],
+      ["Our Approach", "Integrate, govern and decide.", "/about/our-approach", Network],
+      ["Technical Assurance", "Traceable review for defensible decisions.", "/about/technical-assurance", Layers3],
+      ["Leadership", "Technical and mining leadership.", "/about/leadership", UserRound],
+    ] satisfies MegaMenuItem[],
+  },
+  {
+    label: "Services",
+    eyebrow: "SERVICES",
+    title: "Monitoring support, clearly structured.",
+    statement:
+      "Explore how DTG supports monitoring review, reporting, technology integration, analytics and advisory support.",
+    ctaLabel: "EXPLORE SERVICES",
+    ctaHref: "/services",
+    pointer: "38%",
+    items: [
+      [
+        "Remote Monitoring",
+        "Live monitoring, alarms and TARP-based escalation.",
+        "/services/remote-monitoring",
+        RadioTower,
+      ],
+      [
+        "Reporting & Back-Analysis",
+        "Independent reports, event reviews and failure analysis.",
+        "/services/reporting-back-analysis",
+        Activity,
+      ],
+      [
+        "Technology Integration",
+        "Vendor-independent technology review and integration.",
+        "/services/technology-integration",
+        Network,
+      ],
+      [
+        "Data Analytics",
+        "Cleansing, correlation, trend analysis and automation support.",
+        "/services/data-analytics-automation",
+        Database,
+      ],
+      [
+        "Technical Advisory",
+        "Risk support, monitoring review and capability transfer.",
+        "/services/technical-advisory",
+        ShieldCheck,
+      ],
+    ] satisfies MegaMenuItem[],
+  },
+  {
+    label: "Applications",
+    eyebrow: "APPLICATIONS",
+    title: "Monitoring support across complex operating environments.",
+    statement:
+      "Explore where DTG supports monitoring review, reporting, interpretation and decision confidence across mining, tailings, underground and infrastructure environments.",
+    ctaLabel: "EXPLORE APPLICATIONS",
+    ctaHref: "/applications",
+    pointer: "56%",
+    items: [
+      [
+        "Open Pit Mining",
+        "Slope monitoring, alarms and deformation trends in active mining environments.",
+        "/applications/open-pit-mining",
+        Mountain,
+      ],
+      [
+        "Tailings Storage Facilities",
+        "Long-term deformation review, reporting traceability and monitoring assurance.",
+        "/applications/tailings-storage-facilities",
+        Layers3,
+      ],
+      [
+        "Underground Mining",
+        "Convergence, SLAM LiDAR and spatial change review.",
+        "/applications/underground-mining",
+        Activity,
+      ],
+      [
+        "Infrastructure & Civil",
+        "Ground movement, asset deformation and corridor monitoring.",
+        "/applications/infrastructure-civil",
+        Building2,
+      ],
+    ] satisfies MegaMenuItem[],
+  },
+];
+
+const navigationMenus: MegaMenu[] = [
+  menus[0],
+  menus[1],
+  menus[2],
+];
+
+const mobileNavigationSections: MobileNavSection[] = [
+  {
+    label: "About",
+    href: "/about",
+    items: [
+      ["Purpose & Principles", "/about/purpose-principles"],
+      ["Vendor Independence", "/about/vendor-independence"],
+      ["Our Approach", "/about/our-approach"],
+      ["Technical Assurance", "/about/technical-assurance"],
+      ["Leadership", "/about/leadership"],
     ],
   },
   {
     label: "Services",
-    title: "Services",
-    statement: "Independent monitoring, review, analytics and advisory support for critical geotechnical operations.",
-    visual: {
-      src: "/images/dtg-hero-geotechnical-corridor.png",
-      label: "Services",
-      caption: "From sensor data to decision-ready insight.",
-      tone: "services",
-    },
+    href: "/services",
     items: [
-      ["Remote Monitoring", "Real-time monitoring and engineering review.", "/capabilities/monitoring-intelligence"],
-      ["Monitoring Intelligence", "Advanced analytics, automation and interpretation.", "/capabilities/data-intelligence"],
-      ["Monitoring Advisory", "Governance, optimisation and technical guidance.", "/capabilities/monitoring-governance"],
-      ["Technology Advisory", "Independent technology evaluation and selection.", "/capabilities/technology-advisory"],
-      ["Training & Awareness", "Monitoring knowledge and operational readiness.", "/capabilities/training-capability-development"],
-    ],
-  },
-  {
-    label: "DTG Focus™",
-    title: "DTG Focus™",
-    statement: "One operational framework connecting monitoring data, engineering review, governance and decision support.",
-    visual: {
-      src: "/images/dtg-selected-operations.png",
-      label: "DTG Focus™",
-      caption: "Integrated data. Governed workflows. Confident decisions.",
-      tone: "focus",
-    },
-    items: [
-      ["Operationalising Monitoring", "Connects data, workflows and engineering judgement into a single operational framework.", "/dtg-focus"],
-      ["Integrate", "Connect monitoring technologies into one operational context.", "/dtg-focus/multi-sensor-integration"],
-      ["Correlate", "Identify relationships across sensors, locations and datasets.", "/dtg-focus"],
-      ["Analyse", "Transform monitoring data into actionable engineering insight.", "/dtg-focus/data-governance"],
-      ["Govern", "Enable workflows, governance and defensible decision-making.", "/dtg-focus/decision-support"],
-      ["Act", "Support timely and confident operational decisions.", "/dtg-focus/future-workflows"],
+      ["Remote Monitoring", "/services/remote-monitoring"],
+      ["Reporting & Back-Analysis", "/services/reporting-back-analysis"],
+      ["Technology Integration", "/services/technology-integration"],
+      ["Data Analytics", "/services/data-analytics-automation"],
+      ["Technical Advisory", "/services/technical-advisory"],
     ],
   },
   {
     label: "Applications",
-    title: "Applications",
-    statement: "Where DTG supports monitoring, risk management and decision-making across critical mining environments.",
-    visual: {
-      src: "/images/operation-gold-mining.png",
-      label: "Applications",
-      caption: "Open pits, tailings, underground environments and corporate technical teams.",
-      tone: "applications",
-    },
+    href: "/applications",
     items: [
-      ["Active Open Pits", "Monitoring, interpretation and decision support for active pit operations.", "/operations/open-pit-mining"],
-      ["Tailings Storage Facilities", "Deformation monitoring, interpretation and risk-informed decision support.", "/operations/tailings-storage-facilities"],
-      ["Underground Mining", "Convergence monitoring and underground deformation intelligence.", "/operations/underground-operations"],
-      ["Corporate & Consultants", "Independent review, monitoring strategy and technical assurance.", "/operations/civil-infrastructure"],
+      ["Open Pit Mining", "/applications/open-pit-mining"],
+      ["Tailings Storage Facilities", "/applications/tailings-storage-facilities"],
+      ["Underground Mining", "/applications/underground-mining"],
+      ["Infrastructure & Civil", "/applications/infrastructure-civil"],
     ],
+  },
+  {
+    label: "DTG Focus",
+    href: "/dtg-focus",
+    items: [
+      ["DTG Focus Overview", "/dtg-focus"],
+      ["Analytics", "/dtg-focus/data-cleansing"],
+      ["Reporting", "/dtg-focus/automated-reporting"],
+      ["Monitoring Review", "/dtg-focus/decision-support"],
+    ],
+  },
+  {
+    label: "Contact",
+    href: "/contact",
   },
 ];
 
-const navigationMenus = [menus[0], menus[1], menus[3], menus[2]];
-
 export function Header(){
+  const pathname=usePathname();
   const [open,setOpen]=useState(false);
+  const [mobileAccordion,setMobileAccordion]=useState<string|null>(null);
   const [active,setActive]=useState<string|null>(null);
-  const [expanded,setExpanded]=useState<string|null>(menus[0].label);
   const [hidden,setHidden]=useState(false);
   const [scrolled,setScrolled]=useState(false);
   const [showTop,setShowTop]=useState(false);
@@ -107,7 +221,7 @@ export function Header(){
   const keepOpen=()=>{
     if(closeTimer.current) clearTimeout(closeTimer.current);
   };
-  const openMenu=(menu:typeof menus[number], element?:HTMLDetailsElement)=>{
+  const openMenu=(menu:MegaMenu, element?:HTMLDetailsElement)=>{
     keepOpen();
     closeNativeMenus();
     if(element) element.open=true;
@@ -129,7 +243,13 @@ export function Header(){
     };
     onScroll();
     window.addEventListener("scroll",onScroll,{passive:true});
-    const onKey=(event:KeyboardEvent)=>{ if(event.key==="Escape") closeMenu(); };
+    const onKey=(event:KeyboardEvent)=>{
+      if(event.key==="Escape"){
+        setOpen(false);
+        setMobileAccordion(null);
+        closeMenu();
+      }
+    };
     const onPointer=(event:PointerEvent)=>{
       const target=event.target as HTMLElement;
       if(!target.closest(".site-header")) closeMenu();
@@ -145,70 +265,106 @@ export function Header(){
   },[open,active,closeMenu]);
 
   return <>
-  <header className={`site-header fixed inset-x-0 top-0 z-50 transition duration-300 ease-out ${hidden?"-translate-y-[120%]":"translate-y-0"} ${scrolled||open||active?"is-scrolled":""}`} onMouseLeave={scheduleClose} onMouseEnter={keepOpen}>
-    <div className="shell">
+  <header
+    className={`site-header fixed inset-x-0 top-0 z-50 transition duration-300 ease-out ${hidden&&!open?"-translate-y-[120%]":"translate-y-0"} ${scrolled||open||active?"is-scrolled":""} ${active?"header--mega-open":""}`}
+    data-mega-open={active ? "true" : "false"}
+    data-mobile-open={open ? "true" : "false"}
+    data-scrolled={scrolled ? "true" : "false"}
+    onMouseLeave={scheduleClose}
+    onMouseEnter={keepOpen}
+  >
+    <div className="site-container site-header__inner">
       <div className="site-nav flex h-16 items-center justify-between">
-        <Link href="/" aria-label="Digital Twin Geotechnical home" className="logo-lockup">
-          <Image src="/images/dtg-logo-broken-white-mark.png" alt="DTG" width={552} height={198} priority className="h-auto w-[88px]"/>
-        </Link>
+        <div className="site-brand-cluster">
+          <Link href="/" aria-label="Digital Twin Geotechnical home" className="logo-lockup">
+            <Image src="/images/dtg-logo-broken-white-mark.png" alt="DTG" width={552} height={198} priority className="h-auto w-[88px]"/>
+          </Link>
+        </div>
         <nav className="hidden items-center gap-6 lg:flex">
-          {navigationMenus.map((menu)=><details key={menu.label} className="nav-details" name="site-menu" onMouseEnter={(event)=>openMenu(menu,event.currentTarget)} onToggle={(event)=>{if(event.currentTarget.open){setHidden(false); setActive(menu.label);}else if(active===menu.label){setActive(null);}}}>
-            <summary className="nav-trigger" aria-haspopup="true">{renderTrademarkText(menu.label)}</summary>
-            <div className="mega-menu" onMouseEnter={keepOpen} onMouseLeave={scheduleClose}>
+          {navigationMenus.map((menu)=>{
+            const isCurrentSection = pathname === menu.ctaHref || pathname?.startsWith(`${menu.ctaHref}/`);
+            return <details key={menu.label} className="nav-details" name="site-menu" onMouseEnter={(event)=>openMenu(menu,event.currentTarget)} onPointerEnter={(event)=>openMenu(menu,event.currentTarget)} onMouseMove={(event)=>openMenu(menu,event.currentTarget)} onPointerMove={(event)=>openMenu(menu,event.currentTarget)} onToggle={(event)=>{if(event.currentTarget.open){setHidden(false); setActive(menu.label);}else if(active===menu.label){setActive(null);}}}>
+            <summary className="nav-trigger" aria-haspopup="true" aria-current={isCurrentSection ? "page" : undefined} onMouseEnter={(event)=>openMenu(menu,event.currentTarget.parentElement as HTMLDetailsElement)} onPointerEnter={(event)=>openMenu(menu,event.currentTarget.parentElement as HTMLDetailsElement)} onMouseMove={(event)=>openMenu(menu,event.currentTarget.parentElement as HTMLDetailsElement)} onPointerMove={(event)=>openMenu(menu,event.currentTarget.parentElement as HTMLDetailsElement)}>
+              <Link href={menu.ctaHref} className="nav-trigger-link" onMouseEnter={(event)=>openMenu(menu,event.currentTarget.closest(".nav-details") as HTMLDetailsElement)} onPointerEnter={(event)=>openMenu(menu,event.currentTarget.closest(".nav-details") as HTMLDetailsElement)} onMouseMove={(event)=>openMenu(menu,event.currentTarget.closest(".nav-details") as HTMLDetailsElement)} onPointerMove={(event)=>openMenu(menu,event.currentTarget.closest(".nav-details") as HTMLDetailsElement)} onClick={(event)=>{event.stopPropagation(); closeMenu();}}>{renderTrademarkText(menu.label)}</Link>
+            </summary>
+            <div className="mega-menu" onMouseEnter={keepOpen} onMouseLeave={scheduleClose} style={{"--mega-pointer-left": menu.pointer} as CSSProperties}>
               <button className="mega-close" type="button" onClick={(event)=>{event.preventDefault(); closeMenu();}} aria-label="Close menu">×</button>
+              {/* Mega menu layout is shared across all dropdowns. Future wording updates should be made in the menu data only. Do not create separate layouts, image cards, bottom strips, or custom typography per dropdown unless the whole navigation system is intentionally redesigned. */}
               <div className="mega-inner">
                 <div className="mega-intro-panel">
-                  <p>{renderTrademarkText(menu.label)}</p>
+                  <p>{renderTrademarkText(menu.eyebrow)}</p>
                   <h3>{renderTrademarkText(menu.title)}</h3>
                   <span>{renderTrademarkText(menu.statement)}</span>
-                  <Link href={menu.items[0][2]} className="mega-section-cta" onClick={closeMenu}>Explore section <ArrowUpRight size={13}/></Link>
+                  <Link href={menu.ctaHref} className="mega-section-cta" onClick={closeMenu}>{renderTrademarkText(menu.ctaLabel)} <ArrowUpRight size={14}/></Link>
                 </div>
                 <div className="mega-list-panel">
-                  {menu.items.map(([title,description,href])=><Link href={href} className="mega-item" key={href} onClick={closeMenu}>
+                  {menu.items.map(([title,description,href,Icon])=><Link href={href} className="mega-item" key={href} onClick={closeMenu}>
+                    <span className="mega-item-icon"><Icon size={20} strokeWidth={1.55}/></span>
                     <div>
                       <span>{renderTrademarkText(title)}</span>
                       <p>{renderTrademarkText(description)}</p>
                     </div>
-                    <ArrowUpRight size={14}/>
+                    <ArrowUpRight className="mega-item-arrow" size={17}/>
                   </Link>)}
                 </div>
-                <MegaSectionVisual visual={menu.visual}/>
               </div>
             </div>
-          </details>)}
-          <Link href="/#contact" className="nav-link">Contact</Link>
-          <Link href="/contact" className="button ml-2 py-3">Initiate Briefing <ArrowUpRight size={13}/></Link>
+          </details>})}
+          <Link href="/dtg-focus" className="nav-link" aria-current={pathname?.startsWith("/dtg-focus") ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>{renderTrademarkText("DTG Focus™")}</Link>
+          <Link href="/contact" className="nav-link" aria-current={pathname === "/contact" ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>Contact</Link>
+          <Link href="/contact" className="button ml-2 py-3" onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>CONTACT <ArrowUpRight size={13}/></Link>
         </nav>
-        <button className="mobile-menu-button lg:hidden" onClick={()=>setOpen(!open)} aria-label="Toggle menu">{open?<X size={20}/>:<Menu size={20}/>}</button>
+        <button className="mobile-menu-button lg:hidden" onClick={()=>{setHidden(false); setOpen((current)=>{ if(current) setMobileAccordion(null); return !current; });}} aria-label="Toggle menu" aria-expanded={open} aria-controls="mobile-navigation-drawer">{open?<X size={20}/>:<Menu size={20}/>}</button>
       </div>
     </div>
-    {open&&<div className="mobile-nav-panel lg:hidden">
-      <div className="shell py-6">
-        {navigationMenus.map((menu)=><div className="mobile-accordion" key={menu.label}>
-          <button type="button" onClick={()=>setExpanded(expanded===menu.label?null:menu.label)}>{renderTrademarkText(menu.label)}<ChevronDown size={14}/></button>
-          {expanded===menu.label&&<div className="mobile-accordion-links">
-            {menu.items.map(([title,,href])=><Link href={href} key={href} onClick={()=>setOpen(false)}>{renderTrademarkText(title)}</Link>)}
-          </div>}
-        </div>)}
-        <Link href="/#contact" className="mobile-direct" onClick={()=>setOpen(false)}>Contact</Link>
-        <Link href="/contact" className="story-button mt-6 w-full justify-center" onClick={()=>setOpen(false)}>Initiate Briefing <ArrowUpRight size={14}/></Link>
-      </div>
-    </div>}
   </header>
+  {open&&<nav id="mobile-navigation-drawer" className="mobile-nav-panel lg:hidden" aria-label="Mobile navigation">
+    <div className="mobile-nav-list">
+      {mobileNavigationSections.map((section)=>{
+        const isOpen=mobileAccordion===section.label;
+        const isCurrent=pathname===section.href || pathname?.startsWith(`${section.href}/`);
+        const sectionId=`mobile-nav-${section.label.toLowerCase().replace(/[^a-z0-9]+/g,"-")}`;
+
+        if(!section.items?.length){
+          return <Link
+            href={section.href}
+            className="mobile-direct"
+            key={section.label}
+            aria-current={isCurrent?"page":undefined}
+            onClick={()=>{setOpen(false); setMobileAccordion(null);}}
+          >
+            {renderTrademarkText(section.label)}
+            <ArrowUpRight size={14}/>
+          </Link>;
+        }
+
+        return <div className={`mobile-accordion ${isOpen?"is-open":""}`} key={section.label}>
+          <button
+            type="button"
+            className="mobile-accordion-toggle"
+            aria-expanded={isOpen}
+            aria-controls={sectionId}
+            aria-current={isCurrent?"page":undefined}
+            onClick={()=>setMobileAccordion(isOpen?null:section.label)}
+          >
+            <span>{renderTrademarkText(section.label)}</span>
+            <ChevronDown className="mobile-accordion-icon" size={16} strokeWidth={1.7}/>
+          </button>
+          <div id={sectionId} className="mobile-accordion-links" hidden={!isOpen}>
+            {section.items.map(([label,href])=><Link
+              href={href}
+              key={href}
+              onClick={()=>{setOpen(false); setMobileAccordion(null);}}
+            >
+              {renderTrademarkText(label)}
+            </Link>)}
+          </div>
+        </div>;
+      })}
+    </div>
+  </nav>}
   <button className={`scroll-top ${showTop?"is-visible":""}`} onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} aria-label="Scroll to top"><ArrowUp size={16}/></button>
   </>
 }
 
-function MegaSectionVisual({visual}:{visual:{src:string; label:string; caption:string; tone:string}}){
-  return <div className={`mega-section-visual mega-section-visual-${visual.tone}`}>
-    <Image src={visual.src} alt={`${visual.label} navigation visual`} fill className="object-cover"/>
-    <div className="mega-section-grid" aria-hidden="true"/>
-    <div className="mega-section-lines" aria-hidden="true"/>
-    <div className="mega-section-caption">
-      <span>{renderTrademarkText(visual.label)}</span>
-      <p>{renderTrademarkText(visual.caption)}</p>
-    </div>
-  </div>
-}
-
-export function Footer(){return <footer id="contact" className="footer-premium border-t hairline bg-[#0E1823]"><div className="footer-contours" aria-hidden="true"/><div className="shell relative py-16"><div className="grid gap-10 border-b hairline pb-10 lg:grid-cols-[1.15fr_.85fr]"><div><p className="eyebrow">Contact DTG</p><h2 className="mt-5 max-w-2xl text-4xl tracking-[-.07em] md:text-5xl">Start a monitoring conversation.</h2><p className="footer-tagline">Integrated Data.<br/>Informed Decisions.</p><Link href="/contact" className="button mt-7">Initiate briefing <ArrowUpRight size={13}/></Link></div><div className="grid gap-px bg-[#073F4A24] sm:grid-cols-3">{[["Connect","info@dtgeotech.com","Start a monitoring conversation"],["Office","Brisbane, Queensland, Australia","DTG Headquarters"],["Operations","Yogyakarta, Indonesia","Remote Monitoring Centre"]].map(([label,value,description])=><div className="footer-contact-card bg-[#071114] p-4" key={label}><p className="eyebrow">{label}</p><p className="mt-4 text-xs leading-5 text-[#F3F5F4]">{value}</p><p className="mt-3 text-[10px] leading-4 text-[#9CB6C2]">{description}</p></div>)}</div></div><div className="flex flex-col justify-between gap-6 pt-8 text-[10px] uppercase tracking-[.17em] text-[#9CB6C2] md:flex-row md:items-end"><Image src="/images/dtg-logo-broken-white-full.png" alt="Digital Twin Geotechnical Monitoring" width={567} height={301} className="h-auto w-40 opacity-80"/><div>Integrated Data. Informed Decisions.</div></div></div></footer>}
+export function Footer(){return <SiteFooter />}

@@ -3,7 +3,7 @@ import { CTA, PageHero, Reveal, SectionLabel } from "@/components/ui";
 const operations=[
  ["Greatland Gold","Telfer Mine, Western Australia","Integrated geotechnical monitoring and decision-support services.","GroundProbe SSR / Catalyst Earth InSAR / Trimble Prisms"],
  ["Harmony Gold","Hidden Valley Mine, Papua New Guinea","Remote geotechnical monitoring and operational support.","GroundProbe SSR"],
- ["Underground convergence monitoring","Partnership with Beck Engineering","SLAM-based convergence monitoring analysis and underground deformation review.","Underground SLAM / convergence review"],
+ ["Underground convergence monitoring","Partnership with Beck Engineering","SLAM LiDAR-based convergence monitoring analysis and underground deformation review.","Underground SLAM LiDAR / convergence review"],
  ["Golden Energy Mines","PT Borneo Indobara, Indonesia","Radar monitoring service support and operational monitoring trial.","CHCNAV PS-2000 Radar"],
  ["Rain Group","PT Insani Baraperkasa, Indonesia","Radar monitoring service support and operational monitoring services.","CHCNAV PS-2000 Radar"],
 ];

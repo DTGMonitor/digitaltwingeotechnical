@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer, Header } from "@/components/site";
+import { Header } from "@/components/site";
+import { SiteBottom } from "@/components/SiteBottom";
 
 export const metadata: Metadata = {
   title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><Header />{children}<Footer /></body></html>;
+  return <html lang="en"><body id="top"><Header />{children}<SiteBottom /></body></html>;
 }

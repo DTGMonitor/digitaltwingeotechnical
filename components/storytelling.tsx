@@ -11,19 +11,6 @@ export function StoryMotion(){
  if(reduce) return;
 
   const ctx=gsap.context(()=>{
-   gsap.to(".hero-image",{
-    scale:1.08,
-    ease:"none",
-    scrollTrigger:{trigger:".story-hero",start:"top top",end:"bottom top",scrub:true}
-   });
-
-   gsap.to(".hero-sensor-field",{
-    yPercent:-7,
-    xPercent:2,
-    ease:"none",
-    scrollTrigger:{trigger:".story-hero",start:"top top",end:"bottom top",scrub:true}
-   });
-
    gsap.utils.toArray<HTMLElement>(".fade-up").forEach((el)=>{
     gsap.fromTo(el,{autoAlpha:0,y:34},{autoAlpha:1,y:0,duration:.9,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 84%",once:true}});
    });

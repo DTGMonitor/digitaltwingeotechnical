@@ -1,3 +1,5 @@
-import { DetailPage, detailPages } from "@/components/detail-content";
+import { LeadershipSection } from "@/components/leadership-section";
 
-export default function Page(){ return <DetailPage page={detailPages["about/leadership"]}/>; }
+export default function Page() {
+  return <LeadershipSection />;
+}

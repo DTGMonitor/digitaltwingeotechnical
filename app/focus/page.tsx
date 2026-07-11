@@ -13,7 +13,12 @@ export default function Focus() {
         }
         index="01"
         title="Focused Actionable Insight."
-        body="An enterprise-grade geotechnical monitoring framework for data integration, governance, analytics, escalation and decision support."
+        body={
+          <>
+            <DTGFocusMark /> integrates monitoring data, engineering workflows, governance and intelligent analytics into
+            a single decision-support platform.
+          </>
+        }
       />
 
       <section className="focus-section border-b hairline">
@@ -37,9 +42,8 @@ export default function Focus() {
               Focused Actionable Insight.
             </h2>
             <p className="subhead mt-5 max-w-2xl">
-              A framework for monitoring, governance and operational decision support. <DTGFocusMark /> is being developed
-              to support alarm quality, TARP workflows, escalation and informed decisions across multiple monitoring
-              technologies.
+              <DTGFocusMark /> is being developed to integrate monitoring technologies, govern workflows and support
+              informed, defensible decisions across multiple monitoring technologies.
             </p>
           </Reveal>
           <Reveal className="mt-10">
@@ -57,8 +61,9 @@ export default function Focus() {
           <Reveal>
             <h2 className="headline max-w-4xl">One Platform. Multiple Technologies. A Single Operational View.</h2>
             <p className="subhead mt-5 max-w-2xl">
-              Radar, GNSS, prisms, LiDAR, InSAR, seismic systems, environmental monitoring and operational data can be
-              brought into one operating environment for correlation and review.
+              Radar, GNSS, prisms, surface LiDAR, SLAM LiDAR, InSAR, seismic systems, environmental monitoring and
+              operational data can be brought into one operating environment for correlation and review. DTG is
+              independent of monitoring vendors, software vendors and equipment manufacturers.
             </p>
           </Reveal>
         </div>
@@ -68,7 +73,7 @@ export default function Focus() {
         <div className="shell">
           <SectionLabel>Designed workflow</SectionLabel>
           <Reveal>
-            <h2 className="headline max-w-4xl">Monitor. Interpret. Act.</h2>
+            <h2 className="headline max-w-4xl">Integrate. Govern. Decide.</h2>
           </Reveal>
           <div className="mt-10">
             <Workflow />

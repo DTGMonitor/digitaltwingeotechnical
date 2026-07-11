@@ -49,7 +49,7 @@ export function ApplicationsCarousel({ applications }: { applications: Applicati
 
   return (
     <div
-      className="application-carousel mt-14"
+      className="application-carousel"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onClickCapture={(event) => {
