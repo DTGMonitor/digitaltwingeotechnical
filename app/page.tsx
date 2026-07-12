@@ -5,6 +5,7 @@ import { StoryMotion } from "@/components/storytelling";
 import { ApplicationsCarousel } from "@/components/applications-carousel";
 import { MonitoringChallenge } from "@/components/monitoring-challenge";
 import { HomeServicesOverview } from "@/components/services-section";
+import { DTGFocusMark, renderTrademarkText } from "@/components/brand";
 
 const proofItems = [
   {
@@ -54,7 +55,7 @@ const focusPillars = [
 
 export default function Home() {
   return (
-    <main className="story-page">
+    <main className="story-page home-page">
       <StoryMotion />
 
       <section className="story-hero homepage-hero relative overflow-hidden">
@@ -130,13 +131,14 @@ export default function Home() {
       <section id="dtg-focus" className="focus-section home-focus-section" aria-labelledby="home-focus-title">
         <div className="site-container home-focus-layout">
           <div className="home-focus-copy">
-            <p className="story-eyebrow fade-up">DTG FOCUS</p>
+            <p className="story-eyebrow fade-up"><DTGFocusMark /></p>
             <h2 id="home-focus-title" className="section-headline fade-up">
               Governed Monitoring Workflows.
             </h2>
             <p className="story-subcopy fade-up">
-              DTG Focus supports review workflows, visibility, traceability and decision records across complex
-              monitoring environments.
+              {renderTrademarkText(
+                "DTG Focus supports review workflows, visibility, traceability and decision records across complex monitoring environments.",
+              )}
             </p>
             <div className="focus-home-pillars fade-up" aria-label="DTG Focus support pillars">
               {focusPillars.map((pillar, index) => (
