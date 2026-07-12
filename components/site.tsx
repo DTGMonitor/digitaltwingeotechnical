@@ -174,6 +174,11 @@ const mobileNavigationSections: MobileNavSection[] = [
     ],
   },
   {
+    label: "Solutions",
+    href: "/solutions",
+    items: [], // Sprint E1: single page — renders as a direct link
+  },
+  {
     label: "DTG Focus",
     href: "/dtg-focus",
     items: [
@@ -182,10 +187,6 @@ const mobileNavigationSections: MobileNavSection[] = [
       ["Reporting", "/dtg-focus/automated-reporting"],
       ["Monitoring Review", "/dtg-focus/decision-support"],
     ],
-  },
-  {
-    label: "Contact",
-    href: "/contact",
   },
 ];
 
@@ -273,7 +274,7 @@ export function Header(){
             <Image src="/images/dtg-logo-broken-white-mark.png" alt="DTG" width={552} height={198} priority className="h-auto w-[88px]"/>
           </Link>
         </div>
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           <Link href="/about" className="nav-link" aria-current={pathname==="/about"||pathname?.startsWith("/about/")?"page":undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>About</Link>
           {navigationMenus.map((menu)=>{
             const isCurrentSection = pathname === menu.ctaHref || pathname?.startsWith(`${menu.ctaHref}/`);
@@ -304,9 +305,9 @@ export function Header(){
               </div>
             </div>
           </details>})}
+          <Link href="/solutions" className="nav-link" aria-current={pathname==="/solutions"||pathname?.startsWith("/solutions/")?"page":undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>Solutions</Link>
           <Link href="/dtg-focus" className="nav-link" aria-current={pathname?.startsWith("/dtg-focus") ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>{renderTrademarkText("DTG Focus™")}</Link>
-          <Link href="/contact" className="nav-link" aria-current={pathname === "/contact" ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>Contact</Link>
-          <Link href="/contact" className="button ml-2 py-3" onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>CONTACT <ArrowUpRight size={13}/></Link>
+          <Link href="/contact" className="button nav-contact-button py-3" onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>CONTACT <ArrowUpRight size={13}/></Link>
           <ThemeToggle/>
         </nav>
         <div className="flex items-center gap-2 lg:hidden">
@@ -359,6 +360,7 @@ export function Header(){
           </div>
         </div>;
       })}
+      <Link href="/contact" className="mobile-contact-button" aria-current={pathname==="/contact"?"page":undefined} onClick={()=>{setOpen(false); setMobileAccordion(null);}}>Contact <ArrowUpRight size={16}/></Link>
     </div>
   </nav>}
   <button className={`scroll-top ${showTop?"is-visible":""}`} onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} aria-label="Scroll to top"><ArrowUp size={16}/></button>
