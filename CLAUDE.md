@@ -188,6 +188,22 @@ cyberpunk glow, holograms, floating dashboards, generic PPE/stock imagery, radar
 aesthetics, decorative data particles. Canonical diagram spine:
 **Inputs → Independent Review → Governed Monitoring Outcomes.**
 
+### Theme system & the dark-default migration stance (Sprint 3)
+
+The site is theme-aware via a `data-theme` attribute on `<html>`, driven by a semantic `--c-*` token
+layer (dark set + light set) — see `docs/THEME-ARCHITECTURE.md`. Recomposed pages and the section
+kit consume **only** `--c-*` (+ `--accent`/`--accent-text`); legacy `--surface`/`--border`/`--ink`
+are load-bearing for un-migrated pages and are left untouched.
+
+- **Dark is the current default — but this is an explicit, TEMPORARY migration stance,** chosen
+  because the un-recomposed pages are still hard-coded dark. **Light is the intended end-state
+  default** (the masterbook mandates skew-light); the default flips to light once page recomposition
+  is far enough along. The header toggle lets users switch today; its effect is progressive (only
+  token-driven surfaces re-theme — legacy pages stay dark until recomposed).
+- **Green split is enforced:** `--accent` (bright `#63B75D`) is for fills/decoration/dark-surface
+  cues only; **any legible green text or meaningful cue uses `--accent-text`** (`#2E6B2A` on light —
+  `#63B75D` on off-white is only 2.3:1). Never use `--accent` for green text on light.
+
 ---
 
 ## 8. Development rules

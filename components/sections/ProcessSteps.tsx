@@ -26,7 +26,7 @@ export function ProcessSteps({
   titleId,
   steps,
   numbered = false,
-  surface = "light",
+  surface = "default",
   compact,
 }: ProcessStepsProps) {
   return (

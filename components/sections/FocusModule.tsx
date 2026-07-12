@@ -26,7 +26,7 @@ export function FocusModule({
   body,
   pillars,
   actions,
-  surface = "light",
+  surface = "default",
   compact,
 }: FocusModuleProps) {
   return (

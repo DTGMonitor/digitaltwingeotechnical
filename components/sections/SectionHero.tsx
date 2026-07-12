@@ -29,7 +29,7 @@ export function SectionHero({
   actions,
   media,
 }: SectionHeroProps) {
-  const surface = variant === "image" ? "image" : variant === "dark" ? "band" : "light";
+  const surface = variant === "image" ? "image" : variant === "dark" ? "band" : "default";
 
   return (
     <Surface
@@ -40,7 +40,7 @@ export function SectionHero({
     >
       <div className="section-kit-hero">
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <h1 id={titleId} className="story-display">
+        <h1 id={titleId} className="section-hero__title">
           {title}
         </h1>
         {lead ? <p className="section-kit-lead">{lead}</p> : null}

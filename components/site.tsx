@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Activity,
   ArrowUp,
@@ -141,23 +142,15 @@ const menus = [
   },
 ];
 
-const navigationMenus: MegaMenu[] = [
-  menus[0],
-  menus[1],
-  menus[2],
-];
+// Sprint 3: About is now a single nav item (no dropdown). menus[0] retained as data only
+// (keeps its icon imports in use); it is no longer rendered as a mega-menu.
+const navigationMenus: MegaMenu[] = [menus[1], menus[2]];
 
 const mobileNavigationSections: MobileNavSection[] = [
   {
     label: "About",
     href: "/about",
-    items: [
-      ["Purpose & Principles", "/about/purpose-principles"],
-      ["Vendor Independence", "/about/vendor-independence"],
-      ["Our Approach", "/about/our-approach"],
-      ["Technical Assurance", "/about/technical-assurance"],
-      ["Leadership", "/about/leadership"],
-    ],
+    items: [], // Sprint 3: single consolidated page — renders as a direct link (no accordion)
   },
   {
     label: "Services",
@@ -281,6 +274,7 @@ export function Header(){
           </Link>
         </div>
         <nav className="hidden items-center gap-6 lg:flex">
+          <Link href="/about" className="nav-link" aria-current={pathname==="/about"||pathname?.startsWith("/about/")?"page":undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>About</Link>
           {navigationMenus.map((menu)=>{
             const isCurrentSection = pathname === menu.ctaHref || pathname?.startsWith(`${menu.ctaHref}/`);
             return <details key={menu.label} className="nav-details" name="site-menu" onMouseEnter={(event)=>openMenu(menu,event.currentTarget)} onPointerEnter={(event)=>openMenu(menu,event.currentTarget)} onMouseMove={(event)=>openMenu(menu,event.currentTarget)} onPointerMove={(event)=>openMenu(menu,event.currentTarget)} onToggle={(event)=>{if(event.currentTarget.open){setHidden(false); setActive(menu.label);}else if(active===menu.label){setActive(null);}}}>
@@ -313,8 +307,12 @@ export function Header(){
           <Link href="/dtg-focus" className="nav-link" aria-current={pathname?.startsWith("/dtg-focus") ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>{renderTrademarkText("DTG Focus™")}</Link>
           <Link href="/contact" className="nav-link" aria-current={pathname === "/contact" ? "page" : undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>Contact</Link>
           <Link href="/contact" className="button ml-2 py-3" onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>CONTACT <ArrowUpRight size={13}/></Link>
+          <ThemeToggle/>
         </nav>
-        <button className="mobile-menu-button lg:hidden" onClick={()=>{setHidden(false); setOpen((current)=>{ if(current) setMobileAccordion(null); return !current; });}} aria-label="Toggle menu" aria-expanded={open} aria-controls="mobile-navigation-drawer">{open?<X size={20}/>:<Menu size={20}/>}</button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle/>
+          <button className="mobile-menu-button" onClick={()=>{setHidden(false); setOpen((current)=>{ if(current) setMobileAccordion(null); return !current; });}} aria-label="Toggle menu" aria-expanded={open} aria-controls="mobile-navigation-drawer">{open?<X size={20}/>:<Menu size={20}/>}</button>
+        </div>
       </div>
     </div>
   </header>

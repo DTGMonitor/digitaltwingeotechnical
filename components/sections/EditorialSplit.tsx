@@ -23,7 +23,7 @@ export function EditorialSplit({
   actions,
   media,
   mediaLeft = false,
-  surface = "light",
+  surface = "default",
   compact,
 }: EditorialSplitProps) {
   return (

@@ -8,6 +8,21 @@ export const metadata: Metadata = {
   description: "Independent geotechnical monitoring, analytics, governance and decision support.",
 };
 
+// No-flash theme init: dark is the default (interim migration stance); a stored choice is
+// applied to <html data-theme> before first paint. See docs/THEME-ARCHITECTURE.md.
+const themeInit = `(function(){try{var t=localStorage.getItem('dtg-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}})();`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body id="top"><Header />{children}<SiteBottom /></body></html>;
+  return (
+    <html lang="en" data-theme="dark">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
+      <body id="top">
+        <Header />
+        {children}
+        <SiteBottom />
+      </body>
+    </html>
+  );
 }

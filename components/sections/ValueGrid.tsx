@@ -24,7 +24,7 @@ export function ValueGrid({
   title,
   titleId,
   items,
-  surface = "light",
+  surface = "default",
   compact,
 }: ValueGridProps) {
   return (

@@ -1,411 +1,317 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { renderTrademarkText } from "@/components/brand";
 import {
-  ArrowUpRight,
-  BarChart3,
-  ClipboardCheck,
-  Database,
-  FileCheck2,
-  Network,
-  RadioTower,
-  ShieldCheck,
-  Target,
-  UserRound,
-  Workflow,
-} from "lucide-react";
-import { InternalHero } from "@/components/internal-hero";
+  Surface,
+  SectionHero,
+  StatementBand,
+  ValueGrid,
+  ProcessSpine,
+  FaqAccordion,
+  ProfileCard,
+  CTA,
+} from "@/components/sections";
 
-const aboutContent = {
-  hero: {
-    title: "About Us",
-    lead: "Independent monitoring. Trusted outcomes.",
-    copy:
-      "DTG is an independent geotechnical monitoring support company helping mining and infrastructure teams turn monitoring data, alarms, reports and technical evidence into clearer operational and engineering decisions.",
-  },
-  whoWeAre: {
-    label: "WHO WE ARE",
-    title: "Built for practical monitoring environments.",
-    copy:
-      "DTG brings together geotechnical monitoring experience, data review, reporting discipline and operational decision support. We support teams working with complex monitoring information, helping them understand what the data means, what can be trusted, and how it should inform response.",
-    image: "/images/dtg-command-centre.png",
-  },
-  problems: {
-    label: "WHY DTG EXISTS",
-    title: "Monitoring data alone does not create safer decisions.",
-    closing:
-      "DTG exists to help monitoring information become clearer, more traceable and more useful for action.",
-    items: [
-      {
-        title: "Fragmented inputs",
-        copy: "Radar, GNSS, prisms, InSAR, LiDAR, inspections and reports often sit in separate systems.",
-        icon: Database,
-      },
-      {
-        title: "Uncertain interpretation",
-        copy: "Alarms, movement trends and data quality issues need engineering context.",
-        icon: BarChart3,
-      },
-      {
-        title: "Response pressure",
-        copy: "Operational decisions often need to be made quickly, clearly and defensibly.",
-        icon: ClipboardCheck,
-      },
-    ],
-  },
-  capabilities: {
-    label: "WHAT WE HELP TEAMS DO",
-    title: "Practical support across the monitoring workflow.",
-    items: [
-      {
-        title: "Review monitoring evidence",
-        copy: "Independent review of alarms, movement trends and monitoring records.",
-        icon: RadioTower,
-      },
-      {
-        title: "Interpret movement trends",
-        copy: "Support for understanding deformation behaviour and technical context.",
-        icon: BarChart3,
-      },
-      {
-        title: "Improve reporting traceability",
-        copy: "Clearer records that connect monitoring evidence, review and response.",
-        icon: FileCheck2,
-      },
-      {
-        title: "Support technology integration",
-        copy: "Help connecting monitoring sources, workflows and platforms.",
-        icon: Network,
-      },
-      {
-        title: "Strengthen decision confidence",
-        copy: "Independent support for clearer escalation, governance and operational decisions.",
-        icon: ShieldCheck,
-      },
-    ],
-  },
-  principles: {
-    label: "WHAT MAKES DTG DIFFERENT",
-    title: "Independent by design. Practical in operation.",
-    items: [
-      {
-        title: "Independent by design",
-        copy: "DTG is not tied to one vendor, platform or sensor brand.",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Technology-agnostic",
-        copy: "DTG can work across radar, GNSS, prisms, InSAR, LiDAR and other monitoring sources.",
-        icon: Network,
-      },
-      {
-        title: "Engineering-led",
-        copy: "DTG focuses on interpretation, context and decision support, not just data display.",
-        icon: Target,
-      },
-      {
-        title: "Practical in operation",
-        copy: "DTG is built around real monitoring workflows, escalation, reporting and TARP-based response.",
-        icon: Workflow,
-      },
-    ],
-  },
-  processFlow: {
-    label: "HOW DTG SUPPORTS DECISIONS",
-    title: "From monitoring evidence to defensible decisions.",
-    items: [
-      {
-        title: "Monitoring evidence",
-        copy: "Sensors, inspections and reports.",
-        tags: ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "Inspections", "Reports"],
-      },
-      {
-        title: "Independent review",
-        copy: "Validate, correlate, contextualise and report.",
-        tags: ["Validate", "Correlate", "Contextualise", "Govern", "Report"],
-      },
-      {
-        title: "Defensible decisions",
-        copy: "Awareness, escalation, records and confidence.",
-        tags: ["Awareness", "Escalation", "Records", "Confidence"],
-      },
-    ],
-  },
-  leadership: {
-    label: "LEADERSHIP",
-    title: "Led by monitoring and geotechnical experience.",
-    intro:
-      "DTG leadership combines practical monitoring operations, technology implementation, geotechnical risk understanding and decision-support strategy.",
-    story:
-      "DTG was built to address the gap between monitoring technology deployment and independent engineering review. The company supports teams that need monitoring information to become clearer, more traceable and more useful for operational decisions.",
-    members: [
-      {
-        name: "Peter Saunders",
-        role: "Founder / Director",
-        copy: "Monitoring operations, technology implementation and decision-support leadership.",
-        image: "/images/peter-saunders-portrait.png",
-      },
-      {
-        name: "Mark Burdett",
-        role: "Founder / Director",
-        copy: "Mining leadership, geotechnical risk and operational strategy.",
-        image: "/images/mark-burdett-portrait.png",
-      },
-    ],
-  },
-  dtgFocus: {
-    label: "DTG FOCUS",
-    title: "A supporting framework for monitoring review.",
-    copy:
-      "DTG Focus supports DTG's review workflows by improving visibility, traceability and decision records across monitoring information.",
-  },
-  exploreMore: {
-    label: "EXPLORE MORE",
-    title: "Continue through the DTG story.",
-    items: [
-      {
-        title: "Purpose & Principles",
-        copy: "Why DTG exists, the problem it solves and the principles that shape its work.",
-        href: "/about/purpose-principles",
-        icon: Target,
-      },
-      {
-        title: "Vendor Independence",
-        copy: "How DTG remains independent from monitoring vendors, software vendors and equipment manufacturers.",
-        href: "/about/vendor-independence",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Leadership",
-        copy: "The people leading DTG and the experience behind the company.",
-        href: "/about/leadership",
-        icon: UserRound,
-      },
-    ],
-  },
-  closingCta: {
-    title: "Partner with DTG to turn monitoring evidence into trusted decisions.",
-    image: "/images/home/dtg-closing-cta-real-monitoring-centre.png",
-  },
-} as const;
+export const metadata: Metadata = {
+  title: "About | Digital Twin Geotechnical",
+  description:
+    "DTG is an independent geotechnical monitoring, analytics and decision-support company — how we work, our principles, vendor independence, technical assurance and leadership.",
+};
 
-function SectionHeading({
-  label,
-  title,
-  copy,
-  id,
+const capabilities = [
+  { title: "Independent monitoring review", body: "Live and scheduled review of monitoring data, alarms and TARP-based escalation." },
+  { title: "Reporting & back-analysis", body: "Independent reports, event reviews and failure back-analysis." },
+  { title: "Technology integration", body: "Vendor-independent review and integration across monitoring systems." },
+  { title: "Data analytics & automation", body: "Cleansing, correlation, trend analysis and repeatable reporting." },
+  { title: "Technical advisory", body: "Monitoring strategy, governance, escalation design and capability transfer." },
+];
+
+const spineNodes = [
+  { label: "Inputs", body: "Radar, GNSS, prisms, InSAR, LiDAR, SLAM LiDAR, VWP, seismic and operational records." },
+  { label: "Independent review", body: "Engineering judgement, vendor-independent validation, governance and traceability." },
+  { label: "Governed monitoring outcomes", body: "Trusted outcomes, decision support, escalation confidence and defensible records." },
+];
+
+const isAffirm = [
+  "An independent monitoring, analytics and decision-support company",
+  "Requirement-first and technology-agnostic",
+  "Accountable for monitoring outcomes across systems",
+  "A partner to your geotechnical team",
+];
+const isNegate = [
+  "A monitoring hardware vendor",
+  "A software or SaaS product company",
+  "A dashboard company — visualisation is one layer, not the value",
+  "A replacement for your geotechnical team",
+];
+
+const principles: Array<[string, string]> = [
+  ["Technical judgement, not just data", "Experienced review helps teams understand what the data means."],
+  ["Validation before action", "Signals are checked for quality, reliability and operational context."],
+  ["Context over isolated alarms", "Alerts are interpreted alongside related systems, events and observations."],
+  ["Independent review that builds confidence", "Technology-agnostic assessment clarifies what the evidence supports."],
+  ["Governance that supports escalation", "Traceable workflows help teams know what changed, who reviewed it and why."],
+  ["Outcomes that stand up in the field", "Monitoring review is shaped around decisions that can be defended."],
+];
+
+const vendorLed = [
+  "Technology-first",
+  "Brand-specific workflow",
+  "System-limited interpretation",
+  "Performance claims without context",
+  "Reporting shaped by platform capability",
+];
+const independentReview = [
+  "Requirement-first",
+  "Technology-agnostic",
+  "Cross-system interpretation",
+  "Evidence and context-led",
+  "Decision-focused and traceable",
+];
+
+const assuranceChecks = [
+  { title: "Is the data reliable enough?", body: "Review availability, continuity, noise, gaps and instrument behaviour before interpretation." },
+  { title: "Do the sensors agree?", body: "Compare technologies and observations to make agreement, delay or contradiction visible." },
+  { title: "Is interpretation defensible?", body: "Record evidence, assumptions, uncertainty, recommendations and review logic." },
+  { title: "Can teams respond with confidence?", body: "Connect technical review to responsibilities, decision records and change control." },
+];
+
+const leaders = [
+  {
+    name: "Peter Saunders",
+    role: "Founder / Director",
+    src: "/images/peter-saunders-portrait.png",
+    bio: "Peter brings extensive experience in geotechnical monitoring, operational implementation and monitoring service leadership — helping mining and infrastructure teams use monitoring systems as decision-support tools, not only instruments.",
+    tags: ["Monitoring operations", "Technology implementation", "Monitoring governance", "Client advisory"],
+  },
+  {
+    name: "Mark Burdett",
+    role: "Founder / Director",
+    src: "/images/mark-burdett-portrait.png",
+    bio: "Mark brings senior mining and operational experience to DTG's leadership, with a focus on how geotechnical information supports decisions across complex mining environments.",
+    tags: ["Mining leadership", "Operational risk", "Geotechnical strategy", "Governance"],
+  },
+];
+
+const faqs = [
+  {
+    question: "Does independence mean DTG is anti-vendor?",
+    answer:
+      "No. Good monitoring depends on good vendors, good equipment and good implementation. Independence means assessing options objectively and keeping the monitoring requirement at the centre of the decision.",
+  },
+  {
+    question: renderTrademarkText("Is DTG Focus™ a standalone product?"),
+    answer: renderTrademarkText(
+      "No. DTG Focus is a supporting, governed monitoring environment within DTG's service approach — an operational decision-support platform, not a standalone SaaS product or dashboard. It is introduced only where it materially improves the solution.",
+    ),
+  },
+  {
+    question: "Is technical assurance the same as data quality control?",
+    answer:
+      "No. Data quality control is one part of assurance. Technical assurance also considers configuration, alarm logic, multi-sensor correlation, interpretation, escalation, reporting and governance.",
+  },
+  {
+    question: "Does DTG replace the client geotechnical team?",
+    answer:
+      "No. DTG supports client teams by providing independent monitoring review, technical interpretation, workflow support and decision confidence.",
+  },
+  {
+    question: renderTrademarkText("Do we need DTG Focus to work with DTG?"),
+    answer: renderTrademarkText(
+      "No. DTG's review, analytics, governance and advisory work stands on its own. DTG Focus is offered where it strengthens visibility, traceability and decision records — not as a precondition.",
+    ),
+  },
+  {
+    question: "Does AI make the monitoring decisions?",
+    answer:
+      "No. DTG's position is engineering judgement supported by advanced analytics. AI and automation assist review and reporting; they never replace engineering judgement or autonomously identify failures.",
+  },
+];
+
+function ContrastBlock({
+  affirmTitle,
+  affirm,
+  negateTitle,
+  negate,
 }: {
-  label: string;
-  title: string;
-  copy?: string;
-  id?: string;
+  affirmTitle: string;
+  affirm: string[];
+  negateTitle: string;
+  negate: string[];
 }) {
   return (
-    <div className="about-story-heading">
-      <p className="story-eyebrow">{label}</p>
-      <h2 id={id}>{title}</h2>
-      {copy ? <p>{copy}</p> : null}
+    <div className="contrast-grid">
+      <div className="contrast-col is-affirm">
+        <h3>{affirmTitle}</h3>
+        <ul>
+          {affirm.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="contrast-col is-negate">
+        <h3>{negateTitle}</h3>
+        <ul>
+          {negate.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
-export default function About() {
+export default function AboutPage() {
   return (
-    <main className="about-overview-page about-story-page">
-      <InternalHero
-        breadcrumbItems={[{ label: "Home", href: "/" }, { label: "About Us" }]}
-        title={aboutContent.hero.title}
-        subtitle={aboutContent.hero.lead}
-        intro={aboutContent.hero.copy}
-        titleId="about-title"
+    <main id="top">
+      <SectionHero
+        variant="dark"
+        eyebrow="About DTG"
+        title="Independent monitoring support."
+        titleId="about-hero-title"
+        lead="DTG is an independent geotechnical monitoring, analytics and decision-support company. We sit above individual sensors and vendor platforms — validating monitoring information, connecting evidence, governing escalation, and helping teams use monitoring outputs in operational and engineering decisions."
+        actions={
+          <>
+            <Link href="/contact" className="kit-button kit-button--primary">
+              Start a conversation <ArrowUpRight size={15} />
+            </Link>
+            <Link href="/services" className="kit-button">
+              Explore services <ArrowUpRight size={15} />
+            </Link>
+          </>
+        }
       />
 
-      <section className="about-story-section about-who-section" aria-labelledby="about-who-title">
-        <div className="shell about-who-layout">
-          <div className="about-story-heading">
-            <p className="story-eyebrow">{aboutContent.whoWeAre.label}</p>
-            <h2 id="about-who-title">{aboutContent.whoWeAre.title}</h2>
-            <p>{aboutContent.whoWeAre.copy}</p>
-          </div>
-          <figure className="about-story-image">
-            <Image
-              src={aboutContent.whoWeAre.image}
-              alt="DTG monitoring centre with technical review screens"
-              width={1600}
-              height={1000}
-              sizes="(max-width: 900px) 100vw, 46vw"
-            />
-          </figure>
-        </div>
-      </section>
+      <ValueGrid
+        surface="default"
+        eyebrow="What we do"
+        title="Capabilities that turn monitoring into trusted outcomes."
+        titleId="what-we-do"
+        items={capabilities}
+      />
 
-      <section className="about-story-section about-problem-section" aria-labelledby="about-exists-title">
-        <div className="shell">
-          <SectionHeading id="about-exists-title" label={aboutContent.problems.label} title={aboutContent.problems.title} />
-          <div className="about-problem-grid">
-            {aboutContent.problems.items.map(({ title, copy, icon: Icon }, index) => (
-              <article className="about-problem-card" key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <Icon aria-hidden="true" size={22} strokeWidth={1.55} />
+      <StatementBand
+        surface="default"
+        eyebrow="The monitoring gap"
+        title="More data does not automatically create clearer decisions."
+        titleId="the-gap"
+        lead="Monitoring technology has advanced faster than the systems used to interpret, govern and act on it. The market has strong technology providers; the missing layer is independent responsibility for monitoring outcomes across mixed technologies, teams and workflows."
+      />
+
+      <ProcessSpine
+        surface="band"
+        eyebrow="How DTG works"
+        title="Inputs, independent review, governed outcomes."
+        titleId="how-dtg-works"
+        nodes={spineNodes}
+      />
+
+      <Surface variant="default" aria-labelledby="what-dtg-is">
+        <div className="section-kit-statement">
+          <p className="eyebrow">Positioning</p>
+          <h2 id="what-dtg-is" className="section-headline">
+            What DTG is — and what it is not.
+          </h2>
+        </div>
+        <ContrastBlock affirmTitle="DTG is" affirm={isAffirm} negateTitle="DTG is not" negate={isNegate} />
+      </Surface>
+
+      <Surface variant="default" aria-labelledby="purpose-principles">
+        <div className="section-kit-statement">
+          <p className="eyebrow">Purpose &amp; principles</p>
+          <h2 id="purpose-principles" className="section-headline">
+            The principles that protect decision quality.
+          </h2>
+        </div>
+        <ol className="numbered-list">
+          {principles.map(([title, body]) => (
+            <li key={title}>
+              <div>
                 <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-          <p className="about-story-closing-line">
-            {aboutContent.problems.closing}
+                <p>{body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Surface>
+
+      <Surface variant="default" aria-labelledby="vendor-independence">
+        <div className="section-kit-statement">
+          <p className="eyebrow">Vendor independence</p>
+          <h2 id="vendor-independence" className="section-headline">
+            Vendor-led assumptions vs independent DTG review.
+          </h2>
+          <p className="section-kit-lead">
+            Independence does not mean anti-vendor. Strong monitoring depends on good technology and
+            implementation — DTG keeps the monitoring requirement at the centre of the decision.
           </p>
         </div>
-      </section>
-
-      <section className="about-story-section about-help-section" aria-labelledby="about-help-title">
-        <div className="shell">
-          <div className="about-help-header">
-            <SectionHeading id="about-help-title" label={aboutContent.capabilities.label} title={aboutContent.capabilities.title} />
-            <Link href="/services" className="about-story-link">
-              Explore services <ArrowUpRight aria-hidden="true" size={15} />
-            </Link>
-          </div>
-          <div className="about-help-grid">
-            {aboutContent.capabilities.items.map(({ title, copy, icon: Icon }, index) => (
-              <article className="about-help-item" key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <Icon aria-hidden="true" size={20} strokeWidth={1.55} />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-section about-principles-section" aria-labelledby="about-principles-title">
-        <div className="shell">
-          <SectionHeading id="about-principles-title" label={aboutContent.principles.label} title={aboutContent.principles.title} />
-          <div className="about-principle-grid">
-            {aboutContent.principles.items.map(({ title, copy, icon: Icon }) => (
-              <article className="about-principle-card" key={title}>
-                <Icon aria-hidden="true" size={22} strokeWidth={1.55} />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-section about-process-section" aria-labelledby="about-process-title">
-        <div className="shell">
-          <SectionHeading id="about-process-title" label={aboutContent.processFlow.label} title={aboutContent.processFlow.title} />
-          <div className="about-process-flow" aria-label="Monitoring evidence to independent review to defensible decisions">
-            {aboutContent.processFlow.items.map(({ title, copy, tags }, index) => (
-              <details className="about-process-step" key={title}>
-                <summary>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </summary>
-                <div className="about-process-tags">
-                  {tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-section about-leadership-section" aria-labelledby="about-leadership-title">
-        <div className="shell">
-          <div className="about-leadership-intro">
-            <div>
-              <p className="story-eyebrow">{aboutContent.leadership.label}</p>
-              <h2 id="about-leadership-title">{aboutContent.leadership.title}</h2>
-            </div>
-            <div>
-              <p>{aboutContent.leadership.intro}</p>
-              <p>{aboutContent.leadership.story}</p>
-              <Link href="/about/leadership" className="about-story-link">
-                Explore leadership <ArrowUpRight aria-hidden="true" size={15} />
-              </Link>
-            </div>
-          </div>
-          <div className="about-leadership-cards">
-            {aboutContent.leadership.members.map((leader) => (
-              <article className="about-leadership-card" key={leader.name}>
-                <div className="about-leadership-photo">
-                  <Image
-                    src={leader.image}
-                    alt={`${leader.name}, ${leader.role}`}
-                    width={900}
-                    height={1100}
-                    sizes="(max-width: 900px) 100vw, 42vw"
-                  />
-                </div>
-                <div>
-                  <p className="about-panel-kicker">{leader.role}</p>
-                  <h3>{leader.name}</h3>
-                  <p>{leader.copy}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-section about-focus-callout-section" aria-labelledby="about-focus-title">
-        <div className="shell about-focus-callout">
-          <div>
-            <p className="story-eyebrow">{aboutContent.dtgFocus.label}</p>
-            <h2 id="about-focus-title">{aboutContent.dtgFocus.title}</h2>
-          </div>
-          <div>
-            <p>{aboutContent.dtgFocus.copy}</p>
-            <Link href="/dtg-focus" className="about-story-link">
-              Explore DTG Focus <ArrowUpRight aria-hidden="true" size={15} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-section about-explore-section" aria-labelledby="about-explore-title">
-        <div className="shell">
-          <SectionHeading id="about-explore-title" label={aboutContent.exploreMore.label} title={aboutContent.exploreMore.title} />
-          <div className="about-explore-card-grid">
-            {aboutContent.exploreMore.items.map(({ title, copy, href, icon: Icon }) => (
-              <Link href={href} className="about-explore-card" key={title}>
-                <Icon aria-hidden="true" size={20} strokeWidth={1.55} />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-                <span>
-                  Read more <ArrowUpRight aria-hidden="true" size={14} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="about-story-cta" aria-labelledby="about-story-cta-title">
-        <Image
-          src={aboutContent.closingCta.image}
-          alt=""
-          fill
-          sizes="100vw"
-          className="about-story-cta__image"
+        <ContrastBlock
+          affirmTitle="Independent DTG review"
+          affirm={independentReview}
+          negateTitle="Vendor-led assumptions"
+          negate={vendorLed}
         />
-        <div className="shell about-story-cta__inner">
-          <h2 id="about-story-cta-title">{aboutContent.closingCta.title}</h2>
-          <div className="about-story-cta__actions">
-            <Link href="/contact" className="footer-primary-link">
-              CONTACT DTG <ArrowUpRight aria-hidden="true" size={15} />
-            </Link>
-            <Link href="/services" className="footer-text-link">
-              EXPLORE SERVICES <ArrowUpRight aria-hidden="true" size={14} />
-            </Link>
-          </div>
+      </Surface>
+
+      <StatementBand
+        surface="default"
+        eyebrow="Technical assurance"
+        title="Traceable review for defensible decisions."
+        titleId="technical-assurance"
+        lead="Technical assurance is not a single checklist completed at the end of a project. It is a structured way of asking whether monitoring information can be trusted, understood and defended."
+      />
+      <ValueGrid surface="default" compact items={assuranceChecks} />
+
+      <Surface variant="default" aria-labelledby="leadership">
+        <div className="section-kit-statement">
+          <p className="eyebrow">Leadership</p>
+          <h2 id="leadership" className="section-headline">
+            Technical and mining leadership.
+          </h2>
         </div>
-      </section>
+        <div className="profile-grid">
+          {leaders.map((leader) => (
+            <ProfileCard
+              key={leader.name}
+              name={leader.name}
+              role={leader.role}
+              bio={leader.bio}
+              tags={leader.tags}
+              portrait={
+                <Image
+                  src={leader.src}
+                  alt={`Portrait of ${leader.name}, ${leader.role} of DTG`}
+                  width={480}
+                  height={600}
+                />
+              }
+            />
+          ))}
+        </div>
+      </Surface>
+
+      <FaqAccordion
+        surface="default"
+        eyebrow="FAQ"
+        title="Clear answers, without positioning."
+        titleId="faq"
+        items={faqs}
+      />
+
+      <CTA
+        surface="band"
+        eyebrow="Start a monitoring conversation"
+        title="Talk to DTG about decision quality in complex monitoring environments."
+        titleId="about-cta"
+        actions={
+          <Link href="/contact" className="kit-button kit-button--primary">
+            Contact DTG <ArrowUpRight size={15} />
+          </Link>
+        }
+      />
     </main>
   );
 }

@@ -4,18 +4,21 @@ import type { ElementType, ReactNode } from "react";
  * Section surface primitive (masterbook light / deep-teal / image-led).
  * Phase A scaffolding for the shared section kit — not yet adopted by pages.
  *
- * - `light`  → off-white default reading surface (`--surface`)
- * - `band`   → deep-teal authority band (`--deep-teal`) — intentional punctuation
- * - `base`   → footer/menu-grade deep base (`--deep-base`)
- * - `image`  → image-led; pass `media` (e.g. a filled next/image) and prefer
- *              `reserve` to keep a text-safe column instead of a dark overlay.
+ * Theme-aware (consumes the --c-* layer; dark by default, light under [data-theme=light]).
+ * - `default` → the base reading surface (`--c-surface`)
+ * - `raised`  → cards / panels (`--c-surface-raised`)
+ * - `band`    → deep-teal authority band (`--c-surface-band`) — intentional punctuation
+ * - `deep`    → footer/menu-grade deep base (`--c-surface-deep`)
+ * - `image`   → image-led; pass `media` (e.g. a filled next/image) and prefer
+ *               `reserve` to keep a text-safe column instead of a dark overlay.
  */
-export type SurfaceVariant = "light" | "band" | "base" | "image";
+export type SurfaceVariant = "default" | "raised" | "band" | "deep" | "image";
 
 const surfaceClass: Record<SurfaceVariant, string> = {
-  light: "surface-light",
+  default: "surface-default",
+  raised: "surface-raised",
   band: "surface-band",
-  base: "surface-base",
+  deep: "surface-deep",
   image: "surface-image",
 };
 
@@ -37,7 +40,7 @@ export type SurfaceProps = {
 };
 
 export function Surface({
-  variant = "light",
+  variant = "default",
   compact = false,
   media,
   reserve = false,

@@ -33,7 +33,8 @@
  --ink:#10202A;
  --ink-soft:#51626B;
  --muted:#7C8B92;
- --surface:#F4F7F6; /* masterbook off-white — default page surface; also text on dark */
+ --surface:#F4F7F6; /* legacy raw off-white — still consumed by live services/applications light sections; DO NOT repurpose */
+ --off-white:#F4F7F6; /* masterbook off-white (raw) — feeds the themed --c-* layer */
  --white:#FFFFFF;
  --bg-dark:#0B1A22;
  --surface-dark:#122530;
@@ -123,9 +124,46 @@
  --focus-accent:#2E7C92;        /* optional refined accent */
 }
 :root { --nav-open-bg:var(--bg-dark); --mega-bg:var(--bg-dark); --mega-border:var(--border-dark); --mega-muted-border:var(--border-dark); --mega-accent:var(--amber); }
+
+/* ============================================================================
+   THEMED SEMANTIC LAYER (Layer 2) — switched by data-theme on <html>.
+   Dark is the DEFAULT (interim migration stance; light is the masterbook end-state
+   once page recomposition is far enough along — see CLAUDE.md §7 + docs/THEME-ARCHITECTURE.md).
+   The section kit and recomposed pages consume ONLY these --c-* tokens (+ --accent/--accent-text).
+   Legacy --surface / --border / --ink are load-bearing for live pages and are left untouched.
+   ENFORCED: green text/cues use --accent-text (never --accent) — #63B75D on off-white is 2.30:1. */
+:root, :root[data-theme="dark"] {
+ --c-surface:var(--bg-dark);              /* #0B1A22 */
+ --c-surface-raised:var(--surface-dark);  /* #122530 */
+ --c-surface-band:var(--deep-teal);       /* #073C4A — deep-teal punctuation band */
+ --c-surface-deep:var(--deep-base);       /* #061216 — footer / menu */
+ --c-text:var(--off-white);               /* #F4F7F6 — 16.4:1 on surface */
+ --c-text-soft:var(--text-on-dark-soft);  /* #AEC0C7 — 9.4:1 */
+ --c-text-muted:var(--muted);             /* #7C8B92 — 5.0:1 (labels) */
+ --c-on-band:var(--off-white);            /* text on deep-teal band — 11.1:1 */
+ --c-border:var(--border-dark);           /* rgba(255,255,255,.14) */
+ --c-border-strong:rgba(255,255,255,.24);
+ --c-focus:var(--signal-green);
+ --accent-text:var(--signal-green);       /* #63B75D — legible green on dark (7.1:1) */
+}
+:root[data-theme="light"] {
+ --c-surface:var(--off-white);            /* #F4F7F6 — 15.4:1 with --c-text */
+ --c-surface-raised:var(--white);         /* #FFFFFF */
+ --c-surface-band:var(--deep-teal);       /* #073C4A — deep-teal punctuation on light too */
+ --c-surface-deep:var(--deep-base);       /* #061216 */
+ --c-text:var(--ink);                     /* #10202A */
+ --c-text-soft:var(--ink-soft);           /* #51626B — 5.9:1 */
+ --c-text-muted:var(--muted);             /* #7C8B92 — 3.3:1 (labels/large only) */
+ --c-on-band:var(--off-white);            /* band stays deep-teal → light text */
+ --c-border:var(--border);                /* rgba(16,32,42,.12) */
+ --c-border-strong:rgba(16,32,42,.22);
+ --c-focus:#2E6B2A;
+ --accent-text:#2E6B2A;                   /* AA-safe green text on off-white (5.99:1) */
+}
+
 * { box-sizing:border-box; }
-html { scroll-behavior:smooth; background:var(--surface); }
-body { margin:0; color:var(--ink); background:var(--surface); font-family:var(--font-sans); font-size:var(--text-base); line-height:var(--line-body); letter-spacing:var(--tracking-body); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+html { scroll-behavior:smooth; background:var(--c-surface); }
+body { margin:0; color:var(--c-text); background:var(--c-surface); font-family:var(--font-sans); font-size:var(--text-base); line-height:var(--line-body); letter-spacing:var(--tracking-body); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 a { text-decoration:none; }
 section { scroll-margin-top:76px; }
 .shell { width:min(var(--container-max), calc(100% - 48px)); margin-inline:auto; }
@@ -134,12 +172,26 @@ section { scroll-margin-top:76px; }
 .site-section { padding-block:var(--section-space); }
 .section-compact { padding-block:var(--section-space-compact); }
 
-/* --- PHASE A: section surface primitives (masterbook light / deep-teal / image-led) ---
-   Net-new scaffolding for components/sections/. Not yet applied to existing pages. */
-.surface-light { background:var(--surface); color:var(--ink); }
-.surface-band  { background:var(--deep-teal); color:var(--text-on-dark); }   /* deep-teal authority band */
-.surface-base  { background:var(--deep-base); color:var(--text-on-dark); }   /* footer/menu-grade deep base */
-.surface-image { position:relative; isolation:isolate; color:var(--text-on-dark); background:var(--deep-base); }
+/* --- Section surface primitives (Layer 3) — consume the themed --c-* layer.
+   Class names are theme-neutral: `default` renders dark at the dark default, light under
+   [data-theme=light]. `band` = deep-teal punctuation, `deep` = footer/menu grade. --- */
+.surface-default { background:var(--c-surface); color:var(--c-text); }
+.surface-raised  { background:var(--c-surface-raised); color:var(--c-text); }
+/* band / deep / image are ALWAYS dark (deep-teal / deep-base) in both themes, so they locally
+   re-scope the text/border/accent tokens to their on-dark values — children using var(--c-text)
+   etc. then read correctly on a light-theme page too. */
+.surface-band, .surface-deep, .surface-image {
+ --c-text:var(--off-white);
+ --c-text-soft:var(--text-on-dark-soft);
+ --c-text-muted:var(--muted);
+ --c-border:var(--border-dark);
+ --c-border-strong:rgba(255,255,255,.24);
+ --accent-text:var(--signal-green);       /* green is legible on deep-teal (7:1) */
+ color:var(--c-text);
+}
+.surface-band  { background:var(--c-surface-band); }   /* deep-teal authority band */
+.surface-deep  { background:var(--c-surface-deep); }   /* footer/menu-grade deep base */
+.surface-image { position:relative; isolation:isolate; background:var(--c-surface-deep); }
 .surface-image > .surface-image__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .surface-image > .surface-image__media img { width:100%; height:100%; object-fit:cover; }
 .surface-image > .surface-image__content { position:relative; z-index:1; }
@@ -147,22 +199,99 @@ section { scroll-margin-top:76px; }
 .surface-image--reserve > .surface-image__content { max-width:min(58ch, 62%); }
 .tnum { font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; } /* metrics, trends, TARPs */
 
-/* --- PHASE A: section kit helpers (support components/sections/; not yet used by pages) --- */
-.section-kit-lead { margin-top:var(--space-6); max-width:68ch; color:var(--ink-soft); font-size:var(--text-lead); line-height:1.55; }
-.surface-band .section-kit-lead,.surface-base .section-kit-lead,.surface-image .section-kit-lead { color:var(--text-on-dark-soft); }
+/* --- Section kit helpers (consume the themed --c-* layer) --- */
+.section-kit-lead { margin-top:var(--space-6); max-width:68ch; color:var(--c-text-soft); font-size:var(--text-lead); line-height:1.55; }
 .section-kit-actions { margin-top:var(--space-8); display:flex; flex-wrap:wrap; gap:var(--space-4); }
 .section-kit-split { display:grid; gap:clamp(var(--space-8),5vw,var(--space-24)); align-items:center; }
 @media (min-width:900px){ .section-kit-split { grid-template-columns:5fr 7fr; } .section-kit-split[data-flip="true"] { grid-template-columns:7fr 5fr; } .section-kit-split[data-flip="true"] .section-kit-split__media { order:-1; } }
 .section-kit-grid { display:grid; gap:clamp(var(--space-6),3vw,var(--space-12)); grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
 .section-kit-item { display:flex; flex-direction:column; gap:var(--space-3); }
-.section-kit-item h3 { font-size:var(--text-h3); line-height:1.15; letter-spacing:-.02em; font-weight:500; }
-.section-kit-tag { font-family:var(--font-mono); font-size:var(--text-micro); letter-spacing:.14em; text-transform:uppercase; color:var(--muted); } /* mono reserved for technical microdata */
+.section-kit-item h3 { font-size:var(--text-h3); line-height:1.15; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
+.section-kit-item p { color:var(--c-text-soft); }
+.section-kit-tag { font-family:var(--font-mono); font-size:var(--text-micro); letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); } /* mono reserved for technical microdata */
 .section-kit-metrics { display:grid; gap:clamp(var(--space-6),3vw,var(--space-12)); grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
-.section-kit-metric-value { font-size:clamp(2.75rem,5vw,4rem); line-height:1; letter-spacing:-.02em; font-weight:500; }
+.section-kit-metric-value { font-size:clamp(2.75rem,5vw,4rem); line-height:1; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
 .section-kit-steps { display:grid; gap:var(--space-8); }
 @media (min-width:820px){ .section-kit-steps { grid-template-columns:repeat(3,1fr); } }
-.section-kit-step__index { font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600; }
-.section-kit-focus { border-radius:var(--radius-lg); padding:clamp(var(--space-8),4vw,var(--space-16)); background:var(--focus-teal); color:var(--text-on-dark); }
+.section-kit-step__index { font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); font-weight:600; } /* themed AA-safe green */
+.section-kit-focus { border-radius:var(--radius-lg); padding:clamp(var(--space-8),4vw,var(--space-16)); background:var(--focus-teal); color:var(--off-white); }
+.section-kit-statement { max-width:60ch; }
+/* Kit hero title — editorial, mobile-safe clamp (never overflows 390px). */
+.section-hero__title { font-size:clamp(2.5rem,5.5vw,4.75rem); line-height:1.03; letter-spacing:-.02em; font-weight:500; color:var(--c-text); max-width:18ch; overflow-wrap:break-word; }
+.section-hero__title + .section-kit-lead { max-width:60ch; }
+
+/* --- Kit buttons (themed) --- */
+.kit-button { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 22px; border-radius:var(--radius-md); border:1px solid var(--c-border-strong); color:var(--c-text); font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.08em; text-transform:uppercase; font-weight:600; transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+.kit-button:hover { transform:translateY(-2px); border-color:var(--c-text); }
+.kit-button--primary { background:var(--c-text); color:var(--c-surface); border-color:var(--c-text); }
+.kit-button--primary:hover { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.kit-button:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; }
+
+/* --- ProcessSpine (Inputs -> Independent Review -> Governed Outcomes) --- */
+.spine { display:grid; gap:var(--space-8); margin-top:var(--space-12); }
+.spine__node { position:relative; display:grid; grid-template-columns:auto 1fr; gap:var(--space-4); align-items:start; }
+.spine__marker { display:grid; place-items:center; width:44px; height:44px; border-radius:999px; border:1px solid var(--c-border-strong); color:var(--accent-text); font-family:var(--font-label); font-weight:600; }
+.spine__label { font-size:var(--text-h3); line-height:1.15; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
+.spine__body p { margin-top:var(--space-2); color:var(--c-text-soft); line-height:1.55; }
+.spine__connector { position:absolute; left:22px; top:48px; bottom:calc(-1 * var(--space-8)); width:1px; background:linear-gradient(var(--accent-text),transparent); }
+@media (min-width:900px){
+ .spine { grid-auto-flow:column; grid-auto-columns:1fr; gap:var(--space-8); }
+ .spine__node { grid-template-columns:1fr; }
+ .spine__connector { left:44px; right:calc(-1 * var(--space-8)); top:22px; bottom:auto; width:auto; height:1px; background:linear-gradient(90deg,var(--accent-text),transparent); }
+}
+
+/* --- FAQ accordion (native <details>) --- */
+.faq { display:grid; margin-top:var(--space-8); border-top:1px solid var(--c-border); }
+.faq__item { border-bottom:1px solid var(--c-border); }
+.faq__q { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); padding:var(--space-6) 0; cursor:pointer; list-style:none; font-size:var(--text-lg); line-height:1.3; letter-spacing:-.01em; color:var(--c-text); font-weight:500; }
+.faq__q::-webkit-details-marker { display:none; }
+.faq__q:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; }
+.faq__icon { position:relative; flex:0 0 auto; width:18px; height:18px; }
+.faq__icon::before,.faq__icon::after { content:""; position:absolute; background:var(--accent-text); transition:transform .25s ease; }
+.faq__icon::before { left:0; right:0; top:8px; height:2px; }
+.faq__icon::after { top:0; bottom:0; left:8px; width:2px; }
+.faq__item[open] .faq__icon::after { transform:scaleY(0); }
+.faq__a { padding:0 0 var(--space-6); max-width:72ch; color:var(--c-text-soft); font-size:var(--text-lead); line-height:1.6; }
+@media (prefers-reduced-motion:reduce){ .faq__icon::before,.faq__icon::after { transition:none; } }
+
+/* --- Leadership: ProfileCard + grid --- */
+.profile-grid { display:grid; gap:clamp(var(--space-8),4vw,var(--space-16)); }
+@media (min-width:820px){ .profile-grid { grid-template-columns:1fr 1fr; } }
+.profile { display:grid; gap:var(--space-6); grid-template-columns:minmax(0,140px) 1fr; align-items:start; }
+.profile__media { aspect-ratio:4/5; border-radius:var(--radius-lg); overflow:hidden; background:linear-gradient(150deg,var(--focus-teal),var(--focus-depth)); display:grid; place-items:center; }
+.profile__media img { width:100%; height:100%; object-fit:cover; }
+.profile__monogram { font-family:var(--font-label); font-size:clamp(2.25rem,4vw,3rem); font-weight:600; letter-spacing:.02em; color:var(--off-white); }
+.profile__name { font-size:var(--text-h3); line-height:1.1; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
+.profile__role { margin-top:var(--space-1); color:var(--accent-text); font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.12em; text-transform:uppercase; font-weight:600; }
+.profile__bio { margin-top:var(--space-4); color:var(--c-text-soft); line-height:1.6; }
+.profile__tags { display:flex; flex-wrap:wrap; gap:var(--space-2); margin-top:var(--space-4); }
+
+/* --- CTA --- */
+.cta { max-width:60ch; }
+
+/* --- Contrast block (what DTG is / what it is not) --- */
+.contrast-grid { display:grid; gap:var(--space-6); margin-top:var(--space-8); }
+@media (min-width:760px){ .contrast-grid { grid-template-columns:1fr 1fr; } }
+.contrast-col { border:1px solid var(--c-border); border-radius:var(--radius-lg); padding:clamp(var(--space-6),3vw,var(--space-8)); }
+.contrast-col h3 { font-size:var(--text-h4); letter-spacing:-.01em; font-weight:600; color:var(--c-text); }
+.contrast-col.is-affirm { border-color:color-mix(in srgb, var(--accent-text) 40%, transparent); }
+.contrast-col ul { list-style:none; margin:var(--space-4) 0 0; padding:0; display:grid; gap:var(--space-3); }
+.contrast-col li { position:relative; padding-left:var(--space-6); color:var(--c-text-soft); line-height:1.55; }
+.contrast-col li::before { content:""; position:absolute; left:0; top:.6em; width:10px; height:2px; background:var(--accent-text); }
+.contrast-col.is-negate li::before { background:var(--c-text-muted); }
+
+/* --- Numbered principle list --- */
+.numbered-list { list-style:none; margin:var(--space-8) 0 0; padding:0; display:grid; gap:var(--space-6); counter-reset:principle; }
+@media (min-width:760px){ .numbered-list { grid-template-columns:1fr 1fr; gap:var(--space-8) clamp(var(--space-8),5vw,var(--space-16)); } }
+.numbered-list li { counter-increment:principle; display:grid; grid-template-columns:auto 1fr; gap:var(--space-4); }
+.numbered-list li::before { content:counter(principle,decimal-leading-zero); font-family:var(--font-label); font-variant-numeric:tabular-nums; font-weight:600; font-size:var(--text-lead); color:var(--accent-text); }
+.numbered-list h3 { font-size:var(--text-h4); letter-spacing:-.01em; font-weight:600; color:var(--c-text); }
+.numbered-list p { margin-top:var(--space-2); color:var(--c-text-soft); line-height:1.55; }
+
+/* --- Header theme toggle (header is dark in both themes, so light stroke throughout) --- */
+.theme-toggle { display:inline-grid; place-items:center; width:38px; height:38px; border-radius:999px; border:1px solid rgba(242,239,231,.2); color:rgba(242,239,231,.82); background:transparent; cursor:pointer; transition:color .2s ease, border-color .2s ease, background .2s ease; }
+.theme-toggle:hover { color:#F4F7F6; border-color:rgba(242,239,231,.42); background:rgba(242,239,231,.06); }
+.theme-toggle:focus-visible { outline:2px solid var(--signal-green); outline-offset:2px; }
 
 .internal-hero {
  position:relative;
