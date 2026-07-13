@@ -26,6 +26,7 @@ export type ServiceContent = {
   whatsIncluded: {
     eyebrow?: string;
     title: string;
+    intro?: string;
     layout?: "grid" | "split" | "flow" | "list";
     groups: { icon?: ReactNode; title: string; desc: string; points: string[] }[];
   };
@@ -35,7 +36,7 @@ export type ServiceContent = {
   delivery: { eyebrow?: string; title: string; steps: { title: string; body: string }[] };
   outcomes: { eyebrow?: string; title: string; items: { title: string; body?: string }[] };
   faqs: { question: string; answer: string }[];
-  cta: { eyebrow?: string; title: string; actionLabel: string; actionHref: string };
+  cta: { eyebrow?: string; title: string; body?: string; actionLabel: string; actionHref: string };
 };
 
 function Actions({ ctas }: { ctas: Cta[] }) {
@@ -98,6 +99,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           <h2 id={`${c.slug}-included`} className="section-headline service-h2--section">
             {renderTrademarkText(c.whatsIncluded.title)}
           </h2>
+          {c.whatsIncluded.intro ? <p className="section-kit-lead">{renderTrademarkText(c.whatsIncluded.intro)}</p> : null}
         </div>
         <div className="whats-included" data-layout={c.whatsIncluded.layout ?? "grid"}>
           {c.whatsIncluded.groups.map((g, i) => (
@@ -230,6 +232,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         eyebrow={c.cta.eyebrow}
         title={renderTrademarkText(c.cta.title)}
         titleId={`${c.slug}-cta`}
+        body={c.cta.body ? renderTrademarkText(c.cta.body) : undefined}
         actions={
           <Link href={c.cta.actionHref} className="kit-button kit-button--primary">
             {renderTrademarkText(c.cta.actionLabel)} <ArrowUpRight size={15} />

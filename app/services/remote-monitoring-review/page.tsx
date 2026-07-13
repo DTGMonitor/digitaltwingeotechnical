@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
-import { RemoteMonitoringReviewPage } from "@/components/remote-monitoring-review-page";
+import { permanentRedirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Remote Monitoring | Digital Twin Geotechnical",
-  description:
-    "Live monitoring support, alarm awareness, data quality review, deformation trend interpretation and TARP-based escalation support for complex ground movement risk.",
-};
-
+// Phase E: duplicate of /services/remote-monitoring — permanently redirect (308).
 export default function Page() {
-  return <RemoteMonitoringReviewPage />;
+  permanentRedirect("/services/remote-monitoring");
 }
