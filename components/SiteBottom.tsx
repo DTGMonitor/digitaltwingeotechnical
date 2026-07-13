@@ -4,39 +4,16 @@ import { usePathname } from "next/navigation";
 import { PreFooterCTA } from "@/components/PreFooterCTA";
 import { SiteFooter } from "@/components/SiteFooter";
 
-const preFooterExcludedRoutes = [
-  "/contact",
-  "/privacy",
-  "/terms",
-  "/404",
-  "/not-found",
-  "/about",
-  "/about/purpose-principles",
-  "/about/vendor-independence",
-  "/about/our-approach",
-  "/about/technical-assurance",
-  "/about/leadership",
-  "/services",
-  "/services/remote-monitoring",
-  "/services/remote-monitoring-review",
-  "/services/reporting-back-analysis",
-  "/services/technology-integration",
-  "/services/data-analytics-automation",
-  "/services/technical-advisory",
-  "/applications",
-  "/applications/open-pit-mining",
-  "/applications/tailings-storage-facilities",
-  "/applications/underground-mining",
-  "/applications/infrastructure-civil",
-  "/dtg-focus",
-  "/focus",
-  "/leadership",
-  "/operations",
-] as const;
+// Inclusion list (inverted from the old drift-prone exclusion list): the shared PreFooterCTA
+// renders ONLY on pages that lack their own closing CTA. Today that's just home — every other
+// content page (recomposed pages, DetailPage routes, /focus, /leadership, /operations) ends with
+// its own CTA, and /contact is itself the CTA target. Recomposed pages bring their own CTA, so
+// this stays correct as the migration continues (Applications rebuild, etc.).
+const preFooterIncludedRoutes = ["/"] as const;
 
 function shouldShowPreFooter(pathname: string | null) {
-  if (!pathname) return true;
-  return !preFooterExcludedRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`));
+  if (!pathname) return false;
+  return preFooterIncludedRoutes.some((route) => pathname === route);
 }
 
 export function SiteBottom() {
