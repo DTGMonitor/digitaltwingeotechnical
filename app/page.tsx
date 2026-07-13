@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { StoryMotion } from "@/components/storytelling";
 import { ApplicationsCarousel } from "@/components/applications-carousel";
 import { MonitoringChallenge } from "@/components/monitoring-challenge";
-import { HomeServicesOverview } from "@/components/services-section";
+import { HomeServicesOverview } from "@/components/home-services-overview";
 import { DTGFocusMark, renderTrademarkText } from "@/components/brand";
 
 const proofItems = [
