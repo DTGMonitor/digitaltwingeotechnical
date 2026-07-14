@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { ApplicationsOverviewEditorial } from "@/components/applications-overview-editorial";
+import { ApplicationsOverview } from "@/components/applications-overview";
 
 export const metadata: Metadata = {
   title: "Applications | Digital Twin Geotechnical",
   description:
-    "Monitoring support across open pit mining, tailings storage facilities, underground mining and civil infrastructure environments.",
+    "Where DTG works: independent monitoring, analytics and decision support across open-pit mining, tailings storage facilities, underground mining and civil infrastructure environments.",
 };
 
 export default function ApplicationsPage() {
-  return <ApplicationsOverviewEditorial />;
+  return <ApplicationsOverview />;
 }

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -14615,3 +14615,90 @@ main .ld-container,
 .service-card__go { margin-top:auto; padding-top:var(--space-6); display:inline-flex; align-items:center; gap:7px; font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.06em; text-transform:uppercase; font-weight:600; color:var(--accent-text); }
 .service-card__arw { transition:transform .2s ease; }
 .service-card:hover .service-card__arw { transform:translateX(4px); }
+
+/* ============================================================================
+   APPLICATIONS OVERVIEW ("Where We Work") — page 1 of the Applications axis rebuild.
+   Scoped .appsx-* ; consumes the themed --c-* layer only (no parallel token system).
+   Chrome (nav/footer) = global site header + SiteFooter; this styles the page body only.
+   Environment imagery = AI-generated placeholders; proof figures provisional.
+   ========================================================================= */
+.appsx-page { background:var(--c-surface); color:var(--c-text-soft); }
+.appsx-eyebrow { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); }
+
+/* HERO — deep-teal cinematic, always dark in both themes, content bottom-anchored */
+.appsx-hero {
+ position:relative; min-height:82vh; display:flex; align-items:flex-end; overflow:hidden;
+ background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
+ --c-text:var(--off-white);            /* re-scope on-dark so hero reads under [data-theme=light] */
+}
+.appsx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 78% 30%,rgba(99,183,93,.08),transparent 55%); }
+.appsx-hero__inner { position:relative; z-index:2; width:100%; padding-bottom:clamp(56px,7vw,84px); }
+.appsx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
+.appsx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:clamp(3rem,8.5vw,7.5rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
+.appsx-hero__lead { max-width:60ch; font-size:clamp(18px,2.2vw,23px); line-height:1.5; color:#e5eef0; }
+.appsx-scrollcue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+.appsx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
+@keyframes appsx-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+/* INTRO — general framing */
+.appsx-intro { padding-block:clamp(60px,8vw,96px); border-bottom:1px solid var(--c-border); }
+.appsx-intro__grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px); align-items:center; }
+.appsx-intro .appsx-eyebrow { display:block; margin-bottom:16px; }
+.appsx-intro__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); max-width:18ch; }
+.appsx-intro p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); }
+.appsx-intro p + p { margin-top:14px; }
+
+/* ENVIRONMENTS — stacked, alternating image side, full-bleed 3:2 panels */
+.appsx-env__inner { display:grid; grid-template-columns:1fr 1fr; align-items:stretch; }
+.appsx-env--flip .appsx-env__media { order:2; }
+.appsx-env__media { position:relative; aspect-ratio:3/2; width:100%; background:var(--c-surface-deep); overflow:hidden; }
+.appsx-env__img { object-fit:cover; }
+.appsx-env__copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(44px,5vw,64px); background:var(--c-surface); }
+.appsx-env--flip .appsx-env__copy { background:var(--c-surface-raised); }
+.appsx-env__num { font-family:var(--font-sans); font-weight:700; font-size:13px; letter-spacing:.12em; color:var(--accent-text); margin-bottom:14px; }
+.appsx-env__eyebrow { font-family:var(--font-sans); font-weight:600; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:12px; }
+.appsx-env__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-.02em; color:var(--c-text); margin-bottom:16px; }
+.appsx-env__desc { font-size:16px; line-height:1.65; color:var(--c-text-soft); margin-bottom:26px; }
+.appsx-env__proof { display:flex; flex-wrap:wrap; gap:clamp(20px,3vw,32px); padding:22px 0; border-top:1px solid var(--c-border); border-bottom:1px solid var(--c-border); margin-bottom:26px; }
+.appsx-env__pf b { display:block; font-family:var(--font-sans); font-weight:700; font-size:clamp(1.5rem,2.4vw,2rem); line-height:1; color:var(--c-text); font-variant-numeric:tabular-nums; }
+.appsx-env__pf span { display:block; max-width:14ch; margin-top:7px; font-size:12.5px; color:var(--c-text-muted); }
+.appsx-env__approach { padding:22px 0; border-top:1px solid var(--c-border); border-bottom:1px solid var(--c-border); margin-bottom:26px; font-size:15px; line-height:1.6; color:var(--c-text-soft); }
+.appsx-env__approach b { color:var(--accent-text); font-weight:600; }
+.appsx-env__go { display:inline-flex; align-items:center; gap:9px; align-self:flex-start; font-size:15px; font-weight:600; color:var(--accent-text); }
+.appsx-env__go svg { transition:transform .2s ease; }
+.appsx-env__inner:hover .appsx-env__go svg { transform:translateX(4px); }
+
+/* HOW DTG SUPPORTS — spine */
+.appsx-spine-sec { padding-block:clamp(60px,8vw,96px); background:var(--c-surface-raised); }
+.appsx-spine__head { max-width:56ch; margin-bottom:44px; }
+.appsx-spine__head .appsx-eyebrow { display:block; margin-bottom:16px; }
+.appsx-spine__head h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:14px; }
+.appsx-spine__head p { font-size:17px; color:var(--c-text-soft); }
+.appsx-spine { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; list-style:none; margin:0; padding:0; }
+.appsx-spine__n { display:block; font-family:var(--font-sans); font-weight:800; font-size:13px; letter-spacing:.06em; color:var(--accent-text); margin-bottom:12px; }
+.appsx-spine__node h3 { font-family:var(--font-sans); font-weight:600; font-size:17px; color:var(--c-text); margin-bottom:7px; }
+.appsx-spine__node p { font-size:13.5px; line-height:1.5; color:var(--c-text-soft); }
+.appsx-spine__chips { display:flex; flex-wrap:wrap; gap:12px; margin-top:38px; }
+.appsx-chip { display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border:1px solid var(--c-border); border-radius:22px; background:var(--c-surface); font-size:14px; color:var(--accent-text); transition:border-color .2s ease; }
+.appsx-chip:hover { border-color:var(--accent); }
+
+/* CTA */
+.appsx-cta { padding-block:clamp(60px,8vw,96px); text-align:center; background:var(--c-surface); }
+.appsx-cta h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(2rem,4vw,3rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:12px; }
+.appsx-cta > .site-container > p { font-size:17px; color:var(--c-text-soft); margin-bottom:28px; }
+.appsx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease; }
+.appsx-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+.appsx-provisional { max-width:60ch; margin:34px auto 0; font-size:12px; line-height:1.6; color:var(--c-text-muted); }
+
+/* REVEAL — IntersectionObserver adds .is-in; reduced-motion shows immediately */
+[data-appsx-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+[data-appsx-reveal].is-in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) { [data-appsx-reveal] { opacity:1; transform:none; transition:none; } }
+
+@media (max-width:900px) {
+ .appsx-hero { min-height:74vh; }
+ .appsx-intro__grid { grid-template-columns:1fr; }
+ .appsx-env__inner { grid-template-columns:1fr; }
+ .appsx-env--flip .appsx-env__media { order:0; }
+ .appsx-spine { grid-template-columns:1fr 1fr; }
+}
