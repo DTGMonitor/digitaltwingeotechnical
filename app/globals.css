@@ -14882,6 +14882,54 @@ main .ld-container,
 @keyframes envd-grow { to { transform:scaleX(1); } }
 @media (prefers-reduced-motion:reduce) { .envd-scalebar__fill { transform:scaleX(1); animation:none; } }
 
+/* ============================================================================
+   INFRASTRUCTURE & CIVIL (.civx-*) — bespoke, capability-framed page (page 5).
+   Reuses the shared .envd-* hero / sechead / xlink / others / cta; these classes
+   cover the capability-specific sections. Consumes only --c-*.
+   ========================================================================= */
+.civx-k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:14px; }
+
+/* HONEST OPENER */
+.civx-opener { border-bottom:1px solid var(--c-border); }
+.civx-opener__grid { display:grid; grid-template-columns:1.4fr 1fr; gap:clamp(32px,5vw,64px); align-items:start; }
+.civx-opener__big { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.7rem,3vw,2.5rem); line-height:1.18; letter-spacing:-.02em; color:var(--c-text); }
+.civx-opener__big em { color:var(--accent-text); font-style:normal; }
+.civx-opener__side p { font-size:15.5px; line-height:1.65; color:var(--c-text-soft); }
+.civx-opener__side p + p { margin-top:14px; }
+
+/* APPROACH PRINCIPLES */
+.civx-princ { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.civx-pr { border-top:2px solid var(--accent); padding-top:18px; }
+.civx-pr__n { font-family:var(--font-sans); font-weight:600; font-size:16px; color:var(--c-text); margin-bottom:10px; }
+.civx-pr p { font-size:14.5px; line-height:1.6; color:var(--c-text-soft); }
+
+/* SPEC CARDS — image (CSS bg + themed fallback so a missing image degrades cleanly) + fields */
+.civx-spec { display:grid; grid-template-columns:300px 1fr; gap:34px; align-items:stretch; margin-bottom:18px; padding:28px; border:1px solid var(--c-border); border-radius:16px; background:var(--c-surface); }
+.civx-spec:last-child { margin-bottom:0; }
+.civx-spec__img { position:relative; min-height:220px; border-radius:12px; overflow:hidden; background-color:var(--c-surface-band); background-size:cover; background-position:center; background-repeat:no-repeat; }
+.civx-spec__content { min-width:0; }
+.civx-spec__head { display:flex; align-items:baseline; gap:16px; margin-bottom:12px; }
+.civx-spec__num { font-family:var(--font-sans); font-weight:800; font-size:20px; color:var(--accent-text); opacity:.55; font-variant-numeric:tabular-nums; }
+.civx-spec__head h3 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.25rem,2.2vw,1.6rem); line-height:1.12; color:var(--c-text); }
+.civx-spec__lead { margin-bottom:22px; font-size:15.5px; line-height:1.6; color:var(--c-text-soft); }
+.civx-spec__grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px 36px; border-top:1px solid var(--c-border); padding-top:22px; }
+.civx-sf { font-size:14px; line-height:1.55; color:var(--c-text-soft); }
+.civx-sf span { display:block; margin-bottom:6px; font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-text); }
+
+/* HONESTY NOTE */
+.civx-honest { max-width:820px; padding:28px 32px; border:1px dashed var(--c-border); border-radius:16px; background:color-mix(in srgb, var(--accent) 12%, transparent); }
+.civx-honest__k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-text); margin-bottom:10px; }
+.civx-honest p { margin:0; font-size:15.5px; line-height:1.6; color:var(--c-text-soft); }
+.civx-honest p b { color:var(--c-text); }
+
+@media (max-width:900px) {
+ .civx-opener__grid { grid-template-columns:1fr; }
+ .civx-princ { grid-template-columns:1fr; gap:24px; }
+ .civx-spec { grid-template-columns:1fr; gap:20px; padding:22px; }
+ .civx-spec__img { min-height:0; aspect-ratio:16/9; }
+ .civx-spec__grid { grid-template-columns:1fr; gap:16px; }
+}
+
 /* REVEAL */
 [data-envd-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 [data-envd-reveal].is-in { opacity:1; transform:none; }
