@@ -14831,6 +14831,46 @@ main .ld-container,
 .envd-cta h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(2rem,4vw,3rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:12px; }
 .envd-cta p { max-width:60ch; margin:0 auto 28px; font-size:17px; line-height:1.6; color:var(--c-text-soft); }
 
+/* PROOF — capability variant (caps + partner pill), used by TSF instead of big-number stats */
+.envd-caps { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.envd-cap { border-top:3px solid var(--accent); padding-top:20px; }
+.envd-cap b { display:block; font-family:var(--font-sans); font-weight:700; font-size:clamp(1.3rem,2.4vw,1.8rem); line-height:1.1; color:#fff; margin-bottom:10px; }
+.envd-cap span { font-size:14.5px; line-height:1.55; color:#cfe0e2; }
+.envd-partner { display:inline-flex; align-items:center; gap:10px; margin-top:36px; padding:9px 20px; border:1px solid rgba(255,255,255,.22); border-radius:30px; font-size:14px; color:#cfe0e2; }
+.envd-partner svg { flex:none; color:var(--accent); }
+.envd-partner b { color:#fff; font-weight:600; }
+
+/* EDITORIAL — optional at-a-glance table (TSF) */
+.envd-glance { margin-top:26px; border-top:1px solid var(--c-border); padding-top:8px; }
+.envd-glance__g { display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--c-border); font-size:13.5px; }
+.envd-glance__g:last-child { border-bottom:none; }
+.envd-glance__g b { font-family:var(--font-sans); font-weight:600; color:var(--c-text); }
+.envd-glance__g span { text-align:right; color:var(--c-text-muted); }
+
+/* SIGNATURE — noise->signal chart (TSF) + Data Analytics cross-link box */
+.envd-signal-viz { margin-bottom:32px; padding:28px 30px; border:1px solid var(--c-border); border-radius:22px; background:var(--c-surface-raised); }
+.envd-signal-viz svg { display:block; width:100%; height:auto; }
+.envd-vlabel { font-family:var(--font-sans); font-size:13px; font-weight:500; }
+.envd-signal-viz .raw { stroke-dasharray:1400; stroke-dashoffset:1400; animation:envd-draw 1.4s ease-out forwards; }
+.envd-signal-viz .clean { stroke-dasharray:700; stroke-dashoffset:700; animation:envd-draw 1.3s ease-out .9s forwards; }
+.envd-signal-viz .cleanarea { opacity:0; animation:envd-fadein .8s ease-out 1.9s forwards; }
+.envd-signal-viz .endpt { opacity:0; animation:envd-fadein .5s ease-out 2s forwards; }
+.envd-signal-viz .dots circle { opacity:0; animation:envd-fadein .5s ease-out forwards; }
+.envd-signal-viz .dots circle:nth-child(1){animation-delay:.7s}.envd-signal-viz .dots circle:nth-child(2){animation-delay:.78s}
+.envd-signal-viz .dots circle:nth-child(3){animation-delay:.86s}.envd-signal-viz .dots circle:nth-child(4){animation-delay:.94s}
+.envd-signal-viz .dots circle:nth-child(5){animation-delay:1.02s}.envd-signal-viz .dots circle:nth-child(6){animation-delay:1.1s}
+.envd-signal-viz .dots circle:nth-child(7){animation-delay:1.2s}
+@keyframes envd-draw { to { stroke-dashoffset:0; } }
+@keyframes envd-fadein { to { opacity:1; } }
+@media (prefers-reduced-motion:reduce) {
+ .envd-signal-viz .raw, .envd-signal-viz .clean { stroke-dashoffset:0; animation:none; }
+ .envd-signal-viz .cleanarea, .envd-signal-viz .endpt, .envd-signal-viz .dots circle { opacity:1; animation:none; }
+}
+.envd-signal-link { display:flex; flex-wrap:wrap; align-items:center; gap:16px; padding:20px 26px; border:1px dashed var(--c-border); border-radius:14px; background:color-mix(in srgb, var(--accent) 12%, transparent); }
+.envd-signal-link p { flex:1; min-width:280px; margin:0; font-size:15px; line-height:1.6; color:var(--c-text-soft); }
+.envd-signal-link p b { color:var(--c-text); }
+.envd-signal-link a { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; font-size:14px; font-weight:600; color:var(--accent-text); }
+
 /* REVEAL */
 [data-envd-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 [data-envd-reveal].is-in { opacity:1; transform:none; }
@@ -14843,7 +14883,7 @@ main .ld-container,
 @media (max-width:900px) {
  .envd-hero { min-height:88vh; }
  .envd-lead-split, .envd-approach { grid-template-columns:1fr; }
- .envd-bignums, .envd-others { grid-template-columns:1fr; }
+ .envd-bignums, .envd-caps, .envd-others { grid-template-columns:1fr; }
  .envd-funnel__row { grid-template-columns:110px 1fr; gap:16px; }
  .envd-funnel__row--f2 .envd-funnel__bar { width:80%; }
  .envd-funnel__row--f3 .envd-funnel__bar { width:55%; }

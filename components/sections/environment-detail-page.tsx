@@ -7,7 +7,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowDown, Check } from "lucide-react";
+import { ArrowRight, ArrowDown, Check, Eye } from "lucide-react";
 import { type ReactNode, useEffect } from "react";
 
 export type BigNum = { n: string; l: string };
@@ -20,6 +20,9 @@ export type OtherEnv = {
   image?: string;
   imageAlt?: string;
 };
+// Proof band supports two shapes: big-number stats (bignums) OR capability pillars (caps) + partner pill.
+export type Cap = { title: string; body: string };
+export type GlanceRow = { label: string; value: string };
 
 export type EnvironmentDetailData = {
   hero: {
@@ -31,8 +34,16 @@ export type EnvironmentDetailData = {
     primaryCta: { label: string; href: string };
     jumpLink?: { label: string; href: string };
   };
-  proof: { eyebrow: string; heading: string; intro: string; bignums: BigNum[]; verify: string };
-  editorial: { statement: ReactNode; sideK: string; sideParagraphs: ReactNode[] };
+  proof: {
+    eyebrow: string;
+    heading: string;
+    intro: string;
+    bignums?: BigNum[];
+    caps?: Cap[];
+    partner?: ReactNode;
+    verify: string;
+  };
+  editorial: { statement: ReactNode; sideK: string; sideParagraphs: ReactNode[]; glance?: GlanceRow[] };
   signature: { eyebrow: string; heading: string; intro: string; visual: ReactNode; note?: ReactNode };
   monitor: { k: string; heading: string; paragraphs: ReactNode[]; datalist: DataRow[] };
   scope: { k: string; heading: string; intro: string; lines: string[] };
@@ -101,14 +112,32 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
           <span className="envd-eyebrow envd-proof__eyebrow">{proof.eyebrow}</span>
           <h2 className="envd-proof__heading">{proof.heading}</h2>
           <p className="envd-proof__intro">{proof.intro}</p>
-          <div className="envd-bignums">
-            {proof.bignums.map((b) => (
-              <div className="envd-bignum" key={b.l}>
-                <div className="envd-bignum__n">{b.n}</div>
-                <div className="envd-bignum__l">{b.l}</div>
-              </div>
-            ))}
-          </div>
+          {proof.bignums ? (
+            <div className="envd-bignums">
+              {proof.bignums.map((b) => (
+                <div className="envd-bignum" key={b.l}>
+                  <div className="envd-bignum__n">{b.n}</div>
+                  <div className="envd-bignum__l">{b.l}</div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+          {proof.caps ? (
+            <div className="envd-caps">
+              {proof.caps.map((c) => (
+                <div className="envd-cap" key={c.title}>
+                  <b>{c.title}</b>
+                  <span>{c.body}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
+          {proof.partner ? (
+            <div className="envd-partner">
+              <Eye size={16} aria-hidden="true" />
+              {proof.partner}
+            </div>
+          ) : null}
           <p className="envd-proof__verify">{proof.verify}</p>
         </div>
       </section>
@@ -122,12 +151,22 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
             {editorial.sideParagraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
+            {editorial.glance ? (
+              <div className="envd-glance">
+                {editorial.glance.map((g) => (
+                  <div className="envd-glance__g" key={g.label}>
+                    <b>{g.label}</b>
+                    <span>{g.value}</span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
 
       {/* SIGNATURE VISUAL — one per environment (swappable slot) */}
-      <section className="envd-section envd-section--alt">
+      <section className="envd-section envd-section--alt" id="signature">
         <div className="site-container">
           <div className="envd-sechead" data-envd-reveal>
             <span className="envd-eyebrow">{signature.eyebrow}</span>
