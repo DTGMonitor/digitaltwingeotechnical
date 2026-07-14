@@ -165,16 +165,16 @@ export function ApplicationsOverview() {
             key={env.href}
             className={`appsx-env${flip ? " appsx-env--flip" : ""}`}
           >
-            <div className="appsx-env__inner" data-appsx-reveal>
-              <div className="appsx-env__media">
-                <Image
-                  src={env.img}
-                  alt={env.imgAlt}
-                  fill
-                  sizes="(max-width:900px) 100vw, 50vw"
-                  className="appsx-env__img"
-                />
-              </div>
+            <div className="appsx-env__media">
+              <Image
+                src={env.img}
+                alt={env.imgAlt}
+                fill
+                sizes="(max-width:900px) 100vw, 50vw"
+                className="appsx-env__img"
+              />
+            </div>
+            <div className="site-container appsx-env__hold" data-appsx-reveal>
               <div className="appsx-env__copy">
                 <span className="appsx-env__num">{env.num}</span>
                 <span className="appsx-env__eyebrow">{env.eyebrow}</span>
