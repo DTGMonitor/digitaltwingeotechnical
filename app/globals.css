@@ -14700,5 +14700,8 @@ main .ld-container,
  .appsx-intro__grid { grid-template-columns:1fr; }
  .appsx-env__inner { grid-template-columns:1fr; }
  .appsx-env--flip .appsx-env__media { order:0; }
+ /* stacked single-column: the media is alone in an auto row, so inherited
+    align-self:stretch collapses it to 0 and overrides aspect-ratio. Let 3:2 govern. */
+ .appsx-env__media { align-self:auto; min-height:0; }
  .appsx-spine { grid-template-columns:1fr 1fr; }
 }
