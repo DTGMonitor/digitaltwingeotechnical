@@ -7,7 +7,7 @@
 // Hero image is an AI-generated placeholder; partnership/scope provisional (verify-before-publish).
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
 import {
   EnvironmentDetailPage,
   type EnvironmentDetailData,
@@ -129,6 +129,7 @@ const tsfDetail: EnvironmentDetailData = {
         InSAR data in partnership with <b>Catalyst Earth</b>
       </>
     ),
+    partnerIcon: <Eye size={16} aria-hidden="true" />,
     verify: "Partnership and scope to be confirmed before publication.",
   },
   editorial: {

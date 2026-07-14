@@ -7,7 +7,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowDown, Check, Eye } from "lucide-react";
+import { ArrowRight, ArrowDown, Check } from "lucide-react";
 import { type ReactNode, useEffect } from "react";
 
 export type BigNum = { n: string; l: string };
@@ -41,6 +41,7 @@ export type EnvironmentDetailData = {
     bignums?: BigNum[];
     caps?: Cap[];
     partner?: ReactNode;
+    partnerIcon?: ReactNode; // per-page pill glyph (TSF = sensing/Eye, underground = partnership/Users)
     verify: string;
   };
   editorial: { statement: ReactNode; sideK: string; sideParagraphs: ReactNode[]; glance?: GlanceRow[] };
@@ -134,7 +135,7 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
           ) : null}
           {proof.partner ? (
             <div className="envd-partner">
-              <Eye size={16} aria-hidden="true" />
+              {proof.partnerIcon}
               {proof.partner}
             </div>
           ) : null}

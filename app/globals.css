@@ -14871,6 +14871,17 @@ main .ld-container,
 .envd-signal-link p b { color:var(--c-text); }
 .envd-signal-link a { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; font-size:14px; font-weight:600; color:var(--accent-text); }
 
+/* SIGNATURE — scale bar (underground): a bar filling 0 -> 1,000km+ with tick marks */
+.envd-scalebar { padding:44px 48px; border:1px solid var(--c-border); border-radius:22px; background:var(--c-surface-raised); }
+.envd-scalebar__track { position:relative; height:8px; margin:60px 0 24px; border-radius:4px; background:var(--c-border); }
+.envd-scalebar__fill { position:absolute; left:0; top:0; height:100%; width:100%; border-radius:4px; background:linear-gradient(90deg,var(--deep-teal),var(--accent)); transform-origin:left; transform:scaleX(0); animation:envd-grow 1.8s cubic-bezier(.2,.7,.2,1) forwards; }
+.envd-scalebar__bigkm { position:absolute; left:0; top:-52px; font-family:var(--font-sans); font-weight:800; font-size:clamp(2.4rem,5vw,3.6rem); line-height:1; color:var(--c-text); font-variant-numeric:tabular-nums; }
+.envd-scalebar__ticks { display:flex; justify-content:space-between; font-size:12.5px; color:var(--c-text-muted); font-variant-numeric:tabular-nums; }
+.envd-scalebar__caption { margin-top:32px; max-width:64ch; font-size:16px; line-height:1.6; color:var(--c-text-soft); }
+.envd-scalebar__caption b { color:var(--accent-text); }
+@keyframes envd-grow { to { transform:scaleX(1); } }
+@media (prefers-reduced-motion:reduce) { .envd-scalebar__fill { transform:scaleX(1); animation:none; } }
+
 /* REVEAL */
 [data-envd-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 [data-envd-reveal].is-in { opacity:1; transform:none; }
@@ -14884,6 +14895,7 @@ main .ld-container,
  .envd-hero { min-height:88vh; }
  .envd-lead-split, .envd-approach { grid-template-columns:1fr; }
  .envd-bignums, .envd-caps, .envd-others { grid-template-columns:1fr; }
+ .envd-scalebar { padding:32px 26px; }
  .envd-funnel__row { grid-template-columns:110px 1fr; gap:16px; }
  .envd-funnel__row--f2 .envd-funnel__bar { width:80%; }
  .envd-funnel__row--f3 .envd-funnel__bar { width:55%; }
