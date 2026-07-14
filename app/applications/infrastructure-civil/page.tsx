@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { InfrastructureCivilPage } from "@/components/infrastructure-civil-page";
+import { InfrastructureDetail } from "@/components/environments/infrastructure-detail";
 
 export const metadata: Metadata = {
   title: "Infrastructure & Civil Monitoring Support | DTG",
   description:
-    "DTG supports infrastructure and civil monitoring through ground movement review, asset deformation interpretation, multi-sensor comparison, data quality assessment, reporting traceability and independent technical review.",
+    "DTG brings independent geotechnical monitoring and analytics to the built environment — dams, road and rail earthworks, landslides, tunnels, bridges and retaining structures where ground movement is the risk.",
 };
 
 export default function Page() {
-  return <InfrastructureCivilPage />;
+  return <InfrastructureDetail />;
 }

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { TailingsStorageFacilitiesPage } from "@/components/tailings-storage-facilities-page";
+import { TsfDetail } from "@/components/environments/tsf-detail";
 
 export const metadata: Metadata = {
   title: "Tailings Storage Facilities Monitoring Support | DTG",
   description:
-    "DTG supports Tailings Storage Facility monitoring through deformation trend review, multi-sensor comparison, data quality assessment, reporting traceability and independent technical review.",
+    "Independent tailings monitoring from DTG: wide-area satellite InSAR (via Catalyst Earth), monthly water-body mapping and machine-learning analytics that surface slow, long-term deformation from noisy data.",
 };
 
 export default function Page() {
-  return <TailingsStorageFacilitiesPage />;
+  return <TsfDetail />;
 }
