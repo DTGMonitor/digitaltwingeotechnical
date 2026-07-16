@@ -14826,6 +14826,18 @@ main .ld-container,
 .envd-othc__title { display:block; font-family:var(--font-sans); font-weight:600; font-size:20px; line-height:1.15; color:#fff; margin-bottom:6px; }
 .envd-othc__desc { display:block; font-size:13px; line-height:1.45; color:#cfdde0; }
 
+/* DATA-VIZ TREATMENT — the 3 analytics hero images (open-pit/TSF/underground) carry different
+   rainbow grades; a muting filter + deep-teal veil pulls them into one cool, on-brand set.
+   Applied IDENTICALLY to the heroes (.envd-hero--dataviz) and the bottom "other environments"
+   tiles that reuse the same images (.envd-othc--dataviz). Civil (viaduct photo) is untreated. */
+.envd-hero--dataviz .envd-hero__img,
+.envd-othc--dataviz .envd-othc__img { filter: saturate(.82) brightness(.95) contrast(1.02); }
+.envd-hero--dataviz .envd-hero__bg::after,
+.envd-othc--dataviz::before {
+ content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+ background:linear-gradient(180deg, rgba(9,58,72,.14) 0%, rgba(9,58,72,.16) 60%, rgba(6,18,22,.20) 100%);
+}
+
 /* CTA */
 .envd-cta { text-align:center; }
 .envd-cta h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(2rem,4vw,3rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:12px; }

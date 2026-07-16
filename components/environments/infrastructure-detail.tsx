@@ -340,7 +340,11 @@ export function InfrastructureDetail() {
           </div>
           <div className="envd-others" data-envd-reveal>
             {others.map((o) => (
-              <Link href={o.href} key={o.href} className="envd-othc">
+              <Link
+                href={o.href}
+                key={o.href}
+                className={`envd-othc${o.img && !o.img.includes("civil") ? " envd-othc--dataviz" : ""}`}
+              >
                 <Image src={o.img} alt={o.imgAlt} fill sizes="(max-width:900px) 100vw, 33vw" className="envd-othc__img" />
                 <span className="envd-othc__scrim" aria-hidden="true" />
                 <span className="envd-othc__oc">
