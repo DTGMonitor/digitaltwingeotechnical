@@ -1,3 +1,16 @@
+// COMPLIANCE — DO NOT UNDO: independence here is ENGAGEMENT-SCOPED. DTG distributes hardware in
+// Indonesia, so company-wide financial claims are indefensible. NEVER reintroduce "no commission",
+// "no vendor lock-in", "no lock-in", "no product to sell" or "we sell no hardware". The promise is
+// how DTG advises on YOUR site — driven by your risk and your data, not by a product.
+// NB the "Recommends across the market, not one product line" matrix row is a SCOPE-OF-ADVICE claim
+// (binary-true, no commercial claim) — it rests on the factual assumption that DTG advisory really
+// does recommend across the market, including against its own distributed products. Pending Peter's
+// confirmation; if that isn't true, CUT the row rather than reword it.
+// NB the FAQ "Do you recommend specific vendors' products?" is DELIBERATELY silent on the
+// distribution arm. That is a holding position, not an end state: disclosure is a leadership/legal
+// call, and half-disclosing would raise the question without answering it. Do NOT add a neutrality
+// claim here. If DTG establishes genuine advisory/distribution separation, this FAQ is where to say
+// so — it becomes a credential rather than a risk. Escalated for Peter.
 import type { Metadata } from "next";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
@@ -46,7 +59,7 @@ const content: ServiceContent = {
         points: [
           "Technology-agnostic comparison of options",
           "Requirement-led recommendation",
-          "No commission, no vendor lock-in",
+          "On your site, driven by your data — not by a product",
           "Procurement and specification support",
         ],
       },
@@ -80,7 +93,7 @@ const content: ServiceContent = {
     rows: [
       { label: "Starts from your requirement, not a product", cells: ["yes", "no", "yes"] },
       { label: "Technology-agnostic across vendors", cells: ["yes", "no", "partial"] },
-      { label: "Commercially neutral (no product to sell)", cells: ["yes", "no", "yes"] },
+      { label: "Recommends across the market, not one product line", cells: ["yes", "no", "yes"] },
       { label: "Specialist geotechnical monitoring depth", cells: ["yes", "partial", "partial"] },
       { label: "Independent of your own conclusions", cells: ["yes", "no", "no"] },
     ],
@@ -96,7 +109,7 @@ const content: ServiceContent = {
         points: [
           "We define what your risk actually requires, first",
           "Compare technologies objectively across vendors",
-          "Recommend the right fit — no commission, no lock-in",
+          "Recommend the right fit — driven by your risk, not a product",
           "Support the specification and procurement",
         ],
       },
@@ -164,7 +177,7 @@ const content: ServiceContent = {
     {
       question: "Do you recommend specific vendors' products?",
       answer:
-        "We're technology-agnostic and commercially neutral — we recommend the right approach for your requirement, not a product we're paid to sell. Where a specific technology fits best, we'll say so and explain why.",
+        "We're technology-agnostic — we recommend across the market for your requirement, not from one product line. Where a specific technology fits best, we'll say so and explain why.",
     },
     {
       question: "Can you review monitoring another firm set up?",

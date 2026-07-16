@@ -1,3 +1,8 @@
+// COMPLIANCE — DO NOT UNDO: independence here is ENGAGEMENT-SCOPED. DTG distributes hardware in
+// Indonesia, so company-wide financial claims are indefensible. NEVER reintroduce "no commission",
+// "no vendor lock-in", "no lock-in", "no product to sell" or "we sell no hardware". Describe the
+// integration honestly instead ("no rip-and-replace", "technology-agnostic", "regardless of who
+// supplied it") — those are technical claims about the work, not commercial claims about DTG.
 import type { Metadata } from "next";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
@@ -25,7 +30,7 @@ const content: ServiceContent = {
   whatsIncluded: {
     eyebrow: "What's included",
     title: "One consolidated, governed monitoring picture.",
-    intro: "We connect what you already have — no rip-and-replace, no vendor lock-in.",
+    intro: "We connect what you already have — no rip-and-replace, regardless of who supplied it.",
     groups: [
       {
         title: "Multi-vendor sensor integration",
@@ -90,7 +95,7 @@ const content: ServiceContent = {
     title: "What technology integration gives you.",
     items: [
       { title: "One source of truth", body: "Every sensor in one consolidated, governed view." },
-      { title: "No vendor lock-in", body: "Technology-agnostic — we connect what you have." },
+      { title: "Works with what you have", body: "Technology-agnostic — every source connected, whoever supplied it." },
       { title: "Traceable data", body: "From source sensor through to combined picture." },
       { title: "Ready to act on", body: "Consolidated data set up for review and escalation." },
     ],
