@@ -15,6 +15,7 @@
 // an absolute like "no bias" is the same family as the financial claims above. Keep it
 // engagement-scoped.
 import type { Metadata } from "next";
+import { BadgeCheck, Target, ShieldCheck, Compass } from "lucide-react";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
 export const metadata: Metadata = {
@@ -165,10 +166,10 @@ const content: ServiceContent = {
     eyebrow: "What you get",
     title: "What technical advisory gives you.",
     items: [
-      { title: "Confident decisions", body: "Backed by independent, specialist expertise." },
-      { title: "Aligned to your outcome", body: "Advice aligned to your outcome, not a product." },
-      { title: "Independent assurance", body: "A defensible second view on critical calls." },
-      { title: "Specialist depth", body: "Geotechnical monitoring expertise, on demand." },
+      { icon: <BadgeCheck size={17} />, title: "Confident decisions", body: "Backed by independent, specialist expertise." },
+      { icon: <Target size={17} />, title: "Aligned to your outcome", body: "Advice aligned to your outcome, not a product." },
+      { icon: <ShieldCheck size={17} />, title: "Independent assurance", body: "A defensible second view on critical calls." },
+      { icon: <Compass size={17} />, title: "Specialist depth", body: "Geotechnical monitoring expertise, on demand." },
     ],
   },
   faqs: [
