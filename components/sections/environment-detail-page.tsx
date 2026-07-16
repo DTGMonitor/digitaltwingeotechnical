@@ -80,7 +80,7 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
   return (
     <main className="envd-page">
       {/* CINEMATIC HERO — image + scrim, always dark, bottom-anchored under the fixed header */}
-      <header className="envd-hero">
+      <header className="envd-hero envd-hero--dataviz">
         <div className="envd-hero__bg">
           <Image src={hero.image} alt={hero.imageAlt} fill priority sizes="100vw" className="envd-hero__img" />
         </div>
@@ -249,7 +249,11 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
           </div>
           <div className="envd-others" data-envd-reveal>
             {others.map((o) => (
-              <Link href={o.href} key={o.href} className="envd-othc">
+              <Link
+                href={o.href}
+                key={o.href}
+                className={`envd-othc${o.image && !o.image.includes("civil") ? " envd-othc--dataviz" : ""}`}
+              >
                 {o.image ? (
                   <Image src={o.image} alt={o.imageAlt ?? ""} fill sizes="(max-width:900px) 100vw, 33vw" className="envd-othc__img" />
                 ) : null}
