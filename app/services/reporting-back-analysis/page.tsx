@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FileCheck, Search, RefreshCw, Link2 } from "lucide-react";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
 export const metadata: Metadata = {
@@ -92,10 +93,10 @@ const content: ServiceContent = {
     eyebrow: "What you get",
     title: "What reporting & back-analysis gives you.",
     items: [
-      { title: "A defensible record", body: "Consistent reporting that stands up to scrutiny." },
-      { title: "Answers after events", body: "Rigorous back-analysis of what happened and why." },
-      { title: "Better future response", body: "Findings feed back into thresholds and TARPs." },
-      { title: "Traceable conclusions", body: "Every recommendation tied to the evidence behind it." },
+      { icon: <FileCheck size={17} />, title: "A defensible record", body: "Consistent reporting that stands up to scrutiny." },
+      { icon: <Search size={17} />, title: "Answers after events", body: "Rigorous back-analysis of what happened and why." },
+      { icon: <RefreshCw size={17} />, title: "Better future response", body: "Findings feed back into thresholds and TARPs." },
+      { icon: <Link2 size={17} />, title: "Traceable conclusions", body: "Every recommendation tied to the evidence behind it." },
     ],
   },
   faqs: [
