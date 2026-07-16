@@ -15075,3 +15075,107 @@ main .ld-container,
  .solx-sit__foot { gap:18px; margin-top:26px; }
  .solx-outcome { min-width:0; }
 }
+
+/* ============================================================================
+   SERVICES OVERVIEW (.svcx-*) — the WHAT WE DO axis. One page, five capabilities.
+   Consumes only the themed --c-* layer; text sits on the .site-container ruler.
+   Hero is always dark (deep-teal gradient, NO image and NO signature visual —
+   both were considered and rejected; the type carries it). Rest flips with theme.
+   The five are vertical rows, NOT a card grid (grids were rejected on this site).
+   NB this page was the only user of the .service-card* rules, so those are now dead
+   — left in place deliberately (CSS cleanup is a separate, deferred task). Do NOT
+   assume the neighbouring .section-kit-* / .service-backlink rules are dead too:
+   they are still live on /about and in the section kit (ServicePage, Matrix, Tabs...).
+   ========================================================================= */
+.svcx-page { background:var(--c-surface); color:var(--c-text-soft); }
+.svcx-eyebrow { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); }
+
+/* HERO — no image, no signature visual */
+.svcx-hero {
+ position:relative; min-height:84vh; display:flex; align-items:flex-end; overflow:hidden;
+ background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
+}
+.svcx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 36%,rgba(99,183,93,.08),transparent 55%); }
+/* text sits on the .site-container ruler like every body section — do NOT add width:100%,
+   it overrides the container and runs the headline to the screen edge. */
+.svcx-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
+.svcx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
+.svcx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.2vw,5.2rem); line-height:1.02; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:15ch; }
+.svcx-hero__lead { max-width:54ch; font-size:clamp(17px,2vw,22px); line-height:1.5; color:#e5eef0; margin:0 0 32px; }
+.svcx-scrollcue { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+.svcx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
+
+/* INTRO */
+.svcx-intro { padding-block:clamp(56px,7vw,88px); border-bottom:1px solid var(--c-border); }
+.svcx-intro__grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+.svcx-intro__grid .svcx-eyebrow { display:block; margin-bottom:16px; }
+.svcx-intro__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); max-width:20ch; margin:0; }
+.svcx-intro p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0 0 14px; }
+.svcx-intro p:last-child { margin-bottom:0; }
+
+/* THE FIVE — big vertical rows */
+.svcx-list { padding-bottom:clamp(56px,7vw,88px); }
+.svcx-svc { display:block; border-top:1px solid var(--c-border); transition:background .25s ease; }
+.svcx-svc:hover { background:var(--c-surface-raised); }
+.svcx-svc:last-of-type { border-bottom:1px solid var(--c-border); }
+.svcx-svc__row { display:grid; grid-template-columns:56px 1fr 1.05fr auto; gap:34px; align-items:center; padding-block:42px; }
+/* opacity .7, not the mockup's .5: at .5 the numbers were too faint under the light theme.
+   They stay aria-hidden decoration (the row order carries no meaning a reader needs). */
+.svcx-svc__n { font-family:var(--font-sans); font-weight:800; font-size:15px; color:var(--accent-text); opacity:.7; font-variant-numeric:tabular-nums; }
+.svcx-svc__name { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.35rem,2.4vw,1.85rem); line-height:1.15; letter-spacing:-.02em; color:var(--c-text); margin:0; }
+.svcx-svc__pitch { margin:10px 0 0; max-width:36ch; font-size:15.5px; line-height:1.55; color:var(--c-text-soft); }
+.svcx-svc__inc { display:flex; flex-direction:column; gap:9px; }
+/* --c-text-soft, NOT --c-text-muted: muted is 3.3:1 on light (labels/large only) and these are
+   readable 13.5px content, so muted would fail AA. Hierarchy comes from size + the green bullet. */
+.svcx-svc__inc span { position:relative; padding-left:15px; font-size:13.5px; line-height:1.4; color:var(--c-text-soft); }
+.svcx-svc__inc span::before { content:""; position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:.7; }
+.svcx-svc__go { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; font-size:14px; font-weight:600; color:var(--accent-text); }
+.svcx-svc__arw { transition:transform .2s ease; }
+.svcx-svc:hover .svcx-svc__arw { transform:translateX(4px); }
+
+/* THE METHOD — typographic, no diagram */
+.svcx-method { padding-block:clamp(56px,7vw,88px); background:var(--c-surface-raised); border-top:1px solid var(--c-border); }
+.svcx-method__head { max-width:60ch; margin-bottom:clamp(36px,4.5vw,56px); }
+.svcx-method__head .svcx-eyebrow { display:block; margin-bottom:16px; }
+.svcx-method__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.4vw,2.6rem); line-height:1.08; letter-spacing:-.02em; color:var(--c-text); margin:0 0 14px; }
+.svcx-method__head p { font-size:17px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+.svcx-method__three { display:grid; grid-template-columns:repeat(3,1fr); gap:44px; }
+.svcx-mt { border-top:2px solid var(--accent); padding-top:20px; }
+.svcx-mt__word { font-family:var(--font-sans); font-weight:800; font-size:clamp(1.6rem,2.8vw,2.2rem); line-height:1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:12px; }
+.svcx-mt p { font-size:14.5px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+.svcx-method__link { display:inline-flex; align-items:center; gap:8px; margin-top:44px; font-size:14px; font-weight:600; color:var(--accent-text); }
+.svcx-method__arw { transition:transform .2s ease; }
+.svcx-method__link:hover .svcx-method__arw { transform:translateX(4px); }
+
+/* CTA */
+.svcx-cta { padding-block:clamp(56px,7vw,88px); text-align:center; border-top:1px solid var(--c-border); background:var(--c-surface); }
+.svcx-cta__eyebrow { display:block; margin-bottom:16px; }
+.svcx-cta h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.6vw,2.8rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); max-width:24ch; margin:0 auto 12px; }
+.svcx-cta p { max-width:60ch; margin:0 auto 28px; font-size:17px; line-height:1.6; color:var(--c-text-soft); }
+.svcx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease; }
+.svcx-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+
+/* FOCUS — the rows are large targets, so the ring is inset to stay on-screen.
+   The hero is deep-teal in BOTH themes, so its ring uses the bright signal green
+   directly: --c-focus resolves to the dark green (#2E6B2A) under light, which would
+   be near-invisible against the hero. */
+.svcx-btn:focus-visible, .svcx-method__link:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; border-radius:4px; }
+.svcx-hero .svcx-btn:focus-visible { outline-color:var(--signal-green); }
+.svcx-svc:focus-visible { outline:2px solid var(--c-focus); outline-offset:-3px; background:var(--c-surface-raised); }
+
+/* REVEAL */
+[data-svcx-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+[data-svcx-reveal].is-in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) {
+ [data-svcx-reveal] { opacity:1; transform:none; transition:none; }
+ .svcx-scrollcue svg { animation:none; }
+}
+
+@media (max-width:900px) {
+ .svcx-hero { min-height:76vh; }
+ .svcx-intro__grid { grid-template-columns:1fr; gap:30px; }
+ .svcx-svc__row { grid-template-columns:1fr; gap:16px; padding-block:34px; }
+ .svcx-svc__n { font-size:13px; }
+ .svcx-svc__pitch { max-width:none; }
+ .svcx-method__three { grid-template-columns:1fr; gap:30px; }
+}
