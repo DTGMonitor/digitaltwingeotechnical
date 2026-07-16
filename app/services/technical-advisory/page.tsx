@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const content: ServiceContent = {
   slug: "technical-advisory",
-  name: "Technical advisory.",
+  name: "Technical advisory",
   lead: "Independent expert guidance on the decisions that matter — from choosing monitoring technology to auditing what you already have.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },

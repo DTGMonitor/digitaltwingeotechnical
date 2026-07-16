@@ -1,24 +1,36 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { renderTrademarkText } from "@/components/brand";
 import { Surface } from "./Surface";
-import { FaqAccordion } from "./FaqAccordion";
 import { CTA } from "./CTA";
 import { Matrix, type MatrixCell } from "./Matrix";
 import { Tabs } from "./Tabs";
+import { SectionReveals } from "./SectionReveals";
 
 /**
- * Shared, data-driven service-page template (Phase E). One server component + one
- * content object per service. Themed via --c-*; optional slots (crossLink / matrix /
- * tabs) render only when present. Hero has NO breadcrumb (updated rule): green eyebrow →
- * service-name H1 → standfirst → CTAs.
+ * Shared, data-driven service-page template. ONE template + one ServiceContent object per
+ * service — uplift here and all five inherit it. Server component; the reveal behaviour is a
+ * client island (SectionReveals) so the copy stays server-rendered.
+ *
+ * Scoped to the .svcd-* family. It composes the shared Surface primitive for surfaces (never
+ * duplicate that block — a partial duplicate is what caused the invisible-button bug) but
+ * renders its own content markup, because CTA / FaqAccordion / .section-kit-* / .kit-button
+ * are SHARED with /about and others and must not be restyled from here.
+ *
+ * The FAQ is deliberately NOT an accordion: five short answers that build trust
+ * ("Does this replace our geotechnical engineer? No.") should not sit behind a click.
+ * The shared FaqAccordion is untouched and still used by /about.
+ *
+ * Section headings are overridable per service (data-analytics renames several); the FAQ
+ * heading defaults to "Common questions." rather than being hardcoded to the service name.
  */
 type Cta = { label: string; href: string; primary?: boolean };
 type LinkRef = { label: string; href: string };
 
 export type ServiceContent = {
   slug: string;
+  /** Sentence case, NO full stop — site-wide hero rule. */
   name: string;
   lead: string;
   ctas: Cta[];
@@ -27,86 +39,93 @@ export type ServiceContent = {
     eyebrow?: string;
     title: string;
     intro?: string;
-    layout?: "grid" | "split" | "flow" | "list";
-    groups: { icon?: ReactNode; title: string; desc: string; points: string[] }[];
+    groups: { title: string; desc: string; points: string[] }[];
   };
   crossLink?: { title: string; body: string; linkLabel: string; href: string };
   matrix?: { eyebrow?: string; title?: string; columns: string[]; rows: { label: string; cells: MatrixCell[] }[]; highlightColumn?: number };
   tabs?: { eyebrow?: string; title?: string; items: { label: string; heading?: string; intro?: string; points?: string[] }[] };
   delivery: { eyebrow?: string; title: string; steps: { title: string; body: string }[] };
-  outcomes: { eyebrow?: string; title: string; items: { title: string; body?: string }[] };
+  outcomes: { eyebrow?: string; title: string; items: { icon?: ReactNode; title: string; body?: string }[] };
+  /** Optional heading overrides — data-analytics renames its sections. */
+  faqSection?: { eyebrow?: string; title?: string };
   faqs: { question: string; answer: string }[];
   cta: { eyebrow?: string; title: string; body?: string; actionLabel: string; actionHref: string };
 };
 
-function Actions({ ctas }: { ctas: Cta[] }) {
-  return (
-    <div className="section-kit-actions">
-      {ctas.map((c) => (
-        <Link key={c.href + c.label} href={c.href} className={`kit-button ${c.primary ? "kit-button--primary" : ""}`}>
-          {renderTrademarkText(c.label)} <ArrowUpRight size={15} />
-        </Link>
-      ))}
-    </div>
-  );
-}
-
 export function ServicePage({ content }: { content: ServiceContent }) {
   const c = content;
   const heroId = `${c.slug}-hero`;
+  const includedId = `${c.slug}-included`;
+
   return (
-    <main id="top" className="service-page">
-      {/* Hero — no breadcrumb */}
-      <Surface variant="band" aria-labelledby={heroId}>
-        <div className="service-hero">
-          <p className="eyebrow eyebrow-accent">Service</p>
-          <h1 id={heroId} className="service-hero__title">
+    <main id="top" className="svcd-page">
+      <SectionReveals attr="svcd-reveal" />
+
+      {/* HERO — cinematic, gradient, no image. Text on the .site-container ruler:
+          never add width:100% here, it overrides the container and bleeds to the edge. */}
+      <header className="svcd-hero" aria-labelledby={heroId}>
+        <div className="svcd-hero__content site-container" data-svcd-reveal>
+          <span className="svcd-eyebrow svcd-hero__eyebrow">Services</span>
+          <h1 id={heroId} className="svcd-hero__title">
             {renderTrademarkText(c.name)}
           </h1>
-          <p className="service-hero__lead">{renderTrademarkText(c.lead)}</p>
-          <Actions ctas={c.ctas} />
+          <p className="svcd-hero__lead">{renderTrademarkText(c.lead)}</p>
+          <div className="svcd-hero__btns">
+            {c.ctas.map((cta) => (
+              <Link
+                key={cta.href + cta.label}
+                href={cta.href}
+                className={`svcd-btn ${cta.primary ? "" : "svcd-btn--ghost"}`}
+              >
+                {renderTrademarkText(cta.label)}
+                {cta.primary ? <ArrowRight size={16} aria-hidden="true" /> : null}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <span className="svcd-scrollcue" aria-hidden="true">
+          <span>Scroll</span>
+          <ArrowDown size={18} />
+        </span>
+      </header>
+
+      {/* PROBLEM */}
+      <Surface variant="default" className="svcd-problem" aria-labelledby={`${c.slug}-problem`}>
+        <div className="svcd-problem__grid">
+          <div data-svcd-reveal>
+            <span className="svcd-eyebrow">{renderTrademarkText(c.problem.eyebrow)}</span>
+            <h2 id={`${c.slug}-problem`} className="svcd-problem__title">
+              {renderTrademarkText(c.problem.title)}
+            </h2>
+          </div>
+          <div data-svcd-reveal>
+            <p className="svcd-problem__intro">{renderTrademarkText(c.problem.intro)}</p>
+            {c.problem.solutions.map((s) => (
+              <Link key={s.href} href={s.href} className="svcd-sollink">
+                {renderTrademarkText(s.label)}
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
         </div>
       </Surface>
 
-      {/* Problem band + Solutions back-link */}
-      <Surface variant="band" aria-labelledby={`${c.slug}-problem`}>
-        <div className="service-problem">
-          <p className="eyebrow eyebrow-accent">{c.problem.eyebrow}</p>
-          <h2 id={`${c.slug}-problem`} className="section-headline service-h2--narrow">
-            {renderTrademarkText(c.problem.title)}
-          </h2>
-          <p className="section-kit-lead">{renderTrademarkText(c.problem.intro)}</p>
-          {c.problem.solutions.length > 0 ? (
-            <p className="service-backlink">
-              This helps:{" "}
-              {c.problem.solutions.map((s, i) => (
-                <span key={s.href}>
-                  {i > 0 ? " · " : null}
-                  <Link href={s.href} className="service-backlink__link">
-                    {renderTrademarkText(s.label)} <ArrowUpRight size={13} />
-                  </Link>
-                </span>
-              ))}
-            </p>
+      {/* WHAT'S INCLUDED */}
+      <Surface variant="raised" id={includedId} className="svcd-inc" aria-labelledby={`${c.slug}-included-title`}>
+        <div className="svcd-inc__head" data-svcd-reveal>
+          {c.whatsIncluded.eyebrow ? (
+            <span className="svcd-eyebrow">{renderTrademarkText(c.whatsIncluded.eyebrow)}</span>
           ) : null}
-        </div>
-      </Surface>
-
-      {/* What's included — layout prop (default grid) */}
-      <Surface variant="default" aria-labelledby={`${c.slug}-included`}>
-        <div className="section-kit-statement">
-          {c.whatsIncluded.eyebrow ? <p className="eyebrow">{c.whatsIncluded.eyebrow}</p> : null}
-          <h2 id={`${c.slug}-included`} className="section-headline service-h2--section">
+          <h2 id={`${c.slug}-included-title`} className="svcd-inc__title">
             {renderTrademarkText(c.whatsIncluded.title)}
           </h2>
-          {c.whatsIncluded.intro ? <p className="section-kit-lead">{renderTrademarkText(c.whatsIncluded.intro)}</p> : null}
+          {c.whatsIncluded.intro ? <p>{renderTrademarkText(c.whatsIncluded.intro)}</p> : null}
         </div>
-        <div className="whats-included" data-layout={c.whatsIncluded.layout ?? "grid"}>
+        <div className="svcd-inc__grid">
           {c.whatsIncluded.groups.map((g, i) => (
-            <article className="wi-group" key={i}>
-              {g.icon ? <span className="wi-group__icon" aria-hidden="true">{g.icon}</span> : null}
+            <article className="svcd-ig" key={i} data-svcd-reveal>
               <h3>{renderTrademarkText(g.title)}</h3>
-              <p className="wi-group__desc">{renderTrademarkText(g.desc)}</p>
+              <p className="svcd-ig__sub">{renderTrademarkText(g.desc)}</p>
               {g.points.length > 0 ? (
                 <ul>
                   {g.points.map((p, j) => (
@@ -119,22 +138,23 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </div>
       </Surface>
 
-      {/* Adjacent cross-link (optional) */}
+      {/* CROSS-LINK (optional) */}
       {c.crossLink ? (
-        <Surface variant="default" compact aria-label={c.crossLink.title}>
-          <div className="cross-link">
+        <Surface variant="default" compact className="svcd-xl" aria-label={c.crossLink.title}>
+          <div className="svcd-xl__box" data-svcd-reveal>
             <div>
               <h3>{renderTrademarkText(c.crossLink.title)}</h3>
               <p>{renderTrademarkText(c.crossLink.body)}</p>
             </div>
-            <Link href={c.crossLink.href} className="cross-link__cta">
-              {renderTrademarkText(c.crossLink.linkLabel)} <ArrowUpRight size={15} />
+            <Link href={c.crossLink.href} className="svcd-xl__go">
+              {renderTrademarkText(c.crossLink.linkLabel)}
+              <ArrowRight className="svcd-xl__arw" size={15} aria-hidden="true" />
             </Link>
           </div>
         </Surface>
       ) : null}
 
-      {/* Matrix (optional) */}
+      {/* MATRIX (optional — technical-advisory only) */}
       {c.matrix ? (
         <Matrix
           surface="default"
@@ -148,7 +168,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         />
       ) : null}
 
-      {/* Tabs (optional) */}
+      {/* TABS (optional — technical-advisory only) */}
       {c.tabs ? (
         <Tabs
           surface="default"
@@ -177,18 +197,22 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         />
       ) : null}
 
-      {/* How it's delivered — 4-step strip */}
-      <Surface variant="band" aria-labelledby={`${c.slug}-delivery`}>
-        <div className="section-kit-statement">
-          {c.delivery.eyebrow ? <p className="eyebrow eyebrow-accent">{c.delivery.eyebrow}</p> : null}
-          <h2 id={`${c.slug}-delivery`} className="section-headline service-h2--section">
+      {/* HOW IT'S DELIVERED */}
+      <Surface variant="default" className="svcd-del" aria-labelledby={`${c.slug}-delivery`}>
+        <div className="svcd-del__head" data-svcd-reveal>
+          {c.delivery.eyebrow ? (
+            <span className="svcd-eyebrow">{renderTrademarkText(c.delivery.eyebrow)}</span>
+          ) : null}
+          <h2 id={`${c.slug}-delivery`} className="svcd-del__title">
             {renderTrademarkText(c.delivery.title)}
           </h2>
         </div>
-        <ol className="delivery-steps">
+        <ol className="svcd-steps">
           {c.delivery.steps.map((s, i) => (
-            <li className="delivery-step" key={i}>
-              <span className="delivery-step__n tnum">{String(i + 1).padStart(2, "0")}</span>
+            <li className="svcd-st" key={i} data-svcd-reveal>
+              <span className="svcd-st__n tnum" aria-hidden="true">
+                {i + 1}
+              </span>
               <h3>{renderTrademarkText(s.title)}</h3>
               <p>{renderTrademarkText(s.body)}</p>
             </li>
@@ -196,17 +220,24 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </ol>
       </Surface>
 
-      {/* What you get — outcomes */}
-      <Surface variant="default" aria-labelledby={`${c.slug}-outcomes`}>
-        <div className="section-kit-statement">
-          {c.outcomes.eyebrow ? <p className="eyebrow">{c.outcomes.eyebrow}</p> : null}
-          <h2 id={`${c.slug}-outcomes`} className="section-headline service-h2--section">
+      {/* WHAT YOU GET */}
+      <Surface variant="raised" className="svcd-out" aria-labelledby={`${c.slug}-outcomes`}>
+        <div className="svcd-out__head" data-svcd-reveal>
+          {c.outcomes.eyebrow ? (
+            <span className="svcd-eyebrow">{renderTrademarkText(c.outcomes.eyebrow)}</span>
+          ) : null}
+          <h2 id={`${c.slug}-outcomes`} className="svcd-out__title">
             {renderTrademarkText(c.outcomes.title)}
           </h2>
         </div>
-        <div className="service-outcomes">
+        <div className="svcd-out__grid">
           {c.outcomes.items.map((o, i) => (
-            <article className="service-outcome" key={i}>
+            <article className="svcd-og" key={i} data-svcd-reveal>
+              {o.icon ? (
+                <span className="svcd-og__icon" aria-hidden="true">
+                  {o.icon}
+                </span>
+              ) : null}
               <h3>{renderTrademarkText(o.title)}</h3>
               {o.body ? <p>{renderTrademarkText(o.body)}</p> : null}
             </article>
@@ -214,19 +245,25 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </div>
       </Surface>
 
-      {/* FAQ — 5, native <details> */}
-      <FaqAccordion
-        surface="default"
-        eyebrow="FAQ"
-        title={`${c.name.replace(/\.$/, "")}, explained.`}
-        titleId={`${c.slug}-faq`}
-        items={c.faqs.map((f) => ({
-          question: renderTrademarkText(f.question),
-          answer: renderTrademarkText(f.answer),
-        }))}
-      />
+      {/* FAQs — always open, two columns. NOT an accordion (see the note at the top). */}
+      <Surface variant="default" className="svcd-faq" aria-labelledby={`${c.slug}-faq`}>
+        <div className="svcd-faq__head" data-svcd-reveal>
+          <span className="svcd-eyebrow">{c.faqSection?.eyebrow ?? "FAQs"}</span>
+          <h2 id={`${c.slug}-faq`} className="svcd-faq__title">
+            {renderTrademarkText(c.faqSection?.title ?? "Common questions.")}
+          </h2>
+        </div>
+        <dl className="svcd-faq__list">
+          {c.faqs.map((f, i) => (
+            <div className="svcd-fq" key={i} data-svcd-reveal>
+              <dt>{renderTrademarkText(f.question)}</dt>
+              <dd>{renderTrademarkText(f.answer)}</dd>
+            </div>
+          ))}
+        </dl>
+      </Surface>
 
-      {/* CTA */}
+      {/* CTA — shared kit component on a deep-teal band */}
       <CTA
         surface="band"
         eyebrow={c.cta.eyebrow}
@@ -235,7 +272,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         body={c.cta.body ? renderTrademarkText(c.cta.body) : undefined}
         actions={
           <Link href={c.cta.actionHref} className="kit-button kit-button--primary">
-            {renderTrademarkText(c.cta.actionLabel)} <ArrowUpRight size={15} />
+            {renderTrademarkText(c.cta.actionLabel)} <ArrowRight size={15} />
           </Link>
         }
       />

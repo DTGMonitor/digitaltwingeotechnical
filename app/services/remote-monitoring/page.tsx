@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Clock, Eye, FileCheck, Users } from "lucide-react";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 const content: ServiceContent = {
   slug: "remote-monitoring",
-  name: "Remote monitoring.",
+  name: "Remote monitoring",
   lead: "We become your monitoring team — continuous, independent review of your geotechnical data and alarms, so nothing critical goes unwatched.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },
@@ -90,10 +91,10 @@ const content: ServiceContent = {
     eyebrow: "What you get",
     title: "What remote monitoring gives you.",
     items: [
-      { title: "Continuous coverage", body: "Competent eyes on your site, including out of hours." },
-      { title: "Fewer missed events", body: "Correlated review catches precursors single sensors miss." },
-      { title: "Defensible records", body: "Every review, alarm and decision is traceable." },
-      { title: "Your people freed", body: "Your engineers focus on engineering, not the watch." },
+      { icon: <Clock size={17} />, title: "Continuous coverage", body: "Competent eyes on your site, including out of hours." },
+      { icon: <Eye size={17} />, title: "Fewer missed events", body: "Correlated review catches precursors single sensors miss." },
+      { icon: <FileCheck size={17} />, title: "Defensible records", body: "Every review, alarm and decision is traceable." },
+      { icon: <Users size={17} />, title: "Your people freed", body: "Your engineers focus on engineering, not the watch." },
     ],
   },
   faqs: [

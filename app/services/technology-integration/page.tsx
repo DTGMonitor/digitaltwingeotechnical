@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const content: ServiceContent = {
   slug: "technology-integration",
-  name: "Technology integration.",
+  name: "Technology integration",
   lead: "Connect multi-vendor monitoring into one governed view — every sensor, every system, one consolidated and traceable source of truth.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },
