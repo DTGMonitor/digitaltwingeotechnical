@@ -144,6 +144,7 @@
  --c-border:var(--border-dark);           /* rgba(255,255,255,.14) */
  --c-border-strong:rgba(255,255,255,.24);
  --c-focus:var(--signal-green);
+ --c-on-invert:var(--c-surface);          /* colour behind an element filled with --c-text */
  --accent-text:var(--signal-green);       /* #63B75D — legible green on dark (7.1:1) */
 }
 :root[data-theme="light"] {
@@ -158,6 +159,7 @@
  --c-border:var(--border);                /* rgba(16,32,42,.12) */
  --c-border-strong:rgba(16,32,42,.22);
  --c-focus:#2E6B2A;
+ --c-on-invert:var(--c-surface);          /* colour behind an element filled with --c-text */
  --accent-text:#2E6B2A;                   /* AA-safe green text on off-white (5.99:1) */
 }
 
@@ -180,6 +182,14 @@ section { scroll-margin-top:76px; }
 /* band / deep / image are ALWAYS dark (deep-teal / deep-base) in both themes, so they locally
    re-scope the text/border/accent tokens to their on-dark values — children using var(--c-text)
    etc. then read correctly on a light-theme page too. */
+/* ON-DARK RE-SCOPE. ⚠️ This block re-scopes SOME --c-* tokens and not others, which is the
+   single most productive bug source in this codebase (three found so far). Any rule that pairs
+   a re-scoped token with a NON-re-scoped one silently breaks here — and usually only in ONE
+   theme, so it survives review. Re-scoped: --c-text, --c-text-soft, --c-text-muted, --c-border,
+   --c-border-strong, --accent-text, --c-on-invert. NOT re-scoped (deliberately — they name
+   absolute surfaces): --c-surface, --c-surface-raised, --c-surface-band, --c-surface-deep.
+   If you add a rule here that uses two --c-* tokens together, check the surface layer
+   re-scopes BOTH. */
 .surface-band, .surface-deep, .surface-image {
  --c-text:var(--off-white);
  --c-text-soft:var(--text-on-dark-soft);
@@ -187,11 +197,19 @@ section { scroll-margin-top:76px; }
  --c-border:var(--border-dark);
  --c-border-strong:rgba(255,255,255,.24);
  --accent-text:var(--signal-green);       /* green is legible on deep-teal (7:1) */
+ /* Same gap as --c-on-invert: under the light theme --c-focus is the DARK green (#2E6B2A),
+    which measured 1.85:1 against the deep-teal band — an invisible focus ring (WCAG 1.4.11
+    wants 3:1). On-dark surfaces take the bright green: 4.82:1, and identical in both themes. */
+ --c-focus:var(--signal-green);
  color:var(--c-text);
 }
-.surface-band  { background:var(--c-surface-band); }   /* deep-teal authority band */
-.surface-deep  { background:var(--c-surface-deep); }   /* footer/menu-grade deep base */
-.surface-image { position:relative; isolation:isolate; background:var(--c-surface-deep); }
+/* --c-on-invert = "the colour behind me", for anything filled with --c-text (i.e. inverted).
+   It MUST be re-scoped alongside --c-text or an inverted control turns invisible: on a band,
+   --c-text is off-white, so text coloured with the un-re-scoped --c-surface was off-white on
+   off-white (contrast 1.0) in light theme. See .kit-button--primary. */
+.surface-band  { background:var(--c-surface-band); --c-on-invert:var(--c-surface-band); }   /* deep-teal authority band */
+.surface-deep  { background:var(--c-surface-deep); --c-on-invert:var(--c-surface-deep); }   /* footer/menu-grade deep base */
+.surface-image { position:relative; isolation:isolate; background:var(--c-surface-deep); --c-on-invert:var(--c-surface-deep); }
 .surface-image > .surface-image__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .surface-image > .surface-image__media img { width:100%; height:100%; object-fit:cover; }
 .surface-image > .surface-image__content { position:relative; z-index:1; }
@@ -223,7 +241,10 @@ section { scroll-margin-top:76px; }
 /* --- Kit buttons (themed) --- */
 .kit-button { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 22px; border-radius:var(--radius-md); border:1px solid var(--c-border-strong); color:var(--c-text); font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.08em; text-transform:uppercase; font-weight:600; transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease; }
 .kit-button:hover { transform:translateY(-2px); border-color:var(--c-text); }
-.kit-button--primary { background:var(--c-text); color:var(--c-surface); border-color:var(--c-text); }
+/* --c-on-invert, NOT --c-surface: this button is filled with --c-text, and .surface-band re-scopes
+   --c-text but NOT --c-surface — so on a band under the light theme both resolved to off-white and
+   the label vanished (contrast 1.0, on 6 live routes). --c-on-invert is re-scoped in step. */
+.kit-button--primary { background:var(--c-text); color:var(--c-on-invert); border-color:var(--c-text); }
 .kit-button--primary:hover { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
 .kit-button:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; }
 
@@ -2296,12 +2317,18 @@ section { scroll-margin-top:76px; }
 .site-footer {
  /* Masterbook deep-base surface (§7): stays deep in BOTH themes. Re-scope the --c-* tokens
     to their on-dark values like the .surface-deep primitive, so children read correctly under
-    [data-theme=light] instead of flipping to dark-on-dark. */
+    [data-theme=light] instead of flipping to dark-on-dark.
+    ⚠️ This is a DUPLICATE of the .surface-band/.surface-deep/.surface-image block (the footer
+    doesn't use that class). Keep the two in step — a token re-scoped there but not here is
+    exactly how the invisible-button bug happened. Nothing in the footer uses --c-focus or
+    --c-on-invert today; they're declared so the next control added here can't inherit the gap. */
  --c-text:var(--off-white);
  --c-text-soft:var(--text-on-dark-soft);
  --c-text-muted:var(--muted);
  --c-border:var(--border-dark);
  --c-border-strong:rgba(255,255,255,.24);
+ --c-focus:var(--signal-green);
+ --c-on-invert:var(--c-surface-deep);
  --accent-text:var(--signal-green);
  background:var(--c-surface-deep);
  color:var(--c-text);
