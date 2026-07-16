@@ -3,6 +3,13 @@
 // "no vendor lock-in", "no lock-in", "no product to sell" or "we sell no hardware". Describe the
 // integration honestly instead ("no rip-and-replace", "technology-agnostic", "regardless of who
 // supplied it") — those are technical claims about the work, not commercial claims about DTG.
+//
+// COMPLIANCE — DTG Focus(TM) IS NOT A PRODUCT A CLIENT CAN BUY. The truth: it is in ACTIVE
+// DEVELOPMENT, DTG uses parts of it in its OWN delivery today, and it is NOT yet available to
+// clients. NEVER say it is "delivered through", "offered", "available", or that a client "can"
+// integrate into it. Integration delivers into the CLIENT'S OWN systems and does not depend on
+// Focus. Short bullets cannot carry this nuance — they flatten it into an availability claim — so
+// keep the Focus truth in the cross-link and FAQ where there is room to state it properly.
 import type { Metadata } from "next";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
@@ -69,14 +76,14 @@ const content: ServiceContent = {
           "Consolidated overview across all monitoring",
           "Consistent alarms and thresholds across systems",
           "Ready for review, reporting and escalation",
-          "Optionally delivered through DTG Focus™",
+          "Delivered into your existing systems and reporting",
         ],
       },
     ],
   },
   crossLink: {
     title: "Integration is the foundation, not the finish",
-    body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring; the integrated platform itself can be DTG Focus™.",
+    body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring. Integration delivers into your own systems — DTG Focus™, the governed environment we use in our own delivery, is still in development and not yet available as a product.",
     linkLabel: "Data analytics",
     href: "/services/data-analytics-automation",
   },
@@ -109,7 +116,7 @@ const content: ServiceContent = {
     {
       question: "Is this the same as DTG Focus™?",
       answer:
-        "Related but not identical. Integration is the work of connecting and governing your data sources; DTG Focus™ is one governed environment that view can be delivered through. You can integrate into your own systems or into Focus.",
+        "No. Integration is the work of connecting and governing your data sources, delivered into your own systems. DTG Focus™ is the governed environment we use in our own delivery — it's in active development and not yet available as a product you can buy. Integration doesn't depend on it.",
     },
     {
       question: "How is this different from Data analytics?",

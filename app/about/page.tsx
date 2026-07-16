@@ -1,3 +1,13 @@
+// COMPLIANCE — DO NOT UNDO: DTG Focus(TM) IS NOT A PRODUCT A CLIENT CAN BUY. The truth: it is in
+// ACTIVE DEVELOPMENT, DTG uses parts of it in its OWN delivery today, and it is NOT yet available
+// to clients. NEVER say it is "offered", "available", "delivered through", or that clients "can"
+// have it. The reconciliation line is: we use it in our own delivery; it isn't yet available as a
+// product.
+// NB the "Is DTG Focus a standalone product?" FAQ still restates CLAUDE.md §3's categorical
+// definition ("is a supporting, governed monitoring environment ... operational decision-support
+// platform"). That wording is DOWNSTREAM of an unresolved conflict — the governing docs describe
+// Focus as an existing product while it is still in development. Escalated for Peter; do not patch
+// that FAQ piecemeal until the docs and reality are reconciled.
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -120,7 +130,7 @@ const faqs = [
   {
     question: renderTrademarkText("Do we need DTG Focus to work with DTG?"),
     answer: renderTrademarkText(
-      "No. DTG's review, analytics, governance and advisory work stands on its own. DTG Focus is offered where it strengthens visibility, traceability and decision records — not as a precondition.",
+      "No. DTG's review, analytics, governance and advisory work stands on its own. DTG Focus is in active development and not yet available as a product — we use parts of it in our own delivery today, but nothing about working with DTG depends on it.",
     ),
   },
   {

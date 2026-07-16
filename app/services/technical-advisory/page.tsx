@@ -11,6 +11,9 @@
 // call, and half-disclosing would raise the question without answering it. Do NOT add a neutrality
 // claim here. If DTG establishes genuine advisory/distribution separation, this FAQ is where to say
 // so — it becomes a credential rather than a risk. Escalated for Peter.
+// Also: no ABSOLUTE independence claims. "No vendor bias" was retitled "Aligned to your outcome" —
+// an absolute like "no bias" is the same family as the financial claims above. Keep it
+// engagement-scoped.
 import type { Metadata } from "next";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
@@ -163,7 +166,7 @@ const content: ServiceContent = {
     title: "What technical advisory gives you.",
     items: [
       { title: "Confident decisions", body: "Backed by independent, specialist expertise." },
-      { title: "No vendor bias", body: "Advice aligned to your outcome, not a product." },
+      { title: "Aligned to your outcome", body: "Advice aligned to your outcome, not a product." },
       { title: "Independent assurance", body: "A defensible second view on critical calls." },
       { title: "Specialist depth", body: "Geotechnical monitoring expertise, on demand." },
     ],
