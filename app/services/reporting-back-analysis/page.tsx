@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const content: ServiceContent = {
   slug: "reporting-back-analysis",
-  name: "Reporting & back-analysis.",
+  name: "Reporting & back-analysis",
   lead: "Clear technical reporting, and rigorous post-event back-analysis — so your monitoring produces records and answers you can defend.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },

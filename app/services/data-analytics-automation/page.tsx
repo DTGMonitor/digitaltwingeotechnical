@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const content: ServiceContent = {
   slug: "data-analytics-automation",
-  name: "Data analytics.",
+  name: "Data analytics",
   lead: "From data to decision, faster — DTG brings analytics and automation to geotechnical monitoring, cutting through the noise and surfacing what matters so you reach clear, confident decisions sooner.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },

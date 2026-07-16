@@ -29,5 +29,6 @@ export { Matrix } from "./Matrix";
 export type { MatrixProps, MatrixRow, MatrixCell, MatrixMark } from "./Matrix";
 export { Tabs } from "./Tabs";
 export type { TabsProps, TabItem } from "./Tabs";
+export { SectionReveals } from "./SectionReveals";
 export { ServicePage } from "./ServicePage";
 export type { ServiceContent } from "./ServicePage";
