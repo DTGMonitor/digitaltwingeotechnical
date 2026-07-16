@@ -14595,7 +14595,13 @@ main .ld-container,
 .service-outcome p { margin-top:var(--space-2); color:var(--c-text-soft); line-height:1.55; }
 
 /* --- Matrix archetype --- */
-.matrix-scroll { margin-top:var(--space-8); overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--c-border); border-radius:var(--radius-lg); }
+/* contain:paint is LOAD-BEARING, not decoration. The table below is min-width:640px, so on a
+   390px viewport overflow-x:auto lets it scroll — but the table's layout overflow still
+   propagated out to the document, giving /services/technical-advisory a 610px-wide document
+   and a horizontally-scrolling page on mobile. contain:paint stops the propagation while
+   keeping the table scrollable inside this box. (min-width:0 on .matrix also "fixes" the
+   document width but destroys the scroll design — do not use it.) */
+.matrix-scroll { margin-top:var(--space-8); overflow-x:auto; contain:paint; -webkit-overflow-scrolling:touch; border:1px solid var(--c-border); border-radius:var(--radius-lg); }
 .matrix-scroll:focus-visible { outline:2px solid var(--c-focus); outline-offset:2px; }
 .matrix { width:100%; min-width:640px; border-collapse:collapse; }
 .matrix th, .matrix td { padding:var(--space-4) var(--space-5); text-align:left; border-bottom:1px solid var(--c-border); }
