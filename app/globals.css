@@ -14962,3 +14962,116 @@ main .ld-container,
  /* stacked tiles: let aspect/height govern, avoid the align-self:stretch collapse */
  .envd-othc { height:220px; }
 }
+
+/* ============================================================================
+   SOLUTIONS (.solx-*) — the client's SITUATION axis. One page, six situations.
+   Consumes only the themed --c-* layer; text sits on the .site-container ruler.
+   Hero is always dark (deep-teal gradient, no image) in both themes.
+   ========================================================================= */
+.solx-page { background:var(--c-surface); color:var(--c-text-soft); }
+.solx-eyebrow { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); }
+
+/* HERO — no image; six paths converging on one */
+.solx-hero {
+ position:relative; min-height:82vh; display:flex; align-items:flex-end; overflow:hidden;
+ background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
+}
+.solx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 34%,rgba(99,183,93,.08),transparent 55%); }
+.solx-hero__sig { position:absolute; right:3%; top:46%; transform:translateY(-50%); z-index:1; width:42%; max-width:540px; }
+.solx-hero__sig svg { width:100%; height:auto; }
+.solx-hero__sig .ln { stroke-dasharray:520; stroke-dashoffset:520; animation:solx-draw 1.6s ease-out forwards; }
+.solx-hero__sig .ln:nth-child(2){animation-delay:.08s}.solx-hero__sig .ln:nth-child(3){animation-delay:.16s}
+.solx-hero__sig .ln:nth-child(4){animation-delay:.24s}.solx-hero__sig .ln:nth-child(5){animation-delay:.32s}
+.solx-hero__sig .ln:nth-child(6){animation-delay:.4s}
+.solx-hero__sig .dot, .solx-hero__sig .out { opacity:0; animation:solx-fade .6s ease-out 1.5s forwards; }
+@keyframes solx-draw { to { stroke-dashoffset:0; } }
+@keyframes solx-fade { to { opacity:1; } }
+.solx-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
+.solx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
+.solx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(3rem,8.5vw,7rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
+.solx-hero__lead { max-width:56ch; font-size:clamp(18px,2.2vw,23px); line-height:1.5; color:#e5eef0; }
+.solx-hero__lead b { color:#fff; font-weight:600; }
+.solx-scrollcue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+.solx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
+
+/* INTRO + INDEX */
+.solx-intro { padding-block:clamp(56px,7vw,88px); border-bottom:1px solid var(--c-border); }
+.solx-intro__grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px); align-items:start; }
+.solx-intro .solx-eyebrow { display:block; margin-bottom:16px; }
+.solx-intro__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); max-width:20ch; }
+.solx-intro p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); }
+.solx-intro p + p { margin-top:14px; }
+.solx-index { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:44px; }
+.solx-ix { display:flex; gap:14px; align-items:flex-start; padding:16px 18px; border:1px solid var(--c-border); border-radius:12px; background:var(--c-surface-raised); transition:border-color .2s ease, transform .2s ease; }
+.solx-ix:hover { border-color:var(--accent); transform:translateY(-2px); }
+.solx-ix__n { flex:none; padding-top:2px; font-family:var(--font-sans); font-weight:800; font-size:13px; color:var(--accent-text); opacity:.6; font-variant-numeric:tabular-nums; }
+.solx-ix__t { font-size:14px; font-weight:500; line-height:1.4; color:var(--c-text); }
+
+/* SITUATION BLOCKS */
+.solx-sit { border-top:1px solid var(--c-border); padding-block:clamp(52px,6vw,76px); background:var(--c-surface); }
+.solx-sit--flip { background:var(--c-surface-raised); }
+.solx-sit__hook { display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(26px,4vw,52px); align-items:center; margin-bottom:44px; }
+.solx-sit--flip .solx-sit__img { order:2; }
+.solx-sit__img { position:relative; width:100%; aspect-ratio:3/2; border-radius:16px; overflow:hidden; background:var(--c-surface-band); }
+.solx-sit__pic { object-fit:cover; }
+.solx-sit__wash { position:absolute; inset:0; z-index:1; background:linear-gradient(160deg,rgba(9,58,72,.14),rgba(6,18,22,.3)); }
+.solx-sit__num { font-family:var(--font-sans); font-weight:800; font-size:13px; letter-spacing:.12em; color:var(--accent-text); margin-bottom:10px; font-variant-numeric:tabular-nums; }
+.solx-sit__who { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.2; letter-spacing:-.01em; color:var(--c-text); margin-bottom:14px; }
+.solx-sit__quote { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.4rem,2.6vw,2rem); line-height:1.2; letter-spacing:-.02em; color:var(--accent-text); margin-bottom:16px; }
+.solx-sit__desc { max-width:60ch; margin:0; font-size:15.5px; line-height:1.65; color:var(--c-text-soft); }
+
+/* detail band — problem faces answer */
+.solx-sit__detail { display:grid; grid-template-columns:1fr 1fr; gap:clamp(26px,3.5vw,44px); border-top:1px solid var(--c-border); padding-top:32px; }
+.solx-sc__k { font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:12px; }
+.solx-sc--help .solx-sc__k { color:var(--accent-text); }
+.solx-sc ul { list-style:none; margin:0; padding:0; }
+.solx-sc li { position:relative; padding-left:16px; margin-bottom:8px; font-size:14.5px; line-height:1.55; color:var(--c-text-soft); }
+.solx-sc li::before { content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--c-text-muted); }
+.solx-sc--help li::before { background:var(--accent); }
+
+/* foot — outcome + chips */
+.solx-sit__foot { display:flex; gap:24px; align-items:center; flex-wrap:wrap; margin-top:32px; padding-top:26px; border-top:1px solid var(--c-border); }
+.solx-outcome { flex:1; min-width:320px; padding:14px 20px; border-left:3px solid var(--accent); border-radius:0 10px 10px 0; background:color-mix(in srgb, var(--accent) 12%, transparent); }
+.solx-outcome__k { font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-text); margin-bottom:5px; }
+.solx-outcome p { margin:0; font-size:15px; font-weight:500; line-height:1.5; color:var(--c-text); }
+.solx-chips { display:flex; gap:10px; flex-wrap:wrap; }
+.solx-chip { display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border:1px solid var(--c-border); border-radius:20px; background:var(--c-surface); font-size:13px; color:var(--accent-text); transition:border-color .2s ease; }
+.solx-sit--flip .solx-chip { background:var(--c-surface-raised); }
+.solx-chip:hover { border-color:var(--accent); }
+
+/* 06 — roadmap pill + roadnote (DTG Focus is NOT delivered) */
+.solx-roadmap { display:inline-flex; align-items:center; gap:8px; margin-bottom:14px; padding:5px 13px; border-radius:20px; background:var(--accent); color:var(--on-accent); font-family:var(--font-sans); font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+.solx-roadnote { margin-top:26px; padding:16px 20px; border:1px dashed var(--c-border); border-radius:10px; background:color-mix(in srgb, var(--c-text) 3%, transparent); }
+.solx-roadnote p { margin:0; font-size:14px; line-height:1.6; color:var(--c-text-soft); }
+.solx-roadnote b { color:var(--c-text); }
+
+/* CTA */
+.solx-cta { padding-block:clamp(56px,7vw,88px); text-align:center; border-top:1px solid var(--c-border); background:var(--c-surface); }
+.solx-cta h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(2rem,4vw,3rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin-bottom:12px; }
+.solx-cta p { max-width:60ch; margin:0 auto 28px; font-size:17px; line-height:1.6; color:var(--c-text-soft); }
+.solx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease; }
+.solx-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+
+/* REVEAL */
+[data-solx-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+[data-solx-reveal].is-in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) {
+ [data-solx-reveal] { opacity:1; transform:none; transition:none; }
+ .solx-hero__sig .ln { stroke-dashoffset:0; animation:none; }
+ .solx-hero__sig .dot, .solx-hero__sig .out { opacity:1; animation:none; }
+ .solx-scrollcue svg { animation:none; }
+}
+
+@media (max-width:900px) {
+ .solx-hero { min-height:74vh; }
+ .solx-hero__sig { display:none; }
+ .solx-intro__grid { grid-template-columns:1fr; }
+ .solx-index { grid-template-columns:1fr; margin-top:32px; }
+ .solx-sit__hook { grid-template-columns:1fr; gap:26px; margin-bottom:30px; }
+ .solx-sit--flip .solx-sit__img { order:0; }
+ /* stacked: let aspect-ratio govern (avoid the align-self:stretch collapse) */
+ .solx-sit__img { align-self:auto; min-height:0; }
+ .solx-sit__detail { grid-template-columns:1fr; gap:26px; }
+ .solx-sit__foot { gap:18px; margin-top:26px; }
+ .solx-outcome { min-width:0; }
+}
