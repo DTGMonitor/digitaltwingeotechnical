@@ -15592,3 +15592,139 @@ main .ld-container,
 @media (max-width:560px) {
  .ab-prof { grid-template-columns:1fr; }
 }
+
+/* ============================================================================
+   DTG FOCUS (.dfx-*) — the product page. Consumes only the --c-* layer + the site
+   palette (NO Focus colour sub-family — retired; CLAUDE.md §3 amended 2026-07-18).
+   Hero + CTA band stay deep-teal in BOTH themes; the body flips.
+   CONTENT-FIRST reveal: the hiding rule is gated on html.reveals-armed (added by
+   SectionReveals on mount), so a JS failure leaves everything visible.
+   ========================================================================= */
+.dfx-page { background:var(--c-surface); color:var(--c-text-soft); }
+.dfx-eyebrow { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); }
+.dfx-sec-head { max-width:64ch; margin-bottom:clamp(34px,4.5vw,56px); }
+.dfx-sec-head .dfx-eyebrow { display:block; margin-bottom:16px; }
+.dfx-sec-head h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.4vw,2.6rem); line-height:1.08; letter-spacing:-.02em; color:var(--c-text); margin:0 0 16px; }
+.dfx-sec-head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
+
+/* HERO — full-bleed image, deep-teal (#003750 dominant), off-white logo */
+.dfx-hero { position:relative; min-height:clamp(560px,92vh,940px); display:flex; align-items:flex-end; overflow:hidden; background:#003750; }
+.dfx-hero__media { position:absolute; inset:0; z-index:0; }
+.dfx-hero__img { object-fit:cover; }
+.dfx-hero__scrim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,25,40,.15) 0%, rgba(0,25,40,.35) 55%, rgba(0,22,35,.82) 100%); }
+.dfx-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,84px); }
+/* logo filtered to off-white (source asset is single-colour on transparent) — NOT green */
+.dfx-hero__logo { width:clamp(210px,26vw,300px); height:auto; margin-bottom:clamp(28px,4vw,40px); filter:brightness(0) invert(1); }
+.dfx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.4vw,5.2rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 24px; max-width:16ch; }
+.dfx-hero__lead { max-width:60ch; font-size:clamp(17px,2vw,21px); line-height:1.55; color:#e5eef0; margin:0 0 34px; }
+.dfx-hero__lead .dtg-focus-mark { color:#fff; font-weight:600; }
+.dfx-hero__btns { display:flex; gap:14px; flex-wrap:wrap; }
+.dfx-scrollcue { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+.dfx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
+
+/* BUTTONS (hero deep-teal in both themes → ring uses bright green explicitly) */
+.dfx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease, background .2s ease; }
+.dfx-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+.dfx-btn--ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.42); }
+.dfx-btn--ghost:hover { background:rgba(255,255,255,.08); filter:none; }
+.dfx-btn:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; border-radius:4px; }
+
+/* WHAT IT IS */
+.dfx-isit { padding-block:clamp(64px,9vw,110px); border-bottom:1px solid var(--c-border); }
+
+/* software screenshot chrome — a titled frame, not a bare image */
+.dfx-shot { margin:clamp(36px,5vw,56px) 0 0; border:1px solid var(--c-border); border-radius:12px; overflow:hidden; background:var(--c-surface-raised); }
+.dfx-shot__bar { display:flex; align-items:center; gap:7px; padding:11px 16px; background:var(--c-surface-band); border-bottom:1px solid var(--c-border); }
+.dfx-shot__bar span { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.28); }
+.dfx-shot__bar em { margin-left:10px; font-style:normal; font-size:12px; letter-spacing:.04em; color:var(--off-white); opacity:.75; }
+.dfx-shot__bar .dtg-focus-mark { color:var(--off-white); }
+.dfx-shot__img { display:block; width:100%; height:auto; }
+.dfx-shot figcaption { padding:16px 20px; font-size:13.5px; line-height:1.5; color:var(--c-text-soft); border-top:1px solid var(--c-border); }
+.dfx-shot--inline { margin-top:clamp(40px,5vw,60px); }
+
+.dfx-isit__pts { display:grid; grid-template-columns:repeat(4,1fr); gap:34px; margin-top:clamp(36px,4.5vw,52px); }
+.dfx-ip h3 { font-family:var(--font-sans); font-size:1.05rem; font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 8px; padding-top:16px; border-top:2px solid var(--accent); }
+.dfx-ip p { font-size:14px; line-height:1.55; color:var(--c-text-soft); margin:0; }
+
+/* WHO IT'S FOR — sticky stacking cards */
+.dfx-who { padding-block:clamp(64px,9vw,110px); background:var(--c-surface-raised); border-bottom:1px solid var(--c-border); }
+.dfx-who__head { max-width:64ch; margin-bottom:clamp(34px,4.5vw,56px); }
+.dfx-who__head .dfx-eyebrow { display:block; margin-bottom:16px; }
+.dfx-who__head h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.4vw,2.6rem); line-height:1.08; letter-spacing:-.02em; color:var(--c-text); margin:0 0 16px; }
+.dfx-who__head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
+.dfx-stack { display:flex; flex-direction:column; gap:20px; }
+.dfx-sc { position:sticky; }
+.dfx-sc__in { display:grid; grid-template-columns:64px 1fr; gap:28px; padding:clamp(28px,3.5vw,44px); border:1px solid var(--c-border); border-radius:16px; background:var(--c-surface); box-shadow:0 -1px 0 var(--c-border); }
+.dfx-sc__n { font-family:var(--font-sans); font-weight:800; font-size:20px; color:var(--accent-text); font-variant-numeric:tabular-nums; }
+.dfx-sc__k { display:block; font-family:var(--font-sans); font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-text); margin-bottom:10px; }
+.dfx-sc h3 { font-family:var(--font-sans); font-size:clamp(1.3rem,2.2vw,1.7rem); font-weight:600; letter-spacing:-.02em; line-height:1.15; color:var(--c-text); margin:0 0 14px; }
+.dfx-sc__lead { font-size:15.5px; line-height:1.6; color:var(--c-text-soft); margin:0 0 20px; max-width:64ch; }
+.dfx-sc__l { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:9px 32px; }
+.dfx-sc__l li { position:relative; padding-left:16px; font-size:14px; line-height:1.45; color:var(--c-text-soft); }
+.dfx-sc__l li::before { content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.75; }
+
+/* INSIDE FOCUS — five EQUAL pillars as editorial rows (never emphasise one; no boxes — structure
+   from hairline rules + type, matching the mockup and the site's no-cards ethos). All five get the
+   identical row treatment, so there is no orphan grid cell and none is promoted above the others. */
+.dfx-inside { padding-block:clamp(64px,9vw,110px); border-bottom:1px solid var(--c-border); }
+.dfx-pillars { border-top:1px solid var(--c-border); }
+.dfx-pl { display:grid; grid-template-columns:64px 1fr 1.45fr; gap:40px; align-items:start; padding-block:clamp(26px,3vw,38px); border-bottom:1px solid var(--c-border); }
+.dfx-pl__n { font-family:var(--font-sans); font-weight:800; font-size:15px; color:var(--accent-text); opacity:.55; font-variant-numeric:tabular-nums; padding-top:4px; }
+.dfx-pl__t h3 { font-family:var(--font-sans); font-size:clamp(1.2rem,1.7vw,1.35rem); font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 6px; }
+.dfx-pl__k { font-size:13px; font-weight:500; color:var(--accent-text); }
+.dfx-pl__d { font-size:14.5px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+
+/* HOW YOU GET IT */
+.dfx-dep { padding-block:clamp(64px,9vw,110px); border-bottom:1px solid var(--c-border); }
+.dfx-dep__grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:80px; align-items:start; }
+.dfx-dep__l .dfx-eyebrow { display:block; margin-bottom:18px; }
+.dfx-dep__l h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.4vw,2.6rem); letter-spacing:-.03em; line-height:1.07; color:var(--c-text); margin:0 0 18px; max-width:15ch; }
+.dfx-dep__l p { font-size:16px; line-height:1.7; color:var(--c-text-soft); margin:0; }
+.dfx-dep__steps { list-style:none; margin:0; padding:0; }
+.dfx-dstep { display:grid; grid-template-columns:44px 1fr; gap:24px; padding-block:26px; border-top:1px solid var(--c-border); align-items:start; }
+.dfx-dstep:first-child { border-top:none; padding-top:0; }
+.dfx-dstep:last-child { border-bottom:1px solid var(--c-border); }
+.dfx-dstep__n { font-family:var(--font-sans); font-weight:800; font-size:13px; color:var(--accent-text); padding-top:4px; font-variant-numeric:tabular-nums; }
+.dfx-dstep h3 { font-family:var(--font-sans); font-size:1.15rem; font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 8px; }
+.dfx-dstep p { font-size:14.5px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+
+/* SIGNAL TO DECISION — the verbs close */
+.dfx-verbs { padding-block:clamp(64px,9vw,110px); border-bottom:1px solid var(--c-border); }
+.dfx-verbs__head { max-width:62ch; margin-bottom:clamp(34px,4.5vw,60px); }
+.dfx-verbs__head .dfx-eyebrow { display:block; margin-bottom:18px; }
+.dfx-verbs__head h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.8vw,3rem); letter-spacing:-.03em; line-height:1.06; color:var(--c-text); margin:0 0 18px; max-width:20ch; }
+.dfx-verbs__head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
+.dfx-vlist { border-top:1px solid var(--c-border); }
+.dfx-vb { display:grid; grid-template-columns:1fr 1.25fr; gap:56px; align-items:center; padding-block:34px; border-bottom:1px solid var(--c-border); transition:background .3s ease; }
+.dfx-vb:hover { background:color-mix(in srgb, var(--accent) 6%, transparent); }
+.dfx-vb__w { font-family:var(--font-sans); font-size:clamp(2.2rem,5.4vw,4rem); font-weight:800; letter-spacing:-.045em; line-height:.95; color:var(--c-text); margin:0; transition:color .3s ease, transform .3s cubic-bezier(.2,.7,.2,1); }
+.dfx-vb:hover .dfx-vb__w { color:var(--accent-text); transform:translateX(10px); }
+.dfx-vb:last-child .dfx-vb__w { color:var(--accent-text); }
+.dfx-vb__d { font-size:15.5px; line-height:1.65; color:var(--c-text-soft); margin:0; max-width:56ch; }
+.dfx-verbs__close { margin-top:48px; padding-top:34px; border-top:2px solid var(--accent); max-width:78ch; }
+.dfx-verbs__close p { font-size:clamp(1rem,1.6vw,1.25rem); line-height:1.6; color:var(--c-text-soft); margin:0; }
+.dfx-verbs__close b { color:var(--c-text); font-weight:600; }
+
+/* CONTENT-FIRST REVEAL — hide ONLY once armed by JS */
+.reveals-armed [data-dfx-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveals-armed [data-dfx-reveal].is-in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) {
+ .reveals-armed [data-dfx-reveal] { opacity:1; transform:none; transition:none; }
+ .dfx-scrollcue svg { animation:none; }
+}
+
+@media (max-width:1000px) {
+ .dfx-isit__pts { grid-template-columns:1fr 1fr; gap:30px; }
+ .dfx-dep__grid { grid-template-columns:1fr; gap:40px; }
+}
+@media (max-width:760px) {
+ .dfx-hero { min-height:80vh; }
+ .dfx-isit__pts { grid-template-columns:1fr; gap:24px; }
+ .dfx-sc { position:static; }
+ .dfx-sc__in { grid-template-columns:1fr; gap:16px; }
+ .dfx-sc__l { grid-template-columns:1fr; }
+ .dfx-pl { grid-template-columns:40px 1fr; gap:6px 16px; }
+ .dfx-pl__d { grid-column:2; }
+ .dfx-vb { grid-template-columns:1fr; gap:14px; padding-block:26px; }
+ .dfx-vb:hover .dfx-vb__w { transform:none; }
+}
