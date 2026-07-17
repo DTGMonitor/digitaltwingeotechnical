@@ -14621,29 +14621,51 @@ main .ld-container,
    document width but destroys the scroll design — do not use it.) */
 .matrix-scroll { margin-top:var(--space-8); overflow-x:auto; contain:paint; -webkit-overflow-scrolling:touch; border:1px solid var(--c-border); border-radius:var(--radius-lg); }
 .matrix-scroll:focus-visible { outline:2px solid var(--c-focus); outline-offset:2px; }
-.matrix { width:100%; min-width:640px; border-collapse:collapse; }
-.matrix th, .matrix td { padding:var(--space-4) var(--space-5); text-align:left; border-bottom:1px solid var(--c-border); }
-.matrix thead th { font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.08em; text-transform:uppercase; color:var(--c-text-muted); font-weight:600; text-align:center; }
-.matrix tbody th[scope="row"] { font-weight:500; color:var(--c-text); max-width:34ch; }
-.matrix td { text-align:center; }
+.matrix { width:100%; min-width:640px; border-collapse:collapse; text-align:left; }
+.matrix thead th { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--c-text-soft); padding:20px 22px; background:var(--c-surface-raised); border-bottom:1px solid var(--c-border); vertical-align:bottom; }
+.matrix thead th.matrix__corner { width:44%; }
+.matrix tbody td, .matrix tbody th { padding:18px 22px; border-bottom:1px solid var(--c-border); font-size:14.5px; line-height:1.5; color:var(--c-text-soft); }
+.matrix tbody tr:last-child td, .matrix tbody tr:last-child th { border-bottom:none; }
+.matrix tbody th[scope="row"] { font-weight:500; color:var(--c-text); }
+/* The highlighted column is DTG's: accent tint + a green cap rule on the header.
+   Tint is 8%, NOT the mockup's 12%. At 12% the green "Yes" marks and the highlighted header
+   measured 4.57:1 — passing, but with 0.07 of margin, so the first nudge to the tint would fail
+   AA silently and nobody would connect the two changes. The tint is decoration; the contrast is
+   function. Decoration yields. Do not deepen this without re-measuring .mk--yes on it. */
 .matrix .matrix__col--hl { background:color-mix(in srgb, var(--accent) 8%, transparent); }
-.matrix thead .matrix__col--hl { color:var(--accent-text); }
-.mk { display:inline-grid; place-items:center; width:26px; height:26px; }
-.mk svg { width:20px; height:20px; }
-.mk--yes { color:var(--accent-text); }
-.mk--no { color:var(--c-text-muted); }
-.mk--partial { color:var(--c-text-soft); }
+.matrix thead .matrix__col--hl { position:relative; color:var(--accent-text); }
+.matrix thead .matrix__col--hl::after { content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--accent); }
+/* icon + VISIBLE label — colour is never the only cue */
+.mk { display:inline-flex; align-items:center; gap:8px; font-size:13.5px; }
+.mk svg { width:17px; height:17px; flex:none; }
+.mk--yes { color:var(--accent-text); font-weight:600; }
+/* --c-text-soft, NOT --c-text-muted: muted is 3.27:1 on light — see the token annotation */
+.mk--no, .mk--partial { color:var(--c-text-soft); }
 
 /* --- Tabs archetype --- */
 .tabs { margin-top:var(--space-8); }
-.tabs__list { display:flex; flex-wrap:wrap; gap:var(--space-2); border-bottom:1px solid var(--c-border); }
-.tabs__tab { position:relative; padding:var(--space-3) var(--space-4); background:none; border:0; cursor:pointer; font-family:var(--font-label); font-size:var(--text-small); letter-spacing:.02em; color:var(--c-text-muted); font-weight:600; }
+.tabs__list { display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid var(--c-border); }
+/* underline tabs, not pills. --c-text-soft NOT --c-text-muted (3.27:1 on light). */
+.tabs__tab { position:relative; margin-bottom:-1px; padding:13px 18px; background:none; border:0; border-bottom:2px solid transparent; cursor:pointer; font-family:var(--font-sans); font-size:14.5px; font-weight:600; color:var(--c-text-soft); transition:color .2s ease, border-color .2s ease; }
 .tabs__tab:hover { color:var(--c-text); }
-.tabs__tab.is-active { color:var(--c-text); }
-.tabs__tab.is-active::after { content:""; position:absolute; left:var(--space-4); right:var(--space-4); bottom:-1px; height:2px; background:var(--accent-text); }
+.tabs__tab[aria-selected="true"] { color:var(--accent-text); border-bottom-color:var(--accent); }
 .tabs__tab:focus-visible { outline:2px solid var(--c-focus); outline-offset:2px; border-radius:var(--radius-sm); }
 .tabs__panel { padding-top:var(--space-8); }
-.tabs__panel[hidden] { display:none; } /* guard: class rules must not override the hidden attribute */
+/* GUARD — DO NOT REMOVE: a class rule setting display would override the hidden attribute and
+   leave "hidden" panels visible to everyone (this bit us in Phase E). The grid lives on the
+   INNER .tab-body precisely so the panel itself never needs a display value. */
+.tabs__panel[hidden] { display:none; }
+.tab-body { display:grid; grid-template-columns:1fr 1.2fr; gap:52px; align-items:start; }
+.tab-body h3 { font-family:var(--font-sans); font-size:clamp(1.3rem,2.2vw,1.6rem); font-weight:600; line-height:1.2; color:var(--c-text); margin:0 0 12px; }
+.tab-body__intro { font-size:15.5px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+.tab-body ul { list-style:none; margin:0; padding:0; }
+/* circle-outline markers — deliberately distinct from the filled dots in "What's included" */
+.tab-body li { position:relative; padding-left:26px; margin-bottom:13px; font-size:14.5px; line-height:1.55; color:var(--c-text-soft); }
+.tab-body li::before { content:""; position:absolute; left:0; top:5px; width:13px; height:13px; border-radius:50%; border:2px solid var(--accent); opacity:.85; }
+@media (prefers-reduced-motion:no-preference) {
+ .tabs__panel:not([hidden]) { animation:svcd-tabin .3s ease-out; }
+}
+@keyframes svcd-tabin { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 .tab-body { display:grid; gap:var(--space-6); }
 @media (min-width:820px){ .tab-body { grid-template-columns:5fr 7fr; gap:clamp(var(--space-8),4vw,var(--space-16)); align-items:start; } }
 .tab-body h3 { font-size:var(--text-h3); line-height:1.15; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
@@ -15281,12 +15303,19 @@ main .ld-container,
 .svcd-sollink:hover { border-color:var(--accent); }
 .svcd-sollink:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; }
 
+/* SHARED SECTION HEAD — ONE rule, used by EVERY section including the matrix and tabs slots.
+   This exists because those two slots previously rendered the kit's .section-headline and read
+   as "inherited, not designed": measured 52px/weight 400/grey eyebrow against the .svcd-*
+   sections' 38.4px/weight 600/green. Any new section head uses .svcd-sec-head — do not add a
+   per-section title rule, that divergence is exactly what this replaced. */
+.svcd-sec-head { max-width:62ch; margin-bottom:clamp(34px,4vw,48px); }
+.svcd-sec-head .svcd-eyebrow { display:block; margin-bottom:16px; }
+.svcd-sec-head h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0 0 14px; }
+.svcd-sec-head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
+.svcd-sec-head h2:last-child { margin-bottom:0; }
+
 /* WHAT'S INCLUDED */
 .svcd-inc { border-bottom:1px solid var(--c-border); }
-.svcd-inc__head { max-width:62ch; margin-bottom:clamp(34px,4vw,52px); }
-.svcd-inc__head .svcd-eyebrow { display:block; margin-bottom:16px; }
-.svcd-inc__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0 0 14px; }
-.svcd-inc__head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
 .svcd-inc__grid { display:grid; grid-template-columns:1fr 1fr; gap:40px 48px; }
 .svcd-ig { border-top:2px solid var(--accent); padding-top:22px; }
 .svcd-ig h3 { font-family:var(--font-sans); font-size:1.15rem; font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 6px; }
@@ -15308,9 +15337,6 @@ main .ld-container,
 
 /* HOW IT'S DELIVERED */
 .svcd-del { border-bottom:1px solid var(--c-border); }
-.svcd-del__head { margin-bottom:clamp(34px,4vw,52px); }
-.svcd-del__head .svcd-eyebrow { display:block; margin-bottom:16px; }
-.svcd-del__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0; }
 .svcd-steps { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:32px; position:relative; }
 .svcd-steps::before { content:""; position:absolute; top:15px; left:6%; right:6%; height:1px; background:var(--c-border); z-index:0; }
 .svcd-st { position:relative; z-index:1; }
@@ -15320,18 +15346,12 @@ main .ld-container,
 
 /* WHAT YOU GET */
 .svcd-out { border-bottom:1px solid var(--c-border); }
-.svcd-out__head { margin-bottom:clamp(34px,4vw,48px); }
-.svcd-out__head .svcd-eyebrow { display:block; margin-bottom:16px; }
-.svcd-out__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0; }
 .svcd-out__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:34px; }
 .svcd-og__icon { width:34px; height:34px; border-radius:9px; background:color-mix(in srgb, var(--accent) 14%, transparent); display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:var(--accent-text); }
 .svcd-og h3 { font-family:var(--font-sans); font-size:1.05rem; font-weight:600; color:var(--c-text); margin:0 0 9px; }
 .svcd-og p { font-size:14.5px; line-height:1.55; color:var(--c-text-soft); margin:0; }
 
 /* FAQs — always open, two columns (deliberately not an accordion) */
-.svcd-faq__head { margin-bottom:clamp(30px,3.5vw,44px); }
-.svcd-faq__head .svcd-eyebrow { display:block; margin-bottom:16px; }
-.svcd-faq__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0; }
 .svcd-faq__list { margin:0; }
 .svcd-fq { display:grid; grid-template-columns:1fr 1.35fr; gap:48px; align-items:start; border-top:1px solid var(--c-border); padding-block:26px; }
 .svcd-fq:last-of-type { border-bottom:1px solid var(--c-border); }
@@ -15348,6 +15368,8 @@ main .ld-container,
 
 @media (max-width:900px) {
  .svcd-hero { min-height:78vh; }
+ .svcd-sec-head { margin-bottom:34px; }
+ .tab-body { grid-template-columns:1fr; gap:22px; }
  .svcd-problem__grid { grid-template-columns:1fr; gap:28px; }
  .svcd-inc__grid { grid-template-columns:1fr; gap:34px; }
  .svcd-xl__box { grid-template-columns:1fr; gap:18px; padding:24px; }
