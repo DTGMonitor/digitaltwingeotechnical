@@ -7,7 +7,7 @@ The deep detail lives in the auto-memory files (linked at the bottom) — this i
 
 ## State
 
-- **`main` is clean at `ea13927`.** Build + lint green. Tree clean. (This repo is the **nested** path `C:\dtg-website\dtg-website`, not the outer folder — recurring trap.)
+- **`main` is clean.** Last code/content change is `ea13927`; HEAD is the commit that added this handover (docs-only on top). Build + lint green. Tree clean. (This repo is the **nested** path `C:\dtg-website\dtg-website`, not the outer folder — recurring trap.)
 - **Every axis has shipped:** Applications (overview + 4 environments), Solutions, Services (overview + 5 detail pages), About, and DTG Focus™. All recomposed onto the `--c-*` theme layer with scoped class families (`.appsx-* .envd-* .civx-* .solx-* .svcx-* .svcd-* .ab-* .dfx-*`).
 - **Compliance is settled** — every escalated item is resolved and shipped: the "not a hardware vendor" claim, the advisory matrix row, the Beck Engineering removal (Catalyst Earth stays — confirmed), the DTG Focus™ doc-vs-reality conflict (CLAUDE.md §3 amended), and the legacy-route client-name/sensor-brand leaks (redirected + dead data deleted). Proof figures are **approved to publish**.
 - **Light-theme sign-off is COMPLETE.** All 16 recomposed routes pass AA in light. **Floor 4.82** — the bright-green eyebrow (`--accent-text`) on a deep-teal band (`--c-surface-band`), the site's tightest passing pair. **Anything below 4.82 is a regression, not legacy debt.** Full per-route baseline is in commit `4e6aeca`.
