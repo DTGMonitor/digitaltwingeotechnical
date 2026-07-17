@@ -2,7 +2,7 @@
 
 // Open-pit mining detail page — page 2 of the Applications axis. Content object driving the
 // shared EnvironmentDetailPage template; its signature visual is the escalation funnel.
-// Proof figures are PROVISIONAL (verify-before-publish). Hero image is an AI-generated placeholder.
+// Proof figures are APPROVED to publish (user, 2026-07-18). Hero image is an AI-generated placeholder.
 
 import {
   EnvironmentDetailPage,
@@ -59,8 +59,11 @@ const openPitDetail: EnvironmentDetailData = {
       { n: "3", l: "open-pit operations monitored" },
       { n: "14 mo", l: "of continuous monitoring and counting" },
     ],
+    // Figures are APPROVED to publish (user, 2026-07-18) — the "to be confirmed" note is gone. The
+    // 99% clarification STAYS: it is a permanent compliance disclaimer (reliability, not sensor
+    // performance), not a pending-verification caveat. Do not drop it.
     verify:
-      "Figures to be confirmed before publication. “99% uptime” refers to our monitoring centre's remote-connection reliability over the period, not sensor performance.",
+      "“99% uptime” refers to our monitoring centre's remote-connection reliability over the period, not sensor performance.",
   },
   editorial: {
     statement: (
