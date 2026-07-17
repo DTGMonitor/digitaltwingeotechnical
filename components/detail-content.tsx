@@ -22,6 +22,11 @@ export const detailPages: Record<string, DetailPageContent> = {
       "The core principles are simple: integrate monitoring information, govern workflows and support defensible decisions.",
     ],
   },
+  // ⚪ LANDMINE — DEAD DATA, LEFT DELIBERATELY. /about/vendor-independence 308-redirects to
+  // /about#vendor-independence, so nothing renders this key. Its intro is the RETIRED claim
+  // ("DTG is independent of ... equipment manufacturers") — false, DTG distributes radar and GNSS
+  // in Indonesia. Harmless while unrouted. DO NOT WIRE THIS UP without rewriting the intro first.
+  // Same shape as the detailPages["dtg-focus"] landmine below.
   "about/vendor-independence": {
     eyebrow: "About",
     title: "Vendor Independence",
@@ -59,7 +64,11 @@ export const detailPages: Record<string, DetailPageContent> = {
     points: [
       "Many operations are dealing with too much data, too many alarms and too many disconnected systems.",
       "DTG helps clients turn fragmented information into governed monitoring workflows.",
-      "DTG is independent of monitoring vendors, software vendors and equipment manufacturers.",
+      // COMPLIANCE: was "DTG is independent of monitoring vendors, software vendors and equipment
+      // manufacturers" — a company-wide RELATIONSHIP claim, and false: DTG distributes radar and
+      // GNSS in Indonesia. Reframed onto the WORK, which is what is actually true and defensible.
+      // This route is unlinked but returns 200 and is indexable — "not in the nav" is not a defence.
+      "DTG's review is technology-agnostic: monitoring information is assessed across systems and vendors, whoever supplied it.",
     ],
   },
   "about/our-journey": {
@@ -122,7 +131,10 @@ export const detailPages: Record<string, DetailPageContent> = {
       "Independent radar and sensor suitability advice.",
       "Technology selection across radar, InSAR, GNSS, prisms and LiDAR.",
       "Deployment support and monitoring strategy.",
-      "Independent of monitoring vendors, software vendors and equipment manufacturers.",
+      // COMPLIANCE: was "Independent of monitoring vendors, software vendors and equipment
+      // manufacturers" — false (DTG distributes radar and GNSS in Indonesia). Engagement-scoped
+      // instead: the advice starts from the requirement, which is the claim that survives discovery.
+      "Advice that starts from your monitoring requirement, not from a product.",
     ],
   },
   "capabilities/data-intelligence": {
