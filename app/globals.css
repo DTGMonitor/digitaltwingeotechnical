@@ -139,7 +139,10 @@
  --c-surface-deep:var(--deep-base);       /* #061216 — footer / menu */
  --c-text:var(--off-white);               /* #F4F7F6 — 16.4:1 on surface */
  --c-text-soft:var(--text-on-dark-soft);  /* #AEC0C7 — 9.4:1 */
- --c-text-muted:var(--muted);             /* #7C8B92 — 5.0:1 (labels) */
+ /* ⚠️ #7C8B92 — 5.03:1 on THIS surface only. It is 3.27:1 on off-white / 3.52:1 on white /
+    3.4:1 on the deep-teal band, i.e. an AA FAILURE for small text everywhere except here.
+    Read the light-theme note below before using it. */
+ --c-text-muted:var(--muted);
  --c-on-band:var(--off-white);            /* text on deep-teal band — 11.1:1 */
  --c-border:var(--border-dark);           /* rgba(255,255,255,.14) */
  --c-border-strong:rgba(255,255,255,.24);
@@ -154,7 +157,16 @@
  --c-surface-deep:var(--deep-base);       /* #061216 */
  --c-text:var(--ink);                     /* #10202A */
  --c-text-soft:var(--ink-soft);           /* #51626B — 5.9:1 */
- --c-text-muted:var(--muted);             /* #7C8B92 — 3.3:1 (labels/large only) */
+ /* 🚨 #7C8B92 — 3.27:1 on this surface. THIS ANNOTATION USED TO READ "3.3:1 (labels/large only)"
+    AND THAT WAS WRONG — it is the single most reproduced bug on this site, because writers
+    (and mockups) correctly followed the doc. WCAG has NO label exemption: an eyebrow, tag or
+    small-caps label is SMALL text and needs 4.5:1. "Large" means >=24px, or >=18.66px bold —
+    almost nothing here qualifies.
+    USE FOR: text >=24px (or >=18.66px bold) only, or non-text decoration.
+    DO NOT USE FOR: eyebrows, tags, labels, table headers, captions, notes, list items, or any
+    body copy. For secondary readable text use --c-text-soft (5.9:1). For an eyebrow or a green
+    cue use --accent-text (5.99:1) — that is what every recomposed family does. */
+ --c-text-muted:var(--muted);
  --c-on-band:var(--off-white);            /* band stays deep-teal → light text */
  --c-border:var(--border);                /* rgba(16,32,42,.12) */
  --c-border-strong:rgba(16,32,42,.22);
@@ -575,7 +587,13 @@ section { scroll-margin-top:76px; }
 .section-dark { background:var(--color-bg-night); color:var(--color-text-primary); }
 .section-deep { background:var(--color-bg-deep); color:var(--color-text-primary); }
 .section-light { background:var(--color-bg-soft); color:var(--color-text-dark); }
-.eyebrow { color:var(--muted); font-family:var(--font-label); font-size:var(--text-label); line-height:1.4; letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
+/* --accent-text (5.99:1 light / 7.1:1 dark), NOT --muted. An eyebrow is ~12px uppercase = SMALL
+   text, so it needs 4.5:1; --muted (#7C8B92) gave 3.27:1 on off-white, 3.52:1 on white and
+   3.4:1 on the deep-teal band — a live AA failure everywhere except the dark default surface,
+   which is why it went unseen. Green also matches every recomposed family (.svcx-/.svcd-/
+   .envd-/.solx-/.appsx-eyebrow all use --accent-text), so the grey kit eyebrow was the outlier.
+   NB --muted is the raw legacy token: it does not even re-scope per theme or per surface. */
+.eyebrow { color:var(--accent-text); font-family:var(--font-label); font-size:var(--text-label); line-height:1.4; letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
 .display { font-size:var(--h1); line-height:var(--line-tight); letter-spacing:var(--tracking-tight); font-weight:400; }
 .headline,.section-title { font-size:var(--h2); line-height:var(--line-heading); letter-spacing:var(--tracking-heading); font-weight:400; }
 .subsection-title { font-size:var(--text-h3); line-height:1.2; letter-spacing:-.005em; font-weight:500; }
