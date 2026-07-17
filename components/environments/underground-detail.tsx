@@ -3,9 +3,10 @@
 // Underground mining detail page — page 4 of 4 (final) of the Applications axis. Content object
 // driving the shared EnvironmentDetailPage template; signature visual is the scale bar.
 // Proof is bignums-style (like open-pit). LOCKED: NO DTG Focus / automation claims anywhere —
-// delivered convergence work only. Only Beck Engineering named. Figures/partnership provisional.
+// delivered convergence work only. NO capability partner is named here — Beck Engineering was
+// removed site-wide (2026-07-18, partner consent not obtained); describe DTG's own capability, do
+// not name or invent a partner. (Catalyst Earth, on TSF, stays — its partnership is confirmed.)
 
-import { Users } from "lucide-react";
 import {
   EnvironmentDetailPage,
   type EnvironmentDetailData,
@@ -55,19 +56,13 @@ const undergroundDetail: EnvironmentDetailData = {
     eyebrow: "Proven underground",
     heading: "Over 1,000km of convergence monitoring — and counting.",
     intro:
-      "In partnership with Beck Engineering, DTG delivers one of the most extensive underground convergence monitoring programmes of its kind — integrating and interpreting the data to keep a clear read on ground movement.",
+      "DTG delivers one of the most extensive underground convergence monitoring programmes of its kind — integrating and interpreting the data to keep a clear read on ground movement across kilometres of workings.",
     bignums: [
       { n: "1,000km+", l: "of convergence monitoring delivered" },
       { n: "100+", l: "apparent movements detected & reviewed" },
       { n: "Ongoing", l: "continuous monitoring programme" },
     ],
-    partner: (
-      <>
-        In partnership with <b>Beck Engineering</b>
-      </>
-    ),
-    partnerIcon: <Users size={16} aria-hidden="true" />,
-    verify: "Figures and partnership to be confirmed before publication.",
+    verify: "Figures to be confirmed before publication.",
   },
   editorial: {
     statement: (

@@ -1,12 +1,10 @@
-// COMPLIANCE — DO NOT UNDO: DTG Focus(TM) IS NOT A PRODUCT A CLIENT CAN BUY. It is in ACTIVE
-// DEVELOPMENT, DTG uses parts of it in its OWN delivery today, and it is NOT yet available to
-// clients. NEVER say it is "offered", "available", "delivered through", or that clients "can" have
-// it. Reconciliation line: we use it in our own delivery; it isn't yet available as a product.
-//
-// 🔒 The "Is DTG Focus a standalone product?" FAQ is FROZEN — copy verbatim, pending Peter's call.
-// It restates CLAUDE.md §3's categorical definition, which conflicts with reality (Focus is in
-// development). Patching it would make the site contradict its own governing document. Do not edit
-// it until the docs and reality are reconciled (escalated, CLAUDE.md §12).
+// COMPLIANCE — DTG Focus(TM) framing (CLAUDE.md §3, amended 2026-07-18): Focus is DTG's own
+// monitoring software — BUILT AND RUNNING, used by DTG's engineers daily and in delivery for
+// clients. Individual capabilities can be deployed for clients on request; the fully integrated,
+// full-coverage product is still being completed. NEVER write "in development", "not yet available"
+// or "preview" (the tools exist and run) — and never claim complete integrated coverage exists.
+// (The "standalone product?" FAQ below was previously FROZEN pending Peter's doc-vs-reality call;
+// that call has been made and §3 amended, so it is now corrected to this framing — no longer frozen.)
 //
 // The old "Positioning / What DTG is — and is not" section was CUT (user's call): it was DTG
 // defending its category, and everything in it is said better in the hero lead, Vendor independence
@@ -95,10 +93,9 @@ const faqs = [
       "No. Good monitoring depends on good vendors, good equipment and good implementation. Independence means assessing options objectively and keeping the monitoring requirement at the centre of the decision.",
   },
   {
-    // 🔒 FROZEN — verbatim, pending Peter's CLAUDE.md-vs-reality call. Do not edit (see file header).
     question: renderTrademarkText("Is DTG Focus™ a standalone product?"),
     answer: renderTrademarkText(
-      "No. DTG Focus is a supporting, governed monitoring environment within DTG's service approach — an operational decision-support platform, not a standalone SaaS product or dashboard. It is introduced only where it materially improves the solution.",
+      "DTG Focus is DTG's own monitoring software — built and running, and used in how we deliver monitoring for clients. It's not shelf software you buy and run in isolation: individual capabilities are set up for your operation on request, alongside DTG's review. It works with your existing sensors and systems rather than replacing them.",
     ),
   },
   {

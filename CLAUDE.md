@@ -154,6 +154,18 @@ There are also **orphan/legacy routes** on disk (e.g. `/capabilities/*`, `/opera
 `/dtg-focus/*` children). **Leave them untouched during the redesign.** Their fate is a separate,
 deferred decision that requires explicit approval.
 
+> **Exception — orphan ≠ safe when it's LIVE and leaking (2026-07-18, user-authorised).** A concept
+> sweep found several of these orphan routes returning **200** while publishing locked-category
+> content — **client names** (Greatland, Telfer, Harmony, Hidden Valley) and **sensor brands**
+> (GroundProbe, Trimble) in rendered HTML. "Not in nav" is not a defence in discovery: a 200 page is
+> indexable. These were **308-redirected** to their live equivalents (compliance, not redesign):
+> the whole `/operations/*` tree → `/applications/*`; `/leadership` → `/about#leadership`;
+> `/about/our-journey` → `/about`; `/insights/long-term-deformation` → `/applications/tsf`. The
+> remaining orphans (non-leaking `/capabilities/*`, `/insights/*`, `/focus`, `/markets`, `/portfolio`)
+> were verified clean by rendered-HTML sweep and left for the dead-code cleanup task. Rule: **an
+> orphan route that is still 200 and leaks a locked category is a live violation — fix it, don't
+> shield it behind "it's an orphan".**
+
 ---
 
 ## 6. Navigation guardrail
