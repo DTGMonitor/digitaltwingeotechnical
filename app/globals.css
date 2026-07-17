@@ -139,10 +139,12 @@
  --c-surface-deep:var(--deep-base);       /* #061216 — footer / menu */
  --c-text:var(--off-white);               /* #F4F7F6 — 16.4:1 on surface */
  --c-text-soft:var(--text-on-dark-soft);  /* #AEC0C7 — 9.4:1 */
- /* ⚠️ #7C8B92 — 5.03:1 on THIS surface only. It is 3.27:1 on off-white / 3.52:1 on white /
-    3.4:1 on the deep-teal band, i.e. an AA FAILURE for small text everywhere except here.
-    Read the light-theme note below before using it. */
- --c-text-muted:var(--muted);
+ /* #7C8B92 — NON-TEXT DECORATION ONLY (bullet dots, chart noise lines). Renamed from
+    --c-text-muted 2026-07-18 because the "text" in the name is what kept it being used for
+    text — its own annotation was only the accomplice. As small TEXT it fails AA on 4 of 6
+    surfaces: off-white 3.27, white 3.52, deep-teal band 3.40, RAISED-DARK 4.47 (a LIVE dark
+    fail). For secondary readable text use --c-text-soft; for an eyebrow/green cue --accent-text. */
+ --c-decorative-only:var(--muted);
  --c-on-band:var(--off-white);            /* text on deep-teal band — 11.1:1 */
  --c-border:var(--border-dark);           /* rgba(255,255,255,.14) */
  --c-border-strong:rgba(255,255,255,.24);
@@ -157,16 +159,14 @@
  --c-surface-deep:var(--deep-base);       /* #061216 */
  --c-text:var(--ink);                     /* #10202A */
  --c-text-soft:var(--ink-soft);           /* #51626B — 5.9:1 */
- /* 🚨 #7C8B92 — 3.27:1 on this surface. THIS ANNOTATION USED TO READ "3.3:1 (labels/large only)"
-    AND THAT WAS WRONG — it is the single most reproduced bug on this site, because writers
-    (and mockups) correctly followed the doc. WCAG has NO label exemption: an eyebrow, tag or
-    small-caps label is SMALL text and needs 4.5:1. "Large" means >=24px, or >=18.66px bold —
-    almost nothing here qualifies.
-    USE FOR: text >=24px (or >=18.66px bold) only, or non-text decoration.
-    DO NOT USE FOR: eyebrows, tags, labels, table headers, captions, notes, list items, or any
-    body copy. For secondary readable text use --c-text-soft (5.9:1). For an eyebrow or a green
-    cue use --accent-text (5.99:1) — that is what every recomposed family does. */
- --c-text-muted:var(--muted);
+ /* #7C8B92 — NON-TEXT DECORATION ONLY (renamed from --c-text-muted 2026-07-18; the "text" in the
+    old name is what kept it being applied to text). As small text it is 3.27:1 here — an AA fail.
+    It fails on 4 of 6 surfaces (off-white 3.27, white 3.52, deep-teal band 3.40, raised-dark 4.47);
+    it only passes on base-dark (5.03) and the deep-base footer (5.39), which is not enough to trust.
+    NEVER colour text with this. Use --c-text-soft for readable secondary text (5.9 light / 9.4 dark)
+    or --accent-text for an eyebrow / green cue. This token is now used only by bullet dots and the
+    TSF noise-chart line — non-text marks, all aria-safe. */
+ --c-decorative-only:var(--muted);
  --c-on-band:var(--off-white);            /* band stays deep-teal → light text */
  --c-border:var(--border);                /* rgba(16,32,42,.12) */
  --c-border-strong:rgba(16,32,42,.22);
@@ -197,7 +197,7 @@ section { scroll-margin-top:76px; }
 /* ON-DARK RE-SCOPE. ⚠️ This block re-scopes SOME --c-* tokens and not others, which is the
    single most productive bug source in this codebase (three found so far). Any rule that pairs
    a re-scoped token with a NON-re-scoped one silently breaks here — and usually only in ONE
-   theme, so it survives review. Re-scoped: --c-text, --c-text-soft, --c-text-muted, --c-border,
+   theme, so it survives review. Re-scoped: --c-text, --c-text-soft, --c-decorative-only, --c-border,
    --c-border-strong, --accent-text, --c-on-invert. NOT re-scoped (deliberately — they name
    absolute surfaces): --c-surface, --c-surface-raised, --c-surface-band, --c-surface-deep.
    If you add a rule here that uses two --c-* tokens together, check the surface layer
@@ -205,7 +205,7 @@ section { scroll-margin-top:76px; }
 .surface-band, .surface-deep, .surface-image {
  --c-text:var(--off-white);
  --c-text-soft:var(--text-on-dark-soft);
- --c-text-muted:var(--muted);
+ --c-decorative-only:var(--muted);
  --c-border:var(--border-dark);
  --c-border-strong:rgba(255,255,255,.24);
  --accent-text:var(--signal-green);       /* green is legible on deep-teal (7:1) */
@@ -238,7 +238,7 @@ section { scroll-margin-top:76px; }
 .section-kit-item { display:flex; flex-direction:column; gap:var(--space-3); }
 .section-kit-item h3 { font-size:var(--text-h3); line-height:1.15; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
 .section-kit-item p { color:var(--c-text-soft); }
-.section-kit-tag { font-family:var(--font-mono); font-size:var(--text-micro); letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); } /* mono reserved for technical microdata */
+.section-kit-tag { font-family:var(--font-mono); font-size:var(--text-micro); letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-soft); } /* mono reserved for technical microdata */
 .section-kit-metrics { display:grid; gap:clamp(var(--space-6),3vw,var(--space-12)); grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
 .section-kit-metric-value { font-size:clamp(2.75rem,5vw,4rem); line-height:1; letter-spacing:-.02em; font-weight:500; color:var(--c-text); }
 .section-kit-steps { display:grid; gap:var(--space-8); }
@@ -336,7 +336,7 @@ section { scroll-margin-top:76px; }
 .contrast-col ul { list-style:none; margin:var(--space-4) 0 0; padding:0; display:grid; gap:var(--space-3); }
 .contrast-col li { position:relative; padding-left:var(--space-6); color:var(--c-text-soft); line-height:1.55; }
 .contrast-col li::before { content:""; position:absolute; left:0; top:.6em; width:10px; height:2px; background:var(--accent-text); }
-.contrast-col.is-negate li::before { background:var(--c-text-muted); }
+.contrast-col.is-negate li::before { background:var(--c-decorative-only); }
 
 /* --- Numbered principle list --- */
 .numbered-list { list-style:none; margin:var(--space-8) 0 0; padding:0; display:grid; gap:var(--space-6); counter-reset:principle; }
@@ -2367,7 +2367,7 @@ section { scroll-margin-top:76px; }
     --c-on-invert today; they're declared so the next control added here can't inherit the gap. */
  --c-text:var(--off-white);
  --c-text-soft:var(--text-on-dark-soft);
- --c-text-muted:var(--muted);
+ --c-decorative-only:var(--muted);
  --c-border:var(--border-dark);
  --c-border-strong:rgba(255,255,255,.24);
  --c-focus:var(--signal-green);
@@ -2465,7 +2465,7 @@ section { scroll-margin-top:76px; }
 }
 .site-footer__locations span {
  margin-top:4px;
- color:var(--c-text-muted);
+ color:var(--c-text-soft);
  font-size:.82rem;
  line-height:1.4;
 }
@@ -2477,7 +2477,7 @@ section { scroll-margin-top:76px; }
  margin-top:clamp(42px,5vw,64px);
  border-top:1px solid var(--c-border);
  padding-top:24px;
- color:var(--c-text-muted);
+ color:var(--c-text-soft);
  font-family:var(--font-mono);
  font-size:10px;
  letter-spacing:.12em;
@@ -14600,7 +14600,7 @@ main .ld-container,
 .service-h2--section { max-width:28ch; }
 .service-problem { max-width:var(--site-max-width); }
 .service-problem .section-kit-lead { max-width:66ch; }
-.service-backlink { margin-top:var(--space-6); font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.04em; color:var(--c-text-muted); }
+.service-backlink { margin-top:var(--space-6); font-family:var(--font-label); font-size:var(--text-label); letter-spacing:.04em; color:var(--c-text-soft); }
 .service-backlink__link { display:inline-flex; align-items:center; gap:5px; color:var(--accent-text); }
 .service-backlink__link:hover { text-decoration:underline; }
 
@@ -14664,13 +14664,13 @@ main .ld-container,
 .mk { display:inline-flex; align-items:center; gap:8px; font-size:13.5px; }
 .mk svg { width:17px; height:17px; flex:none; }
 .mk--yes { color:var(--accent-text); font-weight:600; }
-/* --c-text-soft, NOT --c-text-muted: muted is 3.27:1 on light — see the token annotation */
+/* --c-text-soft, NOT --c-decorative-only: muted is 3.27:1 on light — see the token annotation */
 .mk--no, .mk--partial { color:var(--c-text-soft); }
 
 /* --- Tabs archetype --- */
 .tabs { margin-top:var(--space-8); }
 .tabs__list { display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid var(--c-border); }
-/* underline tabs, not pills. --c-text-soft NOT --c-text-muted (3.27:1 on light). */
+/* underline tabs, not pills. --c-text-soft NOT --c-decorative-only (3.27:1 on light). */
 .tabs__tab { position:relative; margin-bottom:-1px; padding:13px 18px; background:none; border:0; border-bottom:2px solid transparent; cursor:pointer; font-family:var(--font-sans); font-size:14.5px; font-weight:600; color:var(--c-text-soft); transition:color .2s ease, border-color .2s ease; }
 .tabs__tab:hover { color:var(--c-text); }
 .tabs__tab[aria-selected="true"] { color:var(--accent-text); border-bottom-color:var(--accent); }
@@ -14763,12 +14763,12 @@ main .ld-container,
 /* even rows (image right): text in the LEFT half — its left/outer edge meets the ruler */
 .appsx-env--flip .appsx-env__copy { margin-left:0; margin-right:auto; padding-left:0; padding-right:clamp(32px,4vw,64px); }
 .appsx-env__num { font-family:var(--font-sans); font-weight:700; font-size:13px; letter-spacing:.12em; color:var(--accent-text); margin-bottom:14px; }
-.appsx-env__eyebrow { font-family:var(--font-sans); font-weight:600; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:12px; }
+.appsx-env__eyebrow { font-family:var(--font-sans); font-weight:600; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-soft); margin-bottom:12px; }
 .appsx-env__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-.02em; color:var(--c-text); margin-bottom:16px; }
 .appsx-env__desc { font-size:16px; line-height:1.65; color:var(--c-text-soft); margin-bottom:26px; }
 .appsx-env__proof { display:flex; flex-wrap:wrap; gap:clamp(20px,3vw,32px); padding:22px 0; border-top:1px solid var(--c-border); border-bottom:1px solid var(--c-border); margin-bottom:26px; }
 .appsx-env__pf b { display:block; font-family:var(--font-sans); font-weight:700; font-size:clamp(1.5rem,2.4vw,2rem); line-height:1; color:var(--c-text); font-variant-numeric:tabular-nums; }
-.appsx-env__pf span { display:block; max-width:14ch; margin-top:7px; font-size:12.5px; color:var(--c-text-muted); }
+.appsx-env__pf span { display:block; max-width:14ch; margin-top:7px; font-size:12.5px; color:var(--c-text-soft); }
 .appsx-env__approach { padding:22px 0; border-top:1px solid var(--c-border); border-bottom:1px solid var(--c-border); margin-bottom:26px; font-size:15px; line-height:1.6; color:var(--c-text-soft); }
 .appsx-env__approach b { color:var(--accent-text); font-weight:600; }
 .appsx-env__go { display:inline-flex; align-items:center; gap:9px; align-self:flex-start; font-size:15px; font-weight:600; color:var(--accent-text); }
@@ -14795,7 +14795,7 @@ main .ld-container,
 .appsx-cta > .site-container > p { font-size:17px; color:var(--c-text-soft); margin-bottom:28px; }
 .appsx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease; }
 .appsx-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
-.appsx-provisional { max-width:60ch; margin:34px auto 0; font-size:12px; line-height:1.6; color:var(--c-text-muted); }
+.appsx-provisional { max-width:60ch; margin:34px auto 0; font-size:12px; line-height:1.6; color:var(--c-text-soft); }
 
 /* REVEAL — IntersectionObserver adds .is-in; reduced-motion shows immediately */
 [data-appsx-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
@@ -14857,7 +14857,7 @@ main .ld-container,
 .envd-lead-split { display:grid; grid-template-columns:1.4fr 1fr; gap:clamp(32px,5vw,64px); align-items:start; }
 .envd-lead-split__big { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.7rem,3vw,2.5rem); line-height:1.18; letter-spacing:-.02em; color:var(--c-text); }
 .envd-lead-split__big em { color:var(--accent-text); font-style:normal; }
-.envd-lead-split__side .envd-k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:14px; }
+.envd-lead-split__side .envd-k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-soft); margin-bottom:14px; }
 .envd-lead-split__side p { font-size:15.5px; line-height:1.65; color:var(--c-text-soft); }
 .envd-lead-split__side p + p { margin-top:16px; }
 
@@ -14873,7 +14873,7 @@ main .ld-container,
 .envd-funnel__row { display:grid; grid-template-columns:180px 1fr; gap:28px; align-items:center; }
 .envd-funnel__meta { text-align:right; }
 .envd-funnel__n { font-family:var(--font-sans); font-weight:800; font-size:clamp(1.8rem,3.4vw,2.6rem); line-height:.9; color:var(--c-text); font-variant-numeric:tabular-nums; }
-.envd-funnel__l { margin-top:6px; font-size:13px; color:var(--c-text-muted); }
+.envd-funnel__l { margin-top:6px; font-size:13px; color:var(--c-text-soft); }
 .envd-funnel__bar { display:flex; align-items:center; height:64px; border-radius:12px; padding:0 24px; font-size:14.5px; font-weight:500; color:#fff; overflow:hidden; }
 .envd-funnel__row--f1 .envd-funnel__bar { width:100%; background:linear-gradient(90deg,var(--deep-teal),#0a4a5c); }
 .envd-funnel__row--f2 .envd-funnel__bar { width:66%; background:linear-gradient(90deg,#0a4a5c,#12707a); }
@@ -14955,7 +14955,7 @@ main .ld-container,
 .envd-glance__g { display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--c-border); font-size:13.5px; }
 .envd-glance__g:last-child { border-bottom:none; }
 .envd-glance__g b { font-family:var(--font-sans); font-weight:600; color:var(--c-text); }
-.envd-glance__g span { text-align:right; color:var(--c-text-muted); }
+.envd-glance__g span { text-align:right; color:var(--c-text-soft); }
 
 /* SIGNATURE — noise->signal chart (TSF) + Data Analytics cross-link box */
 .envd-signal-viz { margin-bottom:32px; padding:28px 30px; border:1px solid var(--c-border); border-radius:22px; background:var(--c-surface-raised); }
@@ -14986,7 +14986,7 @@ main .ld-container,
 .envd-scalebar__track { position:relative; height:8px; margin:60px 0 24px; border-radius:4px; background:var(--c-border); }
 .envd-scalebar__fill { position:absolute; left:0; top:0; height:100%; width:100%; border-radius:4px; background:linear-gradient(90deg,var(--deep-teal),var(--accent)); transform-origin:left; transform:scaleX(0); animation:envd-grow 1.8s cubic-bezier(.2,.7,.2,1) forwards; }
 .envd-scalebar__bigkm { position:absolute; left:0; top:-52px; font-family:var(--font-sans); font-weight:800; font-size:clamp(2.4rem,5vw,3.6rem); line-height:1; color:var(--c-text); font-variant-numeric:tabular-nums; }
-.envd-scalebar__ticks { display:flex; justify-content:space-between; font-size:12.5px; color:var(--c-text-muted); font-variant-numeric:tabular-nums; }
+.envd-scalebar__ticks { display:flex; justify-content:space-between; font-size:12.5px; color:var(--c-text-soft); font-variant-numeric:tabular-nums; }
 .envd-scalebar__caption { margin-top:32px; max-width:64ch; font-size:16px; line-height:1.6; color:var(--c-text-soft); }
 .envd-scalebar__caption b { color:var(--accent-text); }
 @keyframes envd-grow { to { transform:scaleX(1); } }
@@ -14997,7 +14997,7 @@ main .ld-container,
    Reuses the shared .envd-* hero / sechead / xlink / others / cta; these classes
    cover the capability-specific sections. Consumes only --c-*.
    ========================================================================= */
-.civx-k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:14px; }
+.civx-k { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--c-text-soft); margin-bottom:14px; }
 
 /* HONEST OPENER */
 .civx-opener { border-bottom:1px solid var(--c-border); }
@@ -15120,11 +15120,11 @@ main .ld-container,
 
 /* detail band — problem faces answer */
 .solx-sit__detail { display:grid; grid-template-columns:1fr 1fr; gap:clamp(26px,3.5vw,44px); border-top:1px solid var(--c-border); padding-top:32px; }
-.solx-sc__k { font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--c-text-muted); margin-bottom:12px; }
+.solx-sc__k { font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--c-text-soft); margin-bottom:12px; }
 .solx-sc--help .solx-sc__k { color:var(--accent-text); }
 .solx-sc ul { list-style:none; margin:0; padding:0; }
 .solx-sc li { position:relative; padding-left:16px; margin-bottom:8px; font-size:14.5px; line-height:1.55; color:var(--c-text-soft); }
-.solx-sc li::before { content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--c-text-muted); }
+.solx-sc li::before { content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--c-decorative-only); }
 .solx-sc--help li::before { background:var(--accent); }
 
 /* foot — outcome + chips */
@@ -15223,7 +15223,7 @@ main .ld-container,
 .svcx-svc__name { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.35rem,2.4vw,1.85rem); line-height:1.15; letter-spacing:-.02em; color:var(--c-text); margin:0; }
 .svcx-svc__pitch { margin:10px 0 0; max-width:36ch; font-size:15.5px; line-height:1.55; color:var(--c-text-soft); }
 .svcx-svc__inc { display:flex; flex-direction:column; gap:9px; }
-/* --c-text-soft, NOT --c-text-muted: muted is 3.3:1 on light (labels/large only) and these are
+/* --c-text-soft, NOT --c-decorative-only: muted is 3.3:1 on light (labels/large only) and these are
    readable 13.5px content, so muted would fail AA. Hierarchy comes from size + the green bullet. */
 .svcx-svc__inc span { position:relative; padding-left:15px; font-size:13.5px; line-height:1.4; color:var(--c-text-soft); }
 .svcx-svc__inc span::before { content:""; position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background:var(--accent); opacity:.7; }
@@ -15357,7 +15357,7 @@ main .ld-container,
 .svcd-ig h3 { font-family:var(--font-sans); font-size:1.15rem; font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 6px; }
 .svcd-ig__sub { font-size:14px; font-weight:500; color:var(--accent-text); margin:0 0 16px; }
 .svcd-ig ul { list-style:none; margin:0; padding:0; }
-/* --c-text-soft, NOT --c-text-muted: muted is 3.3:1 on light (labels/large only). */
+/* --c-text-soft, NOT --c-decorative-only: muted is 3.3:1 on light (labels/large only). */
 .svcd-ig li { position:relative; padding-left:16px; margin-bottom:9px; font-size:14.5px; line-height:1.55; color:var(--c-text-soft); }
 .svcd-ig li::before { content:""; position:absolute; left:0; top:9px; width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.75; }
 
