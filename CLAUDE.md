@@ -85,23 +85,39 @@ hardened into code or published externally without leadership sign-off.
 
 ### DTG Focus™ rule (important)
 
-- **DTG Focus™ is a supporting, governed monitoring environment inside DTG's wider service
-  approach.** It is **not** the centre of the company and **not** a standalone SaaS product.
-- **Category (masterbook):** primary — **Operational Decision-Support Platform**; secondary —
-  **Monitoring Governance Framework**. **Never** use "dashboard" as its category (visualisation is
-  one layer, not the value).
-- **Five functional pillars:** **Integrate · Validate · Analyse · Govern · Act.** These are distinct
-  from the company narrative spine (Integrate · Govern · Decide) and must not be conflated.
-  **"Visualise" is deliberately not a pillar.**
-- Present DTG Focus as one capability that supports review workflows, visibility, traceability and
-  decision records — subordinate to DTG's independent positioning on corporate pages. Introduce
-  Focus only where it materially improves the solution.
-- **Focus colour sub-family (distinct from the parent — do not inherit `#073C4A`):** Focus Teal
-  `#0A5266`, Steel Teal / data accent `#0F5E73`, Dark Focus `#0A4454`, optional refined accent
-  `#2E7C92`. Colour refinement is **not** a redesign — preserve the existing symbol, wordmark,
-  proportions and trademark.
+> **AMENDED 2026-07-18 (user-authorised) — this section previously described Focus as a "supporting,
+> governed monitoring environment" that is "not a standalone product", with a formal
+> "Operational Decision-Support Platform" category and five abstract pillars. That was the
+> masterbook definition, and it did NOT match reality — it was the generator behind the whole
+> Focus doc-vs-reality conflict (see §12). Corrected to what Focus actually is. Same move as the
+> hardware-vendor claim: fix the doc, not just the page, or the next writer re-adds the old framing
+> and cites this section. The masterbook itself still carries the old definition and needs the same
+> amendment — a leadership/business-document task (§12).**
+
+- **DTG Focus™ is DTG's own monitoring software — built and running, used by DTG's own engineers
+  every day, and used in delivery for clients.** It is not internal-only, and not a concept.
+- **What it does (five capabilities, given EQUAL weight — never promote one above the others; a
+  client who sees one feature emphasised files DTG as that kind of vendor):** **Integration ·
+  Analytics · Review & workflow · Governance & reporting · Portfolio view.** (These supersede, for
+  all site copy, the masterbook's older abstract pillars "Integrate · Validate · Analyse · Govern ·
+  Act" — reconciling the masterbook is the §12 follow-up.)
+- **The honest boundary — hold it exactly:** the tools are **built and running**, and **individual
+  capabilities can be deployed for clients on request.** The **fully integrated, full-coverage**
+  product is **still being completed.** So: **NEVER** write "in development", "roadmap", "coming
+  soon", "not yet available" or "preview" — the tools exist and run. **EQUALLY never** claim that
+  complete integrated coverage exists today. Frame delivery **consultatively** ("we start from what
+  your teams need to see") — that is both true and how DTG actually works. *The sentence that
+  promises complete integrated coverage is the one that fails in a demo — don't write it.*
+- **Palette: DTG Focus™ uses the SAME palette as the rest of the site — no sub-brand theme.** The
+  old "Focus colour sub-family" (Focus Teal `#0A5266` etc.) is **retired for the website** (this is
+  the current live `/dtg-focus` design). The **logo renders off-white `#F4F7F6` on dark, NOT green**
+  — green is the site accent that marks "this is DTG" moments and interactive elements; spent on a
+  logo it stops meaning anything.
+- **🔒 The sponsor stays secret.** A major mining group funds Focus development. Never on the site
+  in any form, including softened. (See the confidential memory.)
 - Always render the mark via `components/brand.tsx` (`DTGFocusMark` / `renderTrademarkText`) so the
-  ™ is consistent. Never hand-type "DTG Focus TM".
+  ™ is consistent. Never hand-type "DTG Focus TM", and never put the `<sup>™</sup>` inside a
+  `<title>`, `alt` or `aria-label` (attributes can't hold markup).
 
 ---
 

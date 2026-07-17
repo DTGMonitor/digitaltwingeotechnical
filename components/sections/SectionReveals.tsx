@@ -13,11 +13,18 @@ import { useEffect } from "react";
  * Reduced motion is honoured by revealing everything immediately (never leave content
  * stranded at opacity:0 — the CSS also guards this, but a reader with JS disabled must
  * never lose the page, which is why `.is-in` is the additive state rather than the default).
+ *
+ * CONTENT-FIRST: on mount it adds `.reveals-armed` to <html>. Reveal CSS that hides content
+ * (opacity:0) should be GATED on that class — `.reveals-armed [data-x-reveal] { opacity:0 }` —
+ * so that if the JS never runs (error, disabled), the class is never added and the content is
+ * simply visible. Never let a broken island hide a page. (Older families gate on nothing and
+ * carry this latent risk; new pages should gate on `.reveals-armed`.)
  */
 export function SectionReveals({ attr }: { attr: string }) {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(`[data-${attr}]`));
     if (els.length === 0) return;
+    document.documentElement.classList.add("reveals-armed");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       els.forEach((el) => el.classList.add("is-in"));
       return;
