@@ -4,6 +4,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { renderTrademarkText } from "@/components/brand";
 import { Surface } from "./Surface";
 import { CTA } from "./CTA";
+import { FaqAccordion } from "./FaqAccordion";
 import { Matrix, type MatrixCell } from "./Matrix";
 import { Tabs } from "./Tabs";
 import { SectionReveals } from "./SectionReveals";
@@ -15,12 +16,12 @@ import { SectionReveals } from "./SectionReveals";
  *
  * Scoped to the .svcd-* family. It composes the shared Surface primitive for surfaces (never
  * duplicate that block — a partial duplicate is what caused the invisible-button bug) but
- * renders its own content markup, because CTA / FaqAccordion / .section-kit-* / .kit-button
- * are SHARED with /about and others and must not be restyled from here.
+ * renders its own content markup, because CTA / .section-kit-* / .kit-button are SHARED with
+ * /about and others and must not be restyled from here.
  *
- * The FAQ is deliberately NOT an accordion: five short answers that build trust
- * ("Does this replace our geotechnical engineer? No.") should not sit behind a click.
- * The shared FaqAccordion is untouched and still used by /about.
+ * The FAQ now uses the shared FaqAccordion (exclusive accordion, native <details name>) — the
+ * same pattern /about uses, so the two stay in step. It replaced a hand-rolled always-open
+ * two-column grid.
  *
  * Section headings are overridable per service (data-analytics renames several); the FAQ
  * heading defaults to "Common questions." rather than being hardcoded to the service name.
@@ -274,34 +275,28 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </div>
       </Surface>
 
-      {/* FAQs — always open, two columns. NOT an accordion (see the note at the top). */}
-      <Surface variant="default" className="svcd-faq" aria-labelledby={`${c.slug}-faq`}>
-        <div className="svcd-sec-head" data-svcd-reveal>
-          <span className="svcd-eyebrow">{c.faqSection?.eyebrow ?? "FAQs"}</span>
-          <h2 id={`${c.slug}-faq`}>{renderTrademarkText(c.faqSection?.title ?? "Common questions.")}</h2>
-        </div>
-        <dl className="svcd-faq__list">
-          {c.faqs.map((f, i) => (
-            <div className="svcd-fq" key={i} data-svcd-reveal>
-              <dt>{renderTrademarkText(f.question)}</dt>
-              <dd>{renderTrademarkText(f.answer)}</dd>
-            </div>
-          ))}
-        </dl>
-      </Surface>
+      {/* FAQs — exclusive accordion (native <details name>), shared with /about. */}
+      <FaqAccordion
+        surface="default"
+        eyebrow={c.faqSection?.eyebrow ?? "FAQs"}
+        title={c.faqSection?.title ?? "Common questions."}
+        titleId={`${c.slug}-faq`}
+        name={`faq-${c.slug}`}
+        items={c.faqs.map((f) => ({
+          question: renderTrademarkText(f.question),
+          answer: renderTrademarkText(f.answer),
+        }))}
+      />
 
-      {/* CTA — shared kit component on a deep-teal band */}
+      {/* CTA — shared kit component; the whole band is the link */}
       <CTA
         surface="band"
         eyebrow={c.cta.eyebrow}
         title={renderTrademarkText(c.cta.title)}
         titleId={`${c.slug}-cta`}
         body={c.cta.body ? renderTrademarkText(c.cta.body) : undefined}
-        actions={
-          <Link href={c.cta.actionHref} className="kit-button kit-button--primary">
-            {renderTrademarkText(c.cta.actionLabel)} <ArrowRight size={15} />
-          </Link>
-        }
+        href={c.cta.actionHref}
+        actionLabel={renderTrademarkText(c.cta.actionLabel)}
       />
     </main>
   );
