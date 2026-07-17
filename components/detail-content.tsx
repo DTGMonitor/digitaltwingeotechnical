@@ -71,26 +71,11 @@ export const detailPages: Record<string, DetailPageContent> = {
       "DTG's review is technology-agnostic: monitoring information is assessed across systems and vendors, whoever supplied it.",
     ],
   },
-  "about/our-journey": {
-    eyebrow: "About",
-    title: "Our Journey",
-    intro: "DTG builds on a decade of remote geotechnical monitoring evolution and senior mining leadership.",
-    points: [
-      "Remote monitoring foundations developed through GroundProbe GSS experience from 2015 to 2024.",
-      "Expanded into a technology-agnostic model for integrating multi-sensor monitoring context.",
-      "DTG Focus™ represents the future workflow direction of the company.",
-    ],
-  },
-  "about/leadership": {
-    eyebrow: "About",
-    title: "Leadership",
-    intro: "Peter Saunders and Mark Burdett connect remote monitoring expertise with mining leadership, economic and structural geology, geotechnical studies and operational governance.",
-    points: [
-      "Peter Saunders, Founder / Director: remote monitoring pioneer and former GroundProbe GSS leader.",
-      "Mark Burdett, Founder / Director: economic and structural geology, geotechnical studies, operational consulting and mining leadership.",
-      "Together, DTG leadership connects monitoring data, governance workflows and real operational decision-making.",
-    ],
-  },
+  // COMPLIANCE DELETION (2026-07-18): the "about/our-journey" and "about/leadership" detailPages
+  // entries were removed. Their routes 308-redirect (to /about and /about#leadership), so the data
+  // was dead — but it named a sensor brand (GroundProbe GSS) in founder bios, i.e. a locked-category
+  // leak sitting one un-redirect away from being live again. The recomposed /about carries this
+  // history without naming any vendor. Do not re-add these keys.
   "about/vision-future": {
     eyebrow: "About",
     title: "Vision & Future",
@@ -290,16 +275,9 @@ export const detailPages: Record<string, DetailPageContent> = {
       "Multi-sensor review across radar, InSAR, prisms, GNSS and LiDAR.",
     ],
   },
-  "insights/long-term-deformation": {
-    eyebrow: "Services Evidence",
-    title: "Long-Term Deformation Detection",
-    intro: "How DTG identifies consistent movement from noisy radar and prism datasets.",
-    points: [
-      "Long-term deformation trend discovery.",
-      "GroundProbe and Trimble prism validation context.",
-      "Structurally controlled hazard review from noisy movement data.",
-    ],
-  },
+  // COMPLIANCE DELETION (2026-07-18): "insights/long-term-deformation" removed — its route
+  // 308-redirects (to /applications/tsf), so the data was dead, but it named sensor brands
+  // (GroundProbe, Trimble). Removed rather than left one un-redirect from live. Do not re-add.
   "insights/alarm-confidence": {
     eyebrow: "Services Evidence",
     title: "Alarm Confidence",
