@@ -704,7 +704,11 @@ section { scroll-margin-top:76px; }
 .challenge-simple-card:not(:last-child)::after { content:""; position:absolute; right:-18px; top:50%; z-index:2; width:35px; height:1px; background:linear-gradient(90deg,var(--color-accent-gold),transparent); }
 .challenge-simple-card span { color:var(--color-accent-gold); font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:var(--tracking-label); text-transform:uppercase; }
 .challenge-simple-card p { margin-top:32px; max-width:310px; color:var(--color-text-primary); font-size:clamp(1.2rem,1.45vw,1.65rem); line-height:1.2; letter-spacing:-.025em; }
-.monitoring-challenge { position:relative; overflow:hidden; background:var(--c-surface-band); color:var(--c-on-band); padding:clamp(88px,8vw,138px) 0; }
+/* Deep-teal section that manually sets its surface (doesn't use the .surface-band primitive), so it
+   must re-scope --accent-text to the BRIGHT green like the primitive does — otherwise its green
+   labels stay the LIGHT theme's dark green (#2E6B2A) on deep-teal = 1.85:1, a light-only AA fail
+   the pre-flip sweep caught. Bright green on deep-teal is 4.82:1 in both themes. */
+.monitoring-challenge { position:relative; overflow:hidden; background:var(--c-surface-band); color:var(--c-on-band); --accent-text:var(--signal-green); padding:clamp(88px,8vw,138px) 0; }
 .monitoring-challenge::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 76% 24%,rgba(99,183,93,.075),transparent 28%),linear-gradient(180deg,rgba(244,247,246,.03),transparent 34%); pointer-events:none; }
 .challenge-container { position:relative; z-index:1; }
 .challenge-header { max-width:980px; }
@@ -1101,7 +1105,8 @@ section { scroll-margin-top:76px; }
 .service-row span { color:#D6A73A; font-size:12px; letter-spacing:.18em; text-transform:uppercase; }
 .service-row h3 { color:#1C2A35; font-size:clamp(2rem,3.3vw,4.35rem); line-height:.94; letter-spacing:-.03em; font-weight:500; }
 .service-row p { max-width:720px; color:#52616c; font-size:clamp(1rem,1.35vw,1.28rem); line-height:1.6; }
-.proof-credibility { position:relative; overflow:hidden; background:var(--c-surface-deep); color:var(--c-on-band); padding:clamp(88px,8vw,138px) 0; }
+/* deep surface, same re-scope as .monitoring-challenge — bright green labels in both themes */
+.proof-credibility { position:relative; overflow:hidden; background:var(--c-surface-deep); color:var(--c-on-band); --accent-text:var(--signal-green); padding:clamp(88px,8vw,138px) 0; }
 .proof-credibility::before { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 78% 16%,rgba(99,183,93,.07),transparent 30%),linear-gradient(180deg,rgba(244,247,246,.035),transparent 42%); }
 .proof-container { position:relative; z-index:1; }
 .proof-header { max-width:980px; }
@@ -1135,6 +1140,9 @@ section { scroll-margin-top:76px; }
  overflow:hidden;
  background:var(--c-surface-deep);
  color:var(--c-on-band);
+ /* deep surface without the .surface-* primitive → re-scope --accent-text to bright green, or its
+    label stays the light theme's dark green on deep base (2.94:1, a light-only fail). */
+ --accent-text:var(--signal-green);
  padding:clamp(88px,8vw,138px) 0;
 }
 .applications-section::before {
