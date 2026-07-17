@@ -50,8 +50,26 @@ const isAffirm = [
   "Accountable for monitoring outcomes across systems",
   "A partner to your geotechnical team",
 ];
+// COMPLIANCE — DO NOT UNDO: independence claims are ENGAGEMENT-SCOPED, and that applies to
+// IDENTITY framing too, not just commercial framing. "A monitoring hardware vendor" was CUT from
+// this list: it is the same claim as "we sell no hardware", which is already prohibited — DTG
+// distributes radar and GNSS in Indonesia, so it fails "does it survive discovery?" outright.
+//
+// ⚠️ THE TRAP THIS LIST SETS: a "what DTG is not" list reads as a DESCRIPTION, so the claims in it
+// don't feel like claims. Two earlier concept sweeps missed this one because they searched for
+// commercial wording ("no commission", "commercially neutral", "no product to sell", "no vendor
+// lock-in", "no vendor bias") and this is framed as identity. The sweep concept is now: "what does
+// DTG say it IS or ISN'T", not just "what does DTG say about its commercials".
+// NEVER add here: hardware vendor / equipment supplier / distributor denials, or anything asserting
+// DTG is "independent of" vendors, manufacturers or suppliers as a company-wide relationship.
+// SAFE here: category statements with no commercial assertion, and claims about the WORK.
+//
+// WATCH ITEM (true today, has a shelf life — do not fix, do flag): "A software or SaaS product
+// company" is accurate now, but DTG Focus is being built as a platform. Revisit when Focus ships.
+//
+// NB "Accountable for monitoring outcomes across systems" in the affirm list is CONFIRMED TRUE —
+// DTG is contractually accountable. It is a real differentiator; do not soften it.
 const isNegate = [
-  "A monitoring hardware vendor",
   "A software or SaaS product company",
   "A dashboard company — visualisation is one layer, not the value",
   "A replacement for your geotechnical team",

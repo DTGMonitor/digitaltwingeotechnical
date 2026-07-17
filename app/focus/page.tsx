@@ -61,9 +61,13 @@ export default function Focus() {
           <Reveal>
             <h2 className="headline max-w-4xl">One Platform. Multiple Technologies. A Single Operational View.</h2>
             <p className="subhead mt-5 max-w-2xl">
+              {/* COMPLIANCE: the last sentence was "DTG is independent of monitoring vendors, software
+                  vendors and equipment manufacturers" — a company-wide relationship claim, and false:
+                  DTG distributes radar and GNSS in Indonesia. Reframed onto the work. This route is
+                  unlinked but returns 200 and is indexable. */}
               Radar, GNSS, prisms, surface LiDAR, SLAM LiDAR, InSAR, seismic systems, environmental monitoring and
-              operational data can be brought into one operating environment for correlation and review. DTG is
-              independent of monitoring vendors, software vendors and equipment manufacturers.
+              operational data can be brought into one operating environment for correlation and review — reviewed
+              across systems and vendors, whoever supplied them.
             </p>
           </Reveal>
         </div>

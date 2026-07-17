@@ -19,7 +19,11 @@ hardened into code or published externally without leadership sign-off.
   geotechnical monitoring and decision-support company**. DTG works between monitoring data and
   operational decisions: integrate monitoring information, govern workflows, support defensible
   decisions.
-- **Not** a monitoring hardware vendor, a software vendor, or a technical SaaS product company.
+- **Not** a software vendor or a technical SaaS product company. ⚠️ **This list used to begin "Not a
+  monitoring hardware vendor" — that was REMOVED (2026-07-17) because it is false: DTG distributes
+  radar and GNSS hardware in Indonesia.** Do not reinstate it, and do not publish any equivalent
+  ("we sell no hardware", "independent of equipment manufacturers", or a "DTG is not…" list item to
+  that effect). See §3 and §12.
 - **Stack:** Next.js 15 (App Router) · React 19 · TypeScript (strict) · Tailwind 3 (utility layer
   only) · a single large `app/globals.css` design system · `framer-motion` / `gsap` for motion ·
   `lucide-react` icons. Fonts: **Inter (sans) as a flagged interim only** — the final web/corporate
@@ -57,7 +61,20 @@ hardened into code or published externally without leadership sign-off.
 - **Tone:** engineering-grade, calm, credible, defensible. Not startup-y, not hype, not "SaaS
   dashboard."
 - **Formal category (use verbatim):** an **independent geotechnical monitoring, analytics and
-  decision-support company.** Not a hardware vendor, software vendor, or technical SaaS product.
+  decision-support company.** Not a software vendor or technical SaaS product.
+  > 🚨 **"Not a hardware vendor" was REMOVED from this formal category (2026-07-17). It was FALSE —
+  > DTG distributes radar and GNSS hardware in Indonesia — and because this line said "use
+  > verbatim", the doc was actively *generating* the claim onto the site: it was published on
+  > `/about` and, as "independent of … equipment manufacturers", on three more live routes. Whoever
+  > wrote them was following this instruction. Fixing the pages without fixing this line would have
+  > left the next writer re-adding it, correctly citing the doc.**
+  > **Independence is ENGAGEMENT-SCOPED and always has been in practice:** *"on your site, what we
+  > recommend is driven by your risk and your data, not by any product."* That survives discovery.
+  > A company-wide financial, relationship or category claim does not. This applies to IDENTITY
+  > framing ("DTG is not a…", "DTG is independent of…") exactly as it does to commercial framing —
+  > a "what we are not" list still makes claims, it just doesn't feel like it.
+  > **See §12: this is the second thing this section asserts that reality contradicts (the other is
+  > DTG Focus). Both trace to the masterbook, which is the root generator and needs amending.**
 - **Primary promise:** **Trusted Monitoring Outcomes.** Credibility line: *Independent Monitoring.
   Trusted Outcomes.*
 - **Tagline / strategic line:** **Integrated Data. Informed Decisions.**
@@ -272,3 +289,35 @@ sign-off and must not be locked into code or published externally without verifi
 - **Logo master files and usage rules.**
 - **GroundProbe growth numbers** and any quantified metrics.
 - **Client / partner names and logos.**
+
+### 🚨 FOR PETER / LEADERSHIP — the masterbook asserts two things reality contradicts
+
+**This is ONE issue, not two.** Both trace to the same root, and both are business-document
+decisions, not copy or code decisions:
+
+1. **"DTG is not a hardware vendor."** False — **DTG distributes radar and GNSS in Indonesia.**
+   Retired from §1 and §3 and removed from the site on 2026-07-17.
+2. **"DTG Focus™ is an existing product."** §3 gives it a formal category, five pillars, a colour
+   sub-family, a logo, a trademark and a marketing page. In reality it is **in active development
+   and only partially used internally** — DTG uses parts of it in its own delivery; it is not yet
+   available for a client to buy. This still **blocks** the framing pass on `/dtg-focus`, home and
+   the three Focus children.
+
+**The masterbook is the ROOT GENERATOR.** It was written before the Indonesia distribution arm and
+before Focus's real status, so it describes a company that no longer exactly exists. Amending
+CLAUDE.md stops *this site* reproducing the claims — but the masterbook will keep re-authoring them
+into every new document, deck and proposal until it is amended itself. **Fixing the generator is the
+only durable fix; fixing instances is not.**
+
+**The standing test for any independence or identity wording: "does it survive discovery?"** If a
+client later learned the full truth, would the claim still stand? Engagement-scoped wording passes
+("on your site, what we recommend is driven by your risk and your data"). Company-wide financial,
+relationship or category claims do not — **including ones framed as identity** ("DTG is not a…",
+"DTG is independent of…"), which read as description and so evade sweeps aimed at commercial wording.
+
+**Related, already escalated:** the `/services/technical-advisory` matrix row *"Recommends across the
+market, not one product line"* (assumes DTG advisory genuinely recommends against its own
+distributed products — **if untrue, CUT the row, do not reword**; guard comment is in the code), and
+the vendors FAQ on the same page, which is deliberately silent on the distribution arm — defensible,
+but a **holding position**. If DTG establishes real advisory/distribution separation, that FAQ is
+where to say so, and it flips from a risk into a credential.
