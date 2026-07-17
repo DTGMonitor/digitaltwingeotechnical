@@ -11,6 +11,7 @@
 // Focus. Short bullets cannot carry this nuance — they flatten it into an availability claim — so
 // keep the Focus truth in the cross-link and FAQ where there is room to state it properly.
 import type { Metadata } from "next";
+import { Layers, Plug, GitBranch, Play } from "lucide-react";
 import { ServicePage, type ServiceContent } from "@/components/sections";
 
 export const metadata: Metadata = {
@@ -101,10 +102,10 @@ const content: ServiceContent = {
     eyebrow: "What you get",
     title: "What technology integration gives you.",
     items: [
-      { title: "One source of truth", body: "Every sensor in one consolidated, governed view." },
-      { title: "Works with what you have", body: "Technology-agnostic — every source connected, whoever supplied it." },
-      { title: "Traceable data", body: "From source sensor through to combined picture." },
-      { title: "Ready to act on", body: "Consolidated data set up for review and escalation." },
+      { icon: <Layers size={17} />, title: "One source of truth", body: "Every sensor in one consolidated, governed view." },
+      { icon: <Plug size={17} />, title: "Works with what you have", body: "Technology-agnostic — every source connected, whoever supplied it." },
+      { icon: <GitBranch size={17} />, title: "Traceable data", body: "From source sensor through to combined picture." },
+      { icon: <Play size={17} />, title: "Ready to act on", body: "Consolidated data set up for review and escalation." },
     ],
   },
   faqs: [
