@@ -35,18 +35,18 @@ function NoiseSignalChart() {
           className="raw"
           d="M40,150 L58,120 L70,178 L86,108 L100,190 L118,132 L132,205 L150,96 L165,188 L182,145 L200,215 L216,110 L232,175 L250,138 L268,198 L285,120 L302,165 L320,150 L338,185 L356,128 L374,168 L392,145 L410,178"
           fill="none"
-          stroke="var(--c-text-muted)"
+          stroke="var(--c-decorative-only)"
           strokeWidth="1.5"
           strokeLinejoin="round"
           opacity="0.75"
         />
         <g className="dots">
-          <circle cx="430" cy="140" r="2" fill="var(--c-text-muted)" />
-          <circle cx="450" cy="162" r="2" fill="var(--c-text-muted)" />
-          <circle cx="468" cy="132" r="2" fill="var(--c-text-muted)" />
-          <circle cx="488" cy="170" r="2" fill="var(--c-text-muted)" />
-          <circle cx="506" cy="128" r="2" fill="var(--c-text-muted)" />
-          <circle cx="524" cy="158" r="2" fill="var(--c-text-muted)" />
+          <circle cx="430" cy="140" r="2" fill="var(--c-decorative-only)" />
+          <circle cx="450" cy="162" r="2" fill="var(--c-decorative-only)" />
+          <circle cx="468" cy="132" r="2" fill="var(--c-decorative-only)" />
+          <circle cx="488" cy="170" r="2" fill="var(--c-decorative-only)" />
+          <circle cx="506" cy="128" r="2" fill="var(--c-decorative-only)" />
+          <circle cx="524" cy="158" r="2" fill="var(--c-decorative-only)" />
           <circle cx="500" cy="145" r="2.5" fill="var(--accent-text)" />
         </g>
         <path
@@ -63,7 +63,7 @@ function NoiseSignalChart() {
           strokeLinecap="round"
         />
         <circle className="endpt" cx="960" cy="188" r="5" fill="var(--accent)" />
-        <text x="40" y="285" className="envd-vlabel" fill="var(--c-text-muted)">
+        <text x="40" y="285" className="envd-vlabel" fill="var(--c-text-soft)">
           Raw data · noisy, hard to read
         </text>
         <text x="960" y="285" textAnchor="end" className="envd-vlabel" fill="var(--accent-text)">
