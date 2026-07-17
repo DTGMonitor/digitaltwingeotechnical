@@ -323,9 +323,10 @@ export default function AboutPage() {
 
       <FaqAccordion
         surface="default"
-        eyebrow="FAQ"
+        eyebrow="FAQs"
         title="Clear answers, without positioning."
         titleId="faq"
+        name="about-faq"
         items={faqs}
       />
 
