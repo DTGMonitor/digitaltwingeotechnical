@@ -300,7 +300,31 @@ section { scroll-margin-top:76px; }
 .profile__tags { display:flex; flex-wrap:wrap; gap:var(--space-2); margin-top:var(--space-4); }
 
 /* --- CTA --- */
-.cta { max-width:60ch; }
+/* EDITORIAL CTA — the whole band is one link. Shared by /about + all 5 Services pages.
+   Surface renders with container={false}; the inner .cta-grid carries the .site-container ruler,
+   so the padding block below is vertical only. On-band tokens are re-scoped by .surface-band. */
+.cta-link { display:block; padding-block:clamp(64px,9vw,110px); transition:background .4s ease; }
+.cta-link:hover { background:rgba(99,183,93,.06); }
+.cta-link:focus-visible { outline:2px solid var(--accent); outline-offset:-8px; }
+.cta-grid { display:grid; grid-template-columns:1fr auto; gap:60px; align-items:end; }
+.cta__eyebrow { display:block; margin-bottom:24px; }
+.cta__title { font-family:var(--font-sans); font-weight:700; font-size:clamp(2.2rem,5.2vw,4.2rem); line-height:1.02; letter-spacing:-.035em; color:#fff; max-width:17ch; margin:0 0 22px; }
+/* --c-text-soft (re-scoped to #AEC0C7 on the band, 6.9:1) rather than the mockup's hardcoded
+   #a8c4c8 — the locked rule, token-driven, and it tracks the on-dark re-scope. */
+.cta__body { max-width:44ch; margin:0; font-size:16.5px; line-height:1.6; color:var(--c-text-soft); }
+.cta-go { display:flex; align-items:center; gap:18px; flex:none; padding-bottom:6px; }
+.cta-go__label { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.1rem,1.8vw,1.4rem); letter-spacing:-.01em; white-space:nowrap; color:#fff; }
+.cta-arrow { flex:none; width:66px; height:66px; border-radius:50%; border:1.5px solid rgba(255,255,255,.35); display:flex; align-items:center; justify-content:center; color:#fff; transition:background .3s cubic-bezier(.2,.7,.2,1), border-color .3s ease, color .3s ease, transform .3s cubic-bezier(.2,.7,.2,1); }
+.cta-arrow svg { transition:transform .3s cubic-bezier(.2,.7,.2,1); }
+.cta-link:hover .cta-arrow { background:var(--accent); border-color:var(--accent); color:var(--on-accent); transform:scale(1.06); }
+.cta-link:hover .cta-arrow svg { transform:translateX(3px); }
+@media (prefers-reduced-motion:reduce) {
+ .cta-link, .cta-arrow, .cta-arrow svg { transition:none; }
+ .cta-link:hover .cta-arrow { transform:none; }
+}
+@media (max-width:760px) {
+ .cta-grid { grid-template-columns:1fr; gap:32px; align-items:start; }
+}
 
 /* --- Contrast block (what DTG is / what it is not) --- */
 .contrast-grid { display:grid; gap:var(--space-6); margin-top:var(--space-8); }

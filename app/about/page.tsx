@@ -332,13 +332,11 @@ export default function AboutPage() {
       <CTA
         surface="band"
         eyebrow="Start a monitoring conversation"
-        title="Talk to DTG about decision quality in complex monitoring environments."
+        title="Talk to DTG about decision quality."
         titleId="about-cta"
-        actions={
-          <Link href="/contact" className="kit-button kit-button--primary">
-            Contact DTG <ArrowUpRight size={15} />
-          </Link>
-        }
+        body="Tell us what you're monitoring, and where it's falling short. We'll be straight about what we'd bring."
+        href="/contact"
+        actionLabel="Contact DTG"
       />
     </main>
   );

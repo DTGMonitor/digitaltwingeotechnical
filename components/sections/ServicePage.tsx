@@ -290,18 +290,15 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </dl>
       </Surface>
 
-      {/* CTA — shared kit component on a deep-teal band */}
+      {/* CTA — shared kit component; the whole band is the link */}
       <CTA
         surface="band"
         eyebrow={c.cta.eyebrow}
         title={renderTrademarkText(c.cta.title)}
         titleId={`${c.slug}-cta`}
         body={c.cta.body ? renderTrademarkText(c.cta.body) : undefined}
-        actions={
-          <Link href={c.cta.actionHref} className="kit-button kit-button--primary">
-            {renderTrademarkText(c.cta.actionLabel)} <ArrowRight size={15} />
-          </Link>
-        }
+        href={c.cta.actionHref}
+        actionLabel={renderTrademarkText(c.cta.actionLabel)}
       />
     </main>
   );
