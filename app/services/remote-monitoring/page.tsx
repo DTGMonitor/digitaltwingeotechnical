@@ -71,12 +71,14 @@ const content: ServiceContent = {
       },
     ],
   },
-  crossLink: {
-    title: "Reporting is included",
-    body: "Routine weekly and monthly monitoring reports come as part of the watch. For standalone technical reporting and post-event failure back-analysis, see our dedicated service.",
-    linkLabel: "Reporting & back-analysis",
-    href: "/services/reporting-back-analysis",
-  },
+  crossLinks: [
+    {
+      title: "Reporting is included",
+      body: "Routine weekly and monthly monitoring reports come as part of the watch. For standalone technical reporting and post-event failure back-analysis, see our dedicated service.",
+      linkLabel: "Reporting & back-analysis",
+      href: "/services/reporting-back-analysis",
+    },
+  ],
   delivery: {
     eyebrow: "How it's delivered",
     title: "Set up once, watched continuously.",

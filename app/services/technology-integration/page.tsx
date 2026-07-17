@@ -82,12 +82,14 @@ const content: ServiceContent = {
       },
     ],
   },
-  crossLink: {
-    title: "Integration is the foundation, not the finish",
-    body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring. Integration delivers into your own systems — DTG Focus™, the governed environment we use in our own delivery, is still in development and not yet available as a product.",
-    linkLabel: "Data analytics",
-    href: "/services/data-analytics-automation",
-  },
+  crossLinks: [
+    {
+      title: "Integration is the foundation, not the finish",
+      body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring. Integration delivers into your own systems — DTG Focus™, the governed environment we use in our own delivery, is still in development and not yet available as a product.",
+      linkLabel: "Data analytics",
+      href: "/services/data-analytics-automation",
+    },
+  ],
   delivery: {
     eyebrow: "How it's delivered",
     title: "Connect, align, govern, consolidate.",

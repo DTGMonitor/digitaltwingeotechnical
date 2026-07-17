@@ -15299,6 +15299,8 @@ main .ld-container,
 .svcd-problem__grid .svcd-eyebrow { display:block; margin-bottom:16px; }
 .svcd-problem__title { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.9rem,3.6vw,2.8rem); line-height:1.08; letter-spacing:-.02em; color:var(--c-text); max-width:16ch; margin:0; }
 .svcd-problem__intro { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0 0 20px; }
+/* the page's own claim, in its own voice — --c-text (not soft) so it reads as the statement it is */
+.svcd-problem__emph { font-size:16.5px; line-height:1.65; font-weight:600; color:var(--c-text); margin:0 0 20px; }
 .svcd-sollink { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border:1px solid var(--c-border); border-radius:20px; font-size:14px; font-weight:600; color:var(--accent-text); transition:border-color .2s ease; }
 .svcd-sollink:hover { border-color:var(--accent); }
 .svcd-sollink:focus-visible { outline:2px solid var(--c-focus); outline-offset:3px; }
@@ -15314,6 +15316,15 @@ main .ld-container,
 .svcd-sec-head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
 .svcd-sec-head h2:last-child { margin-bottom:0; }
 
+/* PROOF SLOT (optional) — "why this service is credible". Three columns, green top-rules.
+   Same construction as .svcd-ig deliberately: this is a peer of "what's included", not a
+   decorative aside. */
+.svcd-own { border-bottom:1px solid var(--c-border); }
+.svcd-own__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:44px; }
+.svcd-ow { border-top:2px solid var(--accent); padding-top:22px; }
+.svcd-ow h3 { font-family:var(--font-sans); font-size:1.2rem; font-weight:600; letter-spacing:-.01em; color:var(--c-text); margin:0 0 12px; }
+.svcd-ow p { font-size:15px; line-height:1.6; color:var(--c-text-soft); margin:0; }
+
 /* WHAT'S INCLUDED */
 .svcd-inc { border-bottom:1px solid var(--c-border); }
 .svcd-inc__grid { display:grid; grid-template-columns:1fr 1fr; gap:40px 48px; }
@@ -15328,6 +15339,7 @@ main .ld-container,
 /* CROSS-LINK */
 .svcd-xl { border-bottom:1px solid var(--c-border); }
 .svcd-xl__box { display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center; border:1px dashed var(--c-border); border-radius:14px; padding:28px 32px; }
+.svcd-xl__box + .svcd-xl__box { margin-top:16px; }
 .svcd-xl__box h3 { font-family:var(--font-sans); font-size:1.15rem; font-weight:600; color:var(--c-text); margin:0 0 8px; }
 .svcd-xl__box p { font-size:15px; line-height:1.6; color:var(--c-text-soft); margin:0; max-width:66ch; }
 .svcd-xl__go { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; font-size:14px; font-weight:600; color:var(--accent-text); }
@@ -15369,6 +15381,7 @@ main .ld-container,
 @media (max-width:900px) {
  .svcd-hero { min-height:78vh; }
  .svcd-sec-head { margin-bottom:34px; }
+ .svcd-own__grid { grid-template-columns:1fr; gap:28px; }
  .tab-body { grid-template-columns:1fr; gap:22px; }
  .svcd-problem__grid { grid-template-columns:1fr; gap:28px; }
  .svcd-inc__grid { grid-template-columns:1fr; gap:34px; }

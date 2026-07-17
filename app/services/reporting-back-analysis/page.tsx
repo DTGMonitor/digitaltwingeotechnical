@@ -73,12 +73,14 @@ const content: ServiceContent = {
       },
     ],
   },
-  crossLink: {
-    title: "Already have us monitoring?",
-    body: "Routine reporting comes as part of Remote monitoring. This service adds standalone technical reporting and the deeper forensic back-analysis — commissioned on its own, or on top of the watch.",
-    linkLabel: "Remote monitoring",
-    href: "/services/remote-monitoring",
-  },
+  crossLinks: [
+    {
+      title: "Already have us monitoring?",
+      body: "Routine reporting comes as part of Remote monitoring. This service adds standalone technical reporting and the deeper forensic back-analysis — commissioned on its own, or on top of the watch.",
+      linkLabel: "Remote monitoring",
+      href: "/services/remote-monitoring",
+    },
+  ],
   delivery: {
     eyebrow: "How it's delivered",
     title: "Structured, evidence-first, defensible.",

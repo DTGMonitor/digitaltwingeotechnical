@@ -34,14 +34,24 @@ export type ServiceContent = {
   name: string;
   lead: string;
   ctas: Cta[];
-  problem: { eyebrow: string; title: string; intro: string; solutions: LinkRef[] };
+  problem: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    /** optional second line, set in the page's own voice — rendered emphasised */
+    emphasis?: string;
+    solutions: LinkRef[];
+  };
+  /** optional proof slot — why this service is credible. Sits between problem and whatsIncluded. */
+  proof?: { eyebrow?: string; title: string; intro?: string; items: { title: string; body: string }[] };
   whatsIncluded: {
     eyebrow?: string;
     title: string;
     intro?: string;
     groups: { title: string; desc: string; points: string[] }[];
   };
-  crossLink?: { title: string; body: string; linkLabel: string; href: string };
+  /** zero, one or many adjacent cross-links, rendered in order */
+  crossLinks?: { title: string; body: string; linkLabel: string; href: string }[];
   matrix?: { eyebrow?: string; title?: string; rowHeader?: string; columns: string[]; rows: { label: string; cells: MatrixCell[] }[]; highlightColumn?: number };
   tabs?: { eyebrow?: string; title?: string; items: { label: string; heading?: string; intro?: string; points?: string[] }[] };
   delivery: { eyebrow?: string; title: string; steps: { title: string; body: string }[] };
@@ -100,6 +110,9 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           </div>
           <div data-svcd-reveal>
             <p className="svcd-problem__intro">{renderTrademarkText(c.problem.intro)}</p>
+            {c.problem.emphasis ? (
+              <p className="svcd-problem__emph">{renderTrademarkText(c.problem.emphasis)}</p>
+            ) : null}
             {c.problem.solutions.map((s) => (
               <Link key={s.href} href={s.href} className="svcd-sollink">
                 {renderTrademarkText(s.label)}
@@ -109,6 +122,25 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           </div>
         </div>
       </Surface>
+
+      {/* WHY THIS IS CREDIBLE (optional) — the proof slot */}
+      {c.proof ? (
+        <Surface variant="default" className="svcd-own" aria-labelledby={`${c.slug}-proof`}>
+          <div className="svcd-sec-head" data-svcd-reveal>
+            {c.proof.eyebrow ? <span className="svcd-eyebrow">{renderTrademarkText(c.proof.eyebrow)}</span> : null}
+            <h2 id={`${c.slug}-proof`}>{renderTrademarkText(c.proof.title)}</h2>
+            {c.proof.intro ? <p>{renderTrademarkText(c.proof.intro)}</p> : null}
+          </div>
+          <div className="svcd-own__grid">
+            {c.proof.items.map((p, i) => (
+              <article className="svcd-ow" key={i} data-svcd-reveal>
+                <h3>{renderTrademarkText(p.title)}</h3>
+                <p>{renderTrademarkText(p.body)}</p>
+              </article>
+            ))}
+          </div>
+        </Surface>
+      ) : null}
 
       {/* WHAT'S INCLUDED */}
       <Surface variant="raised" id={includedId} className="svcd-inc" aria-labelledby={`${c.slug}-included-title`}>
@@ -136,19 +168,21 @@ export function ServicePage({ content }: { content: ServiceContent }) {
         </div>
       </Surface>
 
-      {/* CROSS-LINK (optional) */}
-      {c.crossLink ? (
-        <Surface variant="default" compact className="svcd-xl" aria-label={c.crossLink.title}>
-          <div className="svcd-xl__box" data-svcd-reveal>
-            <div>
-              <h3>{renderTrademarkText(c.crossLink.title)}</h3>
-              <p>{renderTrademarkText(c.crossLink.body)}</p>
+      {/* CROSS-LINKS (optional, one or many) */}
+      {c.crossLinks && c.crossLinks.length > 0 ? (
+        <Surface variant="default" compact className="svcd-xl" aria-label="Related services">
+          {c.crossLinks.map((xl, i) => (
+            <div className="svcd-xl__box" key={i} data-svcd-reveal>
+              <div>
+                <h3>{renderTrademarkText(xl.title)}</h3>
+                <p>{renderTrademarkText(xl.body)}</p>
+              </div>
+              <Link href={xl.href} className="svcd-xl__go">
+                {renderTrademarkText(xl.linkLabel)}
+                <ArrowRight className="svcd-xl__arw" size={15} aria-hidden="true" />
+              </Link>
             </div>
-            <Link href={c.crossLink.href} className="svcd-xl__go">
-              {renderTrademarkText(c.crossLink.linkLabel)}
-              <ArrowRight className="svcd-xl__arw" size={15} aria-hidden="true" />
-            </Link>
-          </div>
+          ))}
         </Surface>
       ) : null}
 
