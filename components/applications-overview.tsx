@@ -57,14 +57,14 @@ const environments: Environment[] = [
     num: "03",
     eyebrow: "Underground mining",
     title: "Convergence, kilometre after kilometre.",
-    desc: "Restricted, complex workings where movement is read by comparing scans over time — one of DTG's largest monitoring programmes, delivered in partnership with Beck Engineering.",
+    desc: "Restricted, complex workings where movement is read by comparing scans over time — one of DTG's largest monitoring programmes.",
     href: "/applications/underground-mining",
     img: "/images/applications/underground.png",
     imgAlt: "Underground mine drive with rock bolting, mesh support and ventilation ducting.",
     proof: [
       { value: "1,000km+", label: "convergence monitored" },
       { value: "100+", label: "movements detected" },
-      { value: "Ongoing", label: "with Beck Engineering" },
+      { value: "Ongoing", label: "continuous programme" },
     ],
   },
   {

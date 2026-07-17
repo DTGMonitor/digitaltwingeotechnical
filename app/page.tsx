@@ -137,7 +137,7 @@ export default function Home() {
             </h2>
             <p className="story-subcopy fade-up">
               {renderTrademarkText(
-                "DTG Focus supports review workflows, visibility, traceability and decision records across complex monitoring environments.",
+                "DTG Focus is DTG's own monitoring software — built and running. It brings every source into one view, with analytics, review workflow and governance on the same data.",
               )}
             </p>
             <div className="focus-home-pillars fade-up" aria-label="DTG Focus support pillars">
@@ -183,12 +183,12 @@ function FocusOperationalView() {
           src={dtgFocusOverviewPath}
           width={1672}
           height={941}
-          alt="DTG Focus preview shown on a laptop in an operating environment"
+          alt="DTG Focus shown on a laptop in an operating environment"
           className="focus-operational-image"
           sizes="(max-width: 1024px) 100vw, 46vw"
         />
       </div>
-      <figcaption>DTG Focus preview - supporting monitoring review, visibility and trend interpretation.</figcaption>
+      <figcaption>DTG Focus — every monitoring source in one review environment.</figcaption>
     </figure>
   );
 }

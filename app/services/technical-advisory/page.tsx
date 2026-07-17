@@ -2,10 +2,11 @@
 // Indonesia, so company-wide financial claims are indefensible. NEVER reintroduce "no commission",
 // "no vendor lock-in", "no lock-in", "no product to sell" or "we sell no hardware". The promise is
 // how DTG advises on YOUR site — driven by your risk and your data, not by a product.
-// NB the "Recommends across the market, not one product line" matrix row is a SCOPE-OF-ADVICE claim
-// (binary-true, no commercial claim) — it rests on the factual assumption that DTG advisory really
-// does recommend across the market, including against its own distributed products. Pending Peter's
-// confirmation; if that isn't true, CUT the row rather than reword it.
+// NB the "Recommends across the market, not one product line" matrix row was CUT (2026-07-18): the
+// factual question — does DTG advisory recommend across the market, including against its own
+// distributed products? — was answered, and the answer is that the claim can't stand. Cut, not
+// reworded, and NO mention of the distribution arm added in its place (staying silent about it is
+// the decision; this removed a neutrality claim, it did not disclose anything). Do not reinstate it.
 // NB the FAQ "Do you recommend specific vendors' products?" is DELIBERATELY silent on the
 // distribution arm. That is a holding position, not an end state: disclosure is a leadership/legal
 // call, and half-disclosing would raise the question without answering it. Do NOT add a neutrality
@@ -97,10 +98,6 @@ const content: ServiceContent = {
     rows: [
       { label: "Starts from your requirement, not a product", cells: ["yes", "no", "yes"] },
       { label: "Technology-agnostic across vendors", cells: ["yes", "no", "partial"] },
-      // 🚩 PENDING PETER: this row assumes DTG advisory genuinely recommends across the market,
-      // INCLUDING against DTG's own distributed hardware. If untrue -> CUT THE ROW, do not reword.
-      // Keep its prominence unchanged (row 3 of 5, no special treatment) until that is settled.
-      { label: "Recommends across the market, not one product line", cells: ["yes", "no", "yes"] },
       { label: "Specialist geotechnical monitoring depth", cells: ["yes", "partial", "partial"] },
       { label: "Independent of your own conclusions", cells: ["yes", "no", "no"] },
     ],
