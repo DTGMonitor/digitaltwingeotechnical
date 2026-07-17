@@ -54,11 +54,9 @@ export function Tabs({ eyebrow, title, titleId, items, ariaLabel, surface = "def
   return (
     <Surface variant={surface} compact={compact} aria-labelledby={title ? titleId : undefined}>
       {title ? (
-        <div className="section-kit-statement">
-          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-          <h2 id={titleId} className="section-headline">
-            {title}
-          </h2>
+        <div className="svcd-sec-head">
+          {eyebrow ? <span className="svcd-eyebrow">{eyebrow}</span> : null}
+          <h2 id={titleId}>{title}</h2>
         </div>
       ) : null}
       <div className="tabs">

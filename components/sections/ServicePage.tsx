@@ -42,7 +42,7 @@ export type ServiceContent = {
     groups: { title: string; desc: string; points: string[] }[];
   };
   crossLink?: { title: string; body: string; linkLabel: string; href: string };
-  matrix?: { eyebrow?: string; title?: string; columns: string[]; rows: { label: string; cells: MatrixCell[] }[]; highlightColumn?: number };
+  matrix?: { eyebrow?: string; title?: string; rowHeader?: string; columns: string[]; rows: { label: string; cells: MatrixCell[] }[]; highlightColumn?: number };
   tabs?: { eyebrow?: string; title?: string; items: { label: string; heading?: string; intro?: string; points?: string[] }[] };
   delivery: { eyebrow?: string; title: string; steps: { title: string; body: string }[] };
   outcomes: { eyebrow?: string; title: string; items: { icon?: ReactNode; title: string; body?: string }[] };
@@ -112,13 +112,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
       {/* WHAT'S INCLUDED */}
       <Surface variant="raised" id={includedId} className="svcd-inc" aria-labelledby={`${c.slug}-included-title`}>
-        <div className="svcd-inc__head" data-svcd-reveal>
+        <div className="svcd-sec-head" data-svcd-reveal>
           {c.whatsIncluded.eyebrow ? (
             <span className="svcd-eyebrow">{renderTrademarkText(c.whatsIncluded.eyebrow)}</span>
           ) : null}
-          <h2 id={`${c.slug}-included-title`} className="svcd-inc__title">
-            {renderTrademarkText(c.whatsIncluded.title)}
-          </h2>
+          <h2 id={`${c.slug}-included-title`}>{renderTrademarkText(c.whatsIncluded.title)}</h2>
           {c.whatsIncluded.intro ? <p>{renderTrademarkText(c.whatsIncluded.intro)}</p> : null}
         </div>
         <div className="svcd-inc__grid">
@@ -161,6 +159,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
           eyebrow={c.matrix.eyebrow}
           title={c.matrix.title}
           titleId={`${c.slug}-matrix`}
+          rowHeader={c.matrix.rowHeader}
           columns={c.matrix.columns}
           rows={c.matrix.rows}
           highlightColumn={c.matrix.highlightColumn}
@@ -171,7 +170,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
       {/* TABS (optional — technical-advisory only) */}
       {c.tabs ? (
         <Tabs
-          surface="default"
+          surface="raised"
           eyebrow={c.tabs.eyebrow}
           title={c.tabs.title}
           titleId={`${c.slug}-tabs`}
@@ -199,13 +198,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
       {/* HOW IT'S DELIVERED */}
       <Surface variant="default" className="svcd-del" aria-labelledby={`${c.slug}-delivery`}>
-        <div className="svcd-del__head" data-svcd-reveal>
+        <div className="svcd-sec-head" data-svcd-reveal>
           {c.delivery.eyebrow ? (
             <span className="svcd-eyebrow">{renderTrademarkText(c.delivery.eyebrow)}</span>
           ) : null}
-          <h2 id={`${c.slug}-delivery`} className="svcd-del__title">
-            {renderTrademarkText(c.delivery.title)}
-          </h2>
+          <h2 id={`${c.slug}-delivery`}>{renderTrademarkText(c.delivery.title)}</h2>
         </div>
         <ol className="svcd-steps">
           {c.delivery.steps.map((s, i) => (
@@ -222,13 +219,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
       {/* WHAT YOU GET */}
       <Surface variant="raised" className="svcd-out" aria-labelledby={`${c.slug}-outcomes`}>
-        <div className="svcd-out__head" data-svcd-reveal>
+        <div className="svcd-sec-head" data-svcd-reveal>
           {c.outcomes.eyebrow ? (
             <span className="svcd-eyebrow">{renderTrademarkText(c.outcomes.eyebrow)}</span>
           ) : null}
-          <h2 id={`${c.slug}-outcomes`} className="svcd-out__title">
-            {renderTrademarkText(c.outcomes.title)}
-          </h2>
+          <h2 id={`${c.slug}-outcomes`}>{renderTrademarkText(c.outcomes.title)}</h2>
         </div>
         <div className="svcd-out__grid">
           {c.outcomes.items.map((o, i) => (
@@ -247,11 +242,9 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 
       {/* FAQs — always open, two columns. NOT an accordion (see the note at the top). */}
       <Surface variant="default" className="svcd-faq" aria-labelledby={`${c.slug}-faq`}>
-        <div className="svcd-faq__head" data-svcd-reveal>
+        <div className="svcd-sec-head" data-svcd-reveal>
           <span className="svcd-eyebrow">{c.faqSection?.eyebrow ?? "FAQs"}</span>
-          <h2 id={`${c.slug}-faq`} className="svcd-faq__title">
-            {renderTrademarkText(c.faqSection?.title ?? "Common questions.")}
-          </h2>
+          <h2 id={`${c.slug}-faq`}>{renderTrademarkText(c.faqSection?.title ?? "Common questions.")}</h2>
         </div>
         <dl className="svcd-faq__list">
           {c.faqs.map((f, i) => (

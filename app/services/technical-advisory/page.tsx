@@ -97,6 +97,9 @@ const content: ServiceContent = {
     rows: [
       { label: "Starts from your requirement, not a product", cells: ["yes", "no", "yes"] },
       { label: "Technology-agnostic across vendors", cells: ["yes", "no", "partial"] },
+      // 🚩 PENDING PETER: this row assumes DTG advisory genuinely recommends across the market,
+      // INCLUDING against DTG's own distributed hardware. If untrue -> CUT THE ROW, do not reword.
+      // Keep its prominence unchanged (row 3 of 5, no special treatment) until that is settled.
       { label: "Recommends across the market, not one product line", cells: ["yes", "no", "yes"] },
       { label: "Specialist geotechnical monitoring depth", cells: ["yes", "partial", "partial"] },
       { label: "Independent of your own conclusions", cells: ["yes", "no", "no"] },
