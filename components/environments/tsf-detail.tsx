@@ -4,7 +4,7 @@
 // driving the shared EnvironmentDetailPage template; its signature visual is the noise->signal
 // chart (the one page where the noise/signal treatment is genuinely true). Proof band is
 // capability-framed (NO invented numbers). Client name (Greatland/Telfer) MUST NOT appear.
-// Hero image is an AI-generated placeholder; partnership/scope provisional (verify-before-publish).
+// Hero image is an AI-generated placeholder. Catalyst Earth partnership confirmed; figures approved.
 
 import Link from "next/link";
 import { ArrowRight, Eye } from "lucide-react";
@@ -130,7 +130,8 @@ const tsfDetail: EnvironmentDetailData = {
       </>
     ),
     partnerIcon: <Eye size={16} aria-hidden="true" />,
-    verify: "Partnership and scope to be confirmed before publication.",
+    // Catalyst Earth partnership is CONFIRMED and figures are approved (user, 2026-07-18) — the
+    // "to be confirmed" note is removed. Catalyst Earth stays named; it is the one confirmed partner.
   },
   editorial: {
     statement: (

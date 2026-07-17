@@ -42,7 +42,7 @@ export type EnvironmentDetailData = {
     caps?: Cap[];
     partner?: ReactNode;
     partnerIcon?: ReactNode; // per-page pill glyph (TSF = sensing/Eye, underground = partnership/Users)
-    verify: string;
+    verify?: string; // optional small note under the proof — omit when there's nothing to caveat
   };
   editorial: { statement: ReactNode; sideK: string; sideParagraphs: ReactNode[]; glance?: GlanceRow[] };
   signature: { eyebrow: string; heading: string; intro: string; visual: ReactNode; note?: ReactNode };
@@ -139,7 +139,7 @@ export function EnvironmentDetailPage({ data }: { data: EnvironmentDetailData })
               {proof.partner}
             </div>
           ) : null}
-          <p className="envd-proof__verify">{proof.verify}</p>
+          {proof.verify ? <p className="envd-proof__verify">{proof.verify}</p> : null}
         </div>
       </section>
 

@@ -4,7 +4,7 @@
 // Source of truth: dtg-applications-overview-mockup.html. Chrome (nav + footer) comes from the
 // global layout (Header + SiteBottom); this component renders only the page body.
 // Environment images are AI-GENERATED PLACEHOLDERS (public/images/applications/*) — upgrade to
-// licensed photography before publication. Proof figures are provisional (verify-before-publish).
+// licensed photography before publication. Proof figures are APPROVED to publish (user 2026-07-18).
 
 import Image from "next/image";
 import Link from "next/link";
@@ -246,7 +246,6 @@ export function ApplicationsOverview() {
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
           <p className="appsx-provisional">
-            Proof figures are provisional and subject to verification before publication.
             Environment imagery is AI-generated placeholder pending licensed photography.
           </p>
         </div>

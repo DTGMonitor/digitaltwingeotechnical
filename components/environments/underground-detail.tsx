@@ -62,7 +62,7 @@ const undergroundDetail: EnvironmentDetailData = {
       { n: "100+", l: "apparent movements detected & reviewed" },
       { n: "Ongoing", l: "continuous monitoring programme" },
     ],
-    verify: "Figures to be confirmed before publication.",
+    // Figures APPROVED to publish (user, 2026-07-18) — verify note removed.
   },
   editorial: {
     statement: (
