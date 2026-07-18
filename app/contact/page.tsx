@@ -33,6 +33,32 @@ export const metadata: Metadata = {
     "Start a monitoring conversation with DTG. Share your monitoring context and the decision it needs to support.",
 };
 
+/**
+ * 🔴 LAUNCH GATE — the enquiry form is OFF unless CONTACT_FORM_ENABLED === "true".
+ *
+ * Chosen over an unlinked deploy because /contact is in the primary nav and cannot be unlinked
+ * without breaking the site.
+ *
+ * ⚠️ THIS IS A BUILD-TIME FLAG, NOT A RUNTIME ONE. /contact is statically prerendered, so
+ * process.env is read when the page is built. Changing the variable on the host and restarting
+ * does NOT flip it — verified, after an earlier version of this comment wrongly claimed it would.
+ * Set the variable, then REBUILD/REDEPLOY. That is fine for a gate flipped once at launch, and
+ * keeps the page static; making it runtime would mean force-dynamic on a page that has no other
+ * reason to be dynamic.
+ *
+ * Two things must be true before it is switched on:
+ *   1. The owner has approved the /privacy text (currently DRAFT — the form collects personal
+ *      data and the policy is what it points at).
+ *   2. CONTACT_MAIL_API_KEY is set AND the SPF/DKIM records in docs/CONTACT-FORM.md exist in
+ *      Resend, or replies land in spam.
+ *
+ * While OFF the section keeps its heading and its "what happens next" triad, and offers the
+ * email address instead of the fields — so the page reads as finished rather than broken. It
+ * does NOT show a form that cannot send: asking someone to type a briefing into a dead form is
+ * the exact failure this rebuild set out to remove.
+ */
+const FORM_ENABLED = process.env.CONTACT_FORM_ENABLED === "true";
+
 const OFFICES = [
   {
     label: "Office",
@@ -110,8 +136,11 @@ export default function ContactPage() {
               Share your monitoring context
             </h2>
             <p>Four short answers, straight to the team.</p>
-            {/* Triad claims are owner-sign-off gated ("no ticketing layer", "held in
-                confidence") — shipped as written in the approved mockup. */}
+            {/* ⚠️ OPERATIONAL CLAIMS — owner-confirmed 2026-07-19, and they are commitments,
+                not copy. If enquiries ever move into a ticketing/helpdesk tool, the "no
+                ticketing layer" line MUST be removed. Likewise "a human reply … not an
+                autoresponder" fails the moment an autoresponder is switched on. Anyone wiring
+                automation into info@dtgeotech.com owns updating this list. */}
             <ul className="cx-next" aria-label="What happens next">
               <li>
                 <b>One inbox.</b> It lands at{" "}
@@ -127,7 +156,23 @@ export default function ContactPage() {
           </div>
 
           <div data-cx-reveal>
-            <ContactForm />
+            {FORM_ENABLED ? (
+              <ContactForm />
+            ) : (
+              <div className="cx-formoff">
+                <p className="cx-formoff__lead">
+                  The briefing form is being finished. In the meantime, email us directly —
+                  it reaches exactly the same place.
+                </p>
+                <a className="cx-btn" href="mailto:info@dtgeotech.com">
+                  info@dtgeotech.com
+                </a>
+                <p className="cx-formoff__hint">
+                  Tell us the asset, the behaviour that concerns you, and the decision the data
+                  needs to support.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -15755,3 +15755,9 @@ a.cx-cap:focus-visible .cx-cap__go { opacity:1; transform:translate(0,-50%); }
  .cx-success { animation:none; }
  .cx-btn, .cx-submit, .cx-cap, .cx-cap__go, .cx-success__arr { transition:none; }
 }
+
+/* Launch gate: shown in place of the form while CONTACT_FORM_ENABLED is not "true".
+   Keeps the section looking finished rather than broken — never render a form that cannot send. */
+.cx-formoff { padding-block:clamp(30px,4vw,44px); border-top:1px solid rgba(255,255,255,.15); }
+.cx-formoff__lead { font-size:clamp(17px,1.9vw,21px); line-height:1.5; color:var(--c-text); margin:0 0 26px; max-width:44ch; }
+.cx-formoff__hint { font-size:14px; line-height:1.6; color:var(--c-text-soft); margin:26px 0 0; max-width:48ch; }

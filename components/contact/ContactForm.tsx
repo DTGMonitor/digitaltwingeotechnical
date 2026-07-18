@@ -254,13 +254,7 @@ export function ContactForm() {
           <span>{loading ? "Sending…" : "Send briefing"}</span>
         </button>
         <p className="cx-privacy">
-          Handled as described in our{" "}
-          {/* TODO(owner sign-off): no privacy policy route exists in this repo — confirmed by
-              route audit 2026-07-19. Rendered as plain text, NOT a dead link: a href="#" that
-              goes nowhere is worse than no link. Wire to the real route when it exists. */}
-          <span data-todo="Claude Code: no privacy route exists — confirm and wire">
-            privacy policy
-          </span>
+          Handled as described in our <Link href="/privacy">privacy policy</Link>
         </p>
       </div>
     </form>
