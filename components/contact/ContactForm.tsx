@@ -10,7 +10,7 @@
  * swaps the form out: only a 200 does.
  */
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -39,6 +39,14 @@ export function ContactForm() {
   const errorRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+
+  // Focus moves in an EFFECT, not in the submit handler. The handler runs before React commits
+  // the new state, so the error/success node does not exist yet — a requestAnimationFrame there
+  // silently no-ops (caught by the keyboard QA pass: role="alert" rendered but never took focus).
+  useEffect(() => {
+    if (status === "error") errorRef.current?.focus();
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   function validate() {
     const next: Record<FieldKey, boolean> = {
@@ -70,11 +78,8 @@ export function ContactForm() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus("success");
-      // Focus moves to the success block so a screen-reader user is taken to the outcome.
-      requestAnimationFrame(() => successRef.current?.focus());
     } catch {
       setStatus("error");
-      requestAnimationFrame(() => errorRef.current?.focus());
     }
   }
 
@@ -86,6 +91,8 @@ export function ContactForm() {
     setCompany("");
     setInvalid({ name: false, email: false, context: false });
     setStatus("idle");
+    // Safe here: the form is already mounted when resetting from the success view, but the
+    // success block unmounts in the same commit — defer one frame so focus lands on the input.
     requestAnimationFrame(() => nameRef.current?.focus());
   }
 
