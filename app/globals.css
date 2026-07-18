@@ -15839,6 +15839,10 @@ main .ld-container,
 .sf__col a:hover { color:#fff; }
 .sf__col a:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; }
 .sf__base { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-top:24px; font-size:12.5px; color:rgba(244,247,246,.55); }
+/* Reserve the right edge for the site-wide fixed .scroll-top button (48px wide, 28px from the
+   viewport edge), which otherwise overlaps the last few pixels of the LinkedIn link. Measured
+   against the live render, not guessed. */
+@media (min-width:761px) { .sf__base { padding-right:88px; } }
 .sf__social { display:inline-flex; align-items:center; gap:10px; color:rgba(244,247,246,.75); }
 .sf__social-ic { width:30px; height:30px; border-radius:50%; border:1px solid rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; transition:background .25s ease, border-color .25s ease, color .25s ease; }
 .sf__social:hover { color:#fff; }
