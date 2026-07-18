@@ -26,7 +26,11 @@ export const detailPages: Record<string, DetailPageContent> = {
   // /about#vendor-independence, so nothing renders this key. Its intro is the RETIRED claim
   // ("DTG is independent of ... equipment manufacturers") — false, DTG distributes radar and GNSS
   // in Indonesia. Harmless while unrouted. DO NOT WIRE THIS UP without rewriting the intro first.
-  // Same shape as the detailPages["dtg-focus"] landmine below.
+  //
+  // NB this comment used to point at "the detailPages["dtg-focus"] landmine below" — a dangling
+  // reference, because no warning was ever written at that key. That key has since been DELETED
+  // (see the compliance note further down). The lesson it carried is worth keeping: a dead key in
+  // this file still ships to the browser, because 13 live routes import this module. Dead ≠ absent.
   "about/vendor-independence": {
     eyebrow: "About",
     title: "Vendor Independence",
@@ -143,16 +147,13 @@ export const detailPages: Record<string, DetailPageContent> = {
       "Practical development for teams working with monitoring systems and TARPs.",
     ],
   },
-  "dtg-focus": {
-    eyebrow: "DTG Focus™",
-    title: "What is DTG Focus™?",
-    intro: "DTG Focus™ integrates monitoring data, engineering workflows, governance and intelligent analytics into a single decision-support platform.",
-    points: [
-      "One platform, multiple technologies and a single operational view.",
-      "Integrate monitoring technologies, Govern workflows and Decide with defensible records.",
-      "Supports audit trails, decision records, change management and version control across monitoring workflows.",
-    ],
-  },
+  // COMPLIANCE DELETION (2026-07-18, user-authorised): the "dtg-focus" key was here. It had ZERO
+  // consumers — /dtg-focus renders DTGFocusPage, not DetailPage — but its intro claimed DTG Focus™
+  // "integrates … into a single decision-support platform", i.e. complete integrated coverage,
+  // which CLAUDE.md §3 forbids outright. Dead ≠ absent: this file is imported by 13 live routes, so
+  // the string SHIPPED IN THE JS BUNDLE and was greppable by anyone who looked. Deleted rather than
+  // reworded — nothing renders it, so there is nothing to reword for. Do not re-add.
+
   "dtg-focus/multi-sensor-integration": {
     eyebrow: "DTG Focus™",
     title: "Multi-Sensor Integration",

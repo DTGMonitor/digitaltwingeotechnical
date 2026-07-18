@@ -325,11 +325,22 @@ decisions, not copy or code decisions:
 
 1. **"DTG is not a hardware vendor."** False — **DTG distributes radar and GNSS in Indonesia.**
    Retired from §1 and §3 and removed from the site on 2026-07-17.
-2. **"DTG Focus™ is an existing product."** §3 gives it a formal category, five pillars, a colour
-   sub-family, a logo, a trademark and a marketing page. In reality it is **in active development
-   and only partially used internally** — DTG uses parts of it in its own delivery; it is not yet
-   available for a client to buy. This still **blocks** the framing pass on `/dtg-focus`, home and
-   the three Focus children.
+2. **"DTG Focus™ is a finished, fully-integrated product."** The masterbook gives it a formal
+   category, five abstract pillars, a colour sub-family, a logo and a trademark, and describes it as
+   complete. **The honest position is §3's:** the tools are **built and running**, used daily by
+   DTG's own engineers and in client delivery, and individual capabilities **can be deployed for
+   clients on request** — but the **fully integrated, full-coverage** product is **still being
+   completed**. The masterbook overstates the finished state; it does not describe a concept.
+
+   > ⚠️ **THIS ITEM WAS ITSELF A GENERATOR — corrected 2026-07-18.** Until this edit, §12 still read
+   > *"in active development and only partially used internally … not yet available for a client to
+   > buy"* and claimed the issue *"blocks the framing pass on `/dtg-focus`"*. That was the
+   > pre-amendment framing: §3 was corrected and **§12 was not**, so the governing document
+   > **contradicted itself**, and a reader landing on §12 first would take the retired framing
+   > **with the doc as justification** — the precise failure this section exists to warn about,
+   > happening inside this section. The block referred to was cleared and `/dtg-focus` has shipped.
+   > **A document that contradicts itself is a live generator, not a stale note.** When §3 (or any
+   > rule here) is amended, grep this file for the old framing in the same change.
 
 **The masterbook is the ROOT GENERATOR.** It was written before the Indonesia distribution arm and
 before Focus's real status, so it describes a company that no longer exactly exists. Amending

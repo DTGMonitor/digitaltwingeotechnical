@@ -1,90 +1,26 @@
-import { DTGFocusMark } from "@/components/brand";
-import { FocusPillars, FocusVision, Workflow } from "@/components/geotechnical";
-import { CTA, PageHero, Reveal, SectionLabel } from "@/components/ui";
+import { permanentRedirect } from "next/navigation";
 
-export default function Focus() {
-  return (
-    <main>
-      <PageHero
-        kicker={
-          <>
-            <DTGFocusMark /> / Future Platform Vision
-          </>
-        }
-        index="01"
-        title="Focused Actionable Insight."
-        body={
-          <>
-            <DTGFocusMark /> integrates monitoring data, engineering workflows, governance and intelligent analytics into
-            a single decision-support platform.
-          </>
-        }
-      />
-
-      <section className="focus-section border-b hairline">
-        <div className="shell flex flex-wrap items-center justify-between gap-4 py-5">
-          <p className="eyebrow">Framework status</p>
-          <span className="border border-[#073F4A66] bg-[#0E1823] px-3 py-2 text-[9px] uppercase tracking-[.16em] text-[#D79A2B]">
-            Future Platform Vision - Currently Under Development
-          </span>
-        </div>
-      </section>
-
-      <section className="focus-section py-16 md:py-20">
-        <div className="shell">
-          <SectionLabel>
-            <DTGFocusMark />
-          </SectionLabel>
-          <Reveal>
-            <h2 className="headline max-w-4xl">
-              <DTGFocusMark />
-              <br />
-              Focused Actionable Insight.
-            </h2>
-            <p className="subhead mt-5 max-w-2xl">
-              <DTGFocusMark /> is being developed to integrate monitoring technologies, govern workflows and support
-              informed, defensible decisions across multiple monitoring technologies.
-            </p>
-          </Reveal>
-          <Reveal className="mt-10">
-            <FocusVision />
-          </Reveal>
-          <div className="mt-8">
-            <FocusPillars />
-          </div>
-        </div>
-      </section>
-
-      <section className="light-section border-y hairline py-20 md:py-24">
-        <div className="shell">
-          <SectionLabel>Technology-Agnostic by Design</SectionLabel>
-          <Reveal>
-            <h2 className="headline max-w-4xl">One Platform. Multiple Technologies. A Single Operational View.</h2>
-            <p className="subhead mt-5 max-w-2xl">
-              {/* COMPLIANCE: the last sentence was "DTG is independent of monitoring vendors, software
-                  vendors and equipment manufacturers" — a company-wide relationship claim, and false:
-                  DTG distributes radar and GNSS in Indonesia. Reframed onto the work. This route is
-                  unlinked but returns 200 and is indexable. */}
-              Radar, GNSS, prisms, surface LiDAR, SLAM LiDAR, InSAR, seismic systems, environmental monitoring and
-              operational data can be brought into one operating environment for correlation and review — reviewed
-              across systems and vendors, whoever supplied them.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="petroleum-section border-y hairline py-20 md:py-24">
-        <div className="shell">
-          <SectionLabel>Designed workflow</SectionLabel>
-          <Reveal>
-            <h2 className="headline max-w-4xl">Integrate. Govern. Decide.</h2>
-          </Reveal>
-          <div className="mt-10">
-            <Workflow />
-          </div>
-        </div>
-      </section>
-      <CTA />
-    </main>
-  );
+// COMPLIANCE REDIRECT (2026-07-18, user-authorised): this orphan legacy route was LIVE (200,
+// statically prerendered, zero inbound links) and published the RETIRED DTG Focus™ framing that
+// CLAUDE.md §3 was amended to kill — a status badge reading "Future Platform Vision - Currently
+// Under Development", "DTG Focus™ is being developed to…", and "single decision-support platform"
+// (a claim of complete integrated coverage). §3 forbids all of it: never "in development",
+// "roadmap", "coming soon", "not yet available" or "preview", and never claim full coverage exists.
+//
+// WHY IT SURVIVED EARLIER SWEEPS — worth reading before the next audit: CLAUDE.md §5 records this
+// route as "verified clean by rendered-HTML sweep", and commit e668ba2 already edited this very
+// file for the "not a hardware vendor" claim. Both were true. Both were scoped to a DIFFERENT
+// category (client names, sensor brands, the hardware claim), so the Focus framing was never
+// checked and stayed live. A category nobody enumerates cannot fail an audit — third proof of that
+// shape on this project, after the raised-dark surface and the muted token.
+//
+// Redirected rather than rewritten (user's call): /dtg-focus is the live, recomposed, compliant
+// Focus page. A second Focus page is the divergence pattern — two things meant to say the same
+// thing, drifting apart. One page, one truth.
+//
+// NB this orphans components/geotechnical.tsx entirely (FocusPillars / FocusVision / Workflow /
+// MonitoringCentreVisual / IntegrationVisual — this file was its only importer). Left in place on
+// purpose: CLAUDE.md §2.3 forbids cleanup as a side effect. It is on the dead-code cleanup list.
+export default function Page() {
+  permanentRedirect("/dtg-focus");
 }
