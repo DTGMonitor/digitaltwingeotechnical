@@ -7,33 +7,83 @@ The deep detail lives in the auto-memory files (linked at the bottom) — this i
 
 ## State
 
-- **`main` is clean.** Last code/content change is `ea13927`; HEAD is the commit that added this handover (docs-only on top). Build + lint green. Tree clean. (This repo is the **nested** path `C:\dtg-website\dtg-website`, not the outer folder — recurring trap.)
+- **`main` is clean.** Build + lint green. Tree clean. (This repo is the **nested** path `C:\dtg-website\dtg-website`, not the outer folder — recurring trap.)
+- **Session 2 (2026-07-18) shipped two branches on top of `ea13927`:**
+  - `cae0dd3` — **the DTG Focus framing back-sweep.** §3 was amended but the copy the OLD §3 authored was never swept. Eight live copy instances, one live 200 route (`/focus` → 308), one bundle-shipped dead key, four guard comments, and the §12 self-contradiction that was certifying all of it.
+  - `b9395d4` — **the DetailPage retheme.** 13 legacy routes fixed at the root by re-pointing `.story-page`/`.detail-*`/`InternalHero` at `--c-*`. AA gate: 14 routes × 2 themes, zero fails, floors 5.99 light / 7.14 dark.
 - **Every axis has shipped:** Applications (overview + 4 environments), Solutions, Services (overview + 5 detail pages), About, and DTG Focus™. All recomposed onto the `--c-*` theme layer with scoped class families (`.appsx-* .envd-* .civx-* .solx-* .svcx-* .svcd-* .ab-* .dfx-*`).
 - **Compliance is settled** — every escalated item is resolved and shipped: the "not a hardware vendor" claim, the advisory matrix row, the Beck Engineering removal (Catalyst Earth stays — confirmed), the DTG Focus™ doc-vs-reality conflict (CLAUDE.md §3 amended), and the legacy-route client-name/sensor-brand leaks (redirected + dead data deleted). Proof figures are **approved to publish**.
 - **Light-theme sign-off is COMPLETE.** All 16 recomposed routes pass AA in light. **Floor 4.82** — the bright-green eyebrow (`--accent-text`) on a deep-teal band (`--c-surface-band`), the site's tightest passing pair. **Anything below 4.82 is a regression, not legacy debt.** Full per-route baseline is in commit `4e6aeca`.
 
 ---
 
-## Next task — the dark→light default flip
+## Next task — the /contact redesign (NOT the flip)
 
-The site currently defaults to **dark** as a temporary migration stance; **light is the masterbook end-state**. The flip is the last visual item and it is now unblocked by the sign-off above.
+**The flip is no longer next.** `/contact` is the last theme-blind route: its body is a legacy
+`.contact-*` class family, measured **100% theme-blind across 80 elements**. Its hero already themes
+(it shares `InternalHero` with the 13 DetailPage routes).
 
-- **The gate is `work/lightsweep.mjs`** (dependency-free Node + Chrome-CDP; `work/` is gitignored scratch — the script survives in `main`'s history via this note, rewrite from the pattern if absent). It measures every route in light against **real composited backgrounds** and the correct AA threshold by size. **Run it after the flip; any sub-4.5 floor is a regression.**
-- **Eyes-on every route, both themes, after the flip.** The baseline proves numbers, not that it *looks* right — that distinction has mattered repeatedly on this project.
-- **⚠️ Gap — ANSWERED 2026-07-18: yes, 13 survive.** The sign-off covers only the **recomposed**
-  routes. These render live (200, not redirected) and are **hardcoded dark** — they will **not**
-  participate in the flip and will sit dark against a light site:
-  - `/capabilities/*` — 5 routes (`DetailPage`)
-  - `/dtg-focus/{data-governance, future-workflows, multi-sensor-integration}` (`DetailPage`)
-  - `/about/{why-dtg-exists, vision-future}` (`DetailPage`)
-  - `/insights/{alarm-confidence, monitoring-evidence, monitoring-lessons}` (`DetailPage`)
-  - `/focus` — bespoke legacy, hardcoded hexes (`#071927`, `#08111Acc`, `#073F4Acc`) — see the
-    compliance section below; this one has a **live copy violation** as well as a theme problem.
+**It is being redesigned, so it gets themed ONCE, in the redesign — not rethemed now and again
+later.** The user is producing a mockup + brief in a separate chat. **The `/contact` redesign lands
+BEFORE the flip**, so the flip arrives on a uniformly themed site.
 
-  **11 of the 13 are one component: `DetailPage`.** It is legacy-styled (`.story-page`,
-  `.detail-body`, and a hard-coded `text-[#6d747a]` on the eyebrow). **Retheming `DetailPage` onto
-  `--c-*` fixes 11 routes in one change** — worth doing *before* the flip rather than accepting 13
-  dark islands. Decide with the user: retheme, redirect, or accept.
+> ⚠️ Remember the standing rule: **the mockup chat cannot see this repo.** Take INTENT from the
+> mockup, restyle in place with the repo's own mechanism, and audit the brief's assumptions first —
+> six briefs so far carried an assumption that didn't survive the repo, and it can shrink the task
+> as easily as grow it. See `dtg-working-style`.
+
+---
+
+## Then — the dark→light default flip
+
+The site currently defaults to **dark** as a temporary migration stance; **light is the masterbook end-state**. The flip is the last visual item, and it runs **last**, after `/contact`.
+
+### 🔑 Three gates the flip must respect (learned the hard way, 2026-07-18)
+
+1. **ENUMERATE FROM THE ROUTER, not from any list.** Derive every live 200 from `app/**/page.tsx`
+   minus redirects, at run time. Do **not** trust this handover, the sign-off, a memory file, or a
+   previous audit's route list — **five separate misses this session traced to an incomplete list**
+   (`/contact` belonged to no list at all: not legacy, not recomposed, so neither audit had it).
+   The lists are the thing that has been lying.
+2. **AA IS NOT A THEME CHECK.** `work/lightsweep.mjs` passed `/contact` at floor 7.65 while it was a
+   fully dark island — it measures readability against the background *actually painted*, not
+   whether the surface responds to `data-theme`. Run **`work/blindscan.mjs`** as well: it renders
+   both themes and diffs computed styles across every element in `<main>`.
+3. **THE HEALTHY BLIND-FLOOR IS ~15%, NOT 0%.** Always-dark heroes, CTA bands, buttons and SVG paths
+   legitimately never flip; a correctly recomposed route measures 15% blind. The pass condition is
+   **"every blind element sits inside an intentionally-always-dark region"** — chasing 0% generates
+   false work against correct code.
+
+### The tooling
+
+Both live in `work/` (gitignored scratch — they survive in `main`'s history via this note; rewrite
+from the pattern if absent). Dependency-free Node + Chrome-CDP.
+
+- **`work/lightsweep.mjs <url> [theme]`** — AA gate. Every leaf text element vs its **real
+  composited** background, correct threshold by size. **Floor to beat: 4.82.** Sub-4.5 is a
+  regression, not legacy debt.
+- **`work/blindscan.mjs <url>`** — re-theme gate (see gate 2 above). Also `work/themediff.mjs`
+  (selector-list variant — weaker, prefer blindscan) and `work/rect.mjs` (selector → crop coords,
+  pairs with `work/shot.mjs <url> <out> <width> <theme> [crop]`).
+- **Eyes-on every route, both themes, at 1440 AND 390.** The gates prove numbers, not that it
+  *looks* right — that distinction has mattered repeatedly here.
+
+### ⚠️ Legacy-dark gap — CLOSED 2026-07-18
+
+The 14 routes that would have been dark islands are fixed: **13** were `DetailPage` (rethemed,
+`b9395d4`) and **`/focus`** was 308-redirected (`cae0dd3`). **`/contact` is the only one left**, and
+it is handled by its redesign above. *(An earlier version of this note said "13 legacy routes, 11 of
+them DetailPage" — both figures were wrong, and `/contact` was missing entirely. Derive from the
+router, not from this file.)*
+
+### Known issue to fix DURING the flip pass
+
+**`/solutions` situation 06, at 390px: the `outcome` text wraps one word per line.** Its two short
+chip labels sit beside the outcome block and crush it; situation 01's longer labels wrap below and
+render fine — so the bug is **chip-label-length dependent**. Pre-existing, **proven by stash-test
+against `main`**. Fix the `.solx-sit__outcome` / chips row rule and **test with both short and long
+labels** — fixing against 06 alone will look right and still be wrong for 01.
+
 - The flip itself is the `data-theme` default in `app/layout.tsx` + the no-flash inline script (see `docs/THEME-ARCHITECTURE.md`).
 
 ---
@@ -44,41 +94,35 @@ Orphaned components + dead CSS the recomposition left behind (its own branch, af
 
 ---
 
-## Open compliance items — the Focus framing (ADDED 2026-07-18, second session)
+## ✅ RESOLVED 2026-07-18 — the Focus framing back-sweep (`cae0dd3`)
 
-These were carried in memory/conversation only and were **missing from this handover**. Both
-publish the retired DTG Focus™ framing that CLAUDE.md §3 was amended to kill.
+*Kept as the record of WHY, not as open work. Nothing here is outstanding.*
 
-### 🔴 `/focus` is a LIVE 200 route publishing the banned framing — the bigger half
+**The pattern worth remembering: CLAUDE.md §3 was amended, and the copy the OLD §3 had already
+authored was never swept.** The forward rebuild of `/dtg-focus` shipped; the back-catalogue sat
+violating for a day. **Amending a generator obliges a back-sweep** — that rule came out of this and
+is now in `dtg-fix-the-generator`.
 
-`app/focus/page.tsx` renders (43.7 kB, statically prerendered, **not** redirected). It publishes:
+**And §12 was protecting the violations.** It still carried the pre-amendment framing, so the
+governing doc contradicted itself and *vouched for* the very copy it should have flagged. Anyone
+checking would have read §12 and correctly left the copy alone. **A doc that contradicts itself
+certifies its own bugs** — more dangerous than doc-vs-reality, because the checker stops checking
+with the doc on their side.
 
-- a status badge reading **"Future Platform Vision - Currently Under Development"**,
-- *"DTG Focus™ **is being developed** to integrate…"*,
-- *"**Single decision-support platform**"* + the retired **Integrate·Govern·Decide** pillar block.
+Fixed: `/focus` 308 → `/dtg-focus` (was a live 200 publishing *"Currently Under Development"*);
+eight copy instances on `/about`, `/solutions`, `/services/technology-integration`;
+`detailPages["dtg-focus"]` deleted (dead, but shipping in the bundle via 13 importing routes);
+**four** guard comments that carried the retired framing — one of which *instructed* preservation,
+and one sat above the two violations in its own file, certifying them. §12 reconciled to §3.
 
-CLAUDE.md §3 says **NEVER** write "in development", "roadmap", "coming soon", "not yet available"
-or "preview", and **never** claim complete integrated coverage. This route does both, live.
+Verified clean by rendered-HTML sweep across all 50 routes **and** shipped-bundle grep, both with
+positive controls.
 
-> **Why it survived:** CLAUDE.md §5 records `/focus` as "verified clean by rendered-HTML sweep" —
-> but that sweep was scoped to **client names and sensor brands**. The retired-Focus-framing
-> category was never swept on it. Textbook [[dtg-token-rescope-rule]] lesson: *a surface nobody
-> enumerated can't fail an audit.* Orphan ≠ safe (proven three times now).
-
-**Decide: redirect `/focus` → `/dtg-focus`, or rewrite it.** Redirect is consistent with how the
-other leaking legacy routes were handled (`4a62793`). Needs user sign-off — it is compliance, not
-redesign, so it gets its own branch.
-
-### ⚪ `detailPages["dtg-focus"]` — dead data, still shipped
-
-`components/detail-content.tsx:146`. Intro: *"…into a single decision-support platform."* — the same
-retired overclaim. **Zero consumers** (`/dtg-focus` renders `DTGFocusPage`, not `DetailPage`), so it
-never renders — but it is a module-level export in a file **13 live routes import**, so the string
-**ships in the JS bundle** and is greppable by anyone who looks. Dead ≠ absent.
-
-**Also:** the landmine comment at line 25–29 says *"Same shape as the `detailPages["dtg-focus"]`
-landmine below"* — but **there is no comment at line 146**. The cross-reference dangles; the next
-reader finds no warning on the key it points at. Fix when the key is handled.
+> **The sweep lesson, four instances now:** `/focus` survived earlier audits because CLAUDE.md §5
+> records it "verified clean by rendered-HTML sweep" — a sweep scoped to **client names and sensor
+> brands**. Focus-framing was never a swept category. *A category nobody enumerates cannot fail an
+> audit.* My own widened sweep then still missed *"is being built"* and *"Where DTG is heading"* —
+> I enumerated **phrasings, not the category**, and reported five instances when there were eight.
 
 ---
 
