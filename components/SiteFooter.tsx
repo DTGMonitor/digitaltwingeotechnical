@@ -111,9 +111,11 @@ export function SiteFooter() {
         <div className="sf__base">
           {/* Legal links are limited to pages that actually exist. Peer footers list statutory
               pages because those companies publish them — no equivalents are fabricated here.
-              TODO(owner): no privacy policy route exists in this repo (route audit 2026-07-19).
-              When one ships, add it here and in the Contact form's privacy line. */}
-          <span>© {new Date().getFullYear()} Digital Twin Geotechnical</span>
+              /privacy is currently a DRAFT pending legal review (see app/privacy/page.tsx). */}
+          <span>
+            © {new Date().getFullYear()} Digital Twin Geotechnical ·{" "}
+            <Link href="/privacy">Privacy policy</Link>
+          </span>
           <a
             className="sf__social"
             href="https://www.linkedin.com/company/digitaltwingeotechnical/"

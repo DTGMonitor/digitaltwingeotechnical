@@ -15857,3 +15857,6 @@ main .ld-container,
 @media (prefers-reduced-motion:reduce) {
  .sf__col a, .sf__social-ic, .sf__social > span:last-child { transition:none; }
 }
+.sf__base a { color:rgba(244,247,246,.75); border-bottom:1px solid var(--signal-green); transition:color .2s ease; }
+.sf__base a:hover { color:var(--signal-green); }
+.sf__base a:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; }
