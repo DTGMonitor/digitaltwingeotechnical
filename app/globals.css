@@ -15812,3 +15812,31 @@ main .ld-container,
  .dfx-vb { grid-template-columns:1fr; gap:14px; padding-block:26px; }
  .dfx-vb:hover .dfx-vb__w { transform:none; }
 }
+
+/* ============================================================================
+   PRIVACY POLICY (.pv-*) — a legal prose page, 2026-07-19.
+
+   DELIBERATELY NOT a sixth copy of the eyebrow/button/reveal trio. A legal document has no
+   buttons, no reveals and no scroll cue, so it borrows only what it needs and adds a prose
+   block the other families don't have. If you find yourself pasting .cx-btn in here, stop —
+   this page doesn't need one.
+   ========================================================================= */
+.pv-page { background:var(--c-surface); color:var(--c-text-soft); }
+.pv-hero { background:var(--c-surface-band); color:var(--c-on-band); padding-block:clamp(96px,12vw,150px) clamp(40px,5vw,64px);
+ --c-text:var(--off-white); --c-text-soft:var(--text-on-dark-soft); --accent-text:var(--signal-green); }
+.pv-eyebrow { display:block; font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); margin-bottom:20px; }
+.pv-title { font-family:var(--font-sans); font-weight:700; font-size:clamp(2.4rem,5.5vw,4rem); line-height:1.02; letter-spacing:-.03em; color:#fff; margin:0 0 18px; }
+.pv-lead { max-width:56ch; font-size:clamp(16px,1.8vw,19px); line-height:1.55; color:var(--c-text-soft); margin:0; }
+
+.pv-body { max-width:72ch; padding-block:clamp(48px,7vw,88px); }
+.pv-updated { font-size:12.5px; letter-spacing:.04em; color:var(--c-text-soft); margin:0 0 clamp(32px,4vw,48px); padding-bottom:18px; border-bottom:1px solid var(--c-border); }
+.pv-body section + section { margin-top:clamp(34px,4.5vw,52px); }
+.pv-body h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.25rem,2.2vw,1.55rem); line-height:1.2; letter-spacing:-.02em; color:var(--c-text); margin:0 0 14px; }
+.pv-body p { font-size:16px; line-height:1.7; color:var(--c-text-soft); margin:0 0 14px; }
+.pv-body p:last-child { margin-bottom:0; }
+.pv-body strong { color:var(--c-text); font-weight:600; }
+.pv-body a { color:var(--accent-text); border-bottom:1px solid var(--accent-text); }
+.pv-body a:hover { color:var(--c-text); border-bottom-color:var(--c-text); }
+.pv-body ul { list-style:none; margin:0 0 14px; padding:0; }
+.pv-body li { position:relative; padding-left:20px; font-size:16px; line-height:1.7; color:var(--c-text-soft); margin-bottom:6px; }
+.pv-body li::before { content:""; position:absolute; left:2px; top:.72em; width:6px; height:1px; background:var(--accent-text); }
