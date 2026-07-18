@@ -338,7 +338,11 @@ export function DetailPage({ page }: { page: DetailPageContent }) {
       <section className="detail-body">
         <div className="story-shell detail-grid">
           <div>
-            <p className="story-eyebrow text-[#6d747a]">Overview</p>
+            {/* `text-[#6d747a]` was removed here (2026-07-18): it never applied — .story-eyebrow's
+                own colour won, so the eyebrow computed #A8B5C0, not #6d747a. An inert utility that
+                looks load-bearing is worse than none. Colour now comes from the scoped
+                `.detail-grid .story-eyebrow` rule in globals.css. */}
+            <p className="story-eyebrow">Overview</p>
             <h2>Built one level deeper.</h2>
           </div>
           <div className="detail-list">
