@@ -111,7 +111,7 @@ const faqs = [
   {
     question: renderTrademarkText("Do we need DTG Focus to work with DTG?"),
     answer: renderTrademarkText(
-      "No. DTG's review, analytics, governance and advisory work stands on its own. DTG Focus is in active development and not yet available as a product — we use parts of it in our own delivery today, but nothing about working with DTG depends on it.",
+      "No. DTG's review, analytics, governance and advisory work stands on its own. DTG Focus is our own monitoring software — we use it in how we deliver, and individual capabilities can be set up for your operation on request — but nothing about working with DTG depends on it.",
     ),
   },
   {

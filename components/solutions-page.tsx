@@ -8,14 +8,24 @@
 //  1. Situation 04 is engagement-scoped. NEVER reintroduce "no commission", "no vendor lock-in" or
 //     "we sell no hardware" — DTG distributes hardware in Indonesia, so a company-wide financial
 //     claim is indefensible.
-//  2. Situation 06: DTG Focus(TM) is NOT delivered. It must keep the "In development" pill, the
-//     "Where DTG is heading" column title, and the roadnote. No present-tense platform claims.
+//  2. Situation 06 is DTG Focus(TM). Framing per CLAUDE.md §3 (amended 2026-07-18): Focus is BUILT
+//     AND RUNNING and used in DTG's own delivery; individual capabilities can be set up for a client
+//     on request; complete coverage across every source is still being completed. NEVER write "in
+//     development", "roadmap", "coming soon", "not yet available" or "preview" — and equally never
+//     promise complete integrated coverage today. Frame delivery consultatively.
+//
+//     ⚠️ THIS COMMENT USED TO SAY THE OPPOSITE — it instructed the reader to KEEP an "In development"
+//     pill, a "Where DTG is heading" column title and a roadnote saying Focus was "not yet
+//     available". That was correct when written (a50a125, 2026-07-17, retiring a purchasability
+//     over-claim) and became a violation the moment §3 was amended the next day. A guard comment
+//     that names a specific artefact to preserve is a SINGLE-INSTANCE GENERATOR: it defeats the next
+//     fixer, who reads it and correctly leaves the violation alone. Guard the RULE, not the artefact.
 //
 // Images are AI-generated placeholders (public/images/solutions/*).
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowDown, Clock } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { type ReactNode, useEffect } from "react";
 import { DTGFocusMark, renderTrademarkText } from "@/components/brand";
 
@@ -27,7 +37,6 @@ type Situation = {
   desc: string;
   img: string;
   imgAlt: string;
-  roadmap?: boolean;
   wrong: string[];
   helpTitle: string;
   helps: string[];
@@ -172,27 +181,26 @@ const situations: Situation[] = [
     desc: "You have the people and the systems, but the work is scattered across tools. No single place brings every geotechnical sensor, report and decision together.",
     img: "/images/solutions/solution-06-fragmented.png",
     imgAlt: "A cluttered desk of disconnected tools — scattered printouts, spreadsheets and separate monitoring windows.",
-    roadmap: true,
     wrong: [
       "Separate tools for each sensor type.",
       "No single overview; traceability is manual.",
       "Decision records are scattered across systems.",
     ],
-    // NOT "How DTG helps" — Focus is not delivered.
-    helpTitle: "Where DTG is heading",
+    helpTitle: "How DTG helps",
     helps: [
-      "DTG Focus™ is being built to bring monitoring review, traceability and decision records into one governed environment.",
+      "DTG Focus™ brings monitoring review, traceability and decision records into one governed environment — built and running, and used in DTG's own delivery today.",
       "A single overview across all your geotechnical sensors, within DTG's wider service approach.",
     ],
     roadnote: (
       <p>
-        <b>Straight with you:</b> <DTGFocusMark /> is in active development and not yet available.
-        Today we deliver the integrated, governed view as a <b>service</b> — see situation 02. If a
-        platform is what you&rsquo;re after, talk to us about where it&rsquo;s up to and what we can
-        do for you in the meantime.
+        <b>Straight with you:</b> <DTGFocusMark /> is built and running — we use it every day in our
+        own delivery, and individual capabilities can be set up for your operation on request.
+        Complete coverage across every source in one place is still being completed, so we start from
+        what your teams most need to see. If a platform is what you&rsquo;re after, talk to us about
+        what we can set up for you.
       </p>
     ),
-    outcome: "One integrated, governed view — with every decision traceable.",
+    outcome: "An integrated, governed view of what matters most — with every decision traceable.",
     chips: [
       ["DTG Focus™", "/dtg-focus"],
       ["Data analytics", "/services/data-analytics-automation"],
@@ -323,12 +331,10 @@ export function SolutionsPage() {
               </div>
               <div>
                 <div className="solx-sit__num">{s.num}</div>
-                {s.roadmap ? (
-                  <span className="solx-roadmap">
-                    <Clock size={13} aria-hidden="true" />
-                    In development
-                  </span>
-                ) : null}
+                {/* The "In development" pill rendered here (situation 06 only, behind a `roadmap`
+                    flag) was removed 2026-07-18: CLAUDE.md §3 forbids "in development" framing for
+                    DTG Focus™ — the tools are built and running. The `roadmap` flag and the Clock
+                    import went with it. `.solx-roadmap` in globals.css is now unused → dead-code list. */}
                 <h2 className="solx-sit__who">{s.who}</h2>
                 <p className="solx-sit__quote">{s.quote}</p>
                 <p className="solx-sit__desc">{s.desc}</p>

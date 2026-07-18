@@ -4,12 +4,19 @@
 // integration honestly instead ("no rip-and-replace", "technology-agnostic", "regardless of who
 // supplied it") — those are technical claims about the work, not commercial claims about DTG.
 //
-// COMPLIANCE — DTG Focus(TM) IS NOT A PRODUCT A CLIENT CAN BUY. The truth: it is in ACTIVE
-// DEVELOPMENT, DTG uses parts of it in its OWN delivery today, and it is NOT yet available to
-// clients. NEVER say it is "delivered through", "offered", "available", or that a client "can"
-// integrate into it. Integration delivers into the CLIENT'S OWN systems and does not depend on
-// Focus. Short bullets cannot carry this nuance — they flatten it into an availability claim — so
-// keep the Focus truth in the cross-link and FAQ where there is room to state it properly.
+// COMPLIANCE — DTG Focus(TM) framing (CLAUDE.md §3, amended 2026-07-18). The truth: Focus is DTG's
+// own monitoring software, BUILT AND RUNNING and used in DTG's own delivery; individual capabilities
+// CAN be set up for a client on request; complete coverage across every source is still being
+// completed. NEVER write "in development", "roadmap", "coming soon", "not yet available" or
+// "preview" — and equally never promise complete integrated coverage today.
+// The structural rule still holds and is why the Focus material lives in the cross-link and the FAQ:
+// SHORT BULLETS CANNOT CARRY THIS NUANCE — they flatten it into either an availability claim or a
+// not-available claim. Keep it where there is room to state the boundary properly. Integration
+// delivers into the CLIENT'S OWN systems and does not depend on Focus — that part never changed.
+//
+// ⚠️ THIS COMMENT ASSERTED THE OPPOSITE UNTIL 2026-07-18: "IT IS IN ACTIVE DEVELOPMENT ... NOT yet
+// available to clients". Correct when written (a50a125), contradicted by the §3 amendment the next
+// day, and left standing — so it went on certifying the two violations in this very file.
 import type { Metadata } from "next";
 import { Layers, Plug, GitBranch, Play } from "lucide-react";
 import { ServicePage, type ServiceContent } from "@/components/sections";
@@ -85,7 +92,7 @@ const content: ServiceContent = {
   crossLinks: [
     {
       title: "Integration is the foundation, not the finish",
-      body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring. Integration delivers into your own systems — DTG Focus™, the governed environment we use in our own delivery, is still in development and not yet available as a product.",
+      body: "Consolidating the data is step one. Interpreting it — quality analysis, trends and automated processing — is Data analytics; watching it continuously is Remote monitoring. Integration delivers into your own systems — DTG Focus™ is the governed environment we use in our own delivery, and it isn't a prerequisite: integration works with the systems you already have.",
       linkLabel: "Data analytics",
       href: "/services/data-analytics-automation",
     },
@@ -119,7 +126,7 @@ const content: ServiceContent = {
     {
       question: "Is this the same as DTG Focus™?",
       answer:
-        "No. Integration is the work of connecting and governing your data sources, delivered into your own systems. DTG Focus™ is the governed environment we use in our own delivery — it's in active development and not yet available as a product you can buy. Integration doesn't depend on it.",
+        "No. Integration is the work of connecting and governing your data sources, delivered into your own systems. DTG Focus™ is DTG's own monitoring software — built and running, and used in how we deliver; individual capabilities can be set up on request. Integration doesn't depend on it.",
     },
     {
       question: "How is this different from Data analytics?",

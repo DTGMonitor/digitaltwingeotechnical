@@ -13,9 +13,17 @@
 //    interchangeable tiles.
 //  - The method section is TYPOGRAPHIC (Validate / Correlate / Govern). It replaced a teal band.
 //
-// COMPLIANCE: no DTG Focus(TM) mention anywhere on this page (deliberate — Focus is in development
-// and not available as a product). No sensor brand names. No client counts or proof numbers; the
-// numbers live on Applications and this page links there through the detail pages.
+// COMPLIANCE: no DTG Focus(TM) mention anywhere on this page — deliberate, and the OMISSION STANDS.
+// The reason is editorial, not availability: this is the Services axis (what DTG does for you), and
+// Focus has its own route at /dtg-focus. Naming a product here would file DTG as a software vendor,
+// which §3 forbids. No sensor brand names. No client counts or proof numbers; the numbers live on
+// Applications and this page links there through the detail pages.
+//
+// ⚠️ THE REASON RECORDED HERE USED TO BE FALSE: "Focus is in development and not available as a
+// product". That was true when written and was contradicted by the CLAUDE.md §3 amendment on
+// 2026-07-18 (Focus is built and running). A guard comment carrying a stale JUSTIFICATION is a
+// generator even when the behaviour it guards is still correct — the next reader re-derives the
+// retired framing from it and writes it somewhere else. Fix the reason, keep the rule.
 
 import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
