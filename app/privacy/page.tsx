@@ -45,9 +45,13 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="pv-collect">
           <h2 id="pv-collect">What we collect</h2>
+          {/* REVERT AT FORM LAUNCH: the enquiry form is not yet live — enquiries currently arrive
+              by email. This preface says so honestly. When CONTACT_FORM_ENABLED flips to "true",
+              remove this paragraph so the section describes the live form in the present tense. */}
           <p>
-            If you use the enquiry form on our contact page, we collect the information you type
-            into it:
+            The enquiry form on our contact page is not yet available — enquiries currently reach
+            us by email. When the enquiry form is available, it will collect the information you
+            type into it:
           </p>
           <ul>
             <li>Your name</li>

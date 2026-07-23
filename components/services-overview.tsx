@@ -82,7 +82,7 @@ const method: { word: string; body: string }[] = [
   },
   {
     word: "Correlate",
-    body: "Read every source against the others, so precursors single sensors miss are caught.",
+    body: "Read sources against one another, so precursors a single sensor might miss can surface for review.",
   },
   {
     word: "Govern",

@@ -28,7 +28,7 @@ const audiences = [
     n: "01",
     kicker: "Monitoring teams",
     title: "The people watching the sensors",
-    lead: "Everything on one screen, so nothing gets missed on a night shift. Alarms in context, movement against history, and the review recorded as it happens rather than reconstructed afterwards.",
+    lead: "Your monitoring on one screen — alarms in context, movement against history, and the review recorded as it happens rather than reconstructed afterwards.",
     points: [
       "Live map and trend review together",
       "Alarms with the surrounding evidence",
@@ -72,14 +72,14 @@ const pillars: { n: string; title: string; kicker: string; body: string }[] = [
   {
     n: "01",
     title: "Integration",
-    kicker: "Every source, one place",
+    kicker: "Your sources, one place",
     body: "Radar, GNSS, prisms, InSAR, LiDAR, piezometers, seismic — across any vendor, read together instead of in six separate windows. Nothing on your site gets replaced to make it fit.",
   },
   {
     n: "02",
     title: "Analytics",
     kicker: "The processing underneath",
-    body: "Data quality assessed across every sensor, noise separated from real movement, trends resolved from messy signal, and developing change surfaced early — running continuously, so people aren't doing it by hand.",
+    body: "Data quality assessed across your connected sensors, noise separated from real movement, trends resolved from messy signal, and developing change surfaced early — running continuously, so people aren't doing it by hand.",
   },
   {
     n: "03",
@@ -96,7 +96,7 @@ const pillars: { n: string; title: string; kicker: string; body: string }[] = [
   {
     n: "05",
     title: "Portfolio view",
-    kicker: "Every site, compared",
+    kicker: "Your sites, compared",
     body: "Sensor health, data quality and monitoring performance across the whole group — so corporate can see how each site is really running without ringing them to ask.",
   },
 ];
@@ -109,8 +109,8 @@ const delivery: [string, string][] = [
 ];
 
 const verbs: [string, string][] = [
-  ["See it", "Every source in one view. Radar, GNSS, prisms and InSAR together — not scattered across six windows and one engineer's memory."],
-  ["Trust it", "Quality assessed continuously across every sensor. Gaps, drift, noise and a quietly failing instrument caught first, because everything after this depends on the data being real."],
+  ["See it", "Your sources in one view. Radar, GNSS, prisms and InSAR together — not scattered across six windows and one engineer's memory."],
+  ["Trust it", "Quality assessed continuously across your connected sensors. Gaps, drift, noise and a quietly failing instrument surfaced early, because everything after this depends on the data being real."],
   ["Understand it", "One sensor is an opinion. Four technologies read against each other is evidence — and where they disagree is often where the answer is."],
   ["Act on it", "Out of thousands of readings, the handful that need a person. Surfaced early, with the context already assembled around them."],
   ["Defend it", "What was seen, what was decided, who was told and when — recorded as the work happens. So when someone asks why, a year later, the answer is already there."],
@@ -141,7 +141,7 @@ export function DTGFocusPage() {
           </h1>
           <p className="dfx-hero__lead">
             {renderTrademarkText(
-              "DTG Focus takes everything your site is measuring and turns it into the handful of things that actually need a decision — with the evidence already attached. Built by the monitoring engineers who use it every day.",
+              "DTG Focus takes what your site is measuring and turns it into the handful of things that actually need a decision — with the evidence already attached. Built by the monitoring engineers who use it every day.",
             )}
           </p>
           <div className="dfx-hero__btns">
@@ -191,7 +191,7 @@ export function DTGFocusPage() {
           </figure>
           <div className="dfx-isit__pts" data-dfx-reveal>
             {[
-              ["All sources, one view", "Every technology read together, not in separate windows."],
+              ["Your sources, one view", "Your technologies read together, not in separate windows."],
               ["Trends beside the map", "Where it's moving and how it's been moving, on one screen."],
               ["Quality checked first", "Bad data flagged before anyone interprets it."],
               ["The record writes itself", "What was reviewed, and when — captured as you work."],

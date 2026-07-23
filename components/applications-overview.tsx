@@ -3,10 +3,11 @@
 // Applications overview ("Where We Work") — page 1 of the Applications axis rebuild.
 // Source of truth: dtg-applications-overview-mockup.html. Chrome (nav + footer) comes from the
 // global layout (Header + SiteBottom); this component renders only the page body.
-// Environment images are AI-GENERATED PLACEHOLDERS (public/images/applications/*) — upgrade to
-// licensed photography before publication. Proof figures are APPROVED to publish (user 2026-07-18).
+// Environment media is the FAMILY GRADIENT treatment: the AI-generated placeholder images and
+// their public "AI-generated placeholder" caption were removed together (2026-07-19). The env
+// img/imgAlt data is intentionally retained so licensed photography can be reinstated in one place.
+// Proof figures are APPROVED to publish (user 2026-07-18).
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useEffect } from "react";
@@ -165,15 +166,12 @@ export function ApplicationsOverview() {
             key={env.href}
             className={`appsx-env${flip ? " appsx-env--flip" : ""}`}
           >
-            <div className="appsx-env__media">
-              <Image
-                src={env.img}
-                alt={env.imgAlt}
-                fill
-                sizes="(max-width:900px) 100vw, 50vw"
-                className="appsx-env__img"
-              />
-            </div>
+            {/* Media is the family gradient treatment: the AI-generated placeholder images and
+                their "AI-generated placeholder" caption were removed together (2026-07-19
+                content-discipline pass) — never keep the image with the caption gone. Restore
+                licensed photographs here (env.img / env.imgAlt still carry the intended source)
+                when they exist. */}
+            <div className="appsx-env__media" aria-hidden="true" />
             <div className="site-container appsx-env__hold" data-appsx-reveal>
               <div className="appsx-env__copy">
                 <span className="appsx-env__num">{env.num}</span>
@@ -245,9 +243,6 @@ export function ApplicationsOverview() {
             Talk to DTG
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
-          <p className="appsx-provisional">
-            Environment imagery is AI-generated placeholder pending licensed photography.
-          </p>
         </div>
       </section>
     </main>

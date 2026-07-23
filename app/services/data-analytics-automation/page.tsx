@@ -44,7 +44,7 @@ const content: ServiceContent = {
   // proof. This section is the proof — all of it true, none of it revealing anything.
   proof: {
     eyebrow: "Why DTG can do this",
-    title: "Geotechnical engineers and AI engineers, in one team.",
+    title: "Geotechnical domain expertise combined with software, data and analytics engineering.",
     intro:
       "Most monitoring firms have one or the other. DTG has both — working the same problems, in the same room. That's why our analytics are built in-house rather than bought in, or wrapped around someone else's black box.",
     items: [
@@ -72,32 +72,27 @@ const content: ServiceContent = {
         title: "Automated data cleaning & filtering",
         desc: "Your noisy data, made readable.",
         points: [
-          "Automatic removal of noise, gaps, drift and outliers",
+          "Noise, drift, outliers and data-quality issues are identified and, where appropriate, conditioned within a traceable processed dataset. Original source data remains preserved.",
           "Messy multi-sensor feeds turned into clear, readable signal",
-          "Clean data ready to act on — no manual pre-processing",
-          // "Built and running", not "e.g." — same anonymity, opposite meaning. The tool is real
-          // and unnamed (see the IP note at the top); it is NOT a hypothetical example.
-          "Built and running: a tool that turns an unreadable feed into an at-a-glance trend",
+          "Clean data ready to act on",
         ],
       },
       {
         title: "Intelligent alarm & TARP management",
         desc: "Stop drowning in alarms.",
         points: [
-          "Track alarm performance automatically across every sensor",
+          "Review alarm performance across your monitoring network",
           "Cut false triggers and surface the ones that matter",
-          "Derive the right TARP thresholds from your actual data",
-          "Built and running: a system that tells you whether your alarms are set right",
+          "Support evidence-based review and optimisation of alarm and TARP thresholds",
         ],
       },
       {
         title: "Automated detection & prioritisation",
         desc: "The system flags what matters, before a person has to.",
         points: [
-          "Continuous automated analysis across all sensors",
+          "Continuous analysis across your connected sensors",
           "Developing movement surfaced early, not after the fact",
           "What needs attention is prioritised for the engineer",
-          "Decisions no longer wait on someone noticing manually",
         ],
       },
       {
@@ -106,7 +101,7 @@ const content: ServiceContent = {
         points: [
           "Where off-the-shelf doesn't fit, we build what you need",
           "Analytics and models tailored to your ground and sensors",
-          "Backed by combined geotechnical and AI-engineering capability",
+          "Backed by combined geotechnical and analytics-engineering capability",
           "Cutting-edge methods, applied to real monitoring problems",
         ],
       },

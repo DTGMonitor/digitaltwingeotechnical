@@ -53,7 +53,12 @@ const columns = [
     links: [
       ["Find your situation", "/solutions"],
       ["DTG Focus™", "/dtg-focus"],
-      ["Multi-sensor integration", "/dtg-focus/multi-sensor-integration"],
+      // Repointed 2026-07-19: /dtg-focus/multi-sensor-integration now redirects to Technology
+      // Integration, so this links the destination directly (no redirect hop). ⚠️ This now points
+      // at the same page as the Services column's "Technology integration" entry — a mild
+      // duplication, flagged for the owner. If the owner rebuilds multi-sensor integration as a
+      // DTG Focus capability page, point this back at it.
+      ["Multi-sensor integration", "/services/technology-integration"],
     ],
   },
   {

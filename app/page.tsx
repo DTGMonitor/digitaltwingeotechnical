@@ -137,7 +137,7 @@ export default function Home() {
             </h2>
             <p className="story-subcopy fade-up">
               {renderTrademarkText(
-                "DTG Focus is DTG's own monitoring software — built and running. It brings every source into one view, with analytics, review workflow and governance on the same data.",
+                "DTG Focus is DTG's own monitoring software — built and running. It brings your sources into one view, with analytics, review workflow and governance on the same data.",
               )}
             </p>
             <div className="focus-home-pillars fade-up" aria-label="DTG Focus support pillars">

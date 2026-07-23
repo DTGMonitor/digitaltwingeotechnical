@@ -92,7 +92,7 @@ const situations: Situation[] = [
     ],
     helpTitle: "How DTG helps",
     helps: [
-      "We structure, quality-test and correlate data across every sensor type into one governed view.",
+      "We structure, quality-test and correlate data across your sensor types into one governed view.",
       "We tune alarm thresholds to cut false triggers.",
       "We give your engineer defensible, combined interpretation instead of raw feeds.",
       "One overview, one method — repeatable and traceable.",
