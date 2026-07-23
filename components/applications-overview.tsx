@@ -63,7 +63,11 @@ const environments: Environment[] = [
     img: "/images/applications/underground.png",
     imgAlt: "Underground mine drive with rock bolting, mesh support and ventilation ducting.",
     proof: [
-      { value: "1,000km+", label: "convergence monitored" },
+      // A7 (2026-07-19): was "1,000km+ / convergence monitored" — a binding violation (verified
+      // 952 km, and NEVER phrase as km of tunnels monitored). Corrected to the authorised figure +
+      // throughput framing. Slots 2–3 differ from the detail page's authorised set (500+ TARP / 50
+      // falls) — flagged for the owner, not guessed.
+      { value: "950+ km", label: "scan & deformation processed" },
       { value: "100+", label: "movements detected" },
       { value: "Ongoing", label: "continuous programme" },
     ],

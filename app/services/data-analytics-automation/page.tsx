@@ -75,6 +75,9 @@ const content: ServiceContent = {
           "Noise, drift, outliers and data-quality issues are identified and, where appropriate, conditioned within a traceable processed dataset. Original source data remains preserved.",
           "Messy multi-sensor feeds turned into clear, readable signal",
           "Clean data ready to act on",
+          // A7 rubric restore (2026-07-19): a true differentiator (DTG-built tooling in daily
+          // internal use), not methodology filler — restored with the internal-use scope stated.
+          "Built and running in our own delivery: a tool that turns an unreadable feed into an at-a-glance trend",
         ],
       },
       {
@@ -84,6 +87,9 @@ const content: ServiceContent = {
           "Review alarm performance across your monitoring network",
           "Cut false triggers and surface the ones that matter",
           "Support evidence-based review and optimisation of alarm and TARP thresholds",
+          // A7 rubric restore (2026-07-19): DTG-built tooling in daily internal use — a
+          // differentiator, restored with the internal-use scope stated.
+          "Built and running in our own delivery: a system that flags whether alarm thresholds are set right",
         ],
       },
       {

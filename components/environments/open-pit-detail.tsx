@@ -50,23 +50,18 @@ const openPitDetail: EnvironmentDetailData = {
     image: "/images/applications/openpit.png",
     imageAlt: "Terraced open-pit mine under overcast sky with slope-monitoring instruments in the foreground.",
     primaryCta: { label: "Talk to DTG", href: "/contact" },
-    jumpLink: { label: "See the numbers ↓", href: "#proof" },
+    jumpLink: { label: "See how we work ↓", href: "#proof" },
   },
+  // A7 BINDING RULING (2026-07-19): with the escalation stats relocated to underground, there is NO
+  // "proven" language and NO figures on the open-pit page until the principal supplies open-pit-
+  // specific figures. Reframed from proof ("Proven in the pit" / 99% / 3 operations / 14 mo / "Since
+  // May 2025" / "tens of thousands of alarms") to CAPABILITY. bignums + the 99% verify note removed.
+  // Restore figures ONLY when the principal supplies open-pit-specific ones.
   proof: {
-    eyebrow: "Proven in the pit",
-    heading: "Continuous slope monitoring across three operations.",
+    eyebrow: "Built for the pit",
+    heading: "Radar-led slope monitoring, run from our centre.",
     intro:
-      "Since May 2025, DTG's monitoring centre has watched three open-pit operations in real time — validating tens of thousands of alarms and escalating the movements that matter.",
-    bignums: [
-      { n: "99%", l: "live monitoring uptime from our centre" },
-      { n: "3", l: "open-pit operations monitored" },
-      { n: "14 mo", l: "of continuous monitoring and counting" },
-    ],
-    // Figures are APPROVED to publish (user, 2026-07-18) — the "to be confirmed" note is gone. The
-    // 99% clarification STAYS: it is a permanent compliance disclaimer (reliability, not sensor
-    // performance), not a pending-verification caveat. Do not drop it.
-    verify:
-      "“99% uptime” refers to our monitoring centre's remote-connection reliability over the period, not sensor performance.",
+      "Open-pit slopes can move toward failure in shifts, not weeks — so DTG's monitoring centre watches them in real time, validates the alarm stream, and escalates the movement that matters against your TARP thresholds.",
   },
   editorial: {
     statement: (
@@ -150,7 +145,7 @@ const openPitDetail: EnvironmentDetailData = {
     {
       en: "Underground",
       title: "Underground mining",
-      desc: "1,000km+ of convergence monitoring delivered.",
+      desc: "950+ km of scan and deformation data processed.",
       href: "/applications/underground-mining",
       image: "/images/applications/underground.png",
       imageAlt: "Underground mine drive with rock bolting and ventilation ducting.",

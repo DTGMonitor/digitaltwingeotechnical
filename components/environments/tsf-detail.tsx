@@ -217,7 +217,7 @@ const tsfDetail: EnvironmentDetailData = {
     {
       en: "Underground",
       title: "Underground mining",
-      desc: "1,000km+ of convergence monitoring delivered.",
+      desc: "950+ km of scan and deformation data processed.",
       href: "/applications/underground-mining",
       image: "/images/applications/underground.png",
       imageAlt: "Underground mine drive with rock bolting and ventilation ducting.",

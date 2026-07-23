@@ -39,7 +39,7 @@ const capabilities: { n: string; title: string; body: string; href: string }[] =
 
 const dtgSteps: [string, string][] = [
   ["Validate", "Quality, gaps, drift and sensor health checked before anything is interpreted. Bad data is caught here, not downstream."],
-  ["Correlate", "Sources read against one another, so precursors a single sensor might miss can surface for review."],
+  ["Correlate", "Your sources read against one another, so a precursor a single sensor might miss can surface for review."],
   ["Interpret", "Experienced judgement on what the ground is actually doing, with assumptions and uncertainty stated."],
   ["Govern", "Thresholds, TARP-aligned escalation, and a traceable record of who was told what, and when."],
 ];
