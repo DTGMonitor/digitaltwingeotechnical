@@ -12,13 +12,18 @@ import {
   type EnvironmentDetailData,
 } from "@/components/sections/environment-detail-page";
 
-// Underground signature visual: the scale of the programme — a bar filling 0 -> 1,000km+.
+// Underground signature visual: the scale of the throughput — a bar filling 0 -> 950km+.
 // CSS-driven grow animation (reduced-motion disables it) lives under .envd-scalebar.
+// A7 (2026-07-19): the figure was 1,000km+ and framed "every kilometre monitored" — BOTH now
+// non-compliant with the principal's constraint (verified 952 km, and NEVER phrase as km of tunnels
+// monitored). Corrected to the authorised figure (950km+) and the authorised throughput framing
+// (scan and deformation data processed) — no invented wording. Same figure as the proof stat above,
+// stated consistently.
 function ScaleBar() {
   return (
     <div className="envd-scalebar">
       <div className="envd-scalebar__track">
-        <div className="envd-scalebar__bigkm">1,000km+</div>
+        <div className="envd-scalebar__bigkm">950km+</div>
         <div className="envd-scalebar__fill" />
       </div>
       <div className="envd-scalebar__ticks">
@@ -26,11 +31,11 @@ function ScaleBar() {
         <span>250km</span>
         <span>500km</span>
         <span>750km</span>
-        <span>1,000km+</span>
+        <span>950km+</span>
       </div>
       <p className="envd-scalebar__caption">
-        For scale, that&rsquo;s further than the length of many countries —{" "}
-        <b>every kilometre monitored, compared and reviewed</b> for apparent movement, continuously.
+        Underground scan and deformation data{" "}
+        <b>processed, compared and reviewed</b> for apparent movement, across active engagements.
       </p>
     </div>
   );
@@ -52,17 +57,29 @@ const undergroundDetail: EnvironmentDetailData = {
     primaryCta: { label: "Talk to DTG", href: "/contact" },
     jumpLink: { label: "See the scale ↓", href: "#signature" },
   },
+  // A7 STATS RELOCATION (2026-07-19, principal-sourced facts, owner-approved framing): the
+  // escalation figures below are UNDERGROUND-engagement figures — relocated here from the open-pit
+  // page, where they were mis-attributed. Exact wording is principal-supplied; do not reword the
+  // stat lines. The intro is neutral connective copy (the principal specified the heading + stats,
+  // not an intro) — it makes no numeric, scope or date claim.
   proof: {
     eyebrow: "Proven underground",
-    heading: "Over 1,000km of convergence monitoring — and counting.",
+    heading: "The escalations that matter",
     intro:
-      "DTG delivers one of the most extensive underground convergence monitoring programmes of its kind — integrating and interpreting the data to keep a clear read on ground movement across kilometres of workings.",
+      "Independent processing, review and escalation across DTG's underground convergence work — the throughput behind the numbers, and the discipline that turns it into the movements that matter.",
     bignums: [
-      { n: "1,000km+", l: "of convergence monitoring delivered" },
-      { n: "100+", l: "apparent movements detected & reviewed" },
-      { n: "Ongoing", l: "continuous monitoring programme" },
+      // Throughput figure (QA/QC scan + deformation drive distance). Verified 952 km at time of
+      // writing. Upgrade to 1,000+ only when the dashboard total crosses it. NEVER phrase as km of
+      // tunnels monitored.
+      { n: "950+ km", l: "of underground scan and deformation data processed and analysed, across active engagements" },
+      // PENDING PRINCIPAL CONFIRMATION — if 500+ TARP responses span open pit too, the principal
+      // supplies open-pit-specific figures for that page; do not copy these back.
+      { n: "500+", l: "TARP trigger responses supported" },
+      // Upgrade to "preceded by supported monitoring escalations" ONLY on explicit principal confirmation.
+      { n: "50", l: "confirmed falls of ground captured and analysed through monitoring" },
     ],
-    // Figures APPROVED to publish (user, 2026-07-18) — verify note removed.
+    // No start dates, no client names. Owner decision — revisit adding "since 2025" in ~12 months
+    // when tenure reads as strength.
   },
   editorial: {
     statement: (
@@ -85,9 +102,12 @@ const undergroundDetail: EnvironmentDetailData = {
   },
   signature: {
     eyebrow: "The scale of it",
-    heading: "A thousand kilometres of ground, read for movement.",
+    // A7: was "A thousand kilometres of ground, read for movement." — the specific figure is
+    // superseded (see ScaleBar / proof). Reworded qualitatively (no number) rather than inventing a
+    // new one; the authorised figure lives in the ScaleBar and proof stat.
+    heading: "Kilometre after kilometre of ground, read for movement.",
     intro:
-      "Underground monitoring isn't one drive — it's a continuous programme spanning kilometre after kilometre of workings, every section compared over time. The scale is the point: sustaining a clear, consistent read across all of it.",
+      "Underground monitoring isn't one drive — it's a continuous programme spanning kilometre after kilometre of workings, every section compared over time. The scale is the point: sustaining a clear, consistent read across it.",
     visual: <ScaleBar />,
   },
   monitor: {

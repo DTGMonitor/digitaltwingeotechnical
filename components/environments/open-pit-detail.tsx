@@ -9,20 +9,23 @@ import {
   type EnvironmentDetailData,
 } from "@/components/sections/environment-detail-page";
 
-// Open-pit's signature visual: 50,000+ alarms -> 500+ escalations -> 50+ fall-of-ground.
-function EscalationFunnel() {
+// A7 STATS RELOCATION (2026-07-19): the numeric funnel (50,000+ alarms -> 500+ escalations ->
+// 50+ fall-of-ground) was RELOCATED to the underground page — those are underground-engagement
+// figures. Per the owner: open pit carries QUALITATIVE copy only (NO numbers) until the principal
+// supplies open-pit-specific figures. This is the number-free version of the same workflow — the
+// escalation DISCIPLINE is genuinely open-pit's; only the mis-attributed counts were removed.
+function FilterFlow() {
   const rows = [
-    { mod: "f1", n: "50,000+", l: "automated alarms", bar: "Every automated alarm validated by our monitoring centre" },
-    { mod: "f2", n: "500+", l: "TARP escalations", bar: "Real slope movement escalated against TARP thresholds" },
-    { mod: "f3", n: "50+", l: "fall-of-ground", bar: "Actual ground failures detected and acted on" },
+    { mod: "f1", stage: "Validate", bar: "Automated alarms validated by our monitoring centre" },
+    { mod: "f2", stage: "Escalate", bar: "Real slope movement escalated against TARP thresholds" },
+    { mod: "f3", stage: "Act", bar: "Ground failures detected and acted on" },
   ] as const;
   return (
     <div className="envd-funnel">
       {rows.map((r) => (
         <div className={`envd-funnel__row envd-funnel__row--${r.mod}`} key={r.mod}>
           <div className="envd-funnel__meta">
-            <div className="envd-funnel__n">{r.n}</div>
-            <div className="envd-funnel__l">{r.l}</div>
+            <div className="envd-funnel__l">{r.stage}</div>
           </div>
           <div className="envd-funnel__bar">
             <span>{r.bar}</span>
@@ -81,14 +84,16 @@ const openPitDetail: EnvironmentDetailData = {
   },
   signature: {
     eyebrow: "What DTG actually does",
-    heading: "From fifty thousand alarms to fifty that matter.",
+    // A7: heading was "From fifty thousand alarms to fifty that matter." — numbers removed
+    // (relocated to underground); reworded qualitatively, no invented figures.
+    heading: "From overwhelming alarm volume to the movement that matters.",
     intro:
       "The value isn't raising alarms — anything can do that. It's the disciplined workflow that filters an overwhelming volume of automated alarms down to the real ground failures, so the right movement reaches the right people.",
-    visual: <EscalationFunnel />,
+    visual: <FilterFlow />,
     note: (
       <>
-        That funnel — <b>validate the noise, escalate the real movement, catch the failures</b> — is
-        the discipline behind the numbers.
+        That workflow — <b>validate the noise, escalate the real movement, act on the failures</b> —
+        is the discipline.
       </>
     ),
   },
