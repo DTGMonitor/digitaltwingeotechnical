@@ -15840,3 +15840,54 @@ main .ld-container,
 .pv-body ul { list-style:none; margin:0 0 14px; padding:0; }
 .pv-body li { position:relative; padding-left:20px; font-size:16px; line-height:1.7; color:var(--c-text-soft); margin-bottom:6px; }
 .pv-body li::before { content:""; position:absolute; left:2px; top:.72em; width:6px; height:1px; background:var(--accent-text); }
+/* ============================================================================
+   SITEMAP FOOTER (.sf-*) — site-wide, 2026-07-19. Replaces the .site-footer
+   contact-block footer on EVERY route.
+
+   The old footer repeated the office list, the email address and a "start a monitoring
+   conversation" line on every page — duplicating /contact everywhere, including on /contact.
+   This one is navigation, brand and legal only.
+
+   The surface is fixed deep (--c-surface-deep) in BOTH themes, like the old footer and the
+   .surface-deep primitive — so its text/border values are on-dark constants by design, not
+   theme-blind oversights. The logo asset is the broken-white variant for the same reason.
+
+   NB the legacy .site-footer* rules are now unused but are LEFT IN PLACE — removal belongs to
+   the dead-code pass, and .footer-container / .footer-primary-link / .footer-text-link in that
+   same neighbourhood are still LIVE (PreFooterCTA renders them on /). Do not bulk-delete by
+   prefix.
+   ========================================================================= */
+.sf { background:var(--c-surface-deep); color:var(--off-white); padding-block:clamp(56px,7vw,88px) 30px; }
+.sf__grid { display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:clamp(28px,4vw,56px); padding-bottom:clamp(36px,5vw,56px); border-bottom:1px solid rgba(255,255,255,.14); }
+.sf__brand p { margin:14px 0 0; font-size:14.5px; line-height:1.6; color:var(--text-on-dark-soft); max-width:34ch; }
+.sf__logo { display:block; height:38px; width:auto; max-width:240px; object-fit:contain; }
+.sf__col h3 { margin:0 0 16px; font-family:var(--font-sans); font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--signal-green); }
+.sf__col a { display:block; font-size:14px; line-height:1.5; padding-block:5px; color:var(--text-on-dark-soft); width:max-content; max-width:100%; transition:color .2s ease; }
+.sf__col a:hover { color:#fff; }
+.sf__col a:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; }
+.sf__base { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-top:24px; font-size:12.5px; color:rgba(244,247,246,.55); }
+/* Reserve the right edge for the site-wide fixed .scroll-top button (48px wide, 28px from the
+   viewport edge), which otherwise overlaps the last few pixels of the LinkedIn link. Measured
+   against the live render, not guessed. */
+@media (min-width:761px) { .sf__base { padding-right:88px; } }
+.sf__social { display:inline-flex; align-items:center; gap:10px; color:rgba(244,247,246,.75); }
+.sf__social-ic { width:30px; height:30px; border-radius:50%; border:1px solid rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; transition:background .25s ease, border-color .25s ease, color .25s ease; }
+.sf__social:hover { color:#fff; }
+.sf__social:hover .sf__social-ic { background:var(--signal-green); border-color:var(--signal-green); color:var(--on-accent); }
+.sf__social > span:last-child { border-bottom:1px solid transparent; transition:border-color .2s ease; }
+.sf__social:hover > span:last-child { border-bottom-color:var(--signal-green); }
+.sf__social:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; }
+
+@media (max-width:1000px) {
+ .sf__grid { grid-template-columns:1fr 1fr; }
+ .sf__brand { grid-column:1 / -1; }
+}
+@media (max-width:560px) {
+ .sf__grid { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .sf__col a, .sf__social-ic, .sf__social > span:last-child { transition:none; }
+}
+.sf__base a { color:rgba(244,247,246,.75); border-bottom:1px solid var(--signal-green); transition:color .2s ease; }
+.sf__base a:hover { color:var(--signal-green); }
+.sf__base a:focus-visible { outline:2px solid var(--signal-green); outline-offset:3px; }
