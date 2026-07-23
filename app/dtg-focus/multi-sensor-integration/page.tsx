@@ -10,9 +10,9 @@ import { permanentRedirect } from "next/navigation";
 // interim decision, not a permanent retirement. The detailPages["dtg-focus/multi-sensor-integration"]
 // data is now unrendered (dead) — left in place for the dead-code pass, not wired up here.
 //
-// NB Next's permanentRedirect() issues HTTP 308 (permanent, method-preserving), which is this
-// repo's established convention for every other permanent redirect — not a literal 301. For a GET
-// page the effect is the same; a true 301 isn't available from an App Router page component.
+// permanentRedirect() issues HTTP 308 (permanent) — the repo convention for every permanent
+// redirect, and owner-accepted here (2026-07-19). 308 is a permanent, method-preserving redirect
+// that browsers and search engines honour as permanent.
 export default function Page() {
   permanentRedirect("/services/technology-integration");
 }
