@@ -7,13 +7,14 @@ import type { Metadata } from "next";
 // ACTUALLY does — nothing here is boilerplate copied from another company, and nothing claims a
 // certification, standard or legal basis that has not been verified.
 //
-// 🔴 THE OWNER MUST APPROVE THIS TEXT BEFORE THE FORM GOES LIVE. Two things in particular need a
-// human decision, and both are marked in the copy below:
-//   1. The retention period (currently stated as "as long as needed to answer, then reviewed
-//      periodically" — deliberately vague because no retention schedule exists yet).
-//   2. Whether DTG is subject to the Australian Privacy Act 1988. That turns on annual turnover
-//      and business type; it is NOT something this file should assert. The copy therefore
-//      describes practice and offers a contact route, without claiming or disclaiming coverage.
+// 🔴 STILL PENDING LEGAL REVIEW — going to counsel covering both Australian and Indonesian
+// angles. One substantive point remains a legal judgement, not a code decision:
+//   - Whether DTG is subject to the Australian Privacy Act 1988 (and any Indonesian equivalent).
+//     That turns on turnover, business type and jurisdiction; it is NOT something this file should
+//     assert. The copy therefore describes practice and offers a contact route, without claiming
+//     or disclaiming coverage.
+// The retention period is now SET (24 months from last contact, owner decision 2026-07-19) and is
+// stated concretely in the copy — no longer a placeholder.
 //
 // If a mail provider other than Resend is chosen, update the "where it goes" section — naming the
 // processor accurately is the whole point of that paragraph.
@@ -93,14 +94,13 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="pv-keep">
           <h2 id="pv-keep">How long we keep it</h2>
-          {/* ⚠️ OWNER: no retention schedule exists yet. This wording describes intent honestly
-              rather than inventing a specific period. If you set a real schedule (e.g. "24
-              months"), replace this paragraph with it — a stated period is stronger, but only
-              if it is one DTG actually follows. */}
+          {/* Retention period set by the owner 2026-07-19: 24 months from last contact. This is
+              a commitment DTG must actually keep — if the real practice drifts from it, change the
+              wording, not the practice's cover story. */}
           <p>
-            Enquiries stay in our email system for as long as they are useful to the conversation
-            they started, and are reviewed periodically. We are working towards a defined retention
-            period; until then, you can ask us to delete your enquiry at any time and we will.
+            We keep enquiry data for up to 24 months from our last contact with you, and then
+            delete it. Enquiries are reviewed periodically in the meantime, and you can ask us to
+            delete yours at any time before then.
           </p>
         </section>
 
