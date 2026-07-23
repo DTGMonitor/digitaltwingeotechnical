@@ -12,26 +12,21 @@ import {
   type EnvironmentDetailData,
 } from "@/components/sections/environment-detail-page";
 
-// Underground signature visual: the scale of the throughput — a bar filling 0 -> 950km+.
-// CSS-driven grow animation (reduced-motion disables it) lives under .envd-scalebar.
+// Underground signature visual: the throughput figure over a plain gradient divider.
 // A7 (2026-07-19): the figure was 1,000km+ and framed "every kilometre monitored" — BOTH now
 // non-compliant with the principal's constraint (verified 952 km, and NEVER phrase as km of tunnels
-// monitored). Corrected to the authorised figure (950km+) and the authorised throughput framing
-// (scan and deformation data processed) — no invented wording. Same figure as the proof stat above,
-// stated consistently.
+// monitored). Corrected to the authorised figure and throughput framing — no invented wording. Same
+// figure as the proof stat above, stated consistently.
+// Owner refinement (2026-07-19): the axis tick labels (0/250/500/750/950km+) were REMOVED — a full
+// bar with a scale reads as a fake chart. The gradient rule stays as a plain divider only (no ticks,
+// no numbers). Display figure is "950+ km" (space before km, plus before the number) to match the
+// measurement style in DTG's own reporting. NB .envd-scalebar__ticks CSS is now unused (dead-code pass).
 function ScaleBar() {
   return (
     <div className="envd-scalebar">
       <div className="envd-scalebar__track">
-        <div className="envd-scalebar__bigkm">950km+</div>
+        <div className="envd-scalebar__bigkm">950+ km</div>
         <div className="envd-scalebar__fill" />
-      </div>
-      <div className="envd-scalebar__ticks">
-        <span>0</span>
-        <span>250km</span>
-        <span>500km</span>
-        <span>750km</span>
-        <span>950km+</span>
       </div>
       <p className="envd-scalebar__caption">
         Underground scan and deformation data{" "}
