@@ -101,7 +101,7 @@ const content: ServiceContent = {
   },
   faqs: [
     {
-      question: "Do you provide 24/7 coverage?",
+      question: "How much coverage do you provide?",
       answer:
         "Coverage is set to your risk — from business-hours review through to continuous out-of-hours watch on critical assets. We agree the schedule and escalation pathway during onboarding.",
     },

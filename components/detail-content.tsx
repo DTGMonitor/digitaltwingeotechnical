@@ -272,7 +272,7 @@ export const detailPages: Record<string, DetailPageContent> = {
     points: [
       "9,600+ monitoring hours and 99% monitoring availability.",
       "50,000+ alarms validated through disciplined escalation control.",
-      "Zero missed critical alarm events reported in the reviewed monitoring period.",
+      "Critical alarm events escalated through disciplined review across the monitoring period.",
       "Multi-sensor review across radar, InSAR, prisms, GNSS and LiDAR.",
     ],
   },

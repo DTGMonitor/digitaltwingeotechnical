@@ -123,7 +123,7 @@ const others = [
   {
     en: "Open-pit",
     title: "Open-pit mining",
-    desc: "Radar-led slope monitoring, real-time escalation across three operations.",
+    desc: "Radar-led slope monitoring, real-time escalation from our centre.",
     href: "/applications/open-pit-mining",
     img: "/images/applications/openpit.png",
     imgAlt: "Terraced open-pit mine with slope-monitoring instruments.",

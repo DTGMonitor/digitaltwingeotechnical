@@ -21,6 +21,9 @@ previews/
 work/
 .preview-server.*.log
 
+# Review / handoff scratch — never commit (may contain client names in future passes)
+review/
+
 # OS and editor files
 .DS_Store
 Thumbs.db

@@ -150,7 +150,7 @@ const undergroundDetail: EnvironmentDetailData = {
     {
       en: "Open-pit",
       title: "Open-pit mining",
-      desc: "Radar-led slope monitoring, real-time escalation across three operations.",
+      desc: "Radar-led slope monitoring, real-time escalation from our centre.",
       href: "/applications/open-pit-mining",
       image: "/images/applications/openpit.png",
       imageAlt: "Terraced open-pit mine with slope-monitoring instruments.",

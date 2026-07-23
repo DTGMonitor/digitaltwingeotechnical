@@ -34,11 +34,10 @@ const environments: Environment[] = [
     href: "/applications/open-pit-mining",
     img: "/images/applications/openpit.png",
     imgAlt: "Terraced open-pit mine under overcast sky with slope-monitoring instruments in the foreground.",
-    proof: [
-      { value: "50,000+", label: "alarms validated" },
-      { value: "500+", label: "TARP escalations" },
-      { value: "3", label: "operations monitored" },
-    ],
+    // A7 decision (2026-07-19): open-pit stat chips removed. 50,000+/500+ are underground-engagement
+    // figures (mis-attributed here); "3 operations" is a pending open-pit figure. Per the binding
+    // ruling, open pit carries no figures until the principal supplies open-pit-specific ones — the
+    // qualitative desc above stands in. Card renders like the civil card (no chips).
   },
   {
     num: "02",
@@ -67,9 +66,11 @@ const environments: Environment[] = [
       // 952 km, and NEVER phrase as km of tunnels monitored). Corrected to the authorised figure +
       // throughput framing. Slots 2–3 differ from the detail page's authorised set (500+ TARP / 50
       // falls) — flagged for the owner, not guessed.
+      // A7 decision (2026-07-19): slots aligned to the detail page's authorised set (was 100+
+      // movements / Ongoing). "100+ apparent movements" was not in the principal's 3-stat block.
       { value: "950+ km", label: "scan & deformation processed" },
-      { value: "100+", label: "movements detected" },
-      { value: "Ongoing", label: "continuous programme" },
+      { value: "500+", label: "TARP responses" },
+      { value: "50", label: "confirmed falls" },
     ],
   },
   {
