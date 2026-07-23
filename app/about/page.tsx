@@ -274,7 +274,7 @@ export default function AboutPage() {
       </section>
 
       {/* PRINCIPLES — sticky heading, flowing statements */}
-      <section className="ab-prin" aria-labelledby="ab-prin-title">
+      <section className="ab-prin" id="purpose-principles" aria-labelledby="ab-prin-title">
         <div className="site-container ab-prin__grid">
           <div className="ab-prin__head" data-ab-reveal>
             <span className="ab-eyebrow">Purpose &amp; principles</span>
@@ -294,7 +294,7 @@ export default function AboutPage() {
       </section>
 
       {/* VENDOR INDEPENDENCE — aligned comparison */}
-      <section className="ab-vend" aria-labelledby="ab-vend-title">
+      <section className="ab-vend" id="vendor-independence" aria-labelledby="ab-vend-title">
         <div className="site-container">
           <div className="ab-vend__head" data-ab-reveal>
             <span className="ab-eyebrow">Vendor independence</span>
@@ -322,7 +322,7 @@ export default function AboutPage() {
       </section>
 
       {/* TECHNICAL ASSURANCE — four questions */}
-      <section className="ab-assur" aria-labelledby="ab-assur-title">
+      <section className="ab-assur" id="technical-assurance" aria-labelledby="ab-assur-title">
         <div className="site-container">
           <div className="ab-assur__head" data-ab-reveal>
             <span className="ab-eyebrow">Technical assurance</span>
@@ -347,7 +347,7 @@ export default function AboutPage() {
       </section>
 
       {/* LEADERSHIP — editorial, role above name */}
-      <section className="ab-lead" aria-labelledby="ab-lead-title">
+      <section className="ab-lead" id="leadership" aria-labelledby="ab-lead-title">
         <div className="site-container">
           <div className="ab-lead__head" data-ab-reveal>
             <span className="ab-eyebrow">Leadership</span>
