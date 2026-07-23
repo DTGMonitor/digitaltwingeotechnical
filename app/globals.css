@@ -14583,7 +14583,11 @@ main .ld-container,
    the text half, alternating surface/raised per row. */
 .appsx-env { position:relative; overflow:hidden; background:var(--c-surface); }
 .appsx-env--flip { background:var(--c-surface-raised); }
-.appsx-env__media { position:absolute; top:0; bottom:0; left:0; width:50vw; z-index:0; background:var(--c-surface-deep); }
+/* Family gradient treatment — stands in for licensed photography (AI placeholders removed
+   2026-07-19). Same 155deg deep-teal gradient the heroes use, so an empty media half reads as
+   intentional rather than broken. Restore images by putting next/image back inside the media div. */
+.appsx-env__media { position:absolute; top:0; bottom:0; left:0; width:50vw; z-index:0; background:linear-gradient(155deg,#0c303c 0%,#0a2029 55%,var(--c-surface-deep) 100%); }
+.appsx-env--flip .appsx-env__media { background:linear-gradient(205deg,#0c303c 0%,#0a2029 55%,var(--c-surface-deep) 100%); }
 .appsx-env--flip .appsx-env__media { left:auto; right:0; }
 .appsx-env__img { object-fit:cover; }
 .appsx-env__hold { position:relative; z-index:1; }
@@ -15761,7 +15765,8 @@ main .ld-container,
 
 /* 4 · RMC — .appsx-env half-bleed device */
 .cx-env { position:relative; overflow:hidden; background:var(--c-surface); }
-.cx-env__media { position:absolute; top:0; bottom:0; left:0; width:50vw; z-index:0; background:var(--c-surface-deep); }
+/* Family gradient treatment (AI placeholder removed 2026-07-19) — see .appsx-env__media. */
+.cx-env__media { position:absolute; top:0; bottom:0; left:0; width:50vw; z-index:0; background:linear-gradient(155deg,#0c303c 0%,#0a2029 55%,var(--c-surface-deep) 100%); }
 .cx-env__img { object-fit:cover; }
 .cx-env__copy { position:relative; z-index:1; display:flex; flex-direction:column; width:50%; margin-left:auto; padding-block:clamp(48px,6vw,84px); padding-left:clamp(32px,4vw,64px); }
 .cx-env__copy .cx-eyebrow { display:block; margin-bottom:16px; }

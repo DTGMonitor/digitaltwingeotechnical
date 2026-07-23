@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionReveals } from "@/components/sections";
@@ -159,17 +158,22 @@ export default function ContactPage() {
             {FORM_ENABLED ? (
               <ContactForm />
             ) : (
+              // REVERT AT FORM LAUNCH: when CONTACT_FORM_ENABLED flips to "true", this whole
+              // fallback is replaced by <ContactForm /> above. Its wording deliberately presents
+              // email as the current, first-class channel — NOT as a stopgap for an unfinished
+              // feature (no "coming soon", no "being finished"). Both are true; the framing is
+              // the point.
               <div className="cx-formoff">
                 <p className="cx-formoff__lead">
-                  The briefing form is being finished. In the meantime, email us directly —
-                  it reaches exactly the same place.
+                  Email is the way to reach the team — it goes straight to the engineers at DTG,
+                  and you&rsquo;ll get a reply from a person, not an autoresponder.
                 </p>
                 <a className="cx-btn" href="mailto:info@dtgeotech.com">
                   info@dtgeotech.com
                 </a>
                 <p className="cx-formoff__hint">
                   Tell us the asset, the behaviour that concerns you, and the decision the data
-                  needs to support.
+                  needs to support — a few sentences is enough to start.
                 </p>
               </div>
             )}
@@ -177,17 +181,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 4 · RMC — .appsx-env half-bleed device. */}
+      {/* 4 · RMC — .appsx-env half-bleed device. Media is the family gradient treatment: the
+          AI-generated placeholder image and its "AI-generated placeholder" caption were removed
+          together (2026-07-19 content-discipline pass) — never keep the image with the caption
+          gone. Restore a licensed photograph here when one exists. */}
       <section className="cx-env" aria-labelledby="cx-env-title">
-        <div className="cx-env__media">
-          <Image
-            src="/images/dtg-command-centre.png"
-            alt=""
-            fill
-            sizes="(max-width:900px) 100vw, 50vw"
-            className="cx-env__img"
-          />
-        </div>
+        <div className="cx-env__media" aria-hidden="true" />
         <div className="site-container">
           <div className="cx-env__copy" data-cx-reveal>
             <span className="cx-eyebrow">Remote Monitoring Centre — Yogyakarta</span>
@@ -203,9 +202,6 @@ export default function ContactPage() {
               instrumentation when your own team is off site.
             </p>
             <YogyaClock />
-            <p className="cx-env__disclosure">
-              Imagery is AI-generated placeholder pending licensed photography.
-            </p>
           </div>
         </div>
       </section>

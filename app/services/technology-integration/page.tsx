@@ -24,13 +24,13 @@ import { ServicePage, type ServiceContent } from "@/components/sections";
 export const metadata: Metadata = {
   title: "Technology Integration | Digital Twin Geotechnical",
   description:
-    "Connect multi-vendor monitoring into one governed view — every sensor, every system, one consolidated and traceable source of truth.",
+    "Connect multi-vendor monitoring into one governed view — your sensors, your systems, one consolidated and traceable source of truth.",
 };
 
 const content: ServiceContent = {
   slug: "technology-integration",
   name: "Technology integration",
-  lead: "Connect multi-vendor monitoring into one governed view — every sensor, every system, one consolidated and traceable source of truth.",
+  lead: "Connect multi-vendor monitoring into one governed view — your sensors, your systems, one consolidated and traceable source of truth.",
   ctas: [
     { label: "Talk to DTG", href: "/contact", primary: true },
     { label: "What's included", href: "#technology-integration-included" },
@@ -49,7 +49,7 @@ const content: ServiceContent = {
     groups: [
       {
         title: "Multi-vendor sensor integration",
-        desc: "Every source, connected — whoever supplied it.",
+        desc: "Your sources, connected — whoever supplied them.",
         points: [
           "Radar, prisms, InSAR, piezometers, extensometers and more",
           "Technology-agnostic across vendors and platforms",
@@ -111,8 +111,8 @@ const content: ServiceContent = {
     eyebrow: "What you get",
     title: "What technology integration gives you.",
     items: [
-      { icon: <Layers size={17} />, title: "One source of truth", body: "Every sensor in one consolidated, governed view." },
-      { icon: <Plug size={17} />, title: "Works with what you have", body: "Technology-agnostic — every source connected, whoever supplied it." },
+      { icon: <Layers size={17} />, title: "One source of truth", body: "Your sensors in one consolidated, governed view." },
+      { icon: <Plug size={17} />, title: "Works with what you have", body: "Technology-agnostic — your sources connected, whoever supplied them." },
       { icon: <GitBranch size={17} />, title: "Traceable data", body: "From source sensor through to combined picture." },
       { icon: <Play size={17} />, title: "Ready to act on", body: "Consolidated data set up for review and escalation." },
     ],
@@ -146,7 +146,7 @@ const content: ServiceContent = {
   ],
   cta: {
     eyebrow: "Get started",
-    title: "Bring every sensor into one governed view.",
+    title: "Bring your sensors into one governed view.",
     body: "Tell us what systems you're running — we'll scope the integration.",
     actionLabel: "Talk to DTG",
     actionHref: "/contact",

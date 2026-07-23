@@ -123,7 +123,7 @@ const others = [
   {
     en: "Open-pit",
     title: "Open-pit mining",
-    desc: "Radar-led slope monitoring, real-time escalation across three operations.",
+    desc: "Radar-led slope monitoring, real-time escalation from our centre.",
     href: "/applications/open-pit-mining",
     img: "/images/applications/openpit.png",
     imgAlt: "Terraced open-pit mine with slope-monitoring instruments.",
@@ -139,7 +139,7 @@ const others = [
   {
     en: "Underground",
     title: "Underground mining",
-    desc: "1,000km+ of convergence monitoring delivered.",
+    desc: "950+ km of scan and deformation data processed.",
     href: "/applications/underground-mining",
     img: "/images/applications/underground.png",
     imgAlt: "Underground mine drive with rock bolting and ventilation ducting.",

@@ -3,10 +3,11 @@
 // Applications overview ("Where We Work") — page 1 of the Applications axis rebuild.
 // Source of truth: dtg-applications-overview-mockup.html. Chrome (nav + footer) comes from the
 // global layout (Header + SiteBottom); this component renders only the page body.
-// Environment images are AI-GENERATED PLACEHOLDERS (public/images/applications/*) — upgrade to
-// licensed photography before publication. Proof figures are APPROVED to publish (user 2026-07-18).
+// Environment media is the FAMILY GRADIENT treatment: the AI-generated placeholder images and
+// their public "AI-generated placeholder" caption were removed together (2026-07-19). The env
+// img/imgAlt data is intentionally retained so licensed photography can be reinstated in one place.
+// Proof figures are APPROVED to publish (user 2026-07-18).
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useEffect } from "react";
@@ -33,11 +34,10 @@ const environments: Environment[] = [
     href: "/applications/open-pit-mining",
     img: "/images/applications/openpit.png",
     imgAlt: "Terraced open-pit mine under overcast sky with slope-monitoring instruments in the foreground.",
-    proof: [
-      { value: "50,000+", label: "alarms validated" },
-      { value: "500+", label: "TARP escalations" },
-      { value: "3", label: "operations monitored" },
-    ],
+    // A7 decision (2026-07-19): open-pit stat chips removed. 50,000+/500+ are underground-engagement
+    // figures (mis-attributed here); "3 operations" is a pending open-pit figure. Per the binding
+    // ruling, open pit carries no figures until the principal supplies open-pit-specific ones — the
+    // qualitative desc above stands in. Card renders like the civil card (no chips).
   },
   {
     num: "02",
@@ -62,9 +62,15 @@ const environments: Environment[] = [
     img: "/images/applications/underground.png",
     imgAlt: "Underground mine drive with rock bolting, mesh support and ventilation ducting.",
     proof: [
-      { value: "1,000km+", label: "convergence monitored" },
-      { value: "100+", label: "movements detected" },
-      { value: "Ongoing", label: "continuous programme" },
+      // A7 (2026-07-19): was "1,000km+ / convergence monitored" — a binding violation (verified
+      // 952 km, and NEVER phrase as km of tunnels monitored). Corrected to the authorised figure +
+      // throughput framing. Slots 2–3 differ from the detail page's authorised set (500+ TARP / 50
+      // falls) — flagged for the owner, not guessed.
+      // A7 decision (2026-07-19): slots aligned to the detail page's authorised set (was 100+
+      // movements / Ongoing). "100+ apparent movements" was not in the principal's 3-stat block.
+      { value: "950+ km", label: "scan & deformation processed" },
+      { value: "500+", label: "TARP responses" },
+      { value: "50", label: "confirmed falls" },
     ],
   },
   {
@@ -165,15 +171,12 @@ export function ApplicationsOverview() {
             key={env.href}
             className={`appsx-env${flip ? " appsx-env--flip" : ""}`}
           >
-            <div className="appsx-env__media">
-              <Image
-                src={env.img}
-                alt={env.imgAlt}
-                fill
-                sizes="(max-width:900px) 100vw, 50vw"
-                className="appsx-env__img"
-              />
-            </div>
+            {/* Media is the family gradient treatment: the AI-generated placeholder images and
+                their "AI-generated placeholder" caption were removed together (2026-07-19
+                content-discipline pass) — never keep the image with the caption gone. Restore
+                licensed photographs here (env.img / env.imgAlt still carry the intended source)
+                when they exist. */}
+            <div className="appsx-env__media" aria-hidden="true" />
             <div className="site-container appsx-env__hold" data-appsx-reveal>
               <div className="appsx-env__copy">
                 <span className="appsx-env__num">{env.num}</span>
@@ -245,9 +248,6 @@ export function ApplicationsOverview() {
             Talk to DTG
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
-          <p className="appsx-provisional">
-            Environment imagery is AI-generated placeholder pending licensed photography.
-          </p>
         </div>
       </section>
     </main>

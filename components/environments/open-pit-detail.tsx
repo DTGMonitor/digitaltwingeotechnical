@@ -9,20 +9,23 @@ import {
   type EnvironmentDetailData,
 } from "@/components/sections/environment-detail-page";
 
-// Open-pit's signature visual: 50,000+ alarms -> 500+ escalations -> 50+ fall-of-ground.
-function EscalationFunnel() {
+// A7 STATS RELOCATION (2026-07-19): the numeric funnel (50,000+ alarms -> 500+ escalations ->
+// 50+ fall-of-ground) was RELOCATED to the underground page — those are underground-engagement
+// figures. Per the owner: open pit carries QUALITATIVE copy only (NO numbers) until the principal
+// supplies open-pit-specific figures. This is the number-free version of the same workflow — the
+// escalation DISCIPLINE is genuinely open-pit's; only the mis-attributed counts were removed.
+function FilterFlow() {
   const rows = [
-    { mod: "f1", n: "50,000+", l: "automated alarms", bar: "Every automated alarm validated by our monitoring centre" },
-    { mod: "f2", n: "500+", l: "TARP escalations", bar: "Real slope movement escalated against TARP thresholds" },
-    { mod: "f3", n: "50+", l: "fall-of-ground", bar: "Actual ground failures detected and acted on" },
+    { mod: "f1", stage: "Validate", bar: "Automated alarms validated by our monitoring centre" },
+    { mod: "f2", stage: "Escalate", bar: "Real slope movement escalated against TARP thresholds" },
+    { mod: "f3", stage: "Act", bar: "Ground failures detected and acted on" },
   ] as const;
   return (
     <div className="envd-funnel">
       {rows.map((r) => (
         <div className={`envd-funnel__row envd-funnel__row--${r.mod}`} key={r.mod}>
           <div className="envd-funnel__meta">
-            <div className="envd-funnel__n">{r.n}</div>
-            <div className="envd-funnel__l">{r.l}</div>
+            <div className="envd-funnel__l">{r.stage}</div>
           </div>
           <div className="envd-funnel__bar">
             <span>{r.bar}</span>
@@ -47,23 +50,18 @@ const openPitDetail: EnvironmentDetailData = {
     image: "/images/applications/openpit.png",
     imageAlt: "Terraced open-pit mine under overcast sky with slope-monitoring instruments in the foreground.",
     primaryCta: { label: "Talk to DTG", href: "/contact" },
-    jumpLink: { label: "See the numbers ↓", href: "#proof" },
+    jumpLink: { label: "See how we work ↓", href: "#proof" },
   },
+  // A7 BINDING RULING (2026-07-19): with the escalation stats relocated to underground, there is NO
+  // "proven" language and NO figures on the open-pit page until the principal supplies open-pit-
+  // specific figures. Reframed from proof ("Proven in the pit" / 99% / 3 operations / 14 mo / "Since
+  // May 2025" / "tens of thousands of alarms") to CAPABILITY. bignums + the 99% verify note removed.
+  // Restore figures ONLY when the principal supplies open-pit-specific ones.
   proof: {
-    eyebrow: "Proven in the pit",
-    heading: "Continuous slope monitoring across three operations.",
+    eyebrow: "Built for the pit",
+    heading: "Radar-led slope monitoring, run from our centre.",
     intro:
-      "Since May 2025, DTG's monitoring centre has watched three open-pit operations in real time — validating tens of thousands of alarms and escalating the movements that matter.",
-    bignums: [
-      { n: "99%", l: "live monitoring uptime from our centre" },
-      { n: "3", l: "open-pit operations monitored" },
-      { n: "14 mo", l: "of continuous monitoring and counting" },
-    ],
-    // Figures are APPROVED to publish (user, 2026-07-18) — the "to be confirmed" note is gone. The
-    // 99% clarification STAYS: it is a permanent compliance disclaimer (reliability, not sensor
-    // performance), not a pending-verification caveat. Do not drop it.
-    verify:
-      "“99% uptime” refers to our monitoring centre's remote-connection reliability over the period, not sensor performance.",
+      "Open-pit slopes can move toward failure in shifts, not weeks — so DTG's monitoring centre watches them in real time, validates the alarm stream, and escalates the movement that matters against your TARP thresholds.",
   },
   editorial: {
     statement: (
@@ -81,14 +79,16 @@ const openPitDetail: EnvironmentDetailData = {
   },
   signature: {
     eyebrow: "What DTG actually does",
-    heading: "From fifty thousand alarms to fifty that matter.",
+    // A7: heading was "From fifty thousand alarms to fifty that matter." — numbers removed
+    // (relocated to underground); reworded qualitatively, no invented figures.
+    heading: "From overwhelming alarm volume to the movement that matters.",
     intro:
       "The value isn't raising alarms — anything can do that. It's the disciplined workflow that filters an overwhelming volume of automated alarms down to the real ground failures, so the right movement reaches the right people.",
-    visual: <EscalationFunnel />,
+    visual: <FilterFlow />,
     note: (
       <>
-        That funnel — <b>validate the noise, escalate the real movement, catch the failures</b> — is
-        the discipline behind the numbers.
+        That workflow — <b>validate the noise, escalate the real movement, act on the failures</b> —
+        is the discipline.
       </>
     ),
   },
@@ -145,7 +145,7 @@ const openPitDetail: EnvironmentDetailData = {
     {
       en: "Underground",
       title: "Underground mining",
-      desc: "1,000km+ of convergence monitoring delivered.",
+      desc: "950+ km of scan and deformation data processed.",
       href: "/applications/underground-mining",
       image: "/images/applications/underground.png",
       imageAlt: "Underground mine drive with rock bolting and ventilation ducting.",
