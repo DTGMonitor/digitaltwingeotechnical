@@ -18,9 +18,8 @@ import { permanentRedirect } from "next/navigation";
 // Focus page. A second Focus page is the divergence pattern — two things meant to say the same
 // thing, drifting apart. One page, one truth.
 //
-// NB this orphans components/geotechnical.tsx entirely (FocusPillars / FocusVision / Workflow /
-// MonitoringCentreVisual / IntegrationVisual — this file was its only importer). Left in place on
-// purpose: CLAUDE.md §2.3 forbids cleanup as a side effect. It is on the dead-code cleanup list.
+// NB components/geotechnical.tsx was this route's only consumer and was DELETED in the dead-code
+// pass (2026-07-19) once /focus became a redirect.
 export default function Page() {
   permanentRedirect("/dtg-focus");
 }
