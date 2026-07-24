@@ -101,7 +101,7 @@ const outcomes = [
   ["Better operational awareness", "Monitoring becomes easier to interpret across technologies, teams, and timescales.", Eye],
 ];
 
-const inputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "VWP", "Seismic", "Inspections"];
+const inputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "Piezometers", "Seismic", "Inspections"];
 const review = ["Validate", "Correlate", "Contextualise", "Govern", "Advise"];
 const results = ["Trusted outcomes", "Reduced uncertainty", "Clear escalation", "Operational awareness", "Governance & assurance"];
 

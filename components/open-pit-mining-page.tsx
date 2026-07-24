@@ -140,7 +140,7 @@ const faqs = [
   ],
   [
     "Does DTG only work with slope stability radar?",
-    "No. Slope stability radar may be part of open pit monitoring, but DTG can also review other monitoring sources such as prisms, GNSS, InSAR, LiDAR, VWP, inspections, reports and operational records where available.",
+    "No. Slope stability radar may be part of open pit monitoring, but DTG can also review other monitoring sources such as prisms, GNSS, InSAR, LiDAR, piezometers, inspections, reports and operational records where available.",
   ],
   [
     "Can DTG support TARP-based escalation?",
@@ -302,7 +302,7 @@ function OpenPitEvidence() {
           id="open-pit-evidence-title"
           eyebrow="Monitoring evidence"
           title="Open pit monitoring often requires more than one source of evidence."
-          copy="Open pit monitoring may include slope stability radar, prisms, GNSS, InSAR, LiDAR, VWP, inspections, blasting records, weather data and operational observations. Each source can provide useful information, but each also has limitations."
+          copy="Open pit monitoring may include slope stability radar, prisms, GNSS, InSAR, LiDAR, piezometers, inspections, blasting records, weather data and operational observations. Each source can provide useful information, but each also has limitations."
         />
         <p className="op-lead">
           DTG helps review monitoring information in context, so teams can understand where datasets agree, where
