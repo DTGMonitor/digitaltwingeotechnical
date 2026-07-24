@@ -6,7 +6,7 @@ import { ApplicationsCarousel } from "@/components/applications-carousel";
 import { MonitoringChallenge } from "@/components/monitoring-challenge";
 import { HomeServicesOverview } from "@/components/home-services-overview";
 import { ProofBand } from "@/components/proof-band";
-import { DTGFocusMark, renderTrademarkText } from "@/components/brand";
+import dtgFocusLogo from "@/public/images/dtg-focus-logo-transparent.png";
 
 // The home proof band is now components/proof-band.tsx (variant C). The two NON-NUMERIC cards that
 // used to live here — "Evidence across monitoring sources" (multi-sensor) and "Independent
@@ -24,13 +24,6 @@ const applications: [string, string, string, string, string[]][] = [
 const heroLinks = [
   ["Explore DTG", "/about"],
   ["Our Services", "/services"],
-] as const;
-
-const focusPillars = [
-  "Integrated monitoring information",
-  "Workflow support",
-  "Decision visibility",
-  "Governance and assurance",
 ] as const;
 
 export default function Home() {
@@ -86,28 +79,95 @@ export default function Home() {
 
       <ProofBand />
 
-      <section id="dtg-focus" className="focus-section home-focus-section" aria-labelledby="home-focus-title">
-        <div className="site-container home-focus-layout">
-          <div className="home-focus-copy">
-            <p className="story-eyebrow fade-up"><DTGFocusMark /></p>
-            <h2 id="home-focus-title" className="section-headline fade-up">
-              Governed Monitoring Workflows.
-            </h2>
-            <p className="story-subcopy fade-up">
-              {renderTrademarkText(
-                "DTG Focus is DTG's own monitoring software — built and running. It brings your sources into one view, with analytics, review workflow and governance on the same data.",
-              )}
-            </p>
-            <div className="focus-home-pillars fade-up" aria-label="DTG Focus support pillars">
-              {focusPillars.map((pillar, index) => (
-                <span key={pillar}>
-                  <strong>{String(index + 1).padStart(2, "0")}</strong>
-                  {pillar}
-                </span>
-              ))}
+      {/* DTG Focus — spec-sheet layout on a deep-teal authority band. `.surface-band`
+          re-scopes the full on-dark token set for BOTH themes (globals.css:212), so the
+          `.dfx-*` children read correctly under [data-theme=light] too. */}
+      <section id="dtg-focus" className="dfx-section surface-band" aria-labelledby="home-focus-title">
+        <div className="site-container">
+          <div className="dfx-rule fade-up" />
+          <div className="dfx-logo fade-up">
+            {/* Logo lockup: brand asset (renders off-white on dark per CLAUDE.md §3), with a
+                standalone ™ beside it — the text mark component isn't used because the wordmark
+                here is the image, not typed text. */}
+            <Image src={dtgFocusLogo} alt="DTG Focus" sizes="120px" />
+            <span className="dfx-tm">™</span>
+          </div>
+
+          <h2 id="home-focus-title" className="dfx-h2 fade-up">
+            <span className="dfx-l1">One monitoring environment,</span>{" "}
+            <span className="dfx-l2">configured to your operation</span>
+          </h2>
+          <p className="dfx-sub fade-up">
+            Your monitoring sources, analytics, review workflow and governance brought together on one live record.
+          </p>
+
+          <div className="dfx-rows fade-up">
+            <div className="dfx-row">
+              <span className="dfx-key">Sources</span>
+              <div className="dfx-val">
+                <strong className="dfx-stmt">Read together, regardless of supplier</strong>
+                {/* "and other monitoring sources" is non-exhaustive by design — do not tighten to "every source" (an absolute the sitewide sweep removed). */}
+                <p className="dfx-supp">Radar, GNSS, InSAR, prisms, LiDAR, piezometers and other monitoring sources.</p>
+                <div className="dfx-chips">
+                  <span className="dfx-chip">Radar</span>
+                  <span className="dfx-chip">GNSS</span>
+                  <span className="dfx-chip">InSAR</span>
+                  <span className="dfx-chip">Prisms</span>
+                  <span className="dfx-chip">LiDAR</span>
+                  <span className="dfx-chip">Piezometers</span>
+                </div>
+              </div>
+            </div>
+            <div className="dfx-row">
+              <span className="dfx-key">Analytics</span>
+              <div className="dfx-val">
+                <strong className="dfx-stmt">Performed on the live record</strong>
+                <p className="dfx-supp">Trends, comparisons and threshold reviews without exporting and re-keying data.</p>
+              </div>
+            </div>
+            <div className="dfx-row">
+              <span className="dfx-key">Review</span>
+              <div className="dfx-val">
+                <strong className="dfx-stmt">Assigned, escalated and signed off</strong>
+                <p className="dfx-supp">Every action remains connected to the data that initiated it.</p>
+              </div>
+            </div>
+            <div className="dfx-row dfx-row--gov">
+              <span className="dfx-key">Governance</span>
+              <div className="dfx-val">
+                <strong className="dfx-stmt">Versioned and reviewable</strong>
+                <p className="dfx-supp">What was seen, what was decided and why remain available for later scrutiny.</p>
+              </div>
+            </div>
+            <div className="dfx-row">
+              <span className="dfx-key">Deployment</span>
+              <div className="dfx-val">
+                <strong className="dfx-stmt">Configured for each operation</strong>
+                {/* Maturity claim aligned to the Solutions canonical: configured per operation, extended as monitoring grows. Never claim complete coverage. */}
+                <p className="dfx-supp">Start with the required coverage and extend the environment as monitoring grows.</p>
+              </div>
             </div>
           </div>
-          <FocusOperationalView />
+
+          {/* MEDIA + CAPTION — STAGED, not rendered.
+              Pending a legible synthetic capture. Provenance is cleared (owner-confirmed
+              synthetic), but the current capture's UI text is garbled, so it ships staged —
+              no empty box on the live page. TO ENABLE: remove this comment wrapper, restore
+              the markup below, and place the provenance note as its own JSX comment
+              immediately above the Image.
+
+              Provenance note, verbatim:
+              Synthetic demo capture — interface data, sensor IDs, plotted series and pit
+              imagery are all fabricated for marketing use. Owner-confirmed provenance.
+              Not a client site. Do not treat as client-derived imagery.
+
+              <div className="dfx-media">
+                <Image src="/images/dtg-focus-demo.png"
+                       alt="DTG Focus interface, sources analytics and review workflow on one live record"
+                       fill sizes="(max-width:760px) 100vw, 1200px" style={{ objectFit: "cover" }} />
+              </div>
+              <p className="dfx-caption">DTG Focus — sources, analytics and review workflow on one live record</p>
+          */}
         </div>
       </section>
 
@@ -130,25 +190,4 @@ export default function Home() {
     </main>
   );
 }
-
-function FocusOperationalView() {
-  const dtgFocusOverviewPath = "/images/dtg-focus-laptop-preview.png";
-
-  return (
-    <figure className="focus-operational-view fade-up">
-      <div className="focus-operational-image-frame">
-        <Image
-          src={dtgFocusOverviewPath}
-          width={1672}
-          height={941}
-          alt="DTG Focus shown on a laptop in an operating environment"
-          className="focus-operational-image"
-          sizes="(max-width: 1024px) 100vw, 46vw"
-        />
-      </div>
-      <figcaption>DTG Focus — every monitoring source in one review environment.</figcaption>
-    </figure>
-  );
-}
-
 
