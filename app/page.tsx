@@ -149,25 +149,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* MEDIA + CAPTION — STAGED, not rendered.
-              Pending a legible synthetic capture. Provenance is cleared (owner-confirmed
-              synthetic), but the current capture's UI text is garbled, so it ships staged —
-              no empty box on the live page. TO ENABLE: remove this comment wrapper, restore
-              the markup below, and place the provenance note as its own JSX comment
-              immediately above the Image.
-
-              Provenance note, verbatim:
-              Synthetic demo capture — interface data, sensor IDs, plotted series and pit
+          {/* Synthetic demo capture — interface data, sensor IDs, plotted series and pit
               imagery are all fabricated for marketing use. Owner-confirmed provenance.
-              Not a client site. Do not treat as client-derived imagery.
-
-              <div className="dfx-media">
-                <Image src="/images/dtg-focus-demo.png"
-                       alt="DTG Focus interface, sources analytics and review workflow on one live record"
-                       fill sizes="(max-width:760px) 100vw, 1200px" style={{ objectFit: "cover" }} />
-              </div>
-              <p className="dfx-caption">DTG Focus — sources, analytics and review workflow on one live record</p>
-          */}
+              Not a client site. Do not treat as client-derived imagery. */}
+          {/* Interim capture — UI text is garbled in places. Replace with a clean demo-dataset
+              capture when available. Do not make this image click-to-zoom. */}
+          <div className="dfx-media">
+            <Image
+              src="/images/dtg-focus-demo.png"
+              alt="DTG Focus interface, sources analytics and review workflow on one live record"
+              fill
+              sizes="(max-width:760px) 100vw, 1200px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <p className="dfx-caption">DTG Focus — sources, analytics and review workflow on one live record</p>
         </div>
       </section>
 
