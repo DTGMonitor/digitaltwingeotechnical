@@ -12,7 +12,7 @@ const contextRows = [
   ],
   [
     "Multi-source evidence",
-    "InSAR, GNSS, prisms, radar, LiDAR, VWP, piezometers and inspections may each provide part of the picture.",
+    "InSAR, GNSS, prisms, radar, LiDAR, piezometers and inspections may each provide part of the picture.",
   ],
   [
     "Traceable review",
@@ -32,7 +32,7 @@ const reviewRows = [
     matters:
       "One monitoring source rarely explains the full picture, and different sources may agree, diverge or reveal different time scales.",
     support:
-      "Comparison of available sources such as InSAR, GNSS, prisms, radar, LiDAR, VWP, piezometers, inspections and operational records.",
+      "Comparison of available sources such as InSAR, GNSS, prisms, radar, LiDAR, piezometers, inspections and operational records.",
   },
   {
     area: "Data quality and monitoring confidence",
@@ -95,7 +95,7 @@ const evidenceGroups = [
   {
     title: "Survey and instrumentation",
     copy: "Ground-based instruments can add point-based or subsurface evidence to the broader monitoring record.",
-    items: ["GNSS", "prisms / robotic total station", "VWP / piezometers", "other site instrumentation"],
+    items: ["GNSS", "prisms / robotic total station", "piezometers", "other site instrumentation"],
   },
   {
     title: "Operational and environmental context",
@@ -150,7 +150,7 @@ const faqs = [
   ],
   [
     "Does DTG only work with one monitoring technology?",
-    "No. DTG is technology-agnostic and can review available TSF monitoring information from sources such as InSAR, GNSS, prisms, radar, LiDAR, VWP, piezometers, inspections, reports and operational records where available.",
+    "No. DTG is technology-agnostic and can review available TSF monitoring information from sources such as InSAR, GNSS, prisms, radar, LiDAR, piezometers, inspections, reports and operational records where available.",
   ],
   [
     "Why is long-term trend review important for TSFs?",
@@ -317,7 +317,7 @@ function TSFEvidence() {
           id="tsf-evidence-title"
           eyebrow="Monitoring evidence"
           title="TSF monitoring often depends on multiple sources of evidence."
-          copy="Tailings monitoring may include InSAR, GNSS, prisms, slope stability radar, LiDAR, VWP or piezometers, inspections, rainfall records, deposition activity, water management records, construction history and operational reports."
+          copy="Tailings monitoring may include InSAR, GNSS, prisms, slope stability radar, LiDAR or piezometers, inspections, rainfall records, deposition activity, water management records, construction history and operational reports."
         />
         <p className="tsf-lead">
           Each source can add value, but each also has limitations. DTG helps review available monitoring information in

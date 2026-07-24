@@ -19,7 +19,7 @@ import {
   Workflow,
 } from "lucide-react";
 
-const ecosystem = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "VWP", "Seismic", "Platforms", "Field observations"];
+const ecosystem = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "Piezometers", "Seismic", "Platforms", "Field observations"];
 
 const reviewSteps = [
   "Define requirement",

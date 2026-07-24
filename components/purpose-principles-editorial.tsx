@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { InternalHero } from "@/components/internal-hero";
 
-const inputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "SLAM LiDAR", "VWP", "Seismic", "Operational records"];
+const inputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "SLAM LiDAR", "Piezometers", "Seismic", "Operational records"];
 
 const reviewLayer = [
   "Independent review",

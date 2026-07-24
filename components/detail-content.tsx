@@ -46,7 +46,7 @@ export const detailPages: Record<string, DetailPageContent> = {
     title: "Our Approach",
     intro: "DTG brings monitoring information together through engineering review, governance and decision support.",
     points: [
-      "Integrate: bring radar, GNSS, prisms, InSAR, LiDAR, SLAM LiDAR, VWP, seismic and operational records into context.",
+      "Integrate: bring radar, GNSS, prisms, InSAR, LiDAR, SLAM LiDAR, piezometers, seismic and operational records into context.",
       "Govern: support traceability, accountability, audit trails, decision records and review discipline.",
       "Decide: help organisations move from fragmented information to informed, defensible operational response.",
     ],
@@ -158,7 +158,7 @@ export const detailPages: Record<string, DetailPageContent> = {
   "dtg-focus/multi-sensor-integration": {
     eyebrow: "DTG Focus™",
     title: "Multi-Sensor Integration",
-    intro: "Connect radar, InSAR, prisms, GNSS, surface LiDAR, SLAM LiDAR, seismic, VWPs and operational context.",
+    intro: "Connect radar, InSAR, prisms, GNSS, surface LiDAR, SLAM LiDAR, seismic, piezometers and operational context.",
     points: [
       "Multiple monitoring streams in one operating environment.",
       "Sensor input and correlation workflow.",

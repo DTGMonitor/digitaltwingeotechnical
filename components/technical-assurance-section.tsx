@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { InternalHero } from "@/components/internal-hero";
 
-const monitoringInputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "VWP", "Seismic", "Inspections", "Operational records"];
+const monitoringInputs = ["Radar", "GNSS", "Prisms", "InSAR", "LiDAR", "Piezometers", "Seismic", "Inspections", "Operational records"];
 
 const assuranceGates = ["Data Quality", "Configuration", "Correlation", "Interpretation", "Governance", "Traceability"];
 
