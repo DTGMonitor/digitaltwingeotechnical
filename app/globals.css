@@ -729,13 +729,12 @@ section { scroll-margin-top:76px; }
    must re-scope --accent-text to the BRIGHT green like the primitive does — otherwise its green
    labels stay the LIGHT theme's dark green (#2E6B2A) on deep-teal = 1.85:1, a light-only AA fail
    the pre-flip sweep caught. Bright green on deep-teal is 4.82:1 in both themes. */
-.monitoring-challenge { position:relative; overflow:hidden; background:var(--c-surface-band); color:var(--c-on-band); --accent-text:var(--signal-green); padding:clamp(88px,8vw,138px) 0; }
+.monitoring-challenge { position:relative; overflow:hidden; background:var(--c-surface-band); color:var(--c-on-band); padding:clamp(88px,8vw,138px) 0;
+ /* on-dark re-scope (deep-teal band, dark in BOTH themes) — the .mc-* content uses --c-text-soft/
+    --accent-text, which without this would resolve to dark ink under [data-theme=light]. */
+ --c-text:var(--off-white); --c-text-soft:var(--text-on-dark-soft); --accent-text:var(--signal-green); --c-border:var(--border-dark); }
 .monitoring-challenge::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 76% 24%,rgba(99,183,93,.075),transparent 28%),linear-gradient(180deg,rgba(244,247,246,.03),transparent 34%); pointer-events:none; }
 .challenge-container { position:relative; z-index:1; }
-.challenge-header { max-width:980px; }
-.monitoring-challenge .section-label { margin:0 0 24px; color:var(--accent-text); font-family:var(--font-mono); font-size:12px; line-height:1.4; letter-spacing:.16em; text-transform:uppercase; font-weight:700; }
-.challenge-header h2 { margin:0; max-width:980px; color:#F4F7F6; font-size:clamp(3rem,5.2vw,5.9rem); line-height:1; letter-spacing:-.035em; font-weight:500; }
-.challenge-header p { margin:clamp(22px,2.6vw,34px) 0 0; max-width:800px; color:#C8D8DA; font-size:clamp(1.08rem,1.25vw,1.3rem); line-height:1.58; letter-spacing:-.01em; }
 .challenge-editorial-grid { position:relative; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; margin-top:clamp(38px,4.4vw,64px); border:1px solid rgba(204,224,228,.18); background:rgba(204,224,228,.14); box-shadow:0 28px 90px rgba(0,0,0,.22); }
 .challenge-editorial-grid::before { content:""; position:absolute; left:clamp(24px,2.5vw,36px); right:clamp(24px,2.5vw,36px); top:clamp(62px,6vw,78px); height:1px; background:linear-gradient(90deg,rgba(99,183,93,.42),rgba(204,224,228,.16),rgba(204,224,228,.08)); pointer-events:none; }
 .challenge-editorial-card { position:relative; min-height:520px; overflow:hidden; background:linear-gradient(180deg,rgba(7,31,28,.91),rgba(6,18,22,.96)); padding:clamp(24px,2.5vw,36px); isolation:isolate; animation:challenge-card-reveal .7s ease both; }
@@ -771,143 +770,6 @@ section { scroll-margin-top:76px; }
 .challenge-outcome-list p { border-color:rgba(99,183,93,.22); background:rgba(8,42,49,.7); color:#F4F7F6; }
 .challenge-result-note { border-top:1px solid rgba(216,204,179,.2); padding-top:22px; color:#D8CCB3 !important; }
 @keyframes challenge-card-reveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-.challenge-narrative {
- position:relative;
- display:grid;
- grid-template-columns:repeat(4,minmax(0,1fr));
- gap:clamp(22px,3vw,46px);
- margin:clamp(54px,6vw,92px) 0 0;
- padding:0;
- list-style:none;
-}
-.challenge-narrative::before {
- content:"";
- position:absolute;
- left:0;
- right:0;
- top:16px;
- height:1px;
- background:linear-gradient(90deg,rgba(99,183,93,.5),rgba(204,224,228,.2),rgba(204,224,228,.06));
- pointer-events:none;
-}
-.challenge-narrative-item {
- position:relative;
- display:grid;
- grid-template-rows:auto 1fr;
- gap:clamp(24px,3.4vw,46px);
- min-width:0;
- padding-top:0;
- animation:challenge-card-reveal .65s ease both;
-}
-.challenge-narrative-item:nth-child(2) { margin-top:26px; animation-delay:.06s; }
-.challenge-narrative-item:nth-child(3) { margin-top:52px; animation-delay:.12s; }
-.challenge-narrative-item:nth-child(4) { margin-top:78px; animation-delay:.18s; }
-.challenge-narrative-item > span {
- position:relative;
- z-index:1;
- display:grid;
- place-items:center;
- width:34px;
- height:34px;
- border:1px solid rgba(99,183,93,.42);
- border-radius:999px;
- background:#061216;
- color:var(--accent-text);
- font-family:var(--font-mono);
- font-size:.68rem;
- letter-spacing:.08em;
-}
-.challenge-narrative-item h3 {
- margin:0;
- max-width:310px;
- color:#F4F7F6;
- font-size:clamp(1.55rem,2vw,2.45rem);
- line-height:1.04;
- letter-spacing:-.03em;
- font-weight:500;
-}
-.challenge-narrative-item p {
- margin:clamp(14px,1.6vw,20px) 0 0;
- max-width:340px;
- color:#C8D8DA;
- font-size:clamp(.98rem,1vw,1.08rem);
- line-height:1.62;
-}
-.challenge-narrative-item:nth-child(3) h3,
-.challenge-narrative-item:nth-child(3) > span {
- color:#B7E3B2;
-}
-.challenge-narrative-item:nth-child(3)::after {
- content:"";
- position:absolute;
- left:0;
- top:16px;
- width:min(180px,70%);
- height:1px;
- background:linear-gradient(90deg,rgba(99,183,93,.68),transparent);
- pointer-events:none;
-}
-@media (max-width:1024px){
- .challenge-narrative {
-  grid-template-columns:1fr;
-  gap:0;
-  max-width:860px;
- }
- .challenge-narrative::before {
-  left:16px;
-  right:auto;
-  top:0;
-  bottom:0;
-  width:1px;
-  height:auto;
-  background:linear-gradient(180deg,rgba(99,183,93,.5),rgba(204,224,228,.14),rgba(204,224,228,.04));
- }
- .challenge-narrative-item,
- .challenge-narrative-item:nth-child(2),
- .challenge-narrative-item:nth-child(3),
- .challenge-narrative-item:nth-child(4) {
-  grid-template-columns:34px minmax(0,1fr);
-  grid-template-rows:auto;
-  gap:24px;
-  margin-top:0;
-  padding:0 0 34px;
- }
- .challenge-narrative-item:last-child {
-  padding-bottom:0;
- }
- .challenge-narrative-item h3 {
-  max-width:640px;
- }
- .challenge-narrative-item p {
-  max-width:680px;
- }
- .challenge-narrative-item:nth-child(3)::after {
-  left:16px;
-  top:0;
-  width:1px;
-  height:100%;
-  background:linear-gradient(180deg,rgba(99,183,93,.68),transparent);
- }
-}
-@media (max-width:720px){
- .challenge-narrative {
-  margin-top:38px;
- }
- .challenge-narrative-item,
- .challenge-narrative-item:nth-child(2),
- .challenge-narrative-item:nth-child(3),
- .challenge-narrative-item:nth-child(4) {
-  gap:18px;
-  padding-bottom:30px;
- }
- .challenge-narrative-item h3 {
-  font-size:clamp(1.5rem,7.2vw,2.18rem);
- }
- .challenge-narrative-item p {
-  font-size:.98rem;
-  line-height:1.58;
- }
-}
 .home-focus-section {
  position:relative;
  overflow:hidden;
@@ -4226,14 +4088,12 @@ section { scroll-margin-top:76px; }
 @media (prefers-reduced-motion:reduce){
  .home-service-option,
  .home-service-feature-link svg,
- .challenge-narrative-item,
  .home-service-index-row,
  .home-service-index-row::before,
  .home-service-index-row > svg {
   animation:none;
   transition:none;
  }
- .challenge-narrative-item,
  .home-service-index-row,
  .home-service-index-row:hover,
  .home-service-index-row:focus-visible {
@@ -15874,4 +15734,38 @@ a.cx-cap:focus-visible .cx-cap__go { opacity:1; transform:translate(0,-50%); }
 @media (prefers-reduced-motion:reduce) {
  /* the draw fill is snapped full by the component; nothing here animates */
  .pb__draw { transition:none; }
+}
+
+/* ============================================================================
+   MONITORING CHALLENGE — variant E "Statement + rail" (.mc-*), 2026-07-19.
+   Built from dtg-challenge-variants.html; replaces the old .challenge-narrative
+   staircase (removed). Sits on the .monitoring-challenge deep-teal band (dark in
+   both themes; the band re-scopes the on-dark --c-* set). No boxes/cards —
+   hairlines and type only.
+   ========================================================================= */
+.mc-head { margin-bottom:clamp(30px,4vw,44px); }
+.mc-rule { width:44px; height:2px; background:var(--accent); }
+.mc-eyebrow { display:block; margin-top:20px; font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-text); }
+
+.mc-stmt { font-family:var(--font-sans); font-weight:700; font-size:clamp(2rem,5.6vw,4.6rem); line-height:1.04; letter-spacing:-.04em; color:var(--c-text); margin:0 0 clamp(30px,4vw,48px); max-width:20ch; }
+.mc-stmt__q { color:var(--c-text-soft); }
+.mc-stmt__a { color:var(--accent-text); }
+
+.mc-sub { margin:0 0 clamp(40px,5vw,64px); font-size:clamp(16px,1.7vw,18.5px); line-height:1.6; color:var(--c-text-soft); max-width:52ch; }
+
+.mc-rail { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,2.4vw,34px); border-top:1px solid var(--c-border); padding-top:24px; }
+.mc-step__n { display:block; font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--c-text-soft); margin-bottom:10px; }
+.mc-step b { display:block; font-family:var(--font-sans); font-weight:600; font-size:1rem; letter-spacing:-.01em; color:var(--c-text); margin-bottom:6px; }
+.mc-step p { margin:0; font-size:14px; line-height:1.55; color:var(--c-text-soft); }
+/* DTG step: raised onto an accent rule — the trick only works in a single row (see responsive) */
+.mc-step--dtg { border-top:2px solid var(--accent); margin-top:-26px; padding-top:24px; }
+.mc-step--dtg .mc-step__n, .mc-step--dtg b { color:var(--accent-text); }
+
+@media (max-width:900px) {
+ .mc-rail { grid-template-columns:1fr 1fr; gap:26px; }
+ /* the raised-rule trick breaks across rows — reset the DTG step to a standard cell */
+ .mc-step--dtg { margin-top:0; border-top:1px solid var(--c-border); padding-top:0; }
+}
+@media (max-width:560px) {
+ .mc-rail { grid-template-columns:1fr; }
 }
