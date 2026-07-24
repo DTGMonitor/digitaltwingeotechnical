@@ -3,7 +3,7 @@
 // Tailings storage facilities detail page — page 3 of the Applications axis. Content object
 // driving the shared EnvironmentDetailPage template; its signature visual is the noise->signal
 // chart (the one page where the noise/signal treatment is genuinely true). Proof band is
-// capability-framed (NO invented numbers). Client name (Greatland/Telfer) MUST NOT appear.
+// capability-framed (NO invented numbers). Client/site name MUST NOT appear — never publish client identities.
 // Hero image is an AI-generated placeholder. Catalyst Earth partnership confirmed; figures approved.
 
 import Link from "next/link";

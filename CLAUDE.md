@@ -156,7 +156,7 @@ deferred decision that requires explicit approval.
 
 > **Exception — orphan ≠ safe when it's LIVE and leaking (2026-07-18, user-authorised).** A concept
 > sweep found several of these orphan routes returning **200** while publishing locked-category
-> content — **client names** (Greatland, Telfer, Harmony, Hidden Valley) and **sensor brands**
+> content — **client names** (specific client and site identities — never publish these) and **sensor brands**
 > (GroundProbe, Trimble) in rendered HTML. "Not in nav" is not a defence in discovery: a 200 page is
 > indexable. These were **308-redirected** to their live equivalents (compliance, not redesign):
 > the whole `/operations/*` tree → `/applications/*`; `/leadership` → `/about#leadership`;
