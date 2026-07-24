@@ -77,9 +77,10 @@ export const detailPages: Record<string, DetailPageContent> = {
   },
   // COMPLIANCE DELETION (2026-07-18): the "about/our-journey" and "about/leadership" detailPages
   // entries were removed. Their routes 308-redirect (to /about and /about#leadership), so the data
-  // was dead — but it named a sensor brand (GroundProbe GSS) in founder bios, i.e. a locked-category
-  // leak sitting one un-redirect away from being live again. The recomposed /about carries this
-  // history without naming any vendor. Do not re-add these keys.
+  // was dead — but it named a sensor vendor in founder BIOS, one un-redirect from live. The rule
+  // (CLAUDE.md §3): vendor names are fine in an agnostic technical list, NOT in a bio/history, as a
+  // "partner", or with the vendor's metrics — the bio framing was the leak, not the bare name. The
+  // recomposed /about carries this history without the bio-level vendor reference. Do not re-add.
   "about/vision-future": {
     eyebrow: "About",
     title: "Vision & Future",
