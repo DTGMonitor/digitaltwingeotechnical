@@ -126,9 +126,9 @@ positive controls.
 
 ---
 
-## Deferred content — the Telfer paper (ADDED 2026-07-18; was recorded NOWHERE)
+## Deferred content — the client case-study paper (ADDED 2026-07-18; was recorded NOWHERE)
 
-**Add the Telfer paper to `/services/data-analytics-automation` on publication — with the client
+**Add the client case-study paper to `/services/data-analytics-automation` on publication — with the client
 name REDACTED.** This item existed only in conversation — not in this handover, not in CLAUDE.md,
 not in a code comment, not in memory. It was one session from being lost entirely.
 
@@ -139,11 +139,11 @@ and only the client grants the second.** A paper being public does not transfer 
 marketing site. This was asked and the answer is **no, not yet.**
 
 - **The move is the proof without the name:** *"a published case study on a major gold operation."*
-- **"Telfer" stays on the locked list** with Greatland / Harmony / Hidden Valley — the names behind
-  the `4a62793` breach fix — **until the client says otherwise in writing.** The guard comment at
-  `components/environments/tsf-detail.tsx:6` (*"Client name (Greatland/Telfer) MUST NOT appear"*)
+- **The client name stays on the locked list** with the other locked client/site identities — the
+  names behind the `4a62793` breach fix — **until the client says otherwise in writing.** The guard
+  comment at `components/environments/tsf-detail.tsx:6` (*"Client/site name MUST NOT appear"*)
   stays as-is.
-- Publishing the name without explicit written client consent would be **a second Greatland/Telfer
+- Publishing the name without explicit written client consent would be **a second client-name
   breach**, not a content decision.
 
 ---

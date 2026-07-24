@@ -55,6 +55,12 @@ hardened into code or published externally without leadership sign-off.
 - DTG is **independent and technology-agnostic.** Never imply DTG sells, favours, or is tied to a
   specific sensor, platform, or vendor. DTG reviews across radar, GNSS, prisms, InSAR, LiDAR, SLAM
   LiDAR, VWP, seismic and operational records — objectively.
+- **Sensor-vendor names — the real rule (2026-07-19).** Naming a vendor (GroundProbe, Trimble, etc.)
+  is **permitted in an agnostic technical list** — "we review across radar, GNSS, InSAR… whoever
+  supplied it" — because that *reinforces* technology-agnostic positioning. It is **NOT permitted**:
+  in a bio or history (reads as a personal/company tie), as a "partner" or endorsement, or paired
+  with that vendor's own metrics (another company's figures aren't ours to publish). The past leaks
+  were vendor names in **founder bios** — the bio framing was the violation, not the bare name.
 - **Positioning benchmark:** the calibre of major international engineering consultancies
   (AtkinsRéalis, Mott MacDonald, Arup, Egis, Worley). Match the *quality, restraint, and editorial
   confidence* of that tier — **do not copy their layouts, colours, or components.**
@@ -156,7 +162,7 @@ deferred decision that requires explicit approval.
 
 > **Exception — orphan ≠ safe when it's LIVE and leaking (2026-07-18, user-authorised).** A concept
 > sweep found several of these orphan routes returning **200** while publishing locked-category
-> content — **client names** (Greatland, Telfer, Harmony, Hidden Valley) and **sensor brands**
+> content — **client names** (specific client and site identities — never publish these) and **sensor brands**
 > (GroundProbe, Trimble) in rendered HTML. "Not in nav" is not a defence in discovery: a 200 page is
 > indexable. These were **308-redirected** to their live equivalents (compliance, not redesign):
 > the whole `/operations/*` tree → `/applications/*`; `/leadership` → `/about#leadership`;
@@ -315,7 +321,8 @@ sign-off and must not be locked into code or published externally without verifi
 
 - The **web/corporate typeface** (Inter is interim only).
 - **Logo master files and usage rules.**
-- **GroundProbe growth numbers** and any quantified metrics.
+- **A third party's proprietary metrics** (e.g. a sensor vendor's growth or performance numbers) —
+  never republish another company's figures. Cite only DTG's own, verified numbers.
 - **Client / partner names and logos.**
 
 ### 🚨 FOR PETER / LEADERSHIP — the masterbook asserts two things reality contradicts
