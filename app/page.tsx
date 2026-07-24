@@ -132,7 +132,7 @@ export default function Home() {
                 <p className="dfx-supp">Every action remains connected to the data that initiated it.</p>
               </div>
             </div>
-            <div className="dfx-row dfx-row--gov">
+            <div className="dfx-row">
               <span className="dfx-key">Governance</span>
               <div className="dfx-val">
                 <strong className="dfx-stmt">Versioned and reviewable</strong>

@@ -739,7 +739,10 @@ section { scroll-margin-top:76px; }
 .dfx-section { position:relative; padding:clamp(88px,8vw,138px) 0; }
 .dfx-rule { width:44px; height:2px; background:var(--accent); }
 .dfx-logo { display:flex; align-items:center; gap:12px; margin-top:20px; }
-.dfx-logo img { display:block; height:34px; width:auto; }
+/* Logo forced white on the teal band via filter — no white/off-white DTG Focus lockup asset
+   exists in the repo (checked 2026-07-24); replace this filter with a proper white asset when one
+   is added. ~52px high per owner review (34px read too small and coloured against the band). */
+.dfx-logo img { display:block; height:52px; width:auto; filter:brightness(0) invert(1); }
 .dfx-tm { font-size:11px; color:var(--c-text-soft); }
 .dfx-h2 { margin:18px 0 16px; max-width:none; font-weight:700; font-size:clamp(1.8rem,4vw,3.4rem); line-height:1.08; letter-spacing:-.035em; color:var(--c-text); }
 .dfx-h2 .dfx-l1, .dfx-h2 .dfx-l2 { display:block; white-space:nowrap; }
@@ -751,10 +754,8 @@ section { scroll-margin-top:76px; }
 .dfx-supp { margin:4px 0 0; max-width:62ch; font-size:clamp(15px,1.5vw,16px); line-height:1.55; color:var(--c-text-soft); }
 .dfx-chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
 .dfx-chip { font-size:12.5px; padding:4px 11px; border:1px solid var(--c-border); border-radius:3px; color:var(--c-text-soft); }
-/* Governance = accented row: 2px green left rule pulled outside the text column via negative
-   margin. Governance carries the "decisions you have to defend" positioning. */
-.dfx-row--gov { border-left:2px solid var(--accent); padding-left:clamp(14px,2vw,22px); margin-left:calc(-1 * clamp(14px,2vw,22px) - 2px); }
-.dfx-row--gov .dfx-stmt { color:var(--accent-text); }
+/* All five rows carry EQUAL weight — no accented row (CLAUDE.md §3: never promote one DTG Focus
+   capability above the others). The Governance accent was dropped per owner review 2026-07-24. */
 /* Media + caption are STAGED (not rendered) pending a legible synthetic capture — these rules
    are ready for the one-line enable in page.tsx. 16:9, 4:3 below 760px. */
 .dfx-media { position:relative; margin-top:clamp(34px,4.5vw,54px); aspect-ratio:16/9; overflow:hidden; }
@@ -764,7 +765,6 @@ section { scroll-margin-top:76px; }
 @media (max-width:760px){ .dfx-media { aspect-ratio:4/3; } }
 @media (max-width:640px){
  .dfx-row { grid-template-columns:1fr; gap:5px; }
- .dfx-row--gov { margin-left:0; padding-left:14px; }
 }
 @media (max-width:560px){ .dfx-h2 .dfx-l1, .dfx-h2 .dfx-l2 { white-space:normal; } }
 .story-headline { font-size:clamp(3rem,7.2vw,7.8rem); font-weight:500; line-height:.92; letter-spacing:-.03em; }
