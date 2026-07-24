@@ -5,34 +5,14 @@ import { StoryMotion } from "@/components/storytelling";
 import { ApplicationsCarousel } from "@/components/applications-carousel";
 import { MonitoringChallenge } from "@/components/monitoring-challenge";
 import { HomeServicesOverview } from "@/components/home-services-overview";
+import { ProofBand } from "@/components/proof-band";
 import { DTGFocusMark, renderTrademarkText } from "@/components/brand";
 
-const proofItems = [
-  {
-    eyebrow: "Alarm review",
-    title: "50,000+ alarms reviewed",
-    description:
-      "Operational alarm records reviewed with the discipline needed for clearer escalation and response confidence.",
-  },
-  {
-    eyebrow: "Monitoring hours",
-    title: "9,600+ monitoring hours",
-    description:
-      "Remote monitoring support across active operating conditions where response pathways need steady technical review.",
-  },
-  {
-    eyebrow: "Multi-sensor workflows",
-    title: "Evidence across monitoring sources",
-    description:
-      "Independent review across radar, GNSS, prisms, InSAR, LiDAR and other monitoring inputs.",
-  },
-  {
-    eyebrow: "Technology agnostic",
-    title: "Independent operating experience",
-    description:
-      "Reporting, back-analysis and interpretation support that is not tied to a single platform or hardware vendor.",
-  },
-];
+// The home proof band is now components/proof-band.tsx (variant C). The two NON-NUMERIC cards that
+// used to live here — "Evidence across monitoring sources" (multi-sensor) and "Independent
+// operating experience" (technology-agnostic) — were removed: both claims are already carried on
+// Services (multi-sensor integration / vendor-independent review) and About (vendor independence),
+// so nothing was lost. Only the three record-figures remain: 50,000+ / 10,000+ / 10+.
 
 const applications: [string, string, string, string, string[]][] = [
   ["Open Pit Mining", "Slope monitoring, alarms and deformation trends.", "/images/operation-gold-mining.png", "/applications/open-pit-mining", ["Radar", "Slopes"]],
@@ -104,29 +84,7 @@ export default function Home() {
 
       <HomeServicesOverview />
 
-      <section id="proof" className="proof-section proof-credibility" aria-labelledby="proof-credibility-title">
-        <div className="site-container proof-container">
-          <div className="proof-header">
-            <p className="section-label fade-up">PROOF &amp; CREDIBILITY</p>
-            <h2 id="proof-credibility-title" className="fade-up">
-              Proven in Live Conditions.
-            </h2>
-            <p className="fade-up">
-              DTG supports active monitoring environments through independent review, reporting and multi-source interpretation.
-            </p>
-          </div>
-
-          <div className="proof-editorial-grid">
-            {proofItems.map((item) => (
-              <article className="proof-card fade-up" key={item.title}>
-                <span className="proof-card-kicker">{item.eyebrow}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProofBand />
 
       <section id="dtg-focus" className="focus-section home-focus-section" aria-labelledby="home-focus-title">
         <div className="site-container home-focus-layout">
