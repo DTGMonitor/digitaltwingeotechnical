@@ -80,6 +80,10 @@ const leaders = [
     tags: ["Slope stability radar", "Multi-sensor monitoring", "Mine geomechanics"],
     linkedin: "https://www.linkedin.com/in/geotechnicalmonitoring/",
     email: "Peter.Saunders@dtgeotech.com",
+    // object-position tuned to level the two eye-lines (the portraits differ in crop). Peter's is
+    // the wider frame, so favour the top: keeps his head in and lifts his face to meet Mark's.
+    // Estimate optimised for the desktop column width; swap for matched headshots later.
+    objectPosition: "50% 25%",
   },
   {
     name: "Mark Burdett",
@@ -91,6 +95,8 @@ const leaders = [
     tags: ["Structural geology", "Rock mass characterisation", "3D fault modelling"],
     linkedin: "https://www.linkedin.com/in/mark-burdett/",
     email: "Mark.Burdett@dtgeotech.com",
+    // Near-square source: no vertical crop room at desktop, so his eye-line is fixed here.
+    objectPosition: "50% 50%",
   },
 ];
 
@@ -375,6 +381,7 @@ export default function AboutPage() {
                     alt={`Portrait of ${leader.name}, ${leader.role}`}
                     fill
                     sizes="(max-width: 760px) 100vw, 50vw"
+                    style={{ objectPosition: leader.objectPosition }}
                   />
                   <div className="ab-lead__bar">
                     <p className="ab-lead__role">{leader.role}</p>
