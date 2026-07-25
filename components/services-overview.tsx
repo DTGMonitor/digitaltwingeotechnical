@@ -4,10 +4,16 @@
 // and every Solutions situation cross-links into here. One page, five capabilities, no sub-nav.
 // Chrome (nav/footer) comes from the global layout; this renders only the page body.
 //
-// DESIGN DECISIONS (approved mockup — do not "improve" these back):
-//  - The hero has NO image and NO animated signature visual. Both were considered and rejected:
-//    Services is a capability, not a place, and there is nothing honest to illustrate. The type
-//    carries it. Do not add a photo or an SVG here.
+// DESIGN DECISIONS (approved mockup):
+//  - HERO NOW HAS A PHOTOGRAPHIC BACKGROUND (added 2026-07-25, owner-authorised). This REVERSES the
+//    prior "no image" decision, deliberately: the site is moving to a site-wide photographic-hero
+//    system and Services is brought in for consistency with /about. Recorded here so it is not read
+//    as drift and reverted. The photo is a monitoring-room shot with OWNER-CONFIRMED SYNTHETIC
+//    monitor content (provenance note sits on the <Image>); the tint matches the /about hero's
+//    uniform teal wash (lighter here — the room is already dark teal). Superseded prior rationale,
+//    kept for context: "Services is a capability, not a place, and there is nothing honest to
+//    illustrate; the type carries it" — the photo-hero system decision overrides it, and the
+//    synthetic-data note keeps the monitor content honest.
 //  - The five services are BIG VERTICAL ROWS, not a card grid. Card grids were rejected on the
 //    Applications axis for the same reason — they flatten five distinct capabilities into
 //    interchangeable tiles.
@@ -25,6 +31,7 @@
 // generator even when the behaviour it guards is still correct — the next reader re-derives the
 // retired framing from it and writes it somewhere else. Fix the reason, keep the rule.
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useEffect } from "react";
@@ -114,8 +121,15 @@ export function ServicesOverview() {
 
   return (
     <main className="svcx-page" id="top">
-      {/* HERO — no image, no signature visual (deliberate; see the note at the top of this file) */}
+      {/* HERO — photographic background (site-wide photo-hero system, 2026-07-25; see the note at
+          the top of this file). No animated signature visual. */}
       <header className="svcx-hero">
+        <div className="svcx-hero__media" aria-hidden="true">
+          {/* Synthetic demo capture — monitor content is fabricated for marketing use.
+              Owner-confirmed provenance. Not a client site. Do not treat as client-derived imagery. */}
+          <Image src="/images/service-hero-update.png" alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="svcx-hero__scrim" aria-hidden="true" />
         <div className="svcx-hero__content site-container" data-svcx-reveal>
           <span className="svcx-eyebrow svcx-hero__eyebrow">Services</span>
           <h1 className="svcx-hero__title">The independent layer</h1>

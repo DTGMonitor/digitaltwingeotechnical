@@ -140,8 +140,14 @@ export default function AboutPage() {
     <main id="top" className="ab-page">
       <SectionReveals attr="ab-reveal" />
 
-      {/* HERO — cinematic, no image */}
+      {/* HERO — team office photo background (dark in BOTH themes); text sits over the empty
+          left wall. Image + scrim are decorative (aria-hidden); content colours are hardcoded
+          on-dark so nothing flips under [data-theme=light]. */}
       <header className="ab-hero" aria-labelledby="about-hero-title">
+        <div className="ab-hero__media" aria-hidden="true">
+          <Image src="/images/about-hero-team.png" alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="ab-hero__scrim" aria-hidden="true" />
         <div className="ab-hero__content site-container" data-ab-reveal>
           <span className="ab-eyebrow ab-hero__eyebrow">About DTG</span>
           <h1 id="about-hero-title" className="ab-hero__title">

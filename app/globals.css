@@ -14638,6 +14638,23 @@ main .ld-container,
  background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
 }
 .svcx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 36%,rgba(99,183,93,.08),transparent 55%); }
+/* Services hero — monitoring-room photo background, dark in BOTH themes. Hero content colours are
+   hardcoded on-dark (#fff / --off-white / --accent), so nothing flips under [data-theme=light].
+   Light uniform #073C4A wash (0.2) — the room is already dark blue-teal, so it sits in the same
+   tonal family as the /about hero (which needed 0.5 over a grey wall) with far less tint. A gentle
+   LOCAL LEFT boost adds WCAG-AA headroom under the text (body was 5.2:1 on the uniform wash alone),
+   while the uniform 0.2 tone holds across the rest of the frame. Photo NOT recoloured — overlay only. */
+.svcx-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.svcx-hero__media img { object-fit:cover; object-position:65% 50%; }
+.svcx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(7,60,74,0.42) 0%, rgba(7,60,74,0) 50%),  /* local left boost — AA headroom under the text */
+    rgba(7,60,74,0.2); }                                                  /* uniform teal grade, whole frame */
+/* MOBILE: narrow crop can't hold the wall AND the people, so favour the empty wall — text stays
+   clean over dark; the people/monitors crop out rather than bisecting a face. */
+@media (max-width:760px) {
+  .svcx-hero__media img { object-position:40% 50%; }
+}
 /* text sits on the .site-container ruler like every body section — do NOT add width:100%,
    it overrides the container and runs the headline to the screen edge. */
 .svcx-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
@@ -14879,6 +14896,28 @@ main .ld-container,
 /* HERO */
 .ab-hero { position:relative; min-height:82vh; display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%); }
 .ab-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
+/* Team-photo hero background — dark in BOTH themes (it's a photo). Hero content colours are
+   hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips under
+   [data-theme=light]. The teal grade is a UNIFORM deep-teal (#073C4A) wash across the WHOLE hero —
+   same OVERLAY method as the homepage hero (.home-hero-overlay), but FLAT edge-to-edge so the entire
+   frame (team included) reads as one graded photo, not just the text side. A gentle LOCAL left boost
+   is layered on top, under the text only, to hold WCAG AA over the light grey wall without changing
+   the uniform tone on the team side. The photo is NOT recoloured — overlay only. */
+.ab-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.ab-hero__media img { object-fit:cover; object-position:62% 50%; }
+.ab-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(7,60,74,0.45) 0%, rgba(7,60,74,0) 45%),  /* local left boost — text legibility only */
+    rgba(7,60,74,0.5); }                                                  /* UNIFORM teal grade, whole frame */
+/* MOBILE: push the crop right a touch; text sits over the group, so the local boost moves to a
+   bottom band. Base wash stays uniform (a touch stronger) so the tone is consistent everywhere. */
+@media (max-width:760px) {
+  .ab-hero__media img { object-position:70% 50%; }
+  .ab-hero__scrim {
+    background:
+      linear-gradient(0deg, rgba(7,60,74,0.5) 0%, rgba(7,60,74,0) 45%),
+      rgba(7,60,74,0.55); }
+}
 .ab-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
 .ab-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
 .ab-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.8rem,7vw,5.6rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
