@@ -14988,15 +14988,27 @@ main .ld-container,
 .ab-lead { padding-block:clamp(64px,9vw,110px); border-bottom:1px solid var(--c-border); }
 .ab-lead__head { margin-bottom:clamp(34px,5vw,56px); }
 .ab-lead__head .ab-eyebrow { display:block; margin-bottom:16px; }
-.ab-lead__grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; }
-.ab-prof { display:grid; grid-template-columns:120px 1fr; gap:28px; align-items:start; }
-.ab-prof__img { width:120px; height:150px; border-radius:6px; overflow:hidden; border:1px solid var(--c-border); background:var(--c-surface-raised); }
-.ab-prof__img img { width:100%; height:100%; object-fit:cover; }
-.ab-prof__role { font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-text); margin-bottom:8px; }
-.ab-prof h3 { font-family:var(--font-sans); font-size:1.5rem; font-weight:600; letter-spacing:-.02em; color:var(--c-text); margin:0 0 14px; }
-.ab-prof p { font-size:14.5px; line-height:1.65; color:var(--c-text-soft); margin:0 0 18px; }
-.ab-prof__tags { display:flex; gap:6px; flex-wrap:wrap; }
-.ab-prof__tags span { font-size:10.5px; letter-spacing:.04em; color:var(--c-text-soft); border:1px solid var(--c-border); border-radius:3px; padding:4px 9px; }
+/* Variant C duotone cards — two equal columns, one below 760px. The card sits on the themed
+   page surface (uses --c-* tokens), but the overlay bar is an always-dark gradient over the
+   photo, so its text takes FIXED on-dark colours (name #fff, role bright --accent) in BOTH
+   themes. Pill icons use --accent-text (theme-aware green, legible on the surface in both). */
+.ab-lead__grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,3.4vw,48px); }
+.ab-lead__card { display:flex; flex-direction:column; }
+.ab-lead__figure { position:relative; aspect-ratio:4/5; max-height:560px; overflow:hidden; }
+.ab-lead__figure img { object-fit:cover; filter:grayscale(1) contrast(1.04); }
+.ab-lead__bar { position:absolute; left:0; right:0; bottom:0; padding:18px 20px; background:linear-gradient(to top, rgba(6,18,22,.92), rgba(6,18,22,0)); }
+.ab-lead__role { margin:0; font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.ab-lead__name { margin:4px 0 0; font-family:var(--font-sans); font-weight:700; font-size:clamp(1.3rem,2.2vw,1.6rem); line-height:1.1; letter-spacing:-.02em; color:#fff; }
+.ab-lead__body { display:flex; flex-direction:column; flex:1; padding-top:20px; }
+.ab-lead__bio { margin:0; max-width:48ch; font-size:15px; line-height:1.6; color:var(--c-text-soft); }
+.ab-lead__tags { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0; }
+.ab-lead__tags span { font-size:12px; padding:4px 11px; border:1px solid var(--c-border); border-radius:3px; color:var(--c-text-soft); }
+.ab-lead__contact { margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
+.ab-lead__contact a { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border:1px solid var(--c-border); border-radius:999px; font-size:13px; font-weight:600; color:var(--c-text); transition:background .2s ease, border-color .2s ease, color .2s ease; }
+.ab-lead__contact a:hover { background:var(--accent); border-color:var(--accent); color:#06210A; }
+.ab-lead__ico { display:flex; flex:none; color:var(--accent-text); }
+.ab-lead__contact a:hover .ab-lead__ico { color:#06210A; }
+@media (max-width:760px) { .ab-lead__grid { grid-template-columns:1fr; } }
 
 /* REVEAL */
 [data-ab-reveal] { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
@@ -15029,12 +15041,6 @@ main .ld-container,
  .ab-vr:not(.ab-vr--head) .ab-vr__dtg::before { left:0; top:23px; }
  .ab-vr--head .ab-vr__dtg, .ab-vr--head .ab-vr__v { padding-left:0; }
  .ab-assur__grid { grid-template-columns:1fr; gap:32px; }
- .ab-lead__grid { grid-template-columns:1fr; gap:40px; }
- .ab-prof { grid-template-columns:90px 1fr; gap:20px; }
- .ab-prof__img { width:90px; height:112px; }
-}
-@media (max-width:560px) {
- .ab-prof { grid-template-columns:1fr; }
 }
 
 /* ============================================================================
