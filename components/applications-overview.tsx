@@ -38,7 +38,7 @@ const environments: Environment[] = [
     ),
     href: "/applications/open-pit-mining",
     linkLabel: "Explore open-pit monitoring",
-    img: "/images/operation-openpit-mining.png",
+    img: "/images/applications/openpit.png",
     imgAlt: "Terraced open-pit mine slope under an overcast sky.",
   },
   {
@@ -48,7 +48,7 @@ const environments: Environment[] = [
     body: "Gradual settlement and seepage over years, where the movement that matters is small and easily missed — InSAR and multi-sensor coverage conditioned into a reliable long-term record.",
     href: "/applications/tailings-storage-facilities",
     linkLabel: "Explore tailings monitoring",
-    img: "/images/operation-tsf.png",
+    img: "/images/applications/tsf.png",
     imgAlt: "Aerial view of a tailings storage facility embankment and pond.",
   },
   {
@@ -64,7 +64,7 @@ const environments: Environment[] = [
     ),
     href: "/applications/underground-mining",
     linkLabel: "Explore underground mining",
-    img: "/images/operation-ug.png",
+    img: "/images/applications/underground.png",
     imgAlt: "Underground mine drive with rock support and ventilation ducting.",
   },
   {
@@ -74,7 +74,7 @@ const environments: Environment[] = [
     body: "Dams, slopes, tunnels and civil assets face the same question as a mine: is what moved a problem? The same independent monitoring and analytics apply to the built environment.",
     href: "/applications/infrastructure-civil",
     linkLabel: "Explore infrastructure & civil",
-    img: "/images/sector-infras.png",
+    img: "/images/applications/civil.png",
     imgAlt: "Highway viaduct beside a bolted and mesh-covered rock-cut slope.",
   },
 ];
