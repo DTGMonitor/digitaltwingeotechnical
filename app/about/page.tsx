@@ -72,17 +72,31 @@ const assurance: [string, string][] = [
 const leaders = [
   {
     name: "Peter Saunders",
-    role: "Founder / Director",
+    role: "Founder / Director · Brisbane",
     src: "/images/peter-saunders-portrait.png",
-    bio: "Extensive experience in geotechnical monitoring, operational implementation and monitoring service leadership — helping mining and infrastructure teams use monitoring systems as decision-support tools, not only instruments.",
-    tags: ["Monitoring operations", "Technology implementation", "Monitoring governance", "Client advisory"],
+    // Bio deliberately NEUTRAL: never name GroundProbe or any former employer here. A vendor/
+    // former-employer reference in a founder bio is the locked positioning violation (CLAUDE.md §3).
+    bio: "A leading expert in slope stability radar and multi-sensor monitoring, with 20+ years in open-cut and underground hard-rock geomechanics.",
+    tags: ["Slope stability radar", "Multi-sensor monitoring", "Mine geomechanics"],
+    linkedin: "https://www.linkedin.com/in/geotechnicalmonitoring/",
+    email: "Peter.Saunders@dtgeotech.com",
+    // object-position tuned to level the two eye-lines (the portraits differ in crop). Peter's is
+    // the wider frame, so favour the top: keeps his head in and lifts his face to meet Mark's.
+    // Estimate optimised for the desktop column width; swap for matched headshots later.
+    objectPosition: "50% 25%",
   },
   {
     name: "Mark Burdett",
-    role: "Founder / Director",
+    role: "Founder / Director · Perth",
     src: "/images/mark-burdett-portrait.png",
-    bio: "Senior mining and operational experience, with a focus on how geotechnical information supports decisions across complex mining environments.",
-    tags: ["Mining leadership", "Operational risk", "Geotechnical strategy", "Governance"],
+    // Mark is 25+ years (owner-confirmed current; his LinkedIn is ~2 years stale). No RPEQ /
+    // CP(Geotech) — not supplied, do not add.
+    bio: "Structural geologist bridging ore-deposit understanding with applied geotechnical solutions.",
+    tags: ["Structural geology", "Rock mass characterisation", "3D fault modelling"],
+    linkedin: "https://www.linkedin.com/in/mark-burdett/",
+    email: "Mark.Burdett@dtgeotech.com",
+    // Near-square source: no vertical crop room at desktop, so his eye-line is fixed here.
+    objectPosition: "50% 50%",
   },
 ];
 
@@ -346,29 +360,64 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* LEADERSHIP — editorial, role above name */}
+      {/* LEADERSHIP — variant C duotone cards (owner-approved). Role above name on a gradient
+          overlay bar; bio, three tags, then LinkedIn + email pills (no phone — the company line
+          lives on Contact). Contact links: aria-labelled, SVG icons aria-hidden, LinkedIn
+          target=_blank rel=noopener, plain mailto (never JS-obfuscate the address). */}
       <section className="ab-lead" id="leadership" aria-labelledby="ab-lead-title">
         <div className="site-container">
           <div className="ab-lead__head" data-ab-reveal>
             <span className="ab-eyebrow">Leadership</span>
             <h2 id="ab-lead-title" className="ab-h2">
-              Technical and mining leadership.
+              Technical and mining leadership
             </h2>
           </div>
           <div className="ab-lead__grid">
             {leaders.map((leader) => (
-              <article className="ab-prof" key={leader.name} data-ab-reveal>
-                <div className="ab-prof__img">
-                  <Image src={leader.src} alt={`${leader.name}, ${leader.role} of DTG`} width={240} height={300} />
+              <article className="ab-lead__card" key={leader.name} data-ab-reveal>
+                <div className="ab-lead__figure">
+                  <Image
+                    src={leader.src}
+                    alt={`Portrait of ${leader.name}, ${leader.role}`}
+                    fill
+                    sizes="(max-width: 760px) 100vw, 50vw"
+                    style={{ objectPosition: leader.objectPosition }}
+                  />
+                  <div className="ab-lead__bar">
+                    <p className="ab-lead__role">{leader.role}</p>
+                    <h3 className="ab-lead__name">{leader.name}</h3>
+                  </div>
                 </div>
-                <div>
-                  <div className="ab-prof__role">{leader.role}</div>
-                  <h3>{leader.name}</h3>
-                  <p>{leader.bio}</p>
-                  <div className="ab-prof__tags">
+                <div className="ab-lead__body">
+                  <p className="ab-lead__bio">{leader.bio}</p>
+                  <div className="ab-lead__tags" aria-label={`${leader.name} focus areas`}>
                     {leader.tags.map((tag) => (
                       <span key={tag}>{tag}</span>
                     ))}
+                  </div>
+                  <div className="ab-lead__contact">
+                    <a
+                      href={leader.linkedin}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label={`${leader.name} on LinkedIn`}
+                    >
+                      <span className="ab-lead__ico">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+                        </svg>
+                      </span>
+                      LinkedIn
+                    </a>
+                    <a href={`mailto:${leader.email}`} aria-label={`Email ${leader.name}`}>
+                      <span className="ab-lead__ico">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                          <rect x="2" y="4" width="20" height="16" rx="2" />
+                          <path d="m2 7 10 6 10-6" />
+                        </svg>
+                      </span>
+                      Email
+                    </a>
                   </div>
                 </div>
               </article>
