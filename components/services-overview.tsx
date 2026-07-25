@@ -127,7 +127,7 @@ export function ServicesOverview() {
         <div className="svcx-hero__media" aria-hidden="true">
           {/* Synthetic demo capture — monitor content is fabricated for marketing use.
               Owner-confirmed provenance. Not a client site. Do not treat as client-derived imagery. */}
-          <Image src="/images/services-hero-monitoring.png" alt="" fill priority sizes="100vw" />
+          <Image src="/images/service-hero-update.png" alt="" fill priority sizes="100vw" />
         </div>
         <div className="svcx-hero__scrim" aria-hidden="true" />
         <div className="svcx-hero__content site-container" data-svcx-reveal>
