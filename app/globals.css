@@ -14879,24 +14879,30 @@ main .ld-container,
 /* HERO */
 .ab-hero { position:relative; min-height:82vh; display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%); }
 .ab-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
-/* Team-photo hero background — dark in BOTH themes (it's a photo). All hero content colours are
-   hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips to a
-   light value under [data-theme=light]; the scrim guarantees contrast over the light office wall. */
+/* Team-photo hero background — dark in BOTH themes (it's a photo). Hero content colours are
+   hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips under
+   [data-theme=light]. The scrim is a deep-teal (#073C4A) gradient OVERLAY — SAME METHOD as the
+   homepage hero (.home-hero-overlay is also a gradient-overlay div), retinted from near-black to
+   brand teal so both heroes read as one blue-teal wash. NOTE: home's own overlay is #03181B (a
+   darker near-black teal); about needs the brighter #073C4A because its photo is grey, not teal.
+   Opening opacity held at 0.88 — the left wall is LIGHT grey, so white text needs it for WCAG AA
+   (~10:1). object-position 62% keeps the group (now compact, right) in view with text clear of
+   faces. The photo is NOT recoloured — the teal wash is an overlay only. */
 .ab-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
-.ab-hero__media img { object-fit:cover; object-position:70% 50%; }
+.ab-hero__media img { object-fit:cover; object-position:62% 50%; }
 .ab-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    linear-gradient(90deg, rgba(6,18,22,0.92) 0%, rgba(6,18,22,0.57) 50%, rgba(6,18,22,0) 78%),
-    linear-gradient(180deg, rgba(6,18,22,0.45) 0%, rgba(6,18,22,0) 16%),
-    linear-gradient(0deg, rgba(6,18,22,0.6) 0%, rgba(6,18,22,0) 26%); }
-/* MOBILE: the group can't sit beside the text, so push the crop right (show the group, drop the
-   empty wall) and wash the scrim to near-full so white text stays readable over faces. */
+    linear-gradient(90deg, rgba(7,60,74,0.88) 0%, rgba(7,60,74,0.55) 50%, rgba(7,60,74,0) 78%),
+    linear-gradient(180deg, rgba(7,60,74,0.42) 0%, rgba(7,60,74,0) 16%),
+    linear-gradient(0deg, rgba(7,60,74,0.55) 0%, rgba(7,60,74,0) 26%); }
+/* MOBILE: narrow crop can't hold the whole group beside the text, so push the crop right a touch
+   and wash the teal scrim to near-full so white text stays readable over faces. */
 @media (max-width:760px) {
-  .ab-hero__media img { object-position:80% 50%; }
+  .ab-hero__media img { object-position:70% 50%; }
   .ab-hero__scrim {
     background:
-      linear-gradient(90deg, rgba(6,18,22,0.94) 0%, rgba(6,18,22,0.8) 55%, rgba(6,18,22,0.55) 100%),
-      linear-gradient(0deg, rgba(6,18,22,0.62) 0%, rgba(6,18,22,0) 30%); }
+      linear-gradient(90deg, rgba(7,60,74,0.9) 0%, rgba(7,60,74,0.78) 55%, rgba(7,60,74,0.5) 100%),
+      linear-gradient(0deg, rgba(7,60,74,0.58) 0%, rgba(7,60,74,0) 30%); }
 }
 .ab-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
 .ab-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
