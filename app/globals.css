@@ -14174,6 +14174,21 @@ main .ld-container,
  --c-text:var(--off-white);            /* re-scope on-dark so hero reads under [data-theme=light] */
 }
 .appsx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 78% 30%,rgba(99,183,93,.08),transparent 55%); }
+/* Applications hero — hi-vis monitoring-room photo (AI-generated, synthetic monitors). Dark in BOTH
+   themes; content colours are hardcoded on-dark. Photo-hero family tone: uniform #073C4A wash (0.2) +
+   a STRONGER local left boost than the siblings, because the text overlaps the bright hi-vis vests
+   (accepted — no crop room to fully clear the group) and needs extra darkening to hold WCAG AA over
+   them. object-position pushed right to keep the group + monitors in frame and give the left wall to
+   the text. Photo NOT recoloured — overlay only. */
+.appsx-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.appsx-hero__media img { object-fit:cover; object-position:85% 50%; }
+.appsx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(7,60,74,0.78) 0%, rgba(7,60,74,0.6) 60%, rgba(7,60,74,0) 78%),  /* strong+wide left boost — keeps AA where headline/lead cross the hi-vis (~64-68%) */
+    rgba(7,60,74,0.2); }                                                                          /* uniform teal grade, whole frame */
+@media (max-width:760px) {
+  .appsx-hero__media img { object-position:78% 50%; }
+}
 /* text sits in the site content wrapper (.site-container) like the body sections — do NOT force
    width:100%, which would override the wrapper and run the hero text to the screen edge. */
 .appsx-hero__inner { position:relative; z-index:2; padding-bottom:0; }

@@ -7,8 +7,8 @@
 // Environment images are AI-generated. Owner-confirmed. No identifiable client sites.
 // Do not treat as client-derived imagery. Proof figures are APPROVED to publish (user 2026-07-18).
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useEffect, type ReactNode } from "react";
 
@@ -118,8 +118,17 @@ export function ApplicationsOverview() {
 
   return (
     <main className="appsx-page">
-      {/* CINEMATIC HERO — deep-teal, no image, bottom-anchored under the fixed site header */}
+      {/* HERO — photographic background (site-wide photo-hero system; consistent with
+          home/about/services). Deliberately reverses the prior "deep-teal, no image" note. Image +
+          scrim are decorative; content colours are hardcoded on-dark so they hold in both themes.
+          Height + vertical-centring come from the shared .appsx-hero rules. */}
       <header className="appsx-hero">
+        <div className="appsx-hero__media" aria-hidden="true">
+          {/* Synthetic/AI-generated image — monitor content fabricated, no client branding.
+              Owner-confirmed provenance. Not a client site. Do not treat as client-derived imagery. */}
+          <Image src="/images/applications-hero-team.png" alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="appsx-hero__scrim" aria-hidden="true" />
         <div className="appsx-hero__inner site-container" data-appsx-reveal>
           <span className="appsx-eyebrow appsx-hero__eyebrow">Applications</span>
           <h1 className="appsx-hero__title">Where We Work</h1>
