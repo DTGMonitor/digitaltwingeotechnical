@@ -14881,28 +14881,25 @@ main .ld-container,
 .ab-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
 /* Team-photo hero background — dark in BOTH themes (it's a photo). Hero content colours are
    hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips under
-   [data-theme=light]. The scrim is a deep-teal (#073C4A) gradient OVERLAY — SAME METHOD as the
-   homepage hero (.home-hero-overlay is also a gradient-overlay div), retinted from near-black to
-   brand teal so both heroes read as one blue-teal wash. NOTE: home's own overlay is #03181B (a
-   darker near-black teal); about needs the brighter #073C4A because its photo is grey, not teal.
-   Opening opacity held at 0.88 — the left wall is LIGHT grey, so white text needs it for WCAG AA
-   (~10:1). object-position 62% keeps the group (now compact, right) in view with text clear of
-   faces. The photo is NOT recoloured — the teal wash is an overlay only. */
+   [data-theme=light]. The teal grade is a UNIFORM deep-teal (#073C4A) wash across the WHOLE hero —
+   same OVERLAY method as the homepage hero (.home-hero-overlay), but FLAT edge-to-edge so the entire
+   frame (team included) reads as one graded photo, not just the text side. A gentle LOCAL left boost
+   is layered on top, under the text only, to hold WCAG AA over the light grey wall without changing
+   the uniform tone on the team side. The photo is NOT recoloured — overlay only. */
 .ab-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .ab-hero__media img { object-fit:cover; object-position:62% 50%; }
 .ab-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    linear-gradient(90deg, rgba(7,60,74,0.88) 0%, rgba(7,60,74,0.55) 50%, rgba(7,60,74,0) 78%),
-    linear-gradient(180deg, rgba(7,60,74,0.42) 0%, rgba(7,60,74,0) 16%),
-    linear-gradient(0deg, rgba(7,60,74,0.55) 0%, rgba(7,60,74,0) 26%); }
-/* MOBILE: narrow crop can't hold the whole group beside the text, so push the crop right a touch
-   and wash the teal scrim to near-full so white text stays readable over faces. */
+    linear-gradient(90deg, rgba(7,60,74,0.45) 0%, rgba(7,60,74,0) 45%),  /* local left boost — text legibility only */
+    rgba(7,60,74,0.5); }                                                  /* UNIFORM teal grade, whole frame */
+/* MOBILE: push the crop right a touch; text sits over the group, so the local boost moves to a
+   bottom band. Base wash stays uniform (a touch stronger) so the tone is consistent everywhere. */
 @media (max-width:760px) {
   .ab-hero__media img { object-position:70% 50%; }
   .ab-hero__scrim {
     background:
-      linear-gradient(90deg, rgba(7,60,74,0.9) 0%, rgba(7,60,74,0.78) 55%, rgba(7,60,74,0.5) 100%),
-      linear-gradient(0deg, rgba(7,60,74,0.58) 0%, rgba(7,60,74,0) 30%); }
+      linear-gradient(0deg, rgba(7,60,74,0.5) 0%, rgba(7,60,74,0) 45%),
+      rgba(7,60,74,0.55); }
 }
 .ab-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
 .ab-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
