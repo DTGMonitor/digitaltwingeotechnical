@@ -14169,7 +14169,7 @@ main .ld-container,
 
 /* HERO — deep-teal cinematic, always dark in both themes, content bottom-anchored */
 .appsx-hero {
- position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden;
+ position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden;
  background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
  --c-text:var(--off-white);            /* re-scope on-dark so hero reads under [data-theme=light] */
 }
@@ -14516,7 +14516,7 @@ main .ld-container,
 
 /* HERO — no image; six paths converging on one */
 .solx-hero {
- position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden;
+ position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden;
  background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
 }
 .solx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 34%,rgba(99,183,93,.08),transparent 55%); }
@@ -14630,7 +14630,7 @@ main .ld-container,
 
 /* HERO — no image, no signature visual */
 .svcx-hero {
- position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden;
+ position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden;
  background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
 }
 .svcx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 36%,rgba(99,183,93,.08),transparent 55%); }
@@ -14888,7 +14888,7 @@ main .ld-container,
 .ab-h2 { font-family:var(--font-sans); font-weight:600; font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.1; letter-spacing:-.02em; color:var(--c-text); margin:0; }
 
 /* HERO */
-.ab-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%); }
+.ab-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden; background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%); }
 .ab-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
 /* Team-photo hero background — dark in BOTH themes (it's a photo). Hero content colours are
    hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips under
@@ -15089,7 +15089,7 @@ main .ld-container,
 .dfx-sec-head p { font-size:16.5px; line-height:1.65; color:var(--c-text-soft); margin:0; }
 
 /* HERO — full-bleed image, deep-teal (#003750 dominant), off-white logo */
-.dfx-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden; background:#003750; }
+.dfx-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden; background:#003750; }
 .dfx-hero__media { position:absolute; inset:0; z-index:0; }
 .dfx-hero__img { object-fit:cover; }
 .dfx-hero__scrim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,25,40,.15) 0%, rgba(0,25,40,.35) 55%, rgba(0,22,35,.82) 100%); }
@@ -15317,7 +15317,7 @@ main .ld-container,
 :root[data-theme="light"] { --c-error:#A63A2B; --c-error-bg:rgba(166,58,43,.07); }
 
 /* 1 · HERO — .appsx-hero device */
-.cx-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:flex-end; overflow:hidden;
+.cx-hero { position:relative; min-height:clamp(760px,100svh,980px); display:flex; align-items:center; overflow:hidden;
  background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%);
  --c-text:var(--off-white); }
 /* HERO HEIGHT PARITY (2026-07-25): all seven heroes use the homepage hero's exact height mechanism —
