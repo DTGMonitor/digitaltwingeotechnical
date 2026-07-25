@@ -14879,6 +14879,25 @@ main .ld-container,
 /* HERO */
 .ab-hero { position:relative; min-height:82vh; display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(155deg,#0c303c 0%,#0a2029 45%,var(--c-surface-deep) 100%); }
 .ab-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
+/* Team-photo hero background — dark in BOTH themes (it's a photo). All hero content colours are
+   hardcoded on-dark (#fff / --off-white / --accent / white-outline button), so nothing flips to a
+   light value under [data-theme=light]; the scrim guarantees contrast over the light office wall. */
+.ab-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.ab-hero__media img { object-fit:cover; object-position:70% 50%; }
+.ab-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(6,18,22,0.92) 0%, rgba(6,18,22,0.57) 50%, rgba(6,18,22,0) 78%),
+    linear-gradient(180deg, rgba(6,18,22,0.45) 0%, rgba(6,18,22,0) 16%),
+    linear-gradient(0deg, rgba(6,18,22,0.6) 0%, rgba(6,18,22,0) 26%); }
+/* MOBILE: the group can't sit beside the text, so push the crop right (show the group, drop the
+   empty wall) and wash the scrim to near-full so white text stays readable over faces. */
+@media (max-width:760px) {
+  .ab-hero__media img { object-position:80% 50%; }
+  .ab-hero__scrim {
+    background:
+      linear-gradient(90deg, rgba(6,18,22,0.94) 0%, rgba(6,18,22,0.8) 55%, rgba(6,18,22,0.55) 100%),
+      linear-gradient(0deg, rgba(6,18,22,0.62) 0%, rgba(6,18,22,0) 30%); }
+}
 .ab-hero__content { position:relative; z-index:2; padding-bottom:clamp(56px,7vw,76px); }
 .ab-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
 .ab-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.8rem,7vw,5.6rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
