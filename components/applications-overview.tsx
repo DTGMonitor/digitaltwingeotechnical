@@ -1,88 +1,81 @@
 "use client";
 
 // Applications overview ("Where We Work") — page 1 of the Applications axis rebuild.
-// Source of truth: dtg-applications-overview-mockup.html. Chrome (nav + footer) comes from the
-// global layout (Header + SiteBottom); this component renders only the page body.
-// Environment media is the FAMILY GRADIENT treatment: the AI-generated placeholder images and
-// their public "AI-generated placeholder" caption were removed together (2026-07-19). The env
-// img/imgAlt data is intentionally retained so licensed photography can be reinstated in one place.
-// Proof figures are APPROVED to publish (user 2026-07-18).
+// Source of truth: dtg-applications-overview-mockup.html + design/applications-variants.html
+// (variant A, editorial rows). Chrome (nav + footer) comes from the global layout
+// (Header + SiteBottom); this component renders only the page body.
+// Environment images are AI-generated. Owner-confirmed. No identifiable client sites.
+// Do not treat as client-derived imagery. Proof figures are APPROVED to publish (user 2026-07-18).
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 
-type Proof = { value: string; label: string };
 type Environment = {
   num: string;
-  eyebrow: string;
-  title: string;
-  desc: string;
+  label: string;
+  name: string;
+  body: string;
+  fig?: ReactNode;
   href: string;
+  linkLabel: string;
   img: string;
   imgAlt: string;
-  proof?: Proof[];
-  approach?: string;
 };
 
 const environments: Environment[] = [
   {
     num: "01",
-    eyebrow: "Open-pit mining",
-    title: "Fast slopes, real-time escalation.",
-    desc: "Live, fast-changing slopes where movement can build toward failure in shifts, not weeks — radar-led, watched continuously from our monitoring centre, and escalated the moment a threshold is crossed.",
+    label: "Open-pit mining",
+    name: "Fast slopes, real-time escalation",
+    body: "Slope movement where a wall can build toward failure in shifts, not weeks — radar and multi-sensor coverage feeding review and escalation the moment a threshold is crossed.",
+    // Peter fix: NO "50 that matter" heading — it contradicted the 500+ figure. Neutral count only.
+    fig: (
+      <>
+        <b>500+</b> TARP trigger responses · <b>50</b> confirmed falls of ground
+      </>
+    ),
     href: "/applications/open-pit-mining",
-    img: "/images/applications/openpit.png",
-    imgAlt: "Terraced open-pit mine under overcast sky with slope-monitoring instruments in the foreground.",
-    // A7 decision (2026-07-19): open-pit stat chips removed. 50,000+/500+ are underground-engagement
-    // figures (mis-attributed here); "3 operations" is a pending open-pit figure. Per the binding
-    // ruling, open pit carries no figures until the principal supplies open-pit-specific ones — the
-    // qualitative desc above stands in. Card renders like the civil card (no chips).
+    linkLabel: "Explore open-pit monitoring",
+    img: "/images/operation-openpit-mining.png",
+    imgAlt: "Terraced open-pit mine slope under an overcast sky.",
   },
   {
     num: "02",
-    eyebrow: "Tailings storage facilities",
-    title: "Slow movement, high stakes.",
-    desc: "Gradual settlement and seepage over years, where the movement that matters is small and easily missed — read with satellite InSAR, recurring water mapping, and the analytics to pull a reliable long-term trend from the data.",
+    label: "Tailings storage facilities",
+    name: "Slow movement, high stakes",
+    body: "Gradual settlement and seepage over years, where the movement that matters is small and easily missed — InSAR and multi-sensor coverage conditioned into a reliable long-term record.",
     href: "/applications/tailings-storage-facilities",
-    img: "/images/applications/tsf.png",
+    linkLabel: "Explore tailings monitoring",
+    img: "/images/operation-tsf.png",
     imgAlt: "Aerial view of a tailings storage facility embankment and pond.",
-    proof: [
-      { value: "InSAR", label: "via Catalyst Earth" },
-      { value: "Monthly", label: "water-body mapping" },
-      { value: "Published", label: "analytics methods" },
-    ],
   },
   {
     num: "03",
-    eyebrow: "Underground mining",
-    title: "Convergence, kilometre after kilometre.",
-    desc: "Restricted, complex workings where movement is read by comparing scans over time — one of DTG's largest monitoring programmes.",
+    label: "Underground mining",
+    name: "Convergence, kilometre after kilometre",
+    body: "Restricted, complex workings where movement is read by comparing scans over time — QA/QC scan and deformation-drive distance across the network.",
+    // Peter fix: the figure MUST state what it measures — throughput, NOT "km monitored"/"km of tunnels".
+    fig: (
+      <>
+        <b>950+ km</b> scan &amp; deformation-drive throughput
+      </>
+    ),
     href: "/applications/underground-mining",
-    img: "/images/applications/underground.png",
-    imgAlt: "Underground mine drive with rock bolting, mesh support and ventilation ducting.",
-    proof: [
-      // A7 (2026-07-19): was "1,000km+ / convergence monitored" — a binding violation (verified
-      // 952 km, and NEVER phrase as km of tunnels monitored). Corrected to the authorised figure +
-      // throughput framing. Slots 2–3 differ from the detail page's authorised set (500+ TARP / 50
-      // falls) — flagged for the owner, not guessed.
-      // A7 decision (2026-07-19): slots aligned to the detail page's authorised set (was 100+
-      // movements / Ongoing). "100+ apparent movements" was not in the principal's 3-stat block.
-      { value: "950+ km", label: "scan & deformation processed" },
-      { value: "500+", label: "TARP responses" },
-      { value: "50", label: "confirmed falls" },
-    ],
+    linkLabel: "Explore underground mining",
+    img: "/images/operation-ug.png",
+    imgAlt: "Underground mine drive with rock support and ventilation ducting.",
   },
   {
     num: "04",
-    eyebrow: "Infrastructure & civil",
-    title: "The same discipline, above ground.",
-    desc: "Dams, slopes, tunnels and civil assets face the same core question as a mine: is the ground moving, and does it matter? DTG brings the same independent monitoring and analytics to the built environment.",
+    label: "Infrastructure & civil",
+    name: "The same discipline, above ground",
+    body: "Dams, slopes, tunnels and civil assets face the same question as a mine: is what moved a problem? The same independent monitoring and analytics apply to the built environment.",
     href: "/applications/infrastructure-civil",
-    img: "/images/applications/civil.png",
-    imgAlt: "Mountain highway viaduct beside a bolted and meshed rock cut slope.",
-    approach:
-      "asset-relative movement, wide-area deformation and stakeholder-ready reporting, built on the same independent monitoring and analytics.",
+    linkLabel: "Explore infrastructure & civil",
+    img: "/images/sector-infras.png",
+    imgAlt: "Highway viaduct beside a bolted and mesh-covered rock-cut slope.",
   },
 ];
 
@@ -142,71 +135,53 @@ export function ApplicationsOverview() {
         </span>
       </header>
 
-      {/* INTRO — general framing */}
-      <section className="appsx-intro">
-        <div className="site-container appsx-intro__grid">
-          <div data-appsx-reveal>
+      {/* ENVIRONMENTS — editorial rows (variant A). Header + four full-width rows; each row a
+          2-col grid with the environment image alternating sides (odd: image left, even: image
+          right), collapsing to a single column (image on top) below 820px.
+          Environment images are AI-generated. Owner-confirmed. No identifiable client
+          sites. Do not treat as client-derived imagery. */}
+      <section className="appsx-env-sec">
+        <div className="site-container">
+          <div className="appsx-env-sec__head" data-appsx-reveal>
+            <div className="appsx-env-sec__rule" aria-hidden="true" />
             <span className="appsx-eyebrow">The environments</span>
-            <h2 className="appsx-intro__title">Different ground. The same discipline.</h2>
-          </div>
-          <div data-appsx-reveal>
-            <p>
+            <h2 className="appsx-env-sec__title">Different ground, the same discipline</h2>
+            <p className="appsx-env-sec__lede">
               Every environment moves in its own way — a pit slope in shifts, a tailings embankment
-              over years, a drive by the millimetre — and each demands a different read.
+              over years, a drive by the millimetre. Each demands a different read; the discipline
+              behind it stays the same.
             </p>
-            <p>
-              What stays constant is how DTG works: independent monitoring, rigorous analytics, and
-              clear interpretation that turns data into a decision. Here&rsquo;s how that applies
-              across each environment we work in.
-            </p>
+          </div>
+
+          <div className="appsx-env-rows">
+            {environments.map((env) => (
+              <article className="appsx-env" key={env.href} data-appsx-reveal>
+                <div className="appsx-env__media">
+                  <Image
+                    src={env.img}
+                    alt={env.imgAlt}
+                    fill
+                    sizes="(max-width: 820px) 100vw, 50vw"
+                    className="appsx-env__img"
+                  />
+                </div>
+                <div className="appsx-env__copy">
+                  <span className="appsx-env__num">
+                    {env.num} · {env.label}
+                  </span>
+                  <h3 className="appsx-env__name">{env.name}</h3>
+                  <p className="appsx-env__desc">{env.body}</p>
+                  {env.fig ? <p className="appsx-env__fig">{env.fig}</p> : null}
+                  <Link href={env.href} className="appsx-env__go">
+                    {env.linkLabel}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* ENVIRONMENTS — stacked, alternating image side */}
-      {environments.map((env, index) => {
-        const flip = index % 2 === 1;
-        return (
-          <section
-            key={env.href}
-            className={`appsx-env${flip ? " appsx-env--flip" : ""}`}
-          >
-            {/* Media is the family gradient treatment: the AI-generated placeholder images and
-                their "AI-generated placeholder" caption were removed together (2026-07-19
-                content-discipline pass) — never keep the image with the caption gone. Restore
-                licensed photographs here (env.img / env.imgAlt still carry the intended source)
-                when they exist. */}
-            <div className="appsx-env__media" aria-hidden="true" />
-            <div className="site-container appsx-env__hold" data-appsx-reveal>
-              <div className="appsx-env__copy">
-                <span className="appsx-env__num">{env.num}</span>
-                <span className="appsx-env__eyebrow">{env.eyebrow}</span>
-                <h2 className="appsx-env__title">{env.title}</h2>
-                <p className="appsx-env__desc">{env.desc}</p>
-                {env.proof ? (
-                  <div className="appsx-env__proof">
-                    {env.proof.map((p) => (
-                      <div className="appsx-env__pf" key={p.label}>
-                        <b>{p.value}</b>
-                        <span>{p.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-                {env.approach ? (
-                  <p className="appsx-env__approach">
-                    <b>Our approach applies directly here</b> — {env.approach}
-                  </p>
-                ) : null}
-                <Link href={env.href} className="appsx-env__go">
-                  Explore {env.eyebrow.toLowerCase()}
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </section>
-        );
-      })}
 
       {/* HOW DTG SUPPORTS — spine */}
       <section className="appsx-spine-sec">
