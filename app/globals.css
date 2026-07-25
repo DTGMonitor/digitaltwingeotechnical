@@ -14640,12 +14640,16 @@ main .ld-container,
 .svcx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 76% 36%,rgba(99,183,93,.08),transparent 55%); }
 /* Services hero — monitoring-room photo background, dark in BOTH themes. Hero content colours are
    hardcoded on-dark (#fff / --off-white / --accent), so nothing flips under [data-theme=light].
-   The room is ALREADY dark blue-teal, so it takes only a LIGHT uniform #073C4A wash (0.2) to sit in
-   the same tonal family as the /about hero (which needed 0.5 over a grey wall). NO local boost — the
-   dark left wall gives white text strong contrast on its own. Photo NOT recoloured — overlay only. */
+   Light uniform #073C4A wash (0.2) — the room is already dark blue-teal, so it sits in the same
+   tonal family as the /about hero (which needed 0.5 over a grey wall) with far less tint. A gentle
+   LOCAL LEFT boost adds WCAG-AA headroom under the text (body was 5.2:1 on the uniform wash alone),
+   while the uniform 0.2 tone holds across the rest of the frame. Photo NOT recoloured — overlay only. */
 .svcx-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .svcx-hero__media img { object-fit:cover; object-position:65% 50%; }
-.svcx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none; background:rgba(7,60,74,0.2); }
+.svcx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(7,60,74,0.42) 0%, rgba(7,60,74,0) 50%),  /* local left boost — AA headroom under the text */
+    rgba(7,60,74,0.2); }                                                  /* uniform teal grade, whole frame */
 /* MOBILE: narrow crop can't hold the wall AND the people, so favour the empty wall — text stays
    clean over dark; the people/monitors crop out rather than bisecting a face. */
 @media (max-width:760px) {
