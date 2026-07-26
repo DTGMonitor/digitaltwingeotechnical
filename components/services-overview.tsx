@@ -131,8 +131,8 @@ export function ServicesOverview() {
         </div>
         <div className="svcx-hero__scrim" aria-hidden="true" />
         <div className="svcx-hero__content site-container" data-svcx-reveal>
-          <span className="svcx-eyebrow svcx-hero__eyebrow">What we do</span>
-          <h1 className="svcx-hero__title">The independent layer</h1>
+          <span className="svcx-eyebrow svcx-hero__eyebrow">Services</span>
+          <h1 className="svcx-hero__title">What we do</h1>
           <p className="svcx-hero__lead">
             Five capabilities that sit between your monitoring data and the decisions you have to
             defend — aligned with your operation, not any vendor&rsquo;s product.
