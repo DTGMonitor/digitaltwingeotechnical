@@ -15334,6 +15334,24 @@ main .ld-container,
   .ab-hero, .svcx-hero, .appsx-hero, .solx-hero, .cx-hero, .dfx-hero { min-height:100svh; }
 }
 .cx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 74% 34%,rgba(99,183,93,.07),transparent 55%); }
+/* Contact hero — monitoring-room photo background (AI-generated, synthetic), dark in BOTH themes;
+   content colours hardcoded on-dark so nothing flips under [data-theme=light]. Tint MATCHES the
+   Services hero exactly: uniform #073C4A wash (0.2) + a gentle local left boost (0.42 -> 0 by 50%)
+   for AA headroom under the left text. Composition: a dark empty wall fills the LEFT (text side);
+   the wall monitor + the four people sit in the RIGHT third. Desktop object-position 62% frames the
+   group + monitor on the right while the text clears them on the left; at <=900px (portrait/phone)
+   it pulls to 30% to show the empty wall and crop the group + monitor OUT rather than seat them
+   under the full-width text. Contrast measured WCAG AA (title ~13:1, lead ~11:1 at both ends).
+   Photo NOT recoloured — overlay only. */
+.cx-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.cx-hero__media img { object-fit:cover; object-position:62% 50%; }
+.cx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(7,60,74,0.42) 0%, rgba(7,60,74,0) 50%),  /* gentle left boost — same recipe as Services */
+    rgba(7,60,74,0.2); }                                                  /* uniform teal grade, whole frame */
+@media (max-width:900px) {
+  .cx-hero__media img { object-position:30% 50%; }   /* portrait/phone: show empty wall, crop the group + monitor out */
+}
 .cx-hero__content { position:relative; z-index:2; padding-bottom:0; }
 .cx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
 .cx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:clamp(3rem,8.5vw,7rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:14ch; }

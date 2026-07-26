@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionReveals } from "@/components/sections";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -11,7 +12,7 @@ import { YogyaClock } from "@/components/contact/YogyaClock";
 // The legacy .contact-* body (~80 elements) was 100% theme-blind and has been deleted outright,
 // along with the mailto-only ContactForm it used. Every section here is an existing device from
 // the rebuilt pages, per the owner's direction to follow Applications/About:
-//   hero      = .appsx-hero    (gradient, 82vh, bottom-anchored)
+//   hero      = .cx-hero       (photo-hero: full-bleed image + teal scrim, centred, shared height)
 //   intro     = .appsx-intro   (2-col, centre-aligned)
 //   briefing  = .ab-how        (deep-teal band, sticky head + numbered stages — the stages ARE
 //                               the form)
@@ -81,8 +82,16 @@ export default function ContactPage() {
     <main className="cx-page">
       <SectionReveals attr="cx-reveal" />
 
-      {/* 1 · HERO — .appsx-hero device. Bespoke to this route. */}
+      {/* 1 · HERO — .cx-hero (photo-hero family: full-bleed image + uniform teal scrim, centred,
+          shared hero height). Matches About/Services/Applications. */}
       <header className="cx-hero" aria-labelledby="contact-hero-title">
+        <div className="cx-hero__media" aria-hidden="true">
+          {/* Synthetic/AI-generated image — monitor content fabricated, no client
+              branding, no identifiable site. Owner-confirmed provenance. Do not treat as
+              client-derived imagery. */}
+          <Image src="/images/contact-hero.png" alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="cx-hero__scrim" aria-hidden="true" />
         <div className="cx-hero__content site-container" data-cx-reveal>
           <span className="cx-eyebrow cx-hero__eyebrow">Contact</span>
           <h1 id="contact-hero-title" className="cx-hero__title">
