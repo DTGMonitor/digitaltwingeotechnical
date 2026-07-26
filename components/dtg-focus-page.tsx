@@ -121,11 +121,15 @@ export function DTGFocusPage() {
     <main id="top" className="dfx-page">
       <SectionReveals attr="dfx-reveal" />
 
-      {/* HERO — supplied image, off-white logo, no sub-brand theme */}
+      {/* HERO — supplied image, off-white logo, no sub-brand theme.
+          NO scrim/overlay (DTG-Focus-ONLY): the illustration is a dark navy piece with its own
+          built-in gradient, so it shows at true colour and text still passes WCAG AA (headline
+          12.6:1, lead 10.7:1 over the text zone, desktop + mobile). Do NOT add a teal scrim here,
+          and do NOT copy this to the photo heroes (About/Services/Applications/Contact) — those
+          need their scrims for contrast over bright images. */}
       <header className="dfx-hero" aria-labelledby="dfx-hero-title">
         <div className="dfx-hero__media" aria-hidden="true">
           <Image src="/images/dtg-focus/hero.png" alt="" fill priority sizes="100vw" className="dfx-hero__img" />
-          <span className="dfx-hero__scrim" />
         </div>
         <div className="dfx-hero__content site-container" data-dfx-reveal>
           <Image
