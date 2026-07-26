@@ -1,14 +1,16 @@
 # Session handoff — DTG website
 
-_Updated 2026-07-25, end of the Applications session. Paste-and-go context for a fresh session._
+_Updated 2026-07-25 — photo-hero system complete across all pages (Contact hero added). Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `584e9e2`** (`584e9e20d6f833dbd6422fc69bfe5ebc74989f5c`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `584e9e2`. Unlike the prior handoff, this one **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `a6366a6`** (`a6366a6be2b12d47bd37c408522f79c273d7c58c`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `a6366a6`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
 
 ## Design / section-build phase — ✅ DONE
 The controlled visual-architecture redesign (page section builds + the site-wide photo-hero system) is **complete and merged**. No section-build or hero work remains on branches.
+
+- **Photo-hero system COMPLETE across every page** — Contact was the last gradient-only hero; its photo (`contact-hero.png`) merged at `a6366a6`. (The Applications hero was later swapped from the monitoring-room shot to `applications-hero-update.png` at `4d22091`; the old `applications-hero-team.png` is kept in-repo as a one-line-src revert.)
 
 - **Applications is fully complete** — both halves merged to `main`:
   - **Hero photo** — `applications-hero-team.png` (AI-generated, synthetic monitors) with the refined overlay tuning (`584e9e2`, cherry-picked from the old `5e8f045`).
@@ -29,9 +31,9 @@ All seven page heroes share one structure. Height and vertical position are unif
 - **About** — team office photo; uniform teal `0.5` + left boost (grey wall needs more tint). L\*≈36 (lightest — suits a people page).
 - **Services** — monitoring-room photo (`service-hero-update.png`); uniform `0.2` + light left boost. L\*≈30. `services-hero-monitoring.png` retained as the documented revert path.
 - **Solutions** — node-diagram illustration (no photo); height/centring only. Lead `max-width` narrowed to 48ch so centred text clears the diagram.
-- **Contact** — gradient (no photo); height/centring only.
+- **Contact** — monitoring-room photo (`contact-hero.png`, AI-generated synthetic); tint COPIES Services exactly (uniform `0.2` + gentle left boost `0.42→0` by 50%). `object-position:62% 50%` desktop / `30% 50%` at ≤900px (dark empty wall left for the text; wall monitor + four people cropped out on mobile). Very dark wall → AA generous (title ~13:1, lead ~11:1). Merged `a6366a6`.
 - **DTG Focus** — full-bleed terrain image (pre-existing); height/centring.
-- **Applications** — hi-vis monitoring photo (`applications-hero-team.png`); uniform `0.2` + a STRONGER/wider left boost (`0.78→0.6→0` to ~78%, because text overlaps bright hi-vis vests); `object-position:85% 50%` desktop / `78% 50%` mobile. L\*≈23 (darkest). Contrast verified WCAG AA over the hi-vis (headline 5.19:1, body 6.19:1). **Merged — object-position `85%` is the accepted/shipped value.**
+- **Applications** — open-pit survey photo (`applications-hero-update.png`, AI-generated synthetic; swapped from the monitoring-room shot at `4d22091`, old `applications-hero-team.png` kept as revert); uniform `0.2` + a STRONGER/wider left boost (`0.78→0.6→0` to ~78%); `object-position:85% 50%` desktop / `35% 50%` at ≤900px (empty pit left; two workers on the right, cropped out on mobile). Contrast measured WCAG AA (headline ~9–11:1, lead ~7–9:1).
 
 ## What remains — all non-design
 
