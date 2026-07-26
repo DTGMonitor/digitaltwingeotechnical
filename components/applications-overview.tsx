@@ -124,9 +124,10 @@ export function ApplicationsOverview() {
           Height + vertical-centring come from the shared .appsx-hero rules. */}
       <header className="appsx-hero">
         <div className="appsx-hero__media" aria-hidden="true">
-          {/* Synthetic/AI-generated image — monitor content fabricated, no client branding.
-              Owner-confirmed provenance. Not a client site. Do not treat as client-derived imagery. */}
-          <Image src="/images/applications-hero-team.png" alt="" fill priority sizes="100vw" />
+          {/* Synthetic/AI-generated image — no client branding, no identifiable site.
+              Owner-confirmed provenance. Do not treat as client-derived imagery. */}
+          {/* Revert path: switch src back to /images/applications-hero-team.png (kept in repo). */}
+          <Image src="/images/applications-hero-update.png" alt="" fill priority sizes="100vw" />
         </div>
         <div className="appsx-hero__scrim" aria-hidden="true" />
         <div className="appsx-hero__inner site-container" data-appsx-reveal>

@@ -14174,20 +14174,22 @@ main .ld-container,
  --c-text:var(--off-white);            /* re-scope on-dark so hero reads under [data-theme=light] */
 }
 .appsx-hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 78% 30%,rgba(99,183,93,.08),transparent 55%); }
-/* Applications hero — hi-vis monitoring-room photo (AI-generated, synthetic monitors). Dark in BOTH
-   themes; content colours are hardcoded on-dark. Photo-hero family tone: uniform #073C4A wash (0.2) +
-   a STRONGER local left boost than the siblings, because the text overlaps the bright hi-vis vests
-   (accepted — no crop room to fully clear the group) and needs extra darkening to hold WCAG AA over
-   them. object-position pushed right to keep the group + monitors in frame and give the left wall to
-   the text. Photo NOT recoloured — overlay only. */
+/* Applications hero — open-pit survey photo (AI-generated, synthetic — no identifiable site). Dark in
+   BOTH themes; content colours are hardcoded on-dark. Photo-hero family tone: uniform #073C4A wash
+   (0.2) + a strong local left boost. Composition: two workers sit in the RIGHT third; the empty pit
+   + moody sky fill the left, where the left-aligned text lives. Desktop keeps object-position right
+   (85%) so both workers stay framed while the text clears them on the left. At ≤900px (portrait /
+   phone) cover crops to a vertical strip, so object-position pulls LEFT (35%) to show the empty pit
+   and crop the workers OUT rather than seat them under the full-width text. Contrast measured WCAG AA
+   at both ends (desktop ~9:1, mobile ~7:1 vs the lead). Photo NOT recoloured — overlay only. */
 .appsx-hero__media { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .appsx-hero__media img { object-fit:cover; object-position:85% 50%; }
 .appsx-hero__scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    linear-gradient(90deg, rgba(7,60,74,0.78) 0%, rgba(7,60,74,0.6) 60%, rgba(7,60,74,0) 78%),  /* strong+wide left boost — keeps AA where headline/lead cross the hi-vis (~64-68%) */
+    linear-gradient(90deg, rgba(7,60,74,0.78) 0%, rgba(7,60,74,0.6) 60%, rgba(7,60,74,0) 78%),  /* strong+wide left boost under the left-aligned headline + lead */
     rgba(7,60,74,0.2); }                                                                          /* uniform teal grade, whole frame */
-@media (max-width:760px) {
-  .appsx-hero__media img { object-position:78% 50%; }
+@media (max-width:900px) {
+  .appsx-hero__media img { object-position:35% 50%; }   /* portrait/phone: show empty pit, crop the workers out */
 }
 /* text sits in the site content wrapper (.site-container) like the body sections — do NOT force
    width:100%, which would override the wrapper and run the hero text to the screen edge. */
