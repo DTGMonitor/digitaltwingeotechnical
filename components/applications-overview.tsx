@@ -132,7 +132,7 @@ export function ApplicationsOverview() {
         <div className="appsx-hero__scrim" aria-hidden="true" />
         <div className="appsx-hero__inner site-container" data-appsx-reveal>
           <span className="appsx-eyebrow appsx-hero__eyebrow">Applications</span>
-          <h1 className="appsx-hero__title">Where We Work</h1>
+          <h1 className="appsx-hero__title">Where we work</h1>
           <p className="appsx-hero__lead">
             DTG provides independent monitoring, analytics and decision support across open-pit,
             tailings, underground and civil environments. Each one moves differently — the discipline

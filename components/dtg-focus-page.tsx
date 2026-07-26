@@ -145,7 +145,7 @@ export function DTGFocusPage() {
           {/* No eyebrow — the upper-left lockup already carries the DTG Focus brand; a "DTG Focus™"
               eyebrow here would repeat it. Column is title -> lead -> CTAs. */}
           <h1 id="dfx-hero-title" className="dfx-hero__title">
-            Focused Actionable Insight
+            Focused actionable insight
           </h1>
           <p className="dfx-hero__lead">
             {renderTrademarkText(

@@ -7,6 +7,11 @@
 :root {
  --font-sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+ /* Shared hero H1 type — ONE size + ONE max-width for all six non-home heroes (About, Services,
+    Applications, Solutions, Contact, DTG Focus) so they can't drift into six different clamps again.
+    Balanced ≈104px desktop / 48px mobile. Homepage hero is excluded and does NOT use these. */
+ --hero-title-size:clamp(3rem,7.4vw,6.5rem);
+ --hero-title-max:18ch;
  --font-label:var(--font-sans); /* restrained uppercase labels — replaces mono eyebrows (masterbook). Inter is interim. */
  --text-display:clamp(2.5rem,5vw + 1rem,5rem);
  --text-h2:clamp(2rem,3vw + 1rem,3.25rem);
@@ -14195,7 +14200,7 @@ main .ld-container,
    width:100%, which would override the wrapper and run the hero text to the screen edge. */
 .appsx-hero__inner { position:relative; z-index:2; padding-bottom:0; }
 .appsx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
-.appsx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:clamp(3rem,8.5vw,7.5rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
+.appsx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:var(--hero-title-size); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:var(--hero-title-max); }
 .appsx-hero__lead { max-width:60ch; font-size:clamp(18px,2.2vw,23px); line-height:1.5; color:#e5eef0; }
 .appsx-scrollcue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
 .appsx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
@@ -14534,7 +14539,7 @@ main .ld-container,
 @keyframes solx-fade { to { opacity:1; } }
 .solx-hero__content { position:relative; z-index:2; padding-bottom:0; }
 .solx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
-.solx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(3rem,8.5vw,7rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
+.solx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:var(--hero-title-size); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:var(--hero-title-max); }
 /* max-width narrowed 56ch -> 48ch so the centred lead's right edge stops before the node diagram
    (diagram left edge ~59%); centring is unchanged. */
 .solx-hero__lead { max-width:48ch; font-size:clamp(18px,2.2vw,23px); line-height:1.5; color:#e5eef0; }
@@ -14660,7 +14665,7 @@ main .ld-container,
    it overrides the container and runs the headline to the screen edge. */
 .svcx-hero__content { position:relative; z-index:2; padding-bottom:0; }
 .svcx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
-.svcx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.2vw,5.2rem); line-height:1.02; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:15ch; }
+.svcx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:var(--hero-title-size); line-height:1.02; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:var(--hero-title-max); }
 .svcx-hero__lead { max-width:54ch; font-size:clamp(17px,2vw,22px); line-height:1.5; color:#e5eef0; margin:0 0 32px; }
 .svcx-scrollcue { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
 .svcx-scrollcue svg { animation:appsx-bob 1.8s ease-in-out infinite; }
@@ -14919,7 +14924,7 @@ main .ld-container,
 }
 .ab-hero__content { position:relative; z-index:2; padding-bottom:0; }
 .ab-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
-.ab-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.8rem,7vw,5.6rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 26px; }
+.ab-hero__title { font-family:var(--font-sans); font-weight:800; font-size:var(--hero-title-size); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:var(--hero-title-max); }
 .ab-hero__lead { max-width:56ch; font-size:clamp(17px,2vw,22px); line-height:1.5; color:#e5eef0; margin:0 0 34px; }
 .ab-hero__btns { display:flex; gap:14px; flex-wrap:wrap; }
 .ab-scrollcue { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
@@ -15108,7 +15113,7 @@ main .ld-container,
 .dfx-hero__lockup-rail { position:absolute; left:0; right:0; top:clamp(84px,11vh,128px); z-index:2; pointer-events:none; }
 .dfx-hero__lockup { display:block; width:clamp(210px,23vw,300px); height:auto; filter:brightness(0) invert(1); opacity:.96; }
 @media (max-width:900px) { .dfx-hero__lockup { width:clamp(190px,52vw,230px); } }
-.dfx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.4vw,5.2rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 24px; max-width:16ch; }
+.dfx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:var(--hero-title-size); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 24px; max-width:var(--hero-title-max); }
 .dfx-hero__lead { max-width:60ch; font-size:clamp(17px,2vw,21px); line-height:1.55; color:#e5eef0; margin:0 0 34px; }
 .dfx-hero__lead .dtg-focus-mark { color:#fff; font-weight:600; }
 .dfx-hero__btns { display:flex; gap:14px; flex-wrap:wrap; }
@@ -15361,7 +15366,7 @@ main .ld-container,
 }
 .cx-hero__content { position:relative; z-index:2; padding-bottom:0; }
 .cx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
-.cx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:clamp(3rem,8.5vw,7rem); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:14ch; }
+.cx-hero__title { font-family:var(--font-sans); font-weight:700; font-size:var(--hero-title-size); line-height:.94; letter-spacing:-.03em; color:#fff; margin:0 0 26px; max-width:var(--hero-title-max); }
 .cx-hero__lead { max-width:60ch; font-size:clamp(18px,2.2vw,23px); line-height:1.5; color:#e5eef0; margin:0 0 34px; }
 .cx-hero__btns { display:flex; gap:14px; flex-wrap:wrap; }
 .cx-btn { display:inline-flex; align-items:center; gap:9px; padding:15px 28px; border-radius:8px; background:var(--accent); color:var(--on-accent); font-size:15px; font-weight:600; transition:transform .2s ease, filter .2s ease; }
