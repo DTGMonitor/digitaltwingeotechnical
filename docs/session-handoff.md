@@ -1,10 +1,10 @@
 # Session handoff — DTG website
 
-_Updated 2026-07-25 — photo-hero system complete across all pages (Contact hero added). Paste-and-go context for a fresh session._
+_Updated 2026-07-25 — photo-hero system complete; DTG Focus hero restructured. Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `a6366a6`** (`a6366a6be2b12d47bd37c408522f79c273d7c58c`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `a6366a6`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `16d2e79`** (`16d2e79fe1917d525309e1e18e1cd9f96f0fc9d2`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `16d2e79`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
 
 ## Design / section-build phase — ✅ DONE
@@ -32,7 +32,7 @@ All seven page heroes share one structure. Height and vertical position are unif
 - **Services** — monitoring-room photo (`service-hero-update.png`); uniform `0.2` + light left boost. L\*≈30. `services-hero-monitoring.png` retained as the documented revert path.
 - **Solutions** — node-diagram illustration (no photo); height/centring only. Lead `max-width` narrowed to 48ch so centred text clears the diagram.
 - **Contact** — monitoring-room photo (`contact-hero.png`, AI-generated synthetic); tint COPIES Services exactly (uniform `0.2` + gentle left boost `0.42→0` by 50%). `object-position:62% 50%` desktop / `30% 50%` at ≤900px (dark empty wall left for the text; wall monitor + four people cropped out on mobile). Very dark wall → AA generous (title ~13:1, lead ~11:1). Merged `a6366a6`.
-- **DTG Focus** — full-bleed terrain image (pre-existing); height/centring.
+- **DTG Focus** — full-bleed terrain illustration (`dtg-focus/hero.png`). **Restructured (merged `16d2e79`):** (1) **scrim REMOVED** — shows at true illustration colour, no teal wash (the dark navy artwork carries its own gradient; text still WCAG AA — headline 12.6:1, lead 10.7:1 — the DFX exception to the scrim-on-photo-heroes rule; do NOT re-add a scrim, and do NOT strip scrims off the photo heroes). (2) **DTG Focus lockup** moved into the hero **upper-left**, grid-aligned (absolute `.site-container` rail so its left edge lands on the title's ruler; adds no height so the title never moved), big (294px desktop / 203px ≤900px), not a link. Uses `dtg-focus-lockup.png` (the logo trimmed of transparent padding; original `dtg-focus-logo-transparent.png` stays — still used on the homepage). (3) **Eyebrow dropped** (lockup carries the brand); small controlled title lift (−70→−90 desktop). (4) **Lead trimmed** to one sentence. **Nav unchanged on all pages** (DTG logo alone; the earlier page-scoped nav marker was tried and reverted — a 73px nav can't size the lockup).
 - **Applications** — open-pit survey photo (`applications-hero-update.png`, AI-generated synthetic; swapped from the monitoring-room shot at `4d22091`, old `applications-hero-team.png` kept as revert); uniform `0.2` + a STRONGER/wider left boost (`0.78→0.6→0` to ~78%); `object-position:85% 50%` desktop / `35% 50%` at ≤900px (empty pit left; two workers on the right, cropped out on mobile). Contrast measured WCAG AA (headline ~9–11:1, lead ~7–9:1).
 
 ## What remains — all non-design
