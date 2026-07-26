@@ -15101,8 +15101,15 @@ main .ld-container,
    2026-07-25). The illustration's own gradient carries contrast: headline 12.6:1, lead 10.7:1 over
    the text zone (measured, desktop + mobile). DTG-Focus-ONLY — the photo heroes keep their scrims. */
 .dfx-hero__content { position:relative; z-index:2; padding-bottom:0; }
-/* logo filtered to off-white (source asset is single-colour on transparent) — NOT green */
-.dfx-hero__logo { width:clamp(210px,26vw,300px); height:auto; margin-bottom:clamp(28px,4vw,40px); filter:brightness(0) invert(1); }
+/* TOP-RIGHT lockup — DTG Focus brand mark in the empty navy sky, tucked under the nav (73px) and
+   clear ABOVE the illustration's satellite. Off-white (source asset is single-colour) — NOT green.
+   Hidden ≤900px where it would crowd the nav (and the satellite is cropped out of the frame anyway);
+   the "DTG Focus™" eyebrow carries the brand there. Absolute so it leaves the centred content stack,
+   letting the title rise to the shared centre like the other heroes. */
+.dfx-hero__lockup { position:absolute; top:clamp(92px,12vh,132px); right:clamp(24px,4vw,64px); z-index:2; width:clamp(160px,16vw,200px); height:auto; filter:brightness(0) invert(1); opacity:.95; }
+@media (max-width:900px) { .dfx-hero__lockup { display:none; } }
+/* hero eyebrow — off-white on the dark illustration (matches the other heroes), overriding the green .dfx-eyebrow base */
+.dfx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
 .dfx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.4vw,5.2rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 24px; max-width:16ch; }
 .dfx-hero__lead { max-width:60ch; font-size:clamp(17px,2vw,21px); line-height:1.55; color:#e5eef0; margin:0 0 34px; }
 .dfx-hero__lead .dtg-focus-mark { color:#fff; font-weight:600; }

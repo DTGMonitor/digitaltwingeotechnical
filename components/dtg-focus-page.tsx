@@ -131,15 +131,21 @@ export function DTGFocusPage() {
         <div className="dfx-hero__media" aria-hidden="true">
           <Image src="/images/dtg-focus/hero.png" alt="" fill priority sizes="100vw" className="dfx-hero__img" />
         </div>
+        {/* TOP-RIGHT lockup — the DTG Focus product branding, in the empty navy sky just under the
+            nav. Placed clear ABOVE the illustration's satellite (which sits mid-right, ~y46% and
+            x88-99% on screen — verified). Hidden ≤900px, where the cover-crop drops the satellite
+            and it would crowd the nav; the "DTG Focus™" eyebrow carries the brand there. */}
+        <Image
+          src="/images/dtg-focus-logo-transparent.png"
+          alt="DTG Focus"
+          width={280}
+          height={92}
+          priority
+          className="dfx-hero__lockup"
+          data-dfx-reveal
+        />
         <div className="dfx-hero__content site-container" data-dfx-reveal>
-          <Image
-            src="/images/dtg-focus-logo-transparent.png"
-            alt="DTG Focus"
-            width={280}
-            height={92}
-            priority
-            className="dfx-hero__logo"
-          />
+          <span className="dfx-eyebrow dfx-hero__eyebrow">{renderTrademarkText("DTG Focus")}</span>
           <h1 id="dfx-hero-title" className="dfx-hero__title">
             Focused Actionable Insight
           </h1>
