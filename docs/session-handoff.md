@@ -1,10 +1,10 @@
 # Session handoff — DTG website
 
-_Updated 2026-07-25 — photo-hero system complete; DTG Focus hero restructured. Paste-and-go context for a fresh session._
+_Updated 2026-07-25 — photo-hero system complete; DTG Focus restructured; hero titles tokenised. Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `16d2e79`** (`16d2e79fe1917d525309e1e18e1cd9f96f0fc9d2`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `16d2e79`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `e9d8785`** (`e9d8785f2858bcf77a8684262475e3e4b0270d35`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `e9d8785`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
 
 ## Design / section-build phase — ✅ DONE
@@ -25,6 +25,12 @@ All seven page heroes share one structure. Height and vertical position are unif
 **Content vertical position:**
 - **Homepage** — **bottom-anchored** (absolute-positioned copy). Deliberately NOT centred; do not "fix" it.
 - **The other six** (About, Services, Applications, Solutions, Contact, DTG Focus) — **vertically centred** (`align-items:center` + zeroed content `padding-bottom`). The `[data-*-reveal]` transform applies `translateY(24px)` pre-reveal — don't measure the pre-reveal frame.
+
+**Hero H1 titles — TOKENISED, shared across all six non-home heroes** (`f2fe2b5` + `e9d8785`). The audit had found six different clamps (120/112/89.6/83.2px) and three max-widths; now every `*-hero__title` rule references one shared `--hero-title-*` token set in `:root`:
+- `--hero-title-size: clamp(3rem, 7.4vw, 6.5rem)` (≈104px desktop / 48px mobile) · `--hero-title-max: 18ch` · `--hero-title-weight: 800` · `--hero-title-leading: .98`.
+- **To change hero-title styling, edit the TOKEN — NOT individual heroes.** All six (`.ab/.svcx/.appsx/.solx/.cx/.dfx-hero__title`) point at it; changing one hero directly would re-introduce the drift this fixed. Homepage hero is excluded and does NOT reference these tokens.
+- **Casing unified to sentence case** (locked rule): fixed "Where We Work"→"Where we work" (Applications) and "Focused Actionable Insight"→"Focused actionable insight" (DTG Focus).
+- **Services hero** reads eyebrow **"Services"** → title **"What we do"** (parallel to About "About DTG"→"Who we are"). DTG Focus has **no eyebrow** (lockup carries the brand — the one exception).
 
 **Photo-hero tone system** — uniform deep-teal `#073C4A` overlay, tuned per photo; hero text hardcoded on-dark so it holds in both themes. Overlay is UNIFORM across the frame + a local LEFT boost only where text needs contrast. (Rules in memory `dtg-photo-hero-system`.)
 - **Home** — dam/reservoir photo + `#03181B` gradient overlay (pre-existing).
