@@ -2974,13 +2974,6 @@ section { scroll-margin-top:76px; }
  gap:clamp(14px,1.4vw,20px);
  min-width:0;
 }
-/* DTG Focus page-identity marker in the nav — page-scoped in site.tsx (/dtg-focus only). White to
-   sit with the DTG mark; NOT a link and pointer-events:none so it never intercepts clicks or the
-   logo's home link. Shrinks on narrow screens so it doesn't crowd the menu button. */
-.dfx-nav-brand { display:inline-flex; align-items:center; gap:clamp(7px,0.8vw,11px); pointer-events:none; min-width:0; }
-.dfx-nav-sep { color:rgba(244,247,246,.42); font-size:19px; font-weight:300; line-height:1; }
-.dfx-nav-lockup { display:block; width:auto; height:22px; filter:brightness(0) invert(1); opacity:.92; }
-@media (max-width:600px) { .dfx-nav-sep { font-size:16px; } .dfx-nav-lockup { height:18px; } .dfx-nav-brand { gap:6px; } }
 .mega-menu {
  top:var(--header-height);
  left:0;
@@ -15109,9 +15102,15 @@ main .ld-container,
    the text zone (measured, desktop + mobile). DTG-Focus-ONLY — the photo heroes keep their scrims. */
 .dfx-hero__content { position:relative; z-index:2; padding-bottom:0; }
 /* hero eyebrow — off-white on the dark illustration (matches the other heroes), overriding the green
-   .dfx-eyebrow base. The DTG Focus lockup now lives in the nav (page-scoped, .dfx-nav-brand), not the
-   hero — so the left column is eyebrow -> title -> lead -> CTAs, like About/Services/Contact. */
+   .dfx-eyebrow base. */
 .dfx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
+/* DTG Focus lockup — upper-left brand mark. The RAIL is absolute (out of the content flow, so it
+   adds no height and the title never moves) and spans full width with a .site-container inside, so
+   the lockup's left edge lands on the SAME ruler as the title/CTAs — not floating in a corner. Sits
+   in the empty band below the nav and above the centred title. */
+.dfx-hero__lockup-rail { position:absolute; left:0; right:0; top:clamp(84px,11vh,128px); z-index:2; pointer-events:none; }
+.dfx-hero__lockup { display:block; width:clamp(210px,23vw,300px); height:auto; filter:brightness(0) invert(1); opacity:.96; }
+@media (max-width:900px) { .dfx-hero__lockup { width:clamp(190px,52vw,230px); } }
 .dfx-hero__title { font-family:var(--font-sans); font-weight:800; font-size:clamp(2.6rem,6.4vw,5.2rem); line-height:1; letter-spacing:-.03em; color:#fff; margin:0 0 24px; max-width:16ch; }
 .dfx-hero__lead { max-width:60ch; font-size:clamp(17px,2vw,21px); line-height:1.55; color:#e5eef0; margin:0 0 34px; }
 .dfx-hero__lead .dtg-focus-mark { color:#fff; font-weight:600; }

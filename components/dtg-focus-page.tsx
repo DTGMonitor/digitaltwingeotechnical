@@ -131,6 +131,16 @@ export function DTGFocusPage() {
         <div className="dfx-hero__media" aria-hidden="true">
           <Image src="/images/dtg-focus/hero.png" alt="" fill priority sizes="100vw" className="dfx-hero__img" />
         </div>
+        {/* DTG Focus lockup — upper-left, in the empty band between the nav and the (centred) title.
+            Absolutely positioned via a .site-container rail so its left edge lines up with the title
+            and CTAs on the same ruler, and so it adds NO height to the content stack — the title,
+            subtitle and CTAs stay exactly where they are. Decorative + not a link (page identity;
+            the nav DTG logo is the home link). White via brightness(0) invert(1). */}
+        <div className="dfx-hero__lockup-rail" aria-hidden="true">
+          <div className="site-container">
+            <Image src="/images/dtg-focus-lockup.png" alt="" width={1173} height={410} priority className="dfx-hero__lockup" />
+          </div>
+        </div>
         <div className="dfx-hero__content site-container" data-dfx-reveal>
           <span className="dfx-eyebrow dfx-hero__eyebrow">{renderTrademarkText("DTG Focus")}</span>
           <h1 id="dfx-hero-title" className="dfx-hero__title">

@@ -273,15 +273,6 @@ export function Header(){
           <Link href="/" aria-label="Digital Twin Geotechnical home" className="logo-lockup">
             <Image src="/images/dtg-logo-broken-white-mark.png" alt="DTG" width={552} height={198} priority className="h-auto w-[88px]"/>
           </Link>
-          {/* Page-scoped DTG Focus identity marker — renders ONLY on /dtg-focus, reading "DTG › DTG
-              Focus". Decorative (aria-hidden) and NOT a link: you're already on the page, and the DTG
-              logo keeps its home link. Never render on any other route. */}
-          {pathname === "/dtg-focus" && (
-            <span className="dfx-nav-brand" aria-hidden="true">
-              <span className="dfx-nav-sep">&rsaquo;</span>
-              <Image src="/images/dtg-focus-logo-transparent.png" alt="" width={280} height={92} className="dfx-nav-lockup" />
-            </span>
-          )}
         </div>
         <nav className="hidden items-center gap-5 lg:flex">
           <Link href="/about" className="nav-link" aria-current={pathname==="/about"||pathname?.startsWith("/about/")?"page":undefined} onMouseEnter={closeMenu} onMouseMove={closeMenu} onMouseOver={closeMenu} onPointerEnter={closeMenu} onPointerMove={closeMenu} onFocus={closeMenu}>About</Link>
