@@ -142,7 +142,8 @@ export function DTGFocusPage() {
           </div>
         </div>
         <div className="dfx-hero__content site-container" data-dfx-reveal>
-          <span className="dfx-eyebrow dfx-hero__eyebrow">{renderTrademarkText("DTG Focus")}</span>
+          {/* No eyebrow — the upper-left lockup already carries the DTG Focus brand; a "DTG Focus™"
+              eyebrow here would repeat it. Column is title -> lead -> CTAs. */}
           <h1 id="dfx-hero-title" className="dfx-hero__title">
             Focused Actionable Insight
           </h1>

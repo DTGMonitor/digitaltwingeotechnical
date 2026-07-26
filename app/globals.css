@@ -15101,9 +15101,6 @@ main .ld-container,
    2026-07-25). The illustration's own gradient carries contrast: headline 12.6:1, lead 10.7:1 over
    the text zone (measured, desktop + mobile). DTG-Focus-ONLY — the photo heroes keep their scrims. */
 .dfx-hero__content { position:relative; z-index:2; padding-bottom:0; }
-/* hero eyebrow — off-white on the dark illustration (matches the other heroes), overriding the green
-   .dfx-eyebrow base. */
-.dfx-hero__eyebrow { display:block; margin-bottom:20px; color:var(--off-white); opacity:.85; }
 /* DTG Focus lockup — upper-left brand mark. The RAIL is absolute (out of the content flow, so it
    adds no height and the title never moves) and spans full width with a .site-container inside, so
    the lockup's left edge lands on the SAME ruler as the title/CTAs — not floating in a corner. Sits
