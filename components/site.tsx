@@ -181,12 +181,12 @@ const mobileNavigationSections: MobileNavSection[] = [
   {
     label: "DTG Focus",
     href: "/dtg-focus",
-    items: [
-      ["DTG Focus Overview", "/dtg-focus"],
-      ["Analytics", "/dtg-focus/data-cleansing"],
-      ["Reporting", "/dtg-focus/automated-reporting"],
-      ["Monitoring Review", "/dtg-focus/decision-support"],
-    ],
+    // DEFERRED (2026-08): dropdown removed — the sub-items pointed at deleted /dtg-focus/* sub-pages
+    // (all now 308 -> /dtg-focus), so every option just bounced back to the page. Empty items ->
+    // renders as a single .mobile-direct link, matching the plain top-level DTG Focus link on desktop
+    // (About/Services-style). RE-ADD the dropdown here WHEN the DTG Focus page has real sections built,
+    // pointing at anchors that actually exist (e.g. /dtg-focus#overview). Intentional deferral, not forgotten.
+    items: [],
   },
 ];
 
