@@ -76,7 +76,9 @@ const leaders = [
     src: "/images/peter-saunders-portrait.png",
     // Bio deliberately NEUTRAL: never name GroundProbe or any former employer here. A vendor/
     // former-employer reference in a founder bio is the locked positioning violation (CLAUDE.md §3).
-    bio: "A leading expert in slope stability radar and multi-sensor monitoring, with 20+ years in open-cut and underground hard-rock geomechanics.",
+    // Peter-confirmed additions (2026-08): RPEQ, CP(Geotech), international leadership, project scale
+    // (kept qualitative — no invented figure). "leading" / "major operations" are his confirmed framing.
+    bio: "A leading expert in slope stability radar and multi-sensor monitoring, RPEQ and CP(Geotech), with 20+ years in open-cut and underground hard-rock geomechanics and international leadership of monitoring programmes across major mining operations.",
     tags: ["Slope stability radar", "Multi-sensor monitoring", "Mine geomechanics"],
     linkedin: "https://www.linkedin.com/in/geotechnicalmonitoring/",
     email: "Peter.Saunders@dtgeotech.com",
@@ -90,8 +92,8 @@ const leaders = [
     role: "Founder / Director · Perth",
     src: "/images/mark-burdett-portrait.png",
     // Mark is 25+ years (owner-confirmed current; his LinkedIn is ~2 years stale). No RPEQ /
-    // CP(Geotech) — not supplied, do not add.
-    bio: "Structural geologist bridging ore-deposit understanding with applied geotechnical solutions.",
+    // CP(Geotech) — not supplied, do not add. Strengthened only with the confirmed 25+ years.
+    bio: "A structural geologist with 25+ years bridging ore-deposit understanding with applied geotechnical solutions.",
     tags: ["Structural geology", "Rock mass characterisation", "3D fault modelling"],
     linkedin: "https://www.linkedin.com/in/mark-burdett/",
     email: "Mark.Burdett@dtgeotech.com",

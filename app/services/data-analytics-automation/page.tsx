@@ -33,7 +33,7 @@ const content: ServiceContent = {
     eyebrow: "The idea",
     title: "Imagine monitoring where the routine runs itself.",
     intro:
-      "Noise cleaned automatically. Alarms that tune themselves. The important signal surfaced the moment it appears — so your people spend their time on judgement, not manual processing.",
+      "Noise conditioned into a readable signal. Alarm and threshold performance reviewed against your real data. The signal that matters surfaced early — so your people spend their time on judgement, not manual processing.",
     // The hedge is resolved. This replaced "That's the monitoring DTG is building toward, and
     // delivering today", which faced both ways and committed to neither. DTG's own tools run daily
     // on live operations, so the honest claim is forward-facing and singular. Do not re-hedge it.
@@ -50,7 +50,7 @@ const content: ServiceContent = {
     items: [
       {
         title: "The team",
-        body: "Geotechnical engineers who know what the ground is doing, and AI engineers who can build the tools to see it. The combination is rare, and it's the reason any of this is possible.",
+        body: "Geotechnical domain expertise that knows what the ground is doing, combined with the software, data and analytics engineering that builds the tools to see it. The combination is rare, and it's the reason any of this is possible.",
       },
       {
         title: "Built, not bought",
