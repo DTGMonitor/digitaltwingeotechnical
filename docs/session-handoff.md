@@ -1,10 +1,10 @@
 # Session handoff — DTG website
 
-_Updated 2026-07-25 — photo-hero system complete; DTG Focus restructured; hero titles tokenised. Paste-and-go context for a fresh session._
+_Updated 2026-08-04 — hero titles tokenised; Peter copy changes done; /terms added. Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `e9d8785`** (`e9d8785f2858bcf77a8684262475e3e4b0270d35`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `e9d8785`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `b40b680`** (`b40b680b51e23127071049787b8e6f3b1a0018a1`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `b40b680`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
 
 ## Design / section-build phase — ✅ DONE
@@ -43,12 +43,13 @@ All seven page heroes share one structure. Height and vertical position are unif
 
 ## What remains — all non-design
 
-### 1. Peter — confirmed copy changes
-- **Data Analytics** — verbatim rewrites (apply Peter's supplied copy to `/services/data-analytics-automation`).
-- **Leadership bios** — RPEQ, CP(Geotech), international experience. (Keep vendor names OUT of bios — CLAUDE.md §3.)
-- **IP-ownership sentence** — counsel cleared the concept (client data is theirs; DTG's software/methods/background IP is DTG's); still needs the **verbatim wording** before it goes in.
-- **DTG Focus maturity — consistency pass** — hold the honest boundary everywhere (built-and-running + capabilities deployable on request, but the fully-integrated coverage is still being completed; never "in development"/"roadmap", never "complete integrated coverage exists"). CLAUDE.md §3.
-- **Absolutes audit** — sweep for over-claims / absolute language and soften to what survives discovery.
+### 1. Peter — confirmed copy changes — ✅ DONE (`8a5789c` + `b40b680`)
+- **Data Analytics** — ✅ done. Peter's three verbatim rewrites were already live (2026-07-19); completed the two body remnants that still carried the old framing: "AI engineers"→"software, data and analytics engineering", and the "Alarms that tune themselves" overclaim→"Alarm and threshold performance reviewed against your real data".
+- **Leadership bios** — ✅ done (`/about#leadership`, data array in `app/about/page.tsx`). Peter: added RPEQ, CP(Geotech), international leadership of monitoring programmes, project scale kept **qualitative** ("major mining operations" — no invented figure), neutral on former employer. Mark: strengthened with the owner-confirmed **"25+ years"** only (no RPEQ/CP — not supplied).
+- **IP-ownership sentence** — ✅ built. Peter's exact counsel-cleared clause ("Client source data remains theirs; DTG retains ownership of its software, analytics, workflows, methodologies and background IP.") now lives on a **new minimal `/terms` page** (engagement terms — a different scope from website enquiry data). **`/privacy` stays enquiry-data-only**; do NOT put engagement terms back into it. Footer links **both** (`Privacy policy · Terms`). `/terms` reuses the `.pv-*` legal-page styling and is expandable.
+- **DTG Focus maturity** — ✅ verified held: no forbidden phrases ("in development"/"roadmap"/"coming soon"/"not yet available"/"preview"/"complete integrated coverage") in live copy; Solutions carries the canonical "built and running … still being completed" wording; DTG Focus has no violations.
+- **Absolutes audit** — ✅ verified held: live copy is soft ("helps ensure"/"supports"/"still being completed"); residual hard words are in code comments / dead code (e.g. orphaned `leadership-section.tsx`). Minor nit only: `technical-assurance-section.tsx:230` says "Ensures … documented clearly" while line 337 uses the softer "helps ensure" — consistency tidy, not a regression.
+- **Open-pit "50 that matter" contradiction** — ✅ verified resolved: heading is now "…the movement that matters" (no number); Applications shows "500+ TARP trigger responses · 50 confirmed falls of ground" (distinct counts, no contradiction).
 
 ### 2. Launch mechanics (contact form)
 Resend account → `CONTACT_MAIL_API_KEY` in host env → DNS SPF/DKIM/DMARC (**merge into any existing SPF record — never add a second**) → flip `CONTACT_FORM_ENABLED=true` and **rebuild** (the gate is build-time) → run the Gmail + Outlook **deliverability test** → submit the form once. Form is currently gated **OFF**.
