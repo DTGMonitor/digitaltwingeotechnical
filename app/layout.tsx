@@ -10,6 +10,31 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://dtgeotech.com"),
   title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
   description: "Independent geotechnical monitoring, analytics, governance and decision support.",
+  // OpenGraph + Twitter so shared links render a branded card. Relative url/image are made absolute
+  // against metadataBase (→ https://dtgeotech.com/…). og:image = public/og-image.png (1200×630,
+  // deep-teal hero-dark bg, DTG mark, signal-green rule, the locked strapline). Per-page metadata
+  // can override title/description; this is the site-wide default.
+  openGraph: {
+    type: "website",
+    siteName: "Digital Twin Geotechnical",
+    url: "/",
+    title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
+    description: "Independent geotechnical monitoring, analytics, governance and decision support.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Digital Twin Geotechnical — Integrated Data. Informed Decisions.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
+    description: "Independent geotechnical monitoring, analytics, governance and decision support.",
+    images: ["/og-image.png"],
+  },
 };
 
 // No-flash theme init: dark is the default (interim migration stance); a stored choice is
