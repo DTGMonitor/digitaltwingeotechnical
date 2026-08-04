@@ -131,23 +131,6 @@ export default function PrivacyPage() {
           </p>
         </section>
 
-        {/* IP-OWNERSHIP CLAUSE — Peter's exact wording, counsel-cleared (2026-08). This is an
-            ENGAGEMENT-terms statement (client monitoring data vs DTG's IP), a different scope from
-            the website-enquiry data above; a short lead-in keeps the scopes distinct. Placed here
-            because /privacy is the site's only legal page — if a dedicated /terms page is created
-            later, this clause is its natural home. Move it, don't duplicate it. */}
-        <section aria-labelledby="pv-ip">
-          <h2 id="pv-ip">Client data and intellectual property</h2>
-          <p>
-            This applies to our monitoring and analytics engagements, separately from the website
-            enquiry information described above.
-          </p>
-          <p>
-            Client source data remains theirs; DTG retains ownership of its software, analytics,
-            workflows, methodologies and background IP.
-          </p>
-        </section>
-
         <section aria-labelledby="pv-changes">
           <h2 id="pv-changes">Changes to this policy</h2>
           <p>

@@ -116,10 +116,13 @@ export function SiteFooter() {
         <div className="sf__base">
           {/* Legal links are limited to pages that actually exist. Peer footers list statutory
               pages because those companies publish them — no equivalents are fabricated here.
-              /privacy is currently a DRAFT pending legal review (see app/privacy/page.tsx). */}
+              /privacy is currently a DRAFT pending legal review (see app/privacy/page.tsx).
+              /terms carries the counsel-cleared IP-ownership clause (engagement terms — kept
+              separate from /privacy, which is website enquiry data only). */}
           <span>
             © {new Date().getFullYear()} Digital Twin Geotechnical ·{" "}
-            <Link href="/privacy">Privacy policy</Link>
+            <Link href="/privacy">Privacy policy</Link> ·{" "}
+            <Link href="/terms">Terms</Link>
           </span>
           <a
             className="sf__social"
