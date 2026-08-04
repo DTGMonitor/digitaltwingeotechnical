@@ -1,11 +1,29 @@
 # Session handoff — DTG website
 
-_Updated 2026-08-04 — hero titles tokenised; Peter copy changes done; /terms added. Paste-and-go context for a fresh session._
+_Updated 2026-08-04 — Peter copy changes done; /terms added; SEO/OG launch-ready. Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `b40b680`** (`b40b680b51e23127071049787b8e6f3b1a0018a1`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `b40b680`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `a7e89d9`** (`a7e89d954fd2b7d76a72dc548297096c4be469e6`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `a7e89d9`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
+
+## 🚀 LAUNCH READINESS
+The site is **code-complete and launch-ready, but NOT yet live** — no host is connected and
+**dtgeotech.com is parked** (DNS resolves to registrar parking IPs `3.33.251.168`/`15.197.225.128`,
+returns 405, no app headers). It's a Next.js **server** app (has `/api/contact`, no static export) —
+needs a host that runs Next.js (Vercel assumed).
+
+**In place (code-side, done — `76348b1` + `a7e89d9`):**
+- `metadataBase: https://dtgeotech.com` (root layout) — canonical/OG/Twitter URLs resolve to the real domain, not the deploy URL.
+- `app/sitemap.ts` — 18 CANONICAL pages only (orphan 200s + redirects excluded); `app/robots.ts` — allow `/`, disallow `/api/`, sitemap pointer.
+- **OpenGraph + Twitter cards** (`summary_large_image`) + **`public/og-image.png`** (1200×630, deep-teal hero-dark, DTG mark, green rule, locked strapline). Verified rendering absolute `dtgeotech.com` URLs. (Card strapline uses a brand-sans fallback face, not a guaranteed Inter embed — drop an `Inter-*.ttf` in-repo to re-render against literal Inter.)
+- **`/terms`** page (counsel-cleared IP clause); footer links Privacy · Terms.
+
+**Remaining to actually GO LIVE — NOT a code task** (needs dashboard/registrar access, Peter/domain owner):
+1. **Vercel project** — import the GitHub repo, production branch `main`, set env vars (`CONTACT_MAIL_API_KEY`; `CONTACT_FORM_ENABLED` is a build-time gate, still OFF).
+2. **DNS repoint** — replace the parking records with Vercel's targets (apex `A 76.76.21.21`, `www CNAME cname.vercel-dns.com` — confirm in the dashboard).
+- Plus Resend SPF/DKIM/DMARC before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
+- **Full step-by-step: [`docs/go-live.md`](./go-live.md).**
 
 ## Design / section-build phase — ✅ DONE
 The controlled visual-architecture redesign (page section builds + the site-wide photo-hero system) is **complete and merged**. No section-build or hero work remains on branches.
