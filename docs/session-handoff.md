@@ -1,10 +1,10 @@
 # Session handoff — DTG website
 
-_Updated 2026-08-04 — Peter copy changes done; /terms added; SEO/OG launch-ready. Paste-and-go context for a fresh session._
+_Updated 2026-08-04 — Peter copy changes done; /terms added; SEO/OG launch-ready; mobile-nav DTG Focus fix. Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `a7e89d9`** (`a7e89d954fd2b7d76a72dc548297096c4be469e6`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `a7e89d9`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `2e5092a`** (`2e5092a37379e3f8c762d95944860ebb1ba0c653`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `2e5092a`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`.
 
 ## 🚀 LAUNCH READINESS
@@ -80,6 +80,7 @@ Resend account → `CONTACT_MAIL_API_KEY` in host env → DNS SPF/DKIM/DMARC (**
 - **Light-theme audit** before flipping the dark→light default (memory `dtg-light-theme-audit-before-flip`).
 - **Dead-code tier** (memory `dtg-dead-code-cleanup`) — incl. the orphaned `components/leadership-section.tsx` (`.ld-*`).
 - **Sentence-case heading sweep** — decision key drafted; **strapline carve-out is LOCKED**: "Integrated Data. Informed Decisions." keeps Title Case + full stops as the brand line.
+- **DTG Focus nav dropdown (deferred re-add, `2e5092a`)** — the mobile DTG Focus dropdown was removed (its 4 sub-items were dead — `/dtg-focus/*` all `308`-redirect back to the page). DTG Focus is now a single link on desktop + mobile. **Re-add the dropdown when the DTG Focus page gets real sections built, pointing at anchors that exist** (see the comment on the `mobileNavigationSections` "DTG Focus" entry in `components/site.tsx`).
 
 ## Environment / gotchas for the next session
 - Dev: `npm run dev` on :3000. **Never `npm run build` while dev is live** (corrupts `.next` — CLAUDE.md §9). Stop dev first, then build.
