@@ -5,7 +5,20 @@ _Updated 2026-08-04 — Peter copy changes done; /terms added; SEO/OG launch-rea
 ## Current state
 - **Shipped code state: `main` = `2e5092a`** (`2e5092a37379e3f8c762d95944860ebb1ba0c653`) — the last **code** commit, on `origin/main`.
 - This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `2e5092a`. This handoff **is pushed** — the remote handoff is current.
-- Working tree clean on `main`.
+- Working tree clean on `main`. Every feature branch created this session was merged (fast-forward) and deleted — **nothing outstanding on branches.**
+
+## This session (2026-08-04) — shipped changelog
+All merged to `main` (details in the sections below). Chronological:
+1. **Applications environments section** — text-only section rebuilt as variant-A editorial rows: four full-width rows, images alternating L/R/L/R, collapse below 820px, each "Explore →" → its real `/applications/*` detail page (`b8bf137`, `0cc91f8`).
+2. **Applications hero photo** — added via cherry-pick (`584e9e2`), then image swapped to `applications-hero-update.png` (`4d22091`; old `applications-hero-team.png` kept as revert).
+3. **Contact hero photo** (`a6366a6`) — the last gradient-only hero; **photo-hero system now complete on every page.**
+4. **DTG Focus hero restructure** (`133099b` → `16d2e79`) — scrim removed (true-colour illustration), DTG Focus lockup moved to the hero **upper-left** (grid-aligned, absolute rail, adds no height), eyebrow dropped, lead trimmed to one sentence. (A top-right-lockup and a page-scoped nav-marker were each tried and reverted en route — don't re-attempt; see §DTG Focus in the hero reference.)
+5. **Hero title consistency** (`f2fe2b5`, `e9d8785`) — all six non-home hero titles unified to ONE shared `--hero-title-*` token set (size/max-width/weight/leading); two Title-Case titles fixed to sentence case; Services corrected to eyebrow "Services" → title "What we do".
+6. **Peter copy changes** (`8a5789c`, `b40b680`) — Data Analytics body remnants, leadership bios (Peter RPEQ/CP(Geotech)/international; Mark 25+ yrs), and the IP-ownership clause on a **new `/terms` page** (out of `/privacy`).
+7. **SEO / launch-ready** (`76348b1`, `a7e89d9`) — `metadataBase`, `sitemap.ts` (18 canonical), `robots.ts`, OpenGraph + Twitter cards + `og-image.png`, and `docs/go-live.md` runbook.
+8. **Mobile nav DTG Focus fix** (`2e5092a`) — removed the dead mobile dropdown (sub-items pointed at deleted `/dtg-focus/*` that all redirect back); DTG Focus is now a single link on desktop + mobile.
+
+**Latest code commit: `2e5092a`.** Deleted branches this session: `applications-env-rows`, `applications/hero-photo-final`, `applications/hero-photo`, `dtg-focus/hero-centre-descrim`, `heroes/title-consistency`, `content/peter-copy-changes`, `launch/seo-metadata`, `fix/dtg-focus-nav-dropdown`.
 
 ## 🚀 LAUNCH READINESS
 The site is **code-complete and launch-ready, but NOT yet live** — no host is connected and
