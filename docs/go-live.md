@@ -1,27 +1,39 @@
-# Go-live runbook — deploying DTG to production at dtgeotech.com
+# Go-live runbook — DTG at www.digitaltwingeotechnical.com
 
-Step-by-step to take `main` from GitHub to public at **dtgeotech.com** on **Vercel**. Written for a
-follow-along; each step says what to do and how to confirm it worked.
+The public website serves from **`www.digitaltwingeotechnical.com`** on **Vercel**, with the apex
+**`digitaltwingeotechnical.com` redirecting to `www`**. Company **email stays on `dtgeotech.com`** and
+is **out of scope** for any web-DNS work here (see the guardrail below). This runbook is what to do and
+how to confirm each part.
 
-## Where things stand (verified 2026-08-04)
-- The site is **not deployed anywhere yet** — `main` lives only on GitHub (`DTGMonitor/digitaltwingeotechnical`).
-  No host is connected: no `vercel.json` / `netlify.toml` / CI / Dockerfile in the repo.
-- **`dtgeotech.com` is registered but PARKED** — DNS resolves to registrar/parking IPs
-  (`3.33.251.168` / `15.197.225.128`) and returns `405` with no app headers. It is **not** serving the site.
-- This is a **Next.js server app** (App Router, has a server `/api/contact` route, no static export) — it
-  needs a host that runs Next.js. Vercel is the zero-config default; these steps assume Vercel.
+> ⚠️ **Two separate domains — do not conflate them.**
+> - **Website:** `digitaltwingeotechnical.com` (apex → `www`, `www` = primary, on Vercel).
+> - **Email:** `dtgeotech.com` (`info@`, `noreply@`, staff addresses). **Web DNS changes must NOT touch
+>   `dtgeotech.com`'s MX or other mail records.** The two zones are independent; keep them that way.
+
+## Where things stand (verified 2026-08-05)
+- **The site is DEPLOYED and LIVE on Vercel.** `https://www.digitaltwingeotechnical.com` returns `200`
+  and serves the DTG app (`Server: Vercel`, region `sin1`); the apex `https://digitaltwingeotechnical.com`
+  returns `308` and redirects to `www`. The apex↔www split is already in place.
+- **DNS (verified today):** apex `digitaltwingeotechnical.com` → **A `76.76.21.21`** (Vercel); `www` →
+  **CNAME → `*.vercel-dns.com`** (resolves into Vercel's edge). Both hold valid TLS.
+- **⚠️ Production is running a build from BEFORE the canonical-domain fix (`c7613ac`).** The live
+  `sitemap.xml` still emits `https://dtgeotech.com/…`, and canonical/OG URLs still resolve to the old
+  domain. `main` (`c7613ac` / handoff `5f41607`) has the corrected `www.digitaltwingeotechnical.com`
+  origin and is pushed to `origin` — **production must be redeployed from `main` to pick it up** (step 3).
+- **`dtgeotech.com`** still resolves to a parking IP (`3.33.251.168`) for the web root and is the
+  **email** domain — leave its zone alone except for any *email* records handled separately (step 5).
+- This is a **Next.js server app** (App Router, server `/api/contact`, no static export) — Vercel runs it.
 - The contact form is **gated OFF** (`CONTACT_FORM_ENABLED` is a **build-time** flag). Details in
   [`docs/CONTACT-FORM.md`](./CONTACT-FORM.md).
 
 ---
 
-## 1. Create the Vercel project
-1. Vercel → **Add New… → Project → Import Git Repository** → `DTGMonitor/digitaltwingeotechnical`.
-   (Authorise Vercel on the GitHub org if prompted.)
-2. Framework preset auto-detects **Next.js**. Leave build command (`next build`) and output as default.
-3. **Production Branch = `main`** (Settings → Git). Every push to `main` now auto-deploys to production;
-   other branches get preview URLs.
-4. **Deploy.** ✅ Confirm: build succeeds and you get a temporary URL like `digitaltwin…vercel.app`.
+## 1. Vercel project — DONE (verify only)
+The project already exists and auto-serves `main`. Confirm in the Vercel dashboard:
+1. Project imported from `DTGMonitor/digitaltwingeotechnical`, framework **Next.js**, build `next build`.
+2. **Production Branch = `main`** (Settings → Git) — every push to `main` auto-deploys to production.
+3. **Domains** (Settings → Domains) show `www.digitaltwingeotechnical.com` (primary) and
+   `digitaltwingeotechnical.com` (**redirect → www**), both **Valid Configuration**.
 
 ## 2. Environment variables (Settings → Environment Variables)
 None are committed to the repo — all secrets are supplied here.
@@ -33,48 +45,65 @@ None are committed to the repo — all secrets are supplied here.
 ⚠️ `CONTACT_FORM_ENABLED` is read at **build time** (the page is statically prerendered). Changing it
 later does **not** take effect until you **redeploy**. Keep it off until step 6.
 
-## 3. Smoke-test the temporary URL
-On the `*.vercel.app` URL, confirm: home + a few pages load, nav/mega-menu works, light/dark toggle
-works, `/privacy` and `/terms` render, `/sitemap.xml` and `/robots.txt` resolve. The contact form area
-should show the **email fallback** (form OFF), not a broken form.
+## 3. Redeploy production so the canonical-domain fix goes live ⬅️ NEXT ACTION
+The live build predates `c7613ac`, so its `sitemap.xml` / canonical / `og:` URLs still say
+`dtgeotech.com`. To publish the fix:
+1. Push to `main` already done (`origin/main` = handoff `5f41607`, code `c7613ac`). If Vercel auto-deploy
+   is on, a production deploy for this commit should already be building — check **Deployments**.
+2. If it is not, trigger it: **Deployments → ⋯ → Redeploy** the latest `main` commit (or push any commit).
+3. ✅ Confirm after deploy: `curl -s https://www.digitaltwingeotechnical.com/sitemap.xml` shows `<loc>`
+   URLs on **`www.digitaltwingeotechnical.com`** (not `dtgeotech.com`), and view-source on the home page
+   shows `og:url` / `twitter:` resolving to the www domain.
 
-## 4. Attach the domain + point DNS
-1. Vercel → project → **Settings → Domains → Add** → `dtgeotech.com` (add `www.dtgeotech.com` too; set
-   one as primary — apex `dtgeotech.com` is the usual choice, with `www` → redirect to it).
-2. Vercel shows the exact DNS target. **Use the values Vercel displays** (they can change); at time of
-   writing they are:
-   - Apex `dtgeotech.com`: **A record → `76.76.21.21`**
-   - `www`: **CNAME → `cname.vercel-dns.com`**
-3. At the **registrar** (where the parking records live): **remove the parking A records** and add the
-   above. If the registrar supports ALIAS/ANAME at the apex, that also works.
-4. Wait for propagation + Vercel to issue the TLS cert (minutes to a couple of hours).
-   ✅ Confirm: `https://dtgeotech.com` serves the site with a valid certificate, and Vercel's Domains
-   panel shows **Valid Configuration**.
+## 4. Domain + DNS — DONE (verify + guardrail)
+The web domain is already attached and pointed at Vercel; this section is now **verification**, not setup.
+1. Vercel → project → **Settings → Domains**: `www.digitaltwingeotechnical.com` primary,
+   `digitaltwingeotechnical.com` set to **redirect to www**.
+2. DNS at the `digitaltwingeotechnical.com` registrar (use the values **Vercel displays** if they differ):
+   - Apex `digitaltwingeotechnical.com`: **A → `76.76.21.21`** (or ALIAS/ANAME to Vercel).
+   - `www`: **CNAME → `cname.vercel-dns.com`**.
+3. ✅ Verify: `nslookup www.digitaltwingeotechnical.com` resolves into Vercel; `curl -I` shows Vercel
+   headers (`x-vercel-id`); apex `curl -I https://digitaltwingeotechnical.com` returns `308` → `www`.
 
-> Verify: `nslookup dtgeotech.com` should now return `76.76.21.21` (not the parking IPs), and
-> `curl -I https://dtgeotech.com` should show Vercel headers (`x-vercel-id`), not `405`.
+> 🔒 **Guardrail — do NOT modify `dtgeotech.com` here.** The web-DNS work above lives entirely in the
+> `digitaltwingeotechnical.com` zone. `dtgeotech.com` carries DTG **email**; touching its MX/mail records
+> as part of pointing the *website* at Vercel would break mail. Email records are step 5, and only if the
+> form is set to send from `dtgeotech.com` (a decision made at Resend setup — see below).
 
-## 5. Email-deliverability DNS (separate from step 4)
-This is **independent** of pointing the domain at the web host — it's so the contact form's mail isn't
-spam-filtered. Per [`docs/CONTACT-FORM.md`](./CONTACT-FORM.md): add Resend's **SPF / DKIM / DMARC**
-records at the registrar. **Merge SPF into any existing SPF record — never add a second SPF record.**
+## 5. Email-deliverability DNS (only when the contact form is set up)
+This is **independent** of pointing the website at Vercel — it exists so the contact form's mail isn't
+spam-filtered. It is **deferred until Resend is configured**, and it hinges on one decision:
+
+> ❓ **DECISION AT RESEND SETUP — which domain does the form send FROM?** The SPF / DKIM / DMARC records
+> go on **whichever domain the form's From address uses**, and that domain is **not decided yet**:
+> - **If the form sends from `dtgeotech.com`** (e.g. `noreply@dtgeotech.com`, the current code default),
+>   the records go in the **`dtgeotech.com`** zone — and this is the *one* place web-launch work legitimately
+>   adds records there. **Merge SPF into any existing `dtgeotech.com` SPF record — never add a second SPF
+>   record** — and do not disturb its MX.
+> - **If the form sends from `digitaltwingeotechnical.com`** (a new sending identity on the web domain),
+>   the records go in the **`digitaltwingeotechnical.com`** zone instead.
+>
+> **Do not pre-create these records for either domain until the sending domain is chosen in Resend.**
+> Full record shapes and the pitfalls are in [`docs/CONTACT-FORM.md`](./CONTACT-FORM.md).
 
 ## 6. Turn the contact form on (only when steps 2 & 5 are done)
 1. Set `CONTACT_FORM_ENABLED = true` (Production).
 2. **Redeploy** (Deployments → ⋯ → Redeploy, or push a commit) — the build-time flag needs a rebuild.
-3. Send a test enquiry and confirm it arrives at **info@dtgeotech.com**.
+3. Send a test enquiry and confirm it arrives at **info@dtgeotech.com** (the recipient inbox — unchanged).
 4. Run the **Gmail + Outlook deliverability test** (send to a Gmail and an Outlook address; check inbox
    vs spam). Fix SPF/DKIM/DMARC if it lands in spam.
 > Note: the form's rate limiter is in-memory/per-instance (see CONTACT-FORM.md) — fine for Vercel's
 > typical single-region serverless, but revisit if you scale to many instances.
 
 ## 7. Post-launch verification
-- `https://dtgeotech.com/sitemap.xml` lists the canonical pages, all with `https://dtgeotech.com/…` URLs.
-- `https://dtgeotech.com/robots.txt` allows `/`, disallows `/api/`, and points at the sitemap.
-- View-source on a couple of pages: canonical / `og:` / `twitter:` URLs resolve to `dtgeotech.com`
-  (this is what `metadataBase` fixes).
-- Submit the sitemap in **Google Search Console** (add the property, verify via DNS TXT, submit
-  `sitemap.xml`).
+- `https://www.digitaltwingeotechnical.com/sitemap.xml` lists the canonical pages, all with
+  `https://www.digitaltwingeotechnical.com/…` URLs (this is what step 3 fixes).
+- `https://www.digitaltwingeotechnical.com/robots.txt` allows `/`, disallows `/api/`, points at the sitemap.
+- View-source on a couple of pages: canonical / `og:` / `twitter:` URLs resolve to
+  `www.digitaltwingeotechnical.com` (this is what `metadataBase` fixes).
+- Apex check: `https://digitaltwingeotechnical.com` `308`-redirects to `www`.
+- Submit the sitemap in **Google Search Console** (add the `www.digitaltwingeotechnical.com` property,
+  verify via DNS TXT on the `digitaltwingeotechnical.com` zone, submit `sitemap.xml`).
 
 ## 8. Repo hygiene (from the handoff queue)
 - Confirm the GitHub repo is **Private**.

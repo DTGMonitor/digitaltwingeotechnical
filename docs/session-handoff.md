@@ -3,12 +3,15 @@
 _Updated 2026-08-05 — canonical/OG/sitemap domain repointed to www.digitaltwingeotechnical.com; Peter copy + /terms + SEO/OG launch-ready; mobile-nav fix; owner assets landed (hero rename + PDF downloads). Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `c7613ac`** — the last **code** commit, on branch `main` (feature commit `1aa038c` underneath). ⚠️ **`origin/main` has NOT been updated with `c7613ac` yet** — this and the follow-up handoff commit are local until pushed.
+- **Shipped code state: `main` = `c7613ac`** — the last **code** commit, on branch `main` (feature commit `1aa038c` underneath). **Pushed to `origin/main`** (handoff commit on top).
 - This handoff doc is committed **on top** of `c7613ac`, so `git rev-parse main` reads one ahead of the code commit.
 - Working tree clean on `main`. `fix/canonical-domain` was FF-merged and deleted — **nothing outstanding on branches.**
+- 🚨 **The site is ALREADY LIVE on Vercel at `www.digitaltwingeotechnical.com`** (verified 2026-08-05 — see LAUNCH READINESS). The prior handoff's "not deployed yet" was stale. **Production is still serving a build from BEFORE the domain fix** — its live `sitemap.xml`/canonical still emit `dtgeotech.com`; a **redeploy from `main`** publishes `c7613ac`.
 
 ## This session (2026-08-05) — shipped changelog
-1. **Canonical domain fix** (`c7613ac`) — `metadataBase` (`app/layout.tsx`) + `BASE` in both `app/robots.ts` and `app/sitemap.ts` repointed from `https://dtgeotech.com` → **`https://www.digitaltwingeotechnical.com`** (the real public domain). Canonical tags, OpenGraph/Twitter card URLs and the sitemap now resolve to the site that will actually serve. Verified on the running dev server: `sitemap.xml`, `robots.txt` and the homepage `og:`/`twitter:` tags all emit the new origin; no stale `dtgeotech.com` in head metadata. **Email addresses left untouched** (`info@`, `noreply@`, staff `@dtgeotech.com`). `docs/go-live.md` + `docs/CONTACT-FORM.md` NOT changed — see the DOMAIN DISCREPANCY flag in LAUNCH READINESS. (Committed on `fix/canonical-domain`, FF-merged to `main`, branch deleted. **Not yet pushed to `origin`.**)
+1. **Canonical domain fix** (`c7613ac`) — `metadataBase` (`app/layout.tsx`) + `BASE` in both `app/robots.ts` and `app/sitemap.ts` repointed from `https://dtgeotech.com` → **`https://www.digitaltwingeotechnical.com`** (the real public domain). Canonical tags, OpenGraph/Twitter card URLs and the sitemap now resolve to the site that will actually serve. Verified on the running dev server: `sitemap.xml`, `robots.txt` and the homepage `og:`/`twitter:` tags all emit the new origin; no stale `dtgeotech.com` in head metadata. **Email addresses left untouched** (`info@`, `noreply@`, staff `@dtgeotech.com`). Committed on `fix/canonical-domain`, FF-merged to `main`, branch deleted, **pushed to `origin/main`**.
+2. **Discovered the site is already LIVE** (verified 2026-08-05, not a code change) — `www.digitaltwingeotechnical.com` serves the DTG app on Vercel (`200`), apex `digitaltwingeotechnical.com` `308`-redirects to `www`. The prior handoff assumed "not deployed yet" — that is stale. **Live production still runs a pre-`c7613ac` build** (its `sitemap.xml` still emits `dtgeotech.com`); a redeploy from `main` is needed to publish the domain fix. See the updated `docs/go-live.md` step 3.
+3. **Reconciled the runbook docs to the domain split** — `docs/go-live.md` rewritten for **website on `www.digitaltwingeotechnical.com` (apex→www), email stays on `dtgeotech.com` untouched**, with an explicit guardrail that web-DNS work must not modify `dtgeotech.com`'s MX/mail records, and a "redeploy to publish `c7613ac`" step. `docs/CONTACT-FORM.md` — SPF/DKIM/DMARC reframed as going on **whichever domain the form sends FROM**, an explicit **decision deferred to Resend setup** (not assumed to be `dtgeotech.com`). Recipient inbox stays `info@dtgeotech.com`.
 
 ## This session (2026-08-04) — shipped changelog
 All merged to `main` (details in the sections below). Chronological:
@@ -25,10 +28,14 @@ All merged to `main` (details in the sections below). Chronological:
 **Latest code commit: `1aa038c`.** Deleted branches this session: `applications-env-rows`, `applications/hero-photo-final`, `applications/hero-photo`, `dtg-focus/hero-centre-descrim`, `heroes/title-consistency`, `content/peter-copy-changes`, `launch/seo-metadata`, `fix/dtg-focus-nav-dropdown`, `feat/hero-rename-and-downloads`.
 
 ## 🚀 LAUNCH READINESS
-The site is **code-complete and launch-ready, but NOT yet live** — no host is connected and
-**dtgeotech.com is parked** (DNS resolves to registrar parking IPs `3.33.251.168`/`15.197.225.128`,
-returns 405, no app headers). It's a Next.js **server** app (has `/api/contact`, no static export) —
-needs a host that runs Next.js (Vercel assumed).
+The site is **LIVE on Vercel at `www.digitaltwingeotechnical.com`** (verified 2026-08-05): `www` serves
+the DTG app (`200`, `Server: Vercel`, region `sin1`), apex `digitaltwingeotechnical.com` `308`-redirects
+to `www`, DNS is apex `A 76.76.21.21` + `www CNAME → *.vercel-dns.com`, valid TLS. It's a Next.js
+**server** app on Vercel. **Two open items remain:** (a) **production still runs a pre-`c7613ac` build**
+— the live `sitemap.xml`/canonical/OG still emit `dtgeotech.com`, so a **redeploy from `main`** is needed
+to publish the domain fix (go-live.md step 3); (b) the **contact form is still gated OFF** (Resend + DNS +
+flip, below). `dtgeotech.com` (email domain) still resolves to its parking IP `3.33.251.168` — that's the
+mail domain, untouched.
 
 **In place (code-side, done — `76348b1` + `a7e89d9`, domain repointed `c7613ac`):**
 - `metadataBase: https://www.digitaltwingeotechnical.com` (root layout) — canonical/OG/Twitter URLs resolve to the real public domain, not the deploy URL. **(Repointed from `dtgeotech.com` at `c7613ac` — that domain was never the public site.)**
@@ -36,22 +43,24 @@ needs a host that runs Next.js (Vercel assumed).
 - **OpenGraph + Twitter cards** (`summary_large_image`) + **`public/og-image.png`** (1200×630, deep-teal hero-dark, DTG mark, green rule, locked strapline). Verified on the dev server rendering absolute `www.digitaltwingeotechnical.com` URLs. (Card strapline uses a brand-sans fallback face, not a guaranteed Inter embed — drop an `Inter-*.ttf` in-repo to re-render against literal Inter.)
 - **`/terms`** page (counsel-cleared IP clause); footer links Privacy · Terms.
 
-**Remaining to actually GO LIVE — NOT a code task** (needs dashboard/registrar access, Peter/domain owner):
-1. **Vercel project** — import the GitHub repo, production branch `main`, set env vars (`CONTACT_MAIL_API_KEY`; `CONTACT_FORM_ENABLED` is a build-time gate, still OFF).
-2. **DNS repoint** — replace the parking records with Vercel's targets (apex `A 76.76.21.21`, `www CNAME cname.vercel-dns.com` — confirm in the dashboard).
-- Plus Resend SPF/DKIM/DMARC before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
+**Remaining to finish launch — NOT a code task** (needs dashboard/registrar access, Peter/domain owner):
+1. **Redeploy production from `main`** to publish the canonical-domain fix (`c7613ac`) — the live build predates it. Confirm afterwards: live `sitemap.xml` emits `www.digitaltwingeotechnical.com`. ⬅️ do this first.
+2. **Vercel project / domain / DNS — already DONE** (verified): project on `main`, `www` primary, apex→www redirect, DNS on Vercel. Verify env var `CONTACT_MAIL_API_KEY` is set; `CONTACT_FORM_ENABLED` is a build-time gate, still OFF.
+3. **Contact form** — Resend SPF/DKIM/DMARC on the chosen **sending domain** (see decision below) before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
 - **Full step-by-step: [`docs/go-live.md`](./go-live.md).**
 
-> ⚠️ **DOMAIN DISCREPANCY — flagged, NOT yet resolved in the runbook (2026-08-05).** The canonical/OG/sitemap
-> code was repointed to **`www.digitaltwingeotechnical.com`** at `c7613ac` (that's the real public domain). But
-> **`docs/go-live.md` and `docs/CONTACT-FORM.md` still describe DNS + Resend setup against `dtgeotech.com`** —
-> the DNS-repoint targets, the domain to add in Vercel, and the SPF/DKIM/DMARC record hostnames all name the OLD
-> domain. Those docs were left untouched here because rewriting DNS/email setup is a deployment + domain-owner
-> decision (which apex, which zone gets the records, whether email stays on `dtgeotech.com` while the site moves
-> to `digitaltwingeotechnical.com`), NOT a canonical-URL fix. **Before go-live, reconcile: decide whether the
-> site serves at `www.digitaltwingeotechnical.com` (apex/www split?) and whether mail stays on `dtgeotech.com`;
-> then update `go-live.md` DNS targets + `CONTACT-FORM.md` record hostnames to match.** The `noreply@`/`info@`
-> email addresses on `dtgeotech.com` were deliberately left as-is in code.
+> ⚠️ **DOMAIN SPLIT — code + docs reconciled; KEEP THIS FLAG until Peter confirms (2026-08-05).** The
+> working split, now applied across code and both runbook docs: **website = `www.digitaltwingeotechnical.com`
+> (apex → `www`), email = `dtgeotech.com` (untouched — `info@`/`noreply@`/staff).** Applied: canonical/OG/sitemap
+> code (`c7613ac`); `docs/go-live.md` (web DNS on `digitaltwingeotechnical.com`, explicit guardrail that
+> web-DNS work must **not** modify `dtgeotech.com`'s MX/mail records); `docs/CONTACT-FORM.md` (SPF/DKIM/DMARC
+> go on whichever domain the form **sends from**). This matches the **live** DNS/deployment observed today.
+> **Still OPEN — do not close this flag until resolved:**
+> 1. **Peter to confirm** the split is the intended final arrangement (website on `digitaltwingeotechnical.com`,
+>    mail staying on `dtgeotech.com`).
+> 2. **Contact-form sending domain is UNDECIDED** — `dtgeotech.com` (current `noreply@` default) or a new
+>    identity on `digitaltwingeotechnical.com`. This is a **Resend-setup decision**; SPF/DKIM/DMARC records
+>    must NOT be pre-created for either domain until it's made (see `CONTACT-FORM.md`).
 
 ## Design / section-build phase — ✅ DONE
 The controlled visual-architecture redesign (page section builds + the site-wide photo-hero system) is **complete and merged**. No section-build or hero work remains on branches.

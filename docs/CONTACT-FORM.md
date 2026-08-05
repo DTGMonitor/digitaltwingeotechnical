@@ -13,7 +13,7 @@ The `/contact` enquiry form posts to `app/api/contact/route.ts`, which sends an 
 |---|---|---|
 | `CONTACT_FORM_ENABLED` | yes, to show the form | Launch gate. The form renders **only** when this is exactly `"true"`. Any other value (or unset) shows an email fallback instead. **Build-time — see below.** |
 | `CONTACT_MAIL_API_KEY` | yes, to send | Resend API key. **Never commit this.** With no key the send throws, the API returns 502, and the form shows its visible error state. |
-| `CONTACT_MAIL_FROM` | optional | From address. Defaults to `DTG website <noreply@dtgeotech.com>`. Must be on a domain verified in Resend. |
+| `CONTACT_MAIL_FROM` | optional | From address. Defaults to `DTG website <noreply@dtgeotech.com>`. Must be on a domain verified in Resend. **The domain of THIS address is the "sending domain" — it decides where the SPF/DKIM/DMARC records live (see below). Not yet finalised.** |
 
 ### ⚠️ `CONTACT_FORM_ENABLED` is read at BUILD time
 
@@ -36,28 +36,46 @@ directly.
 
 ## 🔴 DNS records — required before launch
 
-**Without these, replies land in spam.** Add them in Resend (Domains → Add Domain →
-`dtgeotech.com`), then add the records Resend shows you to the `dtgeotech.com` DNS zone.
+**Without these, replies land in spam.**
+
+> ❓ **DECISION FIRST — which domain does the form send FROM?** These records go on the **sending
+> domain** (the domain in `CONTACT_MAIL_FROM`), and that is **not decided yet**. Make this call when
+> Resend is set up; do **not** pre-create records for either domain before then.
+>
+> - **`dtgeotech.com`** — the current code default (`noreply@dtgeotech.com`). If kept, the records go
+>   in the **`dtgeotech.com`** email zone. This is the *only* legitimate reason web-launch DNS work
+>   touches `dtgeotech.com` — and even then, **only these `send.`/`_dmarc` records; never its MX or the
+>   apex.** The website itself lives on `digitaltwingeotechnical.com` (see [`go-live.md`](./go-live.md)).
+> - **`digitaltwingeotechnical.com`** — if a new sending identity (e.g. `noreply@digitaltwingeotechnical.com`)
+>   is preferred so mail and web share one brand domain. Then the records go in that zone instead, and
+>   `CONTACT_MAIL_FROM` is set to match.
+>
+> The recipient inbox is **`info@dtgeotech.com`** regardless of the sending domain — that does not change.
+
+Once the sending domain is chosen, add it in Resend (Domains → Add Domain → *the chosen domain*), then
+add the records Resend shows to **that domain's** DNS zone.
 
 > ⚠️ **Resend generates the exact values per domain — copy them from the Resend dashboard, do not
-> transcribe from here.** The table below is the *shape* of what to expect, so the DNS change can
-> be scoped and raised with whoever administers the zone before you start.
+> transcribe from here.** The table below is the *shape* of what to expect (hosts shown against a
+> `<sending-domain>` placeholder), so the DNS change can be scoped and raised with whoever administers
+> the chosen zone before you start.
 
 | # | Type | Host / Name | Value | Notes |
 |---|---|---|---|---|
-| 1 | `MX` | `send.dtgeotech.com` | `feedback-smtp.<region>.amazonses.com` (priority `10`) | Bounce/complaint handling. Region matches the one chosen in Resend (e.g. `us-east-1`, `eu-west-1`, `ap-northeast-1`). |
-| 2 | `TXT` | `send.dtgeotech.com` | `v=spf1 include:amazonses.com ~all` | **SPF.** Authorises Resend to send for the subdomain. |
-| 3 | `TXT` | `resend._domainkey.dtgeotech.com` | `p=MIGfMA0GCSq…` (long public key from Resend) | **DKIM.** Cryptographically signs the mail. The selector is normally `resend`. |
-| 4 | `TXT` | `_dmarc.dtgeotech.com` | `v=DMARC1; p=none; rua=mailto:dmarc@dtgeotech.com` | **DMARC.** Optional for delivery but strongly recommended. Start at `p=none` (monitor only), review reports, then tighten to `quarantine` and `reject`. |
+| 1 | `MX` | `send.<sending-domain>` | `feedback-smtp.<region>.amazonses.com` (priority `10`) | Bounce/complaint handling. Region matches the one chosen in Resend (e.g. `us-east-1`, `eu-west-1`, `ap-northeast-1`). On the `send.` subdomain only — does **not** affect the apex MX. |
+| 2 | `TXT` | `send.<sending-domain>` | `v=spf1 include:amazonses.com ~all` | **SPF.** Authorises Resend to send for the subdomain. |
+| 3 | `TXT` | `resend._domainkey.<sending-domain>` | `p=MIGfMA0GCSq…` (long public key from Resend) | **DKIM.** Cryptographically signs the mail. The selector is normally `resend`. |
+| 4 | `TXT` | `_dmarc.<sending-domain>` | `v=DMARC1; p=none; rua=mailto:dmarc@<sending-domain>` | **DMARC.** Optional for delivery but strongly recommended. Start at `p=none` (monitor only), review reports, then tighten to `quarantine` and `reject`. |
 
 ### Two things worth flagging to whoever runs the DNS
 
-- **If `dtgeotech.com` already has an SPF record**, do **not** add a second one — a domain with two
-  SPF records fails SPF entirely. Merge the `include:` into the existing record instead. This is the
-  single most common way this setup breaks.
+- **If the chosen sending domain already has an SPF record**, do **not** add a second one — a domain
+  with two SPF records fails SPF entirely. Merge the `include:` into the existing record instead. This
+  is the single most common way this setup breaks. (Especially relevant if the sending domain is
+  `dtgeotech.com`, which already carries live staff email.)
 - **Using the `send.` subdomain** (Resend's default) keeps this separate from whatever sends normal
-  DTG staff mail, so it cannot disturb existing email. Keep it that way unless there is a reason not
-  to.
+  DTG staff mail, so it cannot disturb existing email — the apex MX/SPF are untouched. Keep it that way
+  unless there is a reason not to.
 
 ### Verifying
 
