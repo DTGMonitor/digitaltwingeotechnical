@@ -1,10 +1,10 @@
 # Session handoff — DTG website
 
-_Updated 2026-08-04 — Peter copy changes done; /terms added; SEO/OG launch-ready; mobile-nav DTG Focus fix. Paste-and-go context for a fresh session._
+_Updated 2026-08-05 — Peter copy + /terms + SEO/OG launch-ready; mobile-nav fix; owner assets landed (hero rename + PDF downloads). Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `2e5092a`** (`2e5092a37379e3f8c762d95944860ebb1ba0c653`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `2e5092a`. This handoff **is pushed** — the remote handoff is current.
+- **Shipped code state: `main` = `1aa038c`** (`1aa038c912c26498297ffe6cb1722da428acbea1`) — the last **code** commit, on `origin/main`.
+- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `1aa038c`. This handoff **is pushed** — the remote handoff is current.
 - Working tree clean on `main`. Every feature branch created this session was merged (fast-forward) and deleted — **nothing outstanding on branches.**
 
 ## This session (2026-08-04) — shipped changelog
@@ -17,8 +17,9 @@ All merged to `main` (details in the sections below). Chronological:
 6. **Peter copy changes** (`8a5789c`, `b40b680`) — Data Analytics body remnants, leadership bios (Peter RPEQ/CP(Geotech)/international; Mark 25+ yrs), and the IP-ownership clause on a **new `/terms` page** (out of `/privacy`).
 7. **SEO / launch-ready** (`76348b1`, `a7e89d9`) — `metadataBase`, `sitemap.ts` (18 canonical), `robots.ts`, OpenGraph + Twitter cards + `og-image.png`, and `docs/go-live.md` runbook.
 8. **Mobile nav DTG Focus fix** (`2e5092a`) — removed the dead mobile dropdown (sub-items pointed at deleted `/dtg-focus/*` that all redirect back); DTG Focus is now a single link on desktop + mobile.
+9. **Owner assets landed** (`1aa038c`) — Applications hero **renamed** to `applications-hero.png` (old `-update.png`/`-team.png` git-rm'd, no revert path kept); company-document **PDFs** added in `public/downloads/` and wired: a **"Company documents"** section on `/contact` (eyebrow → heading → two `.cx-cap` `<a download>` rows) + a **"Documents"** footer column (grid 4→5). Both PDFs serve `200 application/pdf`. (These came in as an owner out-of-band working-tree drop — a rename + new files; finished and committed properly.)
 
-**Latest code commit: `2e5092a`.** Deleted branches this session: `applications-env-rows`, `applications/hero-photo-final`, `applications/hero-photo`, `dtg-focus/hero-centre-descrim`, `heroes/title-consistency`, `content/peter-copy-changes`, `launch/seo-metadata`, `fix/dtg-focus-nav-dropdown`.
+**Latest code commit: `1aa038c`.** Deleted branches this session: `applications-env-rows`, `applications/hero-photo-final`, `applications/hero-photo`, `dtg-focus/hero-centre-descrim`, `heroes/title-consistency`, `content/peter-copy-changes`, `launch/seo-metadata`, `fix/dtg-focus-nav-dropdown`, `feat/hero-rename-and-downloads`.
 
 ## 🚀 LAUNCH READINESS
 The site is **code-complete and launch-ready, but NOT yet live** — no host is connected and
@@ -70,7 +71,7 @@ All seven page heroes share one structure. Height and vertical position are unif
 - **Solutions** — node-diagram illustration (no photo); height/centring only. Lead `max-width` narrowed to 48ch so centred text clears the diagram.
 - **Contact** — monitoring-room photo (`contact-hero.png`, AI-generated synthetic); tint COPIES Services exactly (uniform `0.2` + gentle left boost `0.42→0` by 50%). `object-position:62% 50%` desktop / `30% 50%` at ≤900px (dark empty wall left for the text; wall monitor + four people cropped out on mobile). Very dark wall → AA generous (title ~13:1, lead ~11:1). Merged `a6366a6`.
 - **DTG Focus** — full-bleed terrain illustration (`dtg-focus/hero.png`). **Restructured (merged `16d2e79`):** (1) **scrim REMOVED** — shows at true illustration colour, no teal wash (the dark navy artwork carries its own gradient; text still WCAG AA — headline 12.6:1, lead 10.7:1 — the DFX exception to the scrim-on-photo-heroes rule; do NOT re-add a scrim, and do NOT strip scrims off the photo heroes). (2) **DTG Focus lockup** moved into the hero **upper-left**, grid-aligned (absolute `.site-container` rail so its left edge lands on the title's ruler; adds no height so the title never moved), big (294px desktop / 203px ≤900px), not a link. Uses `dtg-focus-lockup.png` (the logo trimmed of transparent padding; original `dtg-focus-logo-transparent.png` stays — still used on the homepage). (3) **Eyebrow dropped** (lockup carries the brand); small controlled title lift (−70→−90 desktop). (4) **Lead trimmed** to one sentence. **Nav unchanged on all pages** (DTG logo alone; the earlier page-scoped nav marker was tried and reverted — a 73px nav can't size the lockup).
-- **Applications** — open-pit survey photo (`applications-hero-update.png`, AI-generated synthetic; swapped from the monitoring-room shot at `4d22091`, old `applications-hero-team.png` kept as revert); uniform `0.2` + a STRONGER/wider left boost (`0.78→0.6→0` to ~78%); `object-position:85% 50%` desktop / `35% 50%` at ≤900px (empty pit left; two workers on the right, cropped out on mobile). Contrast measured WCAG AA (headline ~9–11:1, lead ~7–9:1).
+- **Applications** — open-pit survey photo (`applications-hero.png`, AI-generated synthetic; renamed from `applications-hero-update.png` at `1aa038c` — no revert path kept); uniform `0.2` + a STRONGER/wider left boost (`0.78→0.6→0` to ~78%); `object-position:85% 50%` desktop / `35% 50%` at ≤900px (empty pit left; two workers on the right, cropped out on mobile). Contrast measured WCAG AA (headline ~9–11:1, lead ~7–9:1).
 
 ## What remains — all non-design
 
