@@ -16,10 +16,9 @@ how to confirm each part.
   returns `308` and redirects to `www`. The apex↔www split is already in place.
 - **DNS (verified today):** apex `digitaltwingeotechnical.com` → **A `76.76.21.21`** (Vercel); `www` →
   **CNAME → `*.vercel-dns.com`** (resolves into Vercel's edge). Both hold valid TLS.
-- **⚠️ Production is running a build from BEFORE the canonical-domain fix (`c7613ac`).** The live
-  `sitemap.xml` still emits `https://dtgeotech.com/…`, and canonical/OG URLs still resolve to the old
-  domain. `main` (`c7613ac` / handoff `5f41607`) has the corrected `www.digitaltwingeotechnical.com`
-  origin and is pushed to `origin` — **production must be redeployed from `main` to pick it up** (step 3).
+- **✅ The canonical-domain fix (`c7613ac`) is LIVE in production.** Vercel auto-deploys `main`, so the
+  push rebuilt production automatically; re-verified — the live `sitemap.xml`/`robots.txt`/OG all emit
+  `www.digitaltwingeotechnical.com` (0 `dtgeotech.com`). No manual redeploy was needed.
 - **`dtgeotech.com`** still resolves to a parking IP (`3.33.251.168`) for the web root and is the
   **email** domain — leave its zone alone except for any *email* records handled separately (step 5).
 - This is a **Next.js server app** (App Router, server `/api/contact`, no static export) — Vercel runs it.
@@ -45,15 +44,12 @@ None are committed to the repo — all secrets are supplied here.
 ⚠️ `CONTACT_FORM_ENABLED` is read at **build time** (the page is statically prerendered). Changing it
 later does **not** take effect until you **redeploy**. Keep it off until step 6.
 
-## 3. Redeploy production so the canonical-domain fix goes live ⬅️ NEXT ACTION
-The live build predates `c7613ac`, so its `sitemap.xml` / canonical / `og:` URLs still say
-`dtgeotech.com`. To publish the fix:
-1. Push to `main` already done (`origin/main` = handoff `5f41607`, code `c7613ac`). If Vercel auto-deploy
-   is on, a production deploy for this commit should already be building — check **Deployments**.
-2. If it is not, trigger it: **Deployments → ⋯ → Redeploy** the latest `main` commit (or push any commit).
-3. ✅ Confirm after deploy: `curl -s https://www.digitaltwingeotechnical.com/sitemap.xml` shows `<loc>`
-   URLs on **`www.digitaltwingeotechnical.com`** (not `dtgeotech.com`), and view-source on the home page
-   shows `og:url` / `twitter:` resolving to the www domain.
+## 3. Canonical-domain fix in production — DONE (auto-deployed)
+Vercel auto-deploys `main`, so pushing `c7613ac` rebuilt production automatically — **no manual redeploy
+was needed.** Re-verified live: `curl -s https://www.digitaltwingeotechnical.com/sitemap.xml` shows `<loc>`
+URLs on **`www.digitaltwingeotechnical.com`** (0 `dtgeotech.com`), `robots.txt` points at the www sitemap,
+and the home page `og:`/`twitter:` URLs resolve to the www domain. Nothing to do here unless a future
+domain change needs the same treatment (edit `metadataBase` + both `BASE` constants, push — it redeploys).
 
 ## 4. Domain + DNS — DONE (verify + guardrail)
 The web domain is already attached and pointed at Vercel; this section is now **verification**, not setup.

@@ -6,11 +6,11 @@ _Updated 2026-08-05 — canonical/OG/sitemap domain repointed to www.digitaltwin
 - **Shipped code state: `main` = `c7613ac`** — the last **code** commit, on branch `main` (feature commit `1aa038c` underneath). **Pushed to `origin/main`** (handoff commit on top).
 - This handoff doc is committed **on top** of `c7613ac`, so `git rev-parse main` reads one ahead of the code commit.
 - Working tree clean on `main`. `fix/canonical-domain` was FF-merged and deleted — **nothing outstanding on branches.**
-- 🚨 **The site is ALREADY LIVE on Vercel at `www.digitaltwingeotechnical.com`** (verified 2026-08-05 — see LAUNCH READINESS). The prior handoff's "not deployed yet" was stale. **Production is still serving a build from BEFORE the domain fix** — its live `sitemap.xml`/canonical still emit `dtgeotech.com`; a **redeploy from `main`** publishes `c7613ac`.
+- 🚨 **The site is ALREADY LIVE on Vercel at `www.digitaltwingeotechnical.com`** (verified 2026-08-05 — see LAUNCH READINESS). The prior handoff's "not deployed yet" was stale. **Vercel auto-deploys `main`: the domain fix (`c7613ac`) is now live in production** — the live `sitemap.xml`/`robots.txt`/OG all emit `www.digitaltwingeotechnical.com`, zero `dtgeotech.com` remaining (re-verified after push).
 
 ## This session (2026-08-05) — shipped changelog
 1. **Canonical domain fix** (`c7613ac`) — `metadataBase` (`app/layout.tsx`) + `BASE` in both `app/robots.ts` and `app/sitemap.ts` repointed from `https://dtgeotech.com` → **`https://www.digitaltwingeotechnical.com`** (the real public domain). Canonical tags, OpenGraph/Twitter card URLs and the sitemap now resolve to the site that will actually serve. Verified on the running dev server: `sitemap.xml`, `robots.txt` and the homepage `og:`/`twitter:` tags all emit the new origin; no stale `dtgeotech.com` in head metadata. **Email addresses left untouched** (`info@`, `noreply@`, staff `@dtgeotech.com`). Committed on `fix/canonical-domain`, FF-merged to `main`, branch deleted, **pushed to `origin/main`**.
-2. **Discovered the site is already LIVE** (verified 2026-08-05, not a code change) — `www.digitaltwingeotechnical.com` serves the DTG app on Vercel (`200`), apex `digitaltwingeotechnical.com` `308`-redirects to `www`. The prior handoff assumed "not deployed yet" — that is stale. **Live production still runs a pre-`c7613ac` build** (its `sitemap.xml` still emits `dtgeotech.com`); a redeploy from `main` is needed to publish the domain fix. See the updated `docs/go-live.md` step 3.
+2. **Discovered the site is already LIVE** (verified 2026-08-05, not a code change) — `www.digitaltwingeotechnical.com` serves the DTG app on Vercel (`200`), apex `digitaltwingeotechnical.com` `308`-redirects to `www`. The prior handoff assumed "not deployed yet" — that is stale. **Vercel auto-deploys `main`, so the push of `c7613ac` rebuilt production automatically**: re-verified after the push, the live `sitemap.xml`/`robots.txt`/OG now all emit `www.digitaltwingeotechnical.com` (0 `dtgeotech.com` in the live sitemap). The domain fix is live end-to-end.
 3. **Reconciled the runbook docs to the domain split** — `docs/go-live.md` rewritten for **website on `www.digitaltwingeotechnical.com` (apex→www), email stays on `dtgeotech.com` untouched**, with an explicit guardrail that web-DNS work must not modify `dtgeotech.com`'s MX/mail records, and a "redeploy to publish `c7613ac`" step. `docs/CONTACT-FORM.md` — SPF/DKIM/DMARC reframed as going on **whichever domain the form sends FROM**, an explicit **decision deferred to Resend setup** (not assumed to be `dtgeotech.com`). Recipient inbox stays `info@dtgeotech.com`.
 
 ## This session (2026-08-04) — shipped changelog
@@ -31,9 +31,9 @@ All merged to `main` (details in the sections below). Chronological:
 The site is **LIVE on Vercel at `www.digitaltwingeotechnical.com`** (verified 2026-08-05): `www` serves
 the DTG app (`200`, `Server: Vercel`, region `sin1`), apex `digitaltwingeotechnical.com` `308`-redirects
 to `www`, DNS is apex `A 76.76.21.21` + `www CNAME → *.vercel-dns.com`, valid TLS. It's a Next.js
-**server** app on Vercel. **Two open items remain:** (a) **production still runs a pre-`c7613ac` build**
-— the live `sitemap.xml`/canonical/OG still emit `dtgeotech.com`, so a **redeploy from `main`** is needed
-to publish the domain fix (go-live.md step 3); (b) the **contact form is still gated OFF** (Resend + DNS +
+**server** app on Vercel that **auto-deploys `main`** — the canonical-domain fix (`c7613ac`) is **already
+live in production** (re-verified: live `sitemap.xml`/`robots.txt`/OG all emit `www.digitaltwingeotechnical.com`,
+0 `dtgeotech.com`). **One functional item remains:** the **contact form is still gated OFF** (Resend + DNS +
 flip, below). `dtgeotech.com` (email domain) still resolves to its parking IP `3.33.251.168` — that's the
 mail domain, untouched.
 
@@ -44,9 +44,9 @@ mail domain, untouched.
 - **`/terms`** page (counsel-cleared IP clause); footer links Privacy · Terms.
 
 **Remaining to finish launch — NOT a code task** (needs dashboard/registrar access, Peter/domain owner):
-1. **Redeploy production from `main`** to publish the canonical-domain fix (`c7613ac`) — the live build predates it. Confirm afterwards: live `sitemap.xml` emits `www.digitaltwingeotechnical.com`. ⬅️ do this first.
-2. **Vercel project / domain / DNS — already DONE** (verified): project on `main`, `www` primary, apex→www redirect, DNS on Vercel. Verify env var `CONTACT_MAIL_API_KEY` is set; `CONTACT_FORM_ENABLED` is a build-time gate, still OFF.
-3. **Contact form** — Resend SPF/DKIM/DMARC on the chosen **sending domain** (see decision below) before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
+1. **Deployment + canonical-domain fix — DONE** (auto-deployed on push; re-verified live): `www` serves, apex→www redirect, live `sitemap.xml`/`robots.txt`/OG emit `www.digitaltwingeotechnical.com`.
+2. **Vercel project / domain / DNS — DONE** (verified): project on `main`, `www` primary, apex→www redirect, DNS on Vercel. Verify env var `CONTACT_MAIL_API_KEY` is set; `CONTACT_FORM_ENABLED` is a build-time gate, still OFF.
+3. **Contact form — the remaining item** — Resend SPF/DKIM/DMARC on the chosen **sending domain** (see decision below) before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
 - **Full step-by-step: [`docs/go-live.md`](./go-live.md).**
 
 > ⚠️ **DOMAIN SPLIT — code + docs reconciled; KEEP THIS FLAG until Peter confirms (2026-08-05).** The
