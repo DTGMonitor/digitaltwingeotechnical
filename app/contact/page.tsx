@@ -270,6 +270,37 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* 6 · COMPANY DOCUMENTS — downloadable PDFs from /public/downloads. Hairline .cx-cap rows
+          (no cards/boxes/shadows); ArrowDown signals download. */}
+      <section className="cx-docs" aria-labelledby="cx-docs-title">
+        <div className="site-container">
+          <div data-cx-reveal>
+            <span className="cx-eyebrow">Company documents</span>
+            <h2 id="cx-docs-title" className="cx-h2 cx-docs__h">Download our collateral</h2>
+          </div>
+          <div className="cx-docs__list" data-cx-reveal>
+            <a className="cx-cap" href="/downloads/DTG-Capability-Statement.pdf" download>
+              <span>
+                <span className="cx-cap__place">Capability statement</span>
+                <span className="cx-cap__desc">A concise overview of what we do — PDF, 2 pages</span>
+              </span>
+              <span className="cx-cap__go" aria-hidden="true">
+                <ArrowDown size={18} />
+              </span>
+            </a>
+            <a className="cx-cap" href="/downloads/DTG-Company-Profile.pdf" download>
+              <span>
+                <span className="cx-cap__place">Company profile</span>
+                <span className="cx-cap__desc">Our story, capabilities and leadership — PDF, 7 pages</span>
+              </span>
+              <span className="cx-cap__go" aria-hidden="true">
+                <ArrowDown size={18} />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

@@ -70,6 +70,15 @@ const columns = [
       ["Contact", "/contact"],
     ],
   },
+  {
+    heading: "Documents",
+    label: "Documents",
+    // PDFs in /public/downloads/. Rendered below as <a download> (not next/link) via the /downloads/ check.
+    links: [
+      ["Company profile (PDF)", "/downloads/DTG-Company-Profile.pdf"],
+      ["Capability statement (PDF)", "/downloads/DTG-Capability-Statement.pdf"],
+    ],
+  },
 ] as const;
 
 function FooterLabel({ label }: { label: string }) {
@@ -104,11 +113,17 @@ export function SiteFooter() {
           {columns.map((column) => (
             <nav className="sf__col" aria-label={column.label} key={column.heading}>
               <h3>{column.heading}</h3>
-              {column.links.map(([label, href]) => (
-                <Link href={href} key={href}>
-                  <FooterLabel label={label} />
-                </Link>
-              ))}
+              {column.links.map(([label, href]) =>
+                href.startsWith("/downloads/") ? (
+                  <a href={href} key={href} download>
+                    <FooterLabel label={label} />
+                  </a>
+                ) : (
+                  <Link href={href} key={href}>
+                    <FooterLabel label={label} />
+                  </Link>
+                ),
+              )}
             </nav>
           ))}
         </div>

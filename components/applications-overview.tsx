@@ -126,8 +126,7 @@ export function ApplicationsOverview() {
         <div className="appsx-hero__media" aria-hidden="true">
           {/* Synthetic/AI-generated image — no client branding, no identifiable site.
               Owner-confirmed provenance. Do not treat as client-derived imagery. */}
-          {/* Revert path: switch src back to /images/applications-hero-team.png (kept in repo). */}
-          <Image src="/images/applications-hero-update.png" alt="" fill priority sizes="100vw" />
+          <Image src="/images/applications-hero.png" alt="" fill priority sizes="100vw" />
         </div>
         <div className="appsx-hero__scrim" aria-hidden="true" />
         <div className="appsx-hero__inner site-container" data-appsx-reveal>
