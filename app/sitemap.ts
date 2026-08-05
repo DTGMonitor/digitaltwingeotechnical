@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 // Canonical origin — keep in sync with metadataBase in app/layout.tsx.
-const BASE = "https://dtgeotech.com";
+const BASE = "https://www.digitaltwingeotechnical.com";
 
 // CANONICAL, nav-reachable public pages only (CLAUDE.md §5). A sitemap is a POSITIVE index of what
 // should be crawled, so this list deliberately EXCLUDES:

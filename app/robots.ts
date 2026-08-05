@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 // Canonical origin — keep in sync with metadataBase in app/layout.tsx and app/sitemap.ts.
-const BASE = "https://dtgeotech.com";
+const BASE = "https://www.digitaltwingeotechnical.com";
 
 // Standard allow-all + sitemap pointer. /api is disallowed (the only route there is the POST-only
 // contact endpoint — nothing to index).

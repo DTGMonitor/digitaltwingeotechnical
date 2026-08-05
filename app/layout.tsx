@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   // Canonical origin for the site. Every relative URL Next resolves for canonical tags, Open Graph
   // and Twitter previews is made absolute against this, so social cards and search results reference
   // the real domain rather than the deploy's *.vercel.app URL. Update here if the domain ever changes.
-  metadataBase: new URL("https://dtgeotech.com"),
+  metadataBase: new URL("https://www.digitaltwingeotechnical.com"),
   title: "Digital Twin Geotechnical | Integrated Data. Informed Decisions.",
   description: "Independent geotechnical monitoring, analytics, governance and decision support.",
   // OpenGraph + Twitter so shared links render a branded card. Relative url/image are made absolute
-  // against metadataBase (→ https://dtgeotech.com/…). og:image = public/og-image.png (1200×630,
+  // against metadataBase (→ https://www.digitaltwingeotechnical.com/…). og:image = public/og-image.png (1200×630,
   // deep-teal hero-dark bg, DTG mark, signal-green rule, the locked strapline). Per-page metadata
   // can override title/description; this is the site-wide default.
   openGraph: {
