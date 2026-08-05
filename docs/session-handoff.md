@@ -1,11 +1,14 @@
 # Session handoff — DTG website
 
-_Updated 2026-08-05 — Peter copy + /terms + SEO/OG launch-ready; mobile-nav fix; owner assets landed (hero rename + PDF downloads). Paste-and-go context for a fresh session._
+_Updated 2026-08-05 — canonical/OG/sitemap domain repointed to www.digitaltwingeotechnical.com; Peter copy + /terms + SEO/OG launch-ready; mobile-nav fix; owner assets landed (hero rename + PDF downloads). Paste-and-go context for a fresh session._
 
 ## Current state
-- **Shipped code state: `main` = `1aa038c`** (`1aa038c912c26498297ffe6cb1722da428acbea1`) — the last **code** commit, on `origin/main`.
-- This handoff doc is committed **on top** of that, so `git rev-parse main` reads one ahead of `1aa038c`. This handoff **is pushed** — the remote handoff is current.
-- Working tree clean on `main`. Every feature branch created this session was merged (fast-forward) and deleted — **nothing outstanding on branches.**
+- **Shipped code state: `main` = `c7613ac`** — the last **code** commit, on branch `main` (feature commit `1aa038c` underneath). ⚠️ **`origin/main` has NOT been updated with `c7613ac` yet** — this and the follow-up handoff commit are local until pushed.
+- This handoff doc is committed **on top** of `c7613ac`, so `git rev-parse main` reads one ahead of the code commit.
+- Working tree clean on `main`. `fix/canonical-domain` was FF-merged and deleted — **nothing outstanding on branches.**
+
+## This session (2026-08-05) — shipped changelog
+1. **Canonical domain fix** (`c7613ac`) — `metadataBase` (`app/layout.tsx`) + `BASE` in both `app/robots.ts` and `app/sitemap.ts` repointed from `https://dtgeotech.com` → **`https://www.digitaltwingeotechnical.com`** (the real public domain). Canonical tags, OpenGraph/Twitter card URLs and the sitemap now resolve to the site that will actually serve. Verified on the running dev server: `sitemap.xml`, `robots.txt` and the homepage `og:`/`twitter:` tags all emit the new origin; no stale `dtgeotech.com` in head metadata. **Email addresses left untouched** (`info@`, `noreply@`, staff `@dtgeotech.com`). `docs/go-live.md` + `docs/CONTACT-FORM.md` NOT changed — see the DOMAIN DISCREPANCY flag in LAUNCH READINESS. (Committed on `fix/canonical-domain`, FF-merged to `main`, branch deleted. **Not yet pushed to `origin`.**)
 
 ## This session (2026-08-04) — shipped changelog
 All merged to `main` (details in the sections below). Chronological:
@@ -27,10 +30,10 @@ The site is **code-complete and launch-ready, but NOT yet live** — no host is 
 returns 405, no app headers). It's a Next.js **server** app (has `/api/contact`, no static export) —
 needs a host that runs Next.js (Vercel assumed).
 
-**In place (code-side, done — `76348b1` + `a7e89d9`):**
-- `metadataBase: https://dtgeotech.com` (root layout) — canonical/OG/Twitter URLs resolve to the real domain, not the deploy URL.
-- `app/sitemap.ts` — 18 CANONICAL pages only (orphan 200s + redirects excluded); `app/robots.ts` — allow `/`, disallow `/api/`, sitemap pointer.
-- **OpenGraph + Twitter cards** (`summary_large_image`) + **`public/og-image.png`** (1200×630, deep-teal hero-dark, DTG mark, green rule, locked strapline). Verified rendering absolute `dtgeotech.com` URLs. (Card strapline uses a brand-sans fallback face, not a guaranteed Inter embed — drop an `Inter-*.ttf` in-repo to re-render against literal Inter.)
+**In place (code-side, done — `76348b1` + `a7e89d9`, domain repointed `c7613ac`):**
+- `metadataBase: https://www.digitaltwingeotechnical.com` (root layout) — canonical/OG/Twitter URLs resolve to the real public domain, not the deploy URL. **(Repointed from `dtgeotech.com` at `c7613ac` — that domain was never the public site.)**
+- `app/sitemap.ts` — 18 CANONICAL pages only (orphan 200s + redirects excluded); `app/robots.ts` — allow `/`, disallow `/api/`, sitemap pointer. **Both `BASE` constants also repointed to `www.digitaltwingeotechnical.com` at `c7613ac`.**
+- **OpenGraph + Twitter cards** (`summary_large_image`) + **`public/og-image.png`** (1200×630, deep-teal hero-dark, DTG mark, green rule, locked strapline). Verified on the dev server rendering absolute `www.digitaltwingeotechnical.com` URLs. (Card strapline uses a brand-sans fallback face, not a guaranteed Inter embed — drop an `Inter-*.ttf` in-repo to re-render against literal Inter.)
 - **`/terms`** page (counsel-cleared IP clause); footer links Privacy · Terms.
 
 **Remaining to actually GO LIVE — NOT a code task** (needs dashboard/registrar access, Peter/domain owner):
@@ -38,6 +41,17 @@ needs a host that runs Next.js (Vercel assumed).
 2. **DNS repoint** — replace the parking records with Vercel's targets (apex `A 76.76.21.21`, `www CNAME cname.vercel-dns.com` — confirm in the dashboard).
 - Plus Resend SPF/DKIM/DMARC before enabling the form, then flip `CONTACT_FORM_ENABLED` + redeploy + deliverability test.
 - **Full step-by-step: [`docs/go-live.md`](./go-live.md).**
+
+> ⚠️ **DOMAIN DISCREPANCY — flagged, NOT yet resolved in the runbook (2026-08-05).** The canonical/OG/sitemap
+> code was repointed to **`www.digitaltwingeotechnical.com`** at `c7613ac` (that's the real public domain). But
+> **`docs/go-live.md` and `docs/CONTACT-FORM.md` still describe DNS + Resend setup against `dtgeotech.com`** —
+> the DNS-repoint targets, the domain to add in Vercel, and the SPF/DKIM/DMARC record hostnames all name the OLD
+> domain. Those docs were left untouched here because rewriting DNS/email setup is a deployment + domain-owner
+> decision (which apex, which zone gets the records, whether email stays on `dtgeotech.com` while the site moves
+> to `digitaltwingeotechnical.com`), NOT a canonical-URL fix. **Before go-live, reconcile: decide whether the
+> site serves at `www.digitaltwingeotechnical.com` (apex/www split?) and whether mail stays on `dtgeotech.com`;
+> then update `go-live.md` DNS targets + `CONTACT-FORM.md` record hostnames to match.** The `noreply@`/`info@`
+> email addresses on `dtgeotech.com` were deliberately left as-is in code.
 
 ## Design / section-build phase — ✅ DONE
 The controlled visual-architecture redesign (page section builds + the site-wide photo-hero system) is **complete and merged**. No section-build or hero work remains on branches.
